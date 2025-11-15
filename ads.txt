@@ -1,0 +1,6 @@
+# ads.txt file for Google AdSense
+# This file authorizes Google to sell ads on this domain
+# Format: <Domain>, <Publisher Account ID>, <Relationship>, <Certification Authority ID>
+
+google.com, pub-2042221703015293, DIRECT, f08c47fec0942fa0
+
