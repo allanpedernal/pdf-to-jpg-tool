@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#3b82f6" stroke="#06b6d4" stroke-width="2"/>
+  
+  <!-- PDF document icon -->
+  <rect x="30" y="25" width="40" height="50" rx="2" fill="#ffffff" opacity="0.95"/>
+  <rect x="30" y="25" width="40" height="12" rx="2" fill="#1e293b" opacity="0.8"/>
+  
+  <!-- Lines on document -->
+  <line x1="35" y1="42" x2="65" y2="42" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="35" y1="50" x2="65" y2="50" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="35" y1="58" x2="55" y2="58" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Arrow pointing to image icon -->
+  <path d="M 70 50 L 80 50 M 75 45 L 80 50 L 75 55" stroke="#06b6d4" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Image icon (camera/picture) -->
+  <rect x="82" y="42" width="12" height="12" rx="1" fill="#06b6d4" opacity="0.9"/>
+  <circle cx="88" cy="48" r="3" fill="#ffffff"/>
+  <circle cx="90" cy="46" r="1" fill="#06b6d4"/>
+</svg>
+
