@@ -4,25 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   
-  <!-- DNS Prefetch & Preconnect for Performance -->
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://www.google-analytics.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <link rel="dns-prefetch" href="https://unpkg.com">
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <!-- DNS Prefetch & Preconnect for Performance - Optimized for mobile -->
+  <script>
+    // Only preconnect on desktop, mobile benefits from delayed connections
+    const isMobilePrefetch = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (!isMobilePrefetch) {
+      // Desktop: preconnect for faster loading
+      const preconnects = [
+        'https://cdn.tailwindcss.com',
+        'https://cdnjs.cloudflare.com',
+        'https://cdn.jsdelivr.net'
+      ];
+      preconnects.forEach(url => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = url;
+        document.head.appendChild(link);
+      });
+    }
+  </script>
   
   <!-- Resource Hints -->
   <link rel="preload" href="/preview.jpg" as="image" type="image/jpeg" fetchpriority="low">
-  
-  <!-- Preconnect to CDNs for faster resource loading -->
-  <link rel="preconnect" href="https://cdn.tailwindcss.com">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
   
   <!-- Additional Mobile & Device Meta Tags -->
   <meta name="format-detection" content="telephone=no">
@@ -149,8 +152,30 @@
     }
   </style>
   
-  <!-- Tailwind CDN - Deferred to reduce render-blocking -->
-  <script defer src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CDN - Optimized loading for mobile -->
+  <script>
+    // Load Tailwind with mobile optimization
+    const isMobileTailwind = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    function loadTailwind() {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.tailwindcss.com';
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+    
+    if (isMobileTailwind) {
+      // On mobile: load after initial render
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => setTimeout(loadTailwind, 100));
+      } else {
+        setTimeout(loadTailwind, 100);
+      }
+    } else {
+      // Desktop: load immediately with defer
+      loadTailwind();
+    }
+  </script>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -404,17 +429,48 @@
   }
   </script>
   
-  <!-- Google tag (gtag.js) - Async loading for performance (non-blocking) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G1CV3K3BXS"></script>
+  <!-- Google tag (gtag.js) - Delayed on mobile for better performance -->
   <script>
-    // Initialize Analytics immediately (non-blocking)
+    // Initialize Analytics with mobile optimization
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-G1CV3K3BXS', {
-      'page_title': 'PDF to JPG Converter',
-      'page_location': window.location.href
-    });
+    
+    // Detect mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    // Load Analytics immediately on desktop, delay on mobile
+    function loadAnalytics() {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-G1CV3K3BXS';
+      document.head.appendChild(script);
+      
+      script.onload = function() {
+        gtag('js', new Date());
+        gtag('config', 'G-G1CV3K3BXS', {
+          'page_title': 'PDF to JPG Converter',
+          'page_location': window.location.href
+        });
+        window.gtag = gtag;
+      };
+    }
+    
+    if (isMobile) {
+      // On mobile: load after user interaction or 3 seconds
+      let loaded = false;
+      const loadOnInteraction = () => {
+        if (!loaded) {
+          loaded = true;
+          loadAnalytics();
+          ['touchstart', 'click', 'scroll'].forEach(e => window.removeEventListener(e, loadOnInteraction));
+        }
+      };
+      ['touchstart', 'click', 'scroll'].forEach(e => window.addEventListener(e, loadOnInteraction, { once: true, passive: true }));
+      setTimeout(() => { if (!loaded) loadAnalytics(); }, 3000);
+    } else {
+      // Desktop: load immediately
+      loadAnalytics();
+    }
     
     // Track conversion event function (available immediately)
     window.trackConversion = function(pages) {
@@ -438,10 +494,32 @@
     };
   </script>
   
-  <!-- Google AdSense - Async loading for performance (non-blocking) -->
+  <!-- Google AdSense - Delayed on mobile for better performance -->
   <meta name="google-adsense-account" content="ca-pub-2042221703015293">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2042221703015293"
-     crossorigin="anonymous"></script>
+  <script>
+    // Delay AdSense on mobile for better performance
+    const isMobileAd = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    function loadAdSense() {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2042221703015293';
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
+    }
+    
+    if (isMobileAd) {
+      // On mobile: load after page is interactive
+      if (document.readyState === 'complete') {
+        setTimeout(loadAdSense, 2000);
+      } else {
+        window.addEventListener('load', () => setTimeout(loadAdSense, 2000));
+      }
+    } else {
+      // Desktop: load immediately
+      loadAdSense();
+    }
+  </script>
 
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);">
@@ -842,8 +920,11 @@
     }
   }
 
-  // Load PDF.js after page load for better performance
-  window.addEventListener('load', function() {
+  // Load PDF.js only when needed (lazy load) - much better for mobile performance
+  window.loadPDFJS = function() {
+    if (window.pdfjsLoading) return; // Already loading
+    window.pdfjsLoading = true;
+    
     const pdfjsScript = document.createElement('script');
     pdfjsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
     pdfjsScript.onload = function() {
@@ -857,7 +938,14 @@
       loadPDFJSFallback();
     };
     document.head.appendChild(pdfjsScript);
-  });
+  };
+  
+  // On desktop: load PDF.js after page load
+  // On mobile: load only when user selects a file (handled in loadFile function)
+  const isMobilePDF = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if (!isMobilePDF) {
+    window.addEventListener('load', window.loadPDFJS);
+  }
   </script>
 
   <script>
@@ -904,6 +992,13 @@
     drop.classList.add('border-blue-400', 'bg-blue-500/10');
     dropLabel.innerHTML = `<span class="text-blue-400 font-bold" style="color: #60a5fa;">✓</span> ${f.name}`;
     stats.textContent = `${(f.size/1024/1024).toFixed(2)} MB selected`;
+    
+    // On mobile: load PDF.js when user selects a file (lazy loading)
+    const isMobileFile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (isMobileFile && !pdfjsReady && typeof window.loadPDFJS === 'function' && !window.pdfjsLoading) {
+      window.loadPDFJS();
+    }
+    
     if (pdfjsReady) {
       log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to convert! Click the button below.</span>';
       log.style.color = '#60a5fa'; // blue-400
@@ -1067,11 +1162,27 @@
       }
     }
     
-    // Start initialization after DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initAdSense);
+    // Delay ad initialization on mobile for better performance
+    const isMobileAdInit = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    if (isMobileAdInit) {
+      // On mobile: wait longer before initializing ads
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          if (document.readyState === 'complete') {
+            initAdSense();
+          } else {
+            document.addEventListener('DOMContentLoaded', initAdSense);
+          }
+        }, 1500);
+      });
     } else {
-      initAdSense();
+      // Desktop: initialize after DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAdSense);
+      } else {
+        initAdSense();
+      }
     }
   </script>
 
