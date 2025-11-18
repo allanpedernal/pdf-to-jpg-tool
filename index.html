@@ -1162,27 +1162,11 @@
       }
     }
     
-    // Delay ad initialization on mobile for better performance
-    const isMobileAdInit = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    
-    if (isMobileAdInit) {
-      // On mobile: wait longer before initializing ads
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          if (document.readyState === 'complete') {
-            initAdSense();
-          } else {
-            document.addEventListener('DOMContentLoaded', initAdSense);
-          }
-        }, 1500);
-      });
+    // Start initialization after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAdSense);
     } else {
-      // Desktop: initialize after DOM is ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAdSense);
-      } else {
-        initAdSense();
-      }
+      initAdSense();
     }
   </script>
 
