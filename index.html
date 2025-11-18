@@ -17,7 +17,12 @@
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   
   <!-- Resource Hints -->
-  <link rel="preload" href="/preview.jpg" as="image" type="image/jpeg">
+  <link rel="preload" href="/preview.jpg" as="image" type="image/jpeg" fetchpriority="low">
+  
+  <!-- Preconnect to CDNs for faster resource loading -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
   
   <!-- Additional Mobile & Device Meta Tags -->
   <meta name="format-detection" content="telephone=no">
@@ -62,9 +67,40 @@
   <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json">
   
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Critical CSS - Inline for above-the-fold content -->
   <style>
+    /* Critical styles for initial render */
+    body{margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);color:#f8fafc;min-height:100vh}
+    .bg-gradient-to-br{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
+    .text-slate-50{color:#f8fafc}
+    .min-h-screen{min-height:100vh}
+    .flex{display:flex}
+    .flex-col{flex-direction:column}
+    .items-center{align-items:center}
+    .justify-center{justify-content:center}
+    .w-full{width:100%}
+    .max-w-full{max-width:100%}
+    .overflow-x-hidden{overflow-x:hidden}
+    .text-center{text-align:center}
+    .mb-8{margin-bottom:2rem}
+    .mb-4{margin-bottom:1rem}
+    .mb-3{margin-bottom:0.75rem}
+    .mb-2{margin-bottom:0.5rem}
+    .mb-6{margin-bottom:1.5rem}
+    .px-4{padding-left:1rem;padding-right:1rem}
+    .py-6{padding-top:1.5rem;padding-bottom:1.5rem}
+    .text-4xl{font-size:2.25rem;line-height:2.5rem}
+    .font-bold{font-weight:700}
+    .text-lg{font-size:1.125rem;line-height:1.75rem}
+    .text-sm{font-size:0.875rem;line-height:1.25rem}
+    .border-2{border-width:2px}
+    .border-dashed{border-style:dashed}
+    .rounded-xl{border-radius:0.75rem}
+    .cursor-pointer{cursor:pointer}
+    .hidden{display:none}
+    @media(min-width:1024px){.lg\:block{display:block}}
+    *{box-sizing:border-box}
+    html,body{overflow-x:hidden;max-width:100%}
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
       50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.7); }
@@ -97,13 +133,13 @@
     .progress-bar {
       transition: width 0.3s ease-out;
     }
-    /* Sidebar width for ads */
-    .lg\:w-160 {
-      width: 160px;
+    /* Sidebar width for ads - Updated to 300px for AdSense fluid ads */
+    .lg\:w-300 {
+      width: 300px;
     }
     @media (min-width: 1024px) {
-      .lg\:w-160 {
-        width: 160px;
+      .lg\:w-300 {
+        width: 300px;
       }
     }
     /* Prevent horizontal scrollbar */
@@ -111,10 +147,10 @@
       overflow-x: hidden;
       max-width: 100%;
     }
-    * {
-      box-sizing: border-box;
-    }
   </style>
+  
+  <!-- Tailwind CDN - Deferred to reduce render-blocking -->
+  <script defer src="https://cdn.tailwindcss.com"></script>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -368,9 +404,10 @@
   }
   </script>
   
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) - Async loading for performance (non-blocking) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-G1CV3K3BXS"></script>
   <script>
+    // Initialize Analytics immediately (non-blocking)
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -379,18 +416,29 @@
       'page_location': window.location.href
     });
     
-    // Track conversion event
-    function trackConversion(pages) {
-      gtag('event', 'pdf_conversion', {
-        'event_category': 'PDF Tools',
-        'event_label': 'PDF to JPG',
-        'value': pages,
-        'pages_converted': pages
-      });
-    }
+    // Track conversion event function (available immediately)
+    window.trackConversion = function(pages) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'pdf_conversion', {
+          'event_category': 'PDF Tools',
+          'event_label': 'PDF to JPG',
+          'value': pages,
+          'pages_converted': pages
+        });
+      } else {
+        // Queue event if gtag not loaded yet
+        window.dataLayer.push({
+          'event': 'pdf_conversion',
+          'event_category': 'PDF Tools',
+          'event_label': 'PDF to JPG',
+          'value': pages,
+          'pages_converted': pages
+        });
+      }
+    };
   </script>
   
-  <!-- Google AdSense -->
+  <!-- Google AdSense - Async loading for performance (non-blocking) -->
   <meta name="google-adsense-account" content="ca-pub-2042221703015293">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2042221703015293"
      crossorigin="anonymous"></script>
@@ -402,11 +450,11 @@
   <div class="flex flex-col lg:flex-row w-full min-h-screen overflow-x-hidden max-w-full">
     
     <!-- Left Sidebar Ad (Desktop only) -->
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 160px; top: 20px;">
-      <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4">
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;">
+      <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4" style="min-width: 250px;">
         <!-- Google AdSense Left Sidebar -->
         <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
+             style="display:block; text-align:center; min-width: 250px;"
              data-ad-layout="in-article"
              data-ad-format="fluid"
              data-ad-client="ca-pub-2042221703015293"
@@ -696,11 +744,11 @@
   </main>
 
     <!-- Right Sidebar Ad (Desktop only) -->
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 160px; top: 20px;">
-      <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4">
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;">
+      <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4" style="min-width: 250px;">
         <!-- Google AdSense Right Sidebar -->
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:block; min-width: 250px;"
              data-ad-format="autorelaxed"
              data-ad-client="ca-pub-2042221703015293"
              data-ad-slot="2609300742"></ins>
@@ -720,11 +768,11 @@
          data-full-width-responsive="true"></ins>
   </div>
 
-  <!-- Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <!-- Libraries - Deferred for performance -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   
-  <!-- PDF.js library - using cdnjs for better reliability -->
+  <!-- PDF.js library - Deferred and optimized loading -->
   <script>
   // Wait for both DOM and PDF.js to be ready
   let pdfjsReady = false;
@@ -794,20 +842,22 @@
     }
   }
 
-  // Load PDF.js from primary CDN
-  const pdfjsScript = document.createElement('script');
-  pdfjsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-  pdfjsScript.onload = function() {
-    if (!initPDFJS()) {
-      console.error('PDF.js loaded but initialization failed');
+  // Load PDF.js after page load for better performance
+  window.addEventListener('load', function() {
+    const pdfjsScript = document.createElement('script');
+    pdfjsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    pdfjsScript.onload = function() {
+      if (!initPDFJS()) {
+        console.error('PDF.js loaded but initialization failed');
+        loadPDFJSFallback();
+      }
+    };
+    pdfjsScript.onerror = function() {
+      console.error('cdnjs CDN failed, trying fallback...');
       loadPDFJSFallback();
-    }
-  };
-  pdfjsScript.onerror = function() {
-    console.error('cdnjs CDN failed, trying fallback...');
-    loadPDFJSFallback();
-  };
-  document.head.appendChild(pdfjsScript);
+    };
+    document.head.appendChild(pdfjsScript);
+  });
   </script>
 
   <script>
@@ -1003,11 +1053,26 @@
   }); // End of DOMContentLoaded event listener
   </script>
   
-  <!-- Initialize Google AdSense -->
+  <!-- Initialize Google AdSense - Wait for script to load -->
   <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // Initialize ads when AdSense script is ready
+    function initAdSense() {
+      if (typeof adsbygoogle !== 'undefined') {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } else {
+        // Retry if AdSense script hasn't loaded yet
+        setTimeout(initAdSense, 100);
+      }
+    }
+    
+    // Start initialization after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAdSense);
+    } else {
+      initAdSense();
+    }
   </script>
 
 </body>
