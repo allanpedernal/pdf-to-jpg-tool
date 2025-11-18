@@ -150,29 +150,6 @@
       overflow-x: hidden;
       max-width: 100%;
     }
-    /* Screen reader only class */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-    .sr-only:focus,
-    .focus\:not-sr-only:focus {
-      position: static;
-      width: auto;
-      height: auto;
-      padding: inherit;
-      margin: inherit;
-      overflow: visible;
-      clip: auto;
-      white-space: normal;
-    }
   </style>
   
   <!-- Tailwind CDN - Optimized loading for mobile -->
@@ -547,14 +524,11 @@
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);">
 
-  <!-- Skip to main content link for keyboard navigation -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-500 focus:text-white focus:rounded-lg">Skip to main content</a>
-
   <!-- Main Container with Sidebars -->
   <div class="flex flex-col lg:flex-row w-full min-h-screen overflow-x-hidden max-w-full">
     
     <!-- Left Sidebar Ad (Desktop only) -->
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;" aria-label="Advertisement">
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;">
       <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4" style="min-width: 250px;">
         <!-- Google AdSense Left Sidebar -->
         <ins class="adsbygoogle"
@@ -562,16 +536,15 @@
              data-ad-layout="in-article"
              data-ad-format="fluid"
              data-ad-client="ca-pub-2042221703015293"
-             data-ad-slot="5198028961"
-             aria-label="Advertisement"></ins>
+             data-ad-slot="5198028961"></ins>
       </div>
     </aside>
 
     <!-- Main Content -->
-    <main id="main-content" class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 flex flex-col items-center animate-slide-in overflow-x-hidden" role="main" aria-label="PDF to JPG Converter">
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 flex flex-col items-center animate-slide-in overflow-x-hidden">
     <div class="text-center mb-8">
-      <div class="inline-block mb-4" aria-hidden="true">
-        <svg class="w-16 h-16 text-blue-400 animate-bounce-in" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;" aria-hidden="true">
+      <div class="inline-block mb-4">
+        <svg class="w-16 h-16 text-blue-400 animate-bounce-in" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9h6M9 13h6M9 17h4"/>
         </svg>
@@ -584,79 +557,78 @@
     </div>
 
     <!-- Drag & Drop Area -->
-    <label for="file" class="w-full border-2 border-dashed border-slate-600 rounded-xl px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-slate-800/60 transition-all duration-300 mb-6 bg-slate-800/40 backdrop-blur-sm shadow-lg hover:shadow-blue-500/30 group transform max-w-full focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900" id="dropzone" style="border-color: #475569;" role="button" aria-label="Select PDF file" tabindex="0">
-      <div class="mb-4 relative" aria-hidden="true">
-        <svg class="w-16 h-16 text-blue-400 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: #60a5fa;" aria-hidden="true">
+    <label class="w-full border-2 border-dashed border-slate-600 rounded-xl px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-slate-800/60 transition-all duration-300 mb-6 bg-slate-800/40 backdrop-blur-sm shadow-lg hover:shadow-blue-500/30 group transform max-w-full" id="dropzone" style="border-color: #475569;">
+      <div class="mb-4 relative">
+        <svg class="w-16 h-16 text-blue-400 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: #60a5fa;">
           <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
         </svg>
-        <div class="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-          <svg class="w-8 h-8 text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #93c5fd;" aria-hidden="true">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-8 h-8 text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #93c5fd;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12V4m0 0l-3 3m3-3l3 3"/>
           </svg>
         </div>
       </div>
       <span id="dropLabel" class="text-slate-200 font-semibold text-lg mb-2 group-hover:text-blue-400 transition-colors" style="color: #e2e8f0;">Drag & drop your PDF here</span>
       <span class="text-slate-400 text-sm" style="color: #94a3b8;">or click to browse files</span>
-      <input type="file" id="file" class="sr-only" accept="application/pdf" aria-describedby="dropLabel" />
+      <input type="file" id="file" class="hidden" accept="application/pdf" />
     </label>
 
     <!-- Controls -->
     <div class="flex flex-wrap gap-4 w-full mb-6 justify-center items-end max-w-full px-2">
-      <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl p-4 shadow-lg w-full sm:w-auto" style="background-color: rgba(30, 41, 59, 0.7);">
-        <label for="quality" class="block text-slate-200 text-sm mb-2 font-medium flex items-center gap-2" style="color: #e2e8f0;">
-          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;" aria-hidden="true">
+      <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl p-4 shadow-lg" style="background-color: rgba(30, 41, 59, 0.7);">
+        <label class="block text-slate-200 text-sm mb-2 font-medium flex items-center gap-2" style="color: #e2e8f0;">
+          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
           </svg>
           JPEG Quality
         </label>
-        <input type="number" id="quality" min="0.1" max="1" step="0.1" value="0.85" class="px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all w-full sm:w-32 text-base" style="background-color: #334155; border-color: #475569; color: #f8fafc; min-height: 44px;" aria-label="JPEG Quality" aria-describedby="quality-desc" inputmode="decimal" role="spinbutton" aria-valuemin="0.1" aria-valuemax="1" aria-valuenow="0.85">
-        <span id="quality-desc" class="text-xs text-slate-400 mt-1 block" style="color: #94a3b8;">0.1 (low) - 1.0 (high)</span>
+        <input type="number" id="quality" min="0.1" max="1" step="0.1" value="0.85" class="px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all w-32" style="background-color: #334155; border-color: #475569; color: #f8fafc;">
+        <span class="text-xs text-slate-400 mt-1 block" style="color: #94a3b8;">0.1 (low) - 1.0 (high)</span>
       </div>
-      <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl p-4 shadow-lg w-full sm:w-auto" style="background-color: rgba(30, 41, 59, 0.7);">
-        <label for="scale" class="block text-slate-200 text-sm mb-2 font-medium flex items-center gap-2" style="color: #e2e8f0;">
-          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;" aria-hidden="true">
+      <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl p-4 shadow-lg" style="background-color: rgba(30, 41, 59, 0.7);">
+        <label class="block text-slate-200 text-sm mb-2 font-medium flex items-center gap-2" style="color: #e2e8f0;">
+          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
           </svg>
           Scale
         </label>
-        <input type="number" id="scale" min="0.5" max="3" step="0.1" value="1.6" class="px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all w-full sm:w-32 text-base" style="background-color: #334155; border-color: #475569; color: #f8fafc; min-height: 44px;" aria-label="Scale" aria-describedby="scale-desc" inputmode="decimal" role="spinbutton" aria-valuemin="0.5" aria-valuemax="3" aria-valuenow="1.6">
-        <span id="scale-desc" class="text-xs text-slate-400 mt-1 block" style="color: #94a3b8;">1.0 = original size</span>
+        <input type="number" id="scale" min="0.5" max="3" step="0.1" value="1.6" class="px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all w-32" style="background-color: #334155; border-color: #475569; color: #f8fafc;">
+        <span class="text-xs text-slate-400 mt-1 block" style="color: #94a3b8;">1.0 = original size</span>
       </div>
       <div class="flex flex-col gap-2">
-        <button id="start" type="button" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-blue-500/50 transform hover:scale-105 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900" style="background: linear-gradient(to right, #3b82f6, #06b6d4); color: #ffffff; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);" aria-label="Convert PDF to JPG" aria-describedby="start-desc">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <button id="start" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-blue-500/50 transform hover:scale-105 flex items-center gap-2" style="background: linear-gradient(to right, #3b82f6, #06b6d4); color: #ffffff; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
-          <span>Convert PDF to JPG</span>
+          Convert PDF to JPG
         </button>
-        <span id="start-desc" class="sr-only">Starts the conversion process for the selected PDF file</span>
-        <button id="cancel" type="button" class="px-6 py-2 border-2 border-slate-600 rounded-xl text-slate-300 hover:border-orange-400 hover:text-orange-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-slate-900" style="border-color: #475569; color: #cbd5e1;" disabled aria-label="Cancel conversion" aria-disabled="true">
+        <button id="cancel" class="px-6 py-2 border-2 border-slate-600 rounded-xl text-slate-300 hover:border-orange-400 hover:text-orange-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #475569; color: #cbd5e1;" disabled>
           Cancel
         </button>
       </div>
     </div>
 
     <!-- Progress -->
-    <section aria-label="Conversion progress" class="w-full bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 py-6 shadow-lg mb-6 max-w-full" style="background-color: rgba(30, 41, 59, 0.7);">
+    <div class="w-full bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 py-6 shadow-lg mb-6 max-w-full" style="background-color: rgba(30, 41, 59, 0.7);">
       <div class="flex items-center justify-between mb-3">
-        <h2 class="text-slate-200 font-medium flex items-center gap-2" style="color: #e2e8f0;">
-          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;" aria-hidden="true">
+        <span class="text-slate-200 font-medium flex items-center gap-2" style="color: #e2e8f0;">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
           </svg>
           Progress
-        </h2>
-        <span id="stats" class="text-sm text-slate-300 font-medium" style="color: #cbd5e1;" aria-live="polite" aria-atomic="true">No file selected</span>
+        </span>
+        <span id="stats" class="text-sm text-slate-300 font-medium" style="color: #cbd5e1;">No file selected</span>
       </div>
-      <div class="w-full h-4 bg-slate-700 rounded-full overflow-hidden shadow-inner" style="background-color: #334155;" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="stats">
+      <div class="w-full h-4 bg-slate-700 rounded-full overflow-hidden shadow-inner" style="background-color: #334155;">
         <div id="bar" class="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 w-0 progress-bar rounded-full relative" style="background: linear-gradient(to right, #3b82f6, #22d3ee, #3b82f6);">
-          <div class="absolute inset-0 bg-white/30 animate-pulse" aria-hidden="true"></div>
+          <div class="absolute inset-0 bg-white/30 animate-pulse"></div>
         </div>
       </div>
-      <p id="log" class="text-sm text-slate-200 min-h-[32px] text-center mt-4 font-medium flex items-center justify-center gap-2" style="color: #e2e8f0;" role="status" aria-live="polite" aria-atomic="true">
-        <span class="inline-block" aria-hidden="true">✨</span>
+      <p id="log" class="text-sm text-slate-200 min-h-[32px] text-center mt-4 font-medium flex items-center justify-center gap-2" style="color: #e2e8f0;">
+        <span class="inline-block">✨</span>
         <span>Ready to convert your PDF files</span>
       </p>
-    </section>
+    </div>
 
     <!-- How It Works Section -->
     <section class="w-full mb-8 bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 md:px-8 py-6 md:py-8 shadow-lg max-w-full">
@@ -850,31 +822,29 @@
   </main>
 
     <!-- Right Sidebar Ad (Desktop only) -->
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;" aria-label="Advertisement">
+    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;">
       <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4" style="min-width: 250px;">
         <!-- Google AdSense Right Sidebar -->
         <ins class="adsbygoogle"
              style="display:block; min-width: 250px;"
              data-ad-format="autorelaxed"
              data-ad-client="ca-pub-2042221703015293"
-             data-ad-slot="2609300742"
-             aria-label="Advertisement"></ins>
+             data-ad-slot="2609300742"></ins>
       </div>
     </aside>
     
   </div>
 
   <!-- Bottom Ad Placeholder -->
-  <footer class="w-full bg-gray-700 text-center py-4 mt-auto overflow-x-hidden max-w-full" role="contentinfo" aria-label="Advertisement">
+  <div class="w-full bg-gray-700 text-center py-4 mt-auto overflow-x-hidden max-w-full">
     <!-- Google AdSense Bottom Banner -->
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-2042221703015293"
          data-ad-slot="9174709096"
          data-ad-format="auto"
-         data-full-width-responsive="true"
-         aria-label="Advertisement"></ins>
-  </footer>
+         data-full-width-responsive="true"></ins>
+  </div>
 
   <!-- Libraries - Deferred for performance -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
@@ -996,14 +966,7 @@
   let currentFile = null;
   let controller = { cancelled:false };
 
-  // Keyboard support for dropzone
-  drop.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      fileInput.click();
-    }
-  });
-  
+  // No need for click listener - label automatically handles clicks on the input
   drop.addEventListener('dragover', e => { 
     e.preventDefault(); 
     drop.classList.add('border-teal-400', 'bg-teal-500/20', 'scale-105');
@@ -1019,14 +982,6 @@
     if(f) loadFile(f); 
   });
   fileInput.addEventListener('change', ()=> { if(fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]); });
-  
-  // Update ARIA values for inputs
-  qualityInput.addEventListener('input', (e) => {
-    qualityInput.setAttribute('aria-valuenow', e.target.value);
-  });
-  scaleInput.addEventListener('input', (e) => {
-    scaleInput.setAttribute('aria-valuenow', e.target.value);
-  });
 
   function loadFile(f){
     if(f.type !== 'application/pdf'){ 
@@ -1045,13 +1000,11 @@
     }
     
     if (pdfjsReady) {
-      log.innerHTML = '<span class="inline-block animate-bounce" aria-hidden="true">✨</span> <span>Ready to convert! Click the button below.</span>';
+      log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to convert! Click the button below.</span>';
       log.style.color = '#60a5fa'; // blue-400
       startBtn.classList.add('animate-pulse-glow');
-      // Focus management: move focus to start button for better accessibility
-      setTimeout(() => startBtn.focus(), 100);
     } else {
-      log.innerHTML = '<span class="inline-block animate-spin-slow" aria-hidden="true">⏳</span> <span>Loading PDF.js library...</span>';
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⏳</span> <span>Loading PDF.js library...</span>';
       log.style.color = '#94a3b8'; // slate-400
     }
   }
@@ -1160,14 +1113,11 @@
       if(controller.cancelled || zipCancelled){ throw new Error('Cancelled by user'); }
       const zipName = baseName + '_images.zip';
       saveAs(content, zipName);
-      log.innerHTML = `<span class="inline-block animate-bounce-in" aria-hidden="true">🎉</span> <span>Success! ZIP file downloaded with <strong>${num}</strong> JPG file(s).</span>`;
+      log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ZIP file downloaded with <strong>${num}</strong> JPG file(s).</span>`;
       log.style.color = '#34d399'; // emerald-400 (softer green)
       stats.textContent = `✓ Finished: ${num} page(s) processed successfully`;
       updateProgress(100);
       startBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-      // Focus management: announce success to screen readers
-      log.setAttribute('role', 'alert');
-      setTimeout(() => log.removeAttribute('role'), 1000);
       
       // Track conversion in GA4
       if (typeof trackConversion === 'function') {
@@ -1194,15 +1144,7 @@
     }
   }
 
-  function updateProgress(pct){ 
-    const value = Math.min(100,Math.max(0,pct));
-    bar.style.width = value + '%';
-    // Update ARIA attributes for progressbar
-    const progressbar = bar.parentElement;
-    if (progressbar) {
-      progressbar.setAttribute('aria-valuenow', Math.round(value));
-    }
-  }
+  function updateProgress(pct){ bar.style.width = Math.min(100,Math.max(0,pct)) + '%'; }
   }); // End of DOMContentLoaded event listener
   </script>
   
