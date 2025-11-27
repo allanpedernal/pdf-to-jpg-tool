@@ -1,0 +1,75 @@
+/* Shared styles for all tool pages */
+/* Using Tailwind's built-in grid system - no custom grid CSS needed */
+
+/* Navigation styles */
+nav {
+  scrollbar-width: thin;
+  scrollbar-color: #475569 #1e293b;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+nav::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+nav::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+nav::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Navigation item styles */
+.nav-item {
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  transform: translateX(4px);
+}
+
+.nav-item.active {
+  background: rgba(59, 130, 246, 0.2) !important;
+  color: #60a5fa !important;
+  border-left: 2px solid #60a5fa;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+}
+
+/* Mobile menu animation */
+#mobile-menu {
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 1023px) {
+  #mobile-menu.hidden {
+    display: none;
+  }
+  
+  nav {
+    height: auto;
+    max-height: none;
+  }
+}
+
+/* Ensure content doesn't overflow */
+body {
+  overflow-x: hidden;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Better spacing for grid system */
+.gap-0 {
+  gap: 0;
+}
+
