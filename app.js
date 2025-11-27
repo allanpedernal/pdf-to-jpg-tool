@@ -139,7 +139,7 @@ function initNavigation() {
       
       <div id="mobile-menu" class="d-none d-lg-block">
         <div class="p-3 p-lg-4">
-          <div class="mb-4 mb-lg-5 pb-3 border-bottom d-none d-lg-block" style="border-color: rgba(255, 255, 255, 0.1);">
+          <div class="mb-4 mb-lg-3 pb-3 border-bottom d-none d-lg-block" style="border-color: rgba(255, 255, 255, 0.1);">
             <h1 class="text-gradient fw-bold mb-1" style="font-size: 1.5rem; line-height: 1.2;">
               PDF Tools
             </h1>
