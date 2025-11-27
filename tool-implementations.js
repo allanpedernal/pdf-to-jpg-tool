@@ -190,7 +190,6 @@ function initPDFToJPG() {
       cancelButton.disabled = true;
       cancelButton.textContent = 'Cancelling...';
     }
-    toastr.info('Cancellation requested. Please wait for current operation to complete...');
   }
   
   async function processPDF(file, opts) {
