@@ -271,122 +271,122 @@ function getPDFToJPGContent() {
             <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
           </h2>
           <div class="accordion accordion-flush" id="faqAccordion">
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1" style="font-size: 1rem; padding: 1rem;">
                   How do I convert PDF to JPG?
                 </button>
               </h2>
               <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Simply drag and drop your PDF file into the upload area, adjust the quality and scale settings if needed, then click 'Convert PDF to JPG'. The conversion happens instantly in your browser, and all JPG images will be downloaded as a ZIP file.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2" style="font-size: 1rem; padding: 1rem;">
                   Is my PDF file uploaded to a server?
                 </button>
               </h2>
               <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   No! Your PDF files never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   What quality settings should I use?
                 </button>
               </h2>
               <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Quality ranges from 0.1 (lowest, smallest file) to 1.0 (highest, largest file). For most purposes, 0.85 provides an excellent balance between quality and file size. Use 1.0 for maximum quality when file size isn't a concern, or lower values for smaller file sizes.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   What does the scale setting do?
                 </button>
               </h2>
               <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Scale controls the resolution of the output JPG images. 1.0 = original PDF size, 2.0 = double the resolution, 0.5 = half the resolution. Higher scale values produce larger, sharper images but also larger file sizes. Default is 1.6 for optimal quality.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   Can I convert multi-page PDFs?
                 </button>
               </h2>
               <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Yes! Our PDF to JPG converter supports PDFs with any number of pages. Each page will be converted to a separate JPG image, and all images will be packaged in a single ZIP file for easy download.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   Is this service free?
                 </button>
               </h2>
               <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can convert. Convert as many PDFs to JPG as you need, whenever you need.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   What browsers are supported?
                 </button>
               </h2>
               <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Our PDF to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq8" aria-expanded="false" aria-controls="faq8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq8" aria-expanded="false" aria-controls="faq8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   How long does conversion take?
                 </button>
               </h2>
               <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most PDFs convert in just a few seconds, depending on the number of pages and your device's performance.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq9" aria-expanded="false" aria-controls="faq9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq9" aria-expanded="false" aria-controls="faq9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   What file format will I get?
                 </button>
               </h2>
               <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   You'll receive JPG (JPEG) image files. Each PDF page becomes a separate JPG file, and all files are packaged in a ZIP archive for convenient download. JPG is a widely supported image format compatible with all devices and software.
                 </div>
               </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded" style="background-color: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed text-light fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq10" aria-expanded="false" aria-controls="faq10" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq10" aria-expanded="false" aria-controls="faq10" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
                   Can I convert password-protected PDFs?
                 </button>
               </h2>
               <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-secondary" style="background-color: rgba(30, 41, 59, 0.4); font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
                   Currently, password-protected PDFs cannot be converted. You'll need to remove the password protection from your PDF file first before converting it to JPG format.
                 </div>
               </div>

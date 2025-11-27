@@ -70,13 +70,13 @@
   
   <!-- Critical CSS - Bootstrap Customizations -->
   <style>
-    /* Bootstrap Dark Theme Override */
+    /* Bootstrap Light Theme (Default) */
     body {
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-      color: #f8fafc;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%);
+      color: #1e293b;
       min-height: 100vh;
     }
     
@@ -152,6 +152,7 @@
   
   <!-- Custom Bootstrap Theme - Falcon Inspired -->
   <style>
+    /* Dark Theme (Default) */
     :root {
       --bs-primary: #3b82f6;
       --bs-secondary: #64748b;
@@ -164,11 +165,60 @@
       --bs-body-bg: #0f172a;
       --bs-body-color: #f8fafc;
       --bs-border-color: rgba(255, 255, 255, 0.1);
+      --bg-gradient-start: #0f172a;
+      --bg-gradient-mid: #1e293b;
+      --bg-gradient-end: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --form-bg: rgba(30, 41, 59, 0.8);
+      --form-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --nav-bg: rgba(15, 23, 42, 0.95);
+      --dropzone-bg: rgba(30, 41, 59, 0.4);
+      --dropzone-border: rgba(255, 255, 255, 0.2);
+      --progress-bg: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Light Theme */
+    [data-theme="light"] {
+      --bs-primary: #3b82f6;
+      --bs-secondary: #64748b;
+      --bs-success: #10b981;
+      --bs-info: #06b6d4;
+      --bs-warning: #f59e0b;
+      --bs-danger: #ef4444;
+      --bs-dark: #f8fafc;
+      --bs-light: #0f172a;
+      --bs-body-bg: #ffffff;
+      --bs-body-color: #1e293b;
+      --bs-border-color: rgba(0, 0, 0, 0.1);
+      --bg-gradient-start: #f8fafc;
+      --bg-gradient-mid: #e2e8f0;
+      --bg-gradient-end: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(0, 0, 0, 0.1);
+      --form-bg: rgba(255, 255, 255, 0.95);
+      --form-border: rgba(0, 0, 0, 0.15);
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --dropzone-bg: rgba(248, 250, 252, 0.8);
+      --dropzone-border: rgba(0, 0, 0, 0.15);
+      --progress-bg: rgba(0, 0, 0, 0.1);
     }
     
     body {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-      color: var(--bs-body-color);
+      background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%) !important;
+      color: var(--bs-body-color) !important;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Force light theme background by default */
+    html:not([data-theme]) body,
+    html[data-theme="light"] body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%) !important;
+      color: #1e293b !important;
     }
     
     .bg-gradient-primary {
@@ -184,22 +234,24 @@
     
     /* Card styling */
     .card {
-      background-color: rgba(30, 41, 59, 0.6) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      background-color: var(--card-bg) !important;
+      border: 1px solid var(--card-border) !important;
       backdrop-filter: blur(10px);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     
     /* Form controls */
     .form-control, .form-select {
-      background-color: rgba(30, 41, 59, 0.8) !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-      color: #f8fafc !important;
+      background-color: var(--form-bg) !important;
+      border-color: var(--form-border) !important;
+      color: var(--text-primary) !important;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
     
     .form-control:focus, .form-select:focus {
-      background-color: rgba(30, 41, 59, 0.9) !important;
+      background-color: var(--form-bg) !important;
       border-color: var(--bs-primary) !important;
-      color: #f8fafc !important;
+      color: var(--text-primary) !important;
       box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25) !important;
     }
     
@@ -211,7 +263,8 @@
     
     /* Progress bar */
     .progress {
-      background-color: rgba(30, 41, 59, 0.8) !important;
+      background-color: var(--progress-bg) !important;
+      transition: background-color 0.3s ease;
     }
     
     .progress-bar.bg-gradient-primary,
@@ -220,29 +273,97 @@
       background-color: transparent !important;
     }
     
-    .progress {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-    }
-    
     /* Dropzone */
     .dropzone {
-      border: 2px dashed rgba(255, 255, 255, 0.2) !important;
-      background-color: rgba(30, 41, 59, 0.4) !important;
+      border: 2px dashed var(--dropzone-border) !important;
+      background-color: var(--dropzone-bg) !important;
       cursor: pointer;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
     }
     
     .dropzone:hover {
       border-color: var(--bs-primary) !important;
-      background-color: rgba(30, 41, 59, 0.6) !important;
+      background-color: var(--dropzone-bg) !important;
+      opacity: 0.9;
     }
     
     /* Text colors */
     .text-light {
-      color: #f8fafc !important;
+      color: var(--text-primary) !important;
     }
     
     .text-secondary {
-      color: #94a3b8 !important;
+      color: var(--text-secondary) !important;
+    }
+    
+    /* Falcon-style Dropdown Theme Selector */
+    .dropdown-menu {
+      background-color: var(--card-bg) !important;
+      border: 1px solid var(--card-border) !important;
+      backdrop-filter: blur(10px);
+    }
+    
+    .dropdown-item {
+      color: var(--text-primary) !important;
+      transition: all 0.2s ease;
+    }
+    
+    .dropdown-item:hover {
+      background-color: var(--bs-primary) !important;
+      color: #ffffff !important;
+    }
+    
+    .dropdown-item.active {
+      background-color: rgba(59, 130, 246, 0.15) !important;
+      color: var(--bs-primary) !important;
+    }
+    
+    .dropdown-item i {
+      width: 16px;
+      text-align: center;
+    }
+    
+    /* Theme Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1050;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--bs-primary);
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
+    }
+    
+    .theme-toggle i {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .theme-toggle:hover i {
+      transform: rotate(180deg);
+    }
+    
+    @media (max-width: 991.98px) {
+      .theme-toggle {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+      }
     }
   </style>
 
@@ -591,7 +712,7 @@
   </script>
 
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);">
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%);">
 
   <!-- Main Container - Bootstrap Grid Layout -->
   <div class="container-fluid px-0">
@@ -871,3 +992,4 @@
 
 </body>
 </html>
+

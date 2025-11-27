@@ -17,6 +17,7 @@ button.disabled {
 nav {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 nav::-webkit-scrollbar {
@@ -153,9 +154,10 @@ nav {
     width: 100% !important;
     max-height: 100vh;
     overflow-y: auto;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: rgba(15, 23, 42, 0.98) !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease;
+    background-color: var(--nav-bg) !important;
     backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--card-border) !important;
   }
   
   #mobile-menu {
@@ -371,17 +373,28 @@ html {
   scroll-behavior: smooth;
 }
 
-/* FAQ Accordion Styling */
+/* FAQ Accordion Styling - Theme Aware */
+.faq-item {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
 .accordion-button {
-  background-color: rgba(30, 41, 59, 0.6) !important;
-  color: #f8fafc !important;
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
   border: none !important;
   box-shadow: none !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .accordion-button:not(.collapsed) {
   background-color: rgba(59, 130, 246, 0.15) !important;
   color: var(--bs-primary) !important;
+}
+
+.accordion-button:hover {
+  background-color: rgba(59, 130, 246, 0.1) !important;
 }
 
 .accordion-button:focus {
@@ -390,13 +403,15 @@ html {
 }
 
 .accordion-body {
-  background-color: rgba(30, 41, 59, 0.4) !important;
-  color: #cbd5e1 !important;
+  background-color: var(--card-bg) !important;
+  color: var(--text-secondary) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .accordion-item {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background-color: transparent !important;
+  border: 1px solid var(--card-border) !important;
+  background-color: var(--card-bg) !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Section animations */
