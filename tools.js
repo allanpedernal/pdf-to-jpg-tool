@@ -64,7 +64,7 @@ function getPDFToJPGContent() {
         <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
           <div id="bar-pdf-jpg" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <p id="log-pdf-jpg" class="small text-light text-center mb-0" style="min-height: 24px;">✨ Ready to convert your PDF files</p>
+        <p id="log-pdf-jpg" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your PDF files</p>
       </div>
 
       <!-- How It Works Section -->

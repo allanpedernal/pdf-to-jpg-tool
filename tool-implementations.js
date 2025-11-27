@@ -115,7 +115,7 @@ function initPDFToJPG() {
   
   function loadFile(f) {
     if (f.type !== 'application/pdf') {
-      alert('Please select a PDF file');
+      toastr.error('Please select a PDF file');
       return;
     }
     currentFile = f;
@@ -143,11 +143,11 @@ function initPDFToJPG() {
   
   function handleStart() {
     if (!currentFile) {
-      alert('Choose a PDF first');
+      toastr.warning('Choose a PDF first');
       return;
     }
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      alert('PDF.js library is still loading. Please wait a moment and try again.');
+      toastr.info('PDF.js library is still loading. Please wait a moment and try again.');
       return;
     }
     controller.cancelled = false;
@@ -249,6 +249,11 @@ function initPDFToJPG() {
       const zipName = baseName + '_images.zip';
       saveAs(content, zipName);
       
+      // Show success toastr notification
+      toastr.success(`Successfully converted ${num} page(s) to JPG!`, 'Conversion Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
         log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ZIP file downloaded with <strong>${num}</strong> JPG file(s).</span>`;
         log.style.color = '#34d399';
@@ -260,6 +265,42 @@ function initPDFToJPG() {
       if (typeof trackConversion === 'function') {
         trackConversion(num);
       }
+      
+      // Clear and reset the form after a short delay
+      setTimeout(() => {
+        // Clear file input
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Reset dropzone
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        
+        // Reset dropzone label
+        if (dropLabel) {
+          dropLabel.innerHTML = 'Drag & drop your PDF here';
+        }
+        
+        // Reset stats
+        if (stats) {
+          stats.textContent = 'No file selected';
+        }
+        
+        // Reset progress bar
+        updateProgress(0);
+        
+        // Reset log message
+        if (log) {
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your PDF files';
+          log.style.color = '';
+        }
+        
+        // Clear current file
+        currentFile = null;
+      }, 2000);
     } catch (err) {
       console.error(err);
       if (log) {
@@ -401,12 +442,12 @@ function initJPGToPDF() {
   
   async function handleConvert() {
     if (selectedFiles.length === 0) {
-      alert('Please select at least one image');
+      toastr.error('Please select at least one image');
       return;
     }
     
     if (typeof window.jspdf === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -571,12 +612,12 @@ function initPDFCompress() {
   
   async function handleCompress() {
     if (!currentFile) {
-      alert('Please select a PDF file first');
+      toastr.warning('Please select a PDF file first');
       return;
     }
     
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -763,12 +804,12 @@ function initPNGToJPG() {
   
   async function handleConvert() {
     if (selectedFiles.length === 0) {
-      alert('Please select at least one PNG image');
+      toastr.error('Please select at least one PNG image');
       return;
     }
     
     if (typeof JSZip === 'undefined') {
-      alert('Required library is loading. Please wait a moment and try again.');
+      toastr.info('Required library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -926,7 +967,7 @@ function initImageResize() {
   
   async function handleResize() {
     if (selectedFiles.length === 0) {
-      alert('Please select at least one image');
+      toastr.error('Please select at least one image');
       return;
     }
     
@@ -935,12 +976,12 @@ function initImageResize() {
     const maintainAspect = aspectCheck?.checked !== false;
     
     if (!targetWidth && !targetHeight) {
-      alert('Please specify width or height');
+      toastr.warning('Please specify width or height');
       return;
     }
     
     if (typeof JSZip === 'undefined') {
-      alert('Required library is loading. Please wait a moment and try again.');
+      toastr.info('Required library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -1115,7 +1156,7 @@ function initImageCompress() {
   
   async function handleCompress() {
     if (selectedFiles.length === 0) {
-      alert('Please select at least one image');
+      toastr.error('Please select at least one image');
       return;
     }
     
@@ -1264,7 +1305,7 @@ function initPDFSplit() {
   
   async function loadFile(file) {
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -1304,7 +1345,7 @@ function initPDFSplit() {
       if (pagesInfo) pagesInfo.classList.remove('hidden');
       updateExtractButton();
     } catch (error) {
-      alert('Error loading PDF: ' + error.message);
+      toastr.error('Error loading PDF: ' + error.message);
     }
   }
   
@@ -1347,7 +1388,7 @@ function initPDFSplit() {
   
   async function handleSplitAll() {
     if (!currentPdf) {
-      alert('Please select a PDF file first');
+      toastr.warning('Please select a PDF file first');
       return;
     }
     
@@ -1356,7 +1397,7 @@ function initPDFSplit() {
   
   async function handleExtractSelected() {
     if (selectedPages.size === 0) {
-      alert('Please select at least one page');
+      toastr.warning('Please select at least one page');
       return;
     }
     
@@ -1365,7 +1406,7 @@ function initPDFSplit() {
   
   async function splitPDF(pages, splitAll) {
     if (typeof window.jspdf === 'undefined' || typeof JSZip === 'undefined') {
-      alert('Required libraries not loaded. Please wait a moment and try again.');
+      toastr.info('Required libraries not loaded. Please wait a moment and try again.');
       return;
     }
     
@@ -1531,12 +1572,12 @@ function initPDFMerge() {
   
   async function handleMerge() {
     if (selectedFiles.length < 2) {
-      alert('Please select at least 2 PDF files to merge');
+      toastr.warning('Please select at least 2 PDF files to merge');
       return;
     }
     
     if (!pdfjsReady || typeof pdfjsLib === 'undefined' || typeof window.jspdf === 'undefined') {
-      alert('Required libraries not loaded. Please wait a moment and try again.');
+      toastr.info('Required libraries not loaded. Please wait a moment and try again.');
       return;
     }
     
@@ -1676,7 +1717,7 @@ function initPDFRotate() {
   
   async function loadFile(file) {
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -1715,23 +1756,23 @@ function initPDFRotate() {
       
       if (pagesInfo) pagesInfo.classList.remove('hidden');
     } catch (error) {
-      alert('Error loading PDF: ' + error.message);
+      toastr.error('Error loading PDF: ' + error.message);
     }
   }
   
   async function handleRotate() {
     if (!currentPdf) {
-      alert('Please select a PDF file first');
+      toastr.warning('Please select a PDF file first');
       return;
     }
     
     if (selectedPages.size === 0) {
-      alert('Please select at least one page to rotate');
+      toastr.warning('Please select at least one page to rotate');
       return;
     }
     
     if (typeof window.jspdf === 'undefined') {
-      alert('Required libraries not loaded. Please wait a moment and try again.');
+      toastr.info('Required libraries not loaded. Please wait a moment and try again.');
       return;
     }
     
@@ -1891,19 +1932,19 @@ function initPDFUnlock() {
   
   async function handleUnlock() {
     if (!currentFile) {
-      alert('Please select a PDF file first');
+      toastr.warning('Please select a PDF file first');
       return;
     }
     
     const password = passwordInput?.value || '';
     if (!password) {
-      alert('Please enter the PDF password');
+      toastr.warning('Please enter the PDF password');
       if (passwordInput) passwordInput.focus();
       return;
     }
     
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -2069,7 +2110,7 @@ function initPDFProtect() {
   
   async function handleProtect() {
     if (!currentFile) {
-      alert('Please select a PDF file first');
+      toastr.warning('Please select a PDF file first');
       return;
     }
     
@@ -2077,19 +2118,19 @@ function initPDFProtect() {
     const passwordConfirmValue = passwordConfirm?.value || '';
     
     if (!password) {
-      alert('Please enter a password');
+      toastr.warning('Please enter a password');
       if (passwordInput) passwordInput.focus();
       return;
     }
     
     if (password !== passwordConfirmValue) {
-      alert('Passwords do not match');
+      toastr.error('Passwords do not match');
       if (passwordConfirm) passwordConfirm.focus();
       return;
     }
     
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -2270,7 +2311,7 @@ function initPDFOCR() {
   
   async function handleOCR() {
     if (!currentFile) {
-      alert('Please select a PDF file first');
+      toastr.warning('Please select a PDF file first');
       return;
     }
     
@@ -2411,12 +2452,12 @@ function initPDFToWord() {
   
   async function handleConvert() {
     if (!currentFile) {
-      alert('Please select a PDF file first');
+      toastr.warning('Please select a PDF file first');
       return;
     }
     
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -2560,12 +2601,12 @@ function initWordToPDF() {
   
   async function handleConvert() {
     if (!currentFile) {
-      alert('Please select a Word document first');
+      toastr.warning('Please select a Word document first');
       return;
     }
     
     if (typeof window.jspdf === 'undefined') {
-      alert('PDF library is loading. Please wait a moment and try again.');
+      toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
@@ -2728,7 +2769,7 @@ function initHEICToJPG() {
   
   async function handleConvert() {
     if (selectedFiles.length === 0) {
-      alert('Please select at least one HEIC image');
+      toastr.error('Please select at least one HEIC image');
       return;
     }
     

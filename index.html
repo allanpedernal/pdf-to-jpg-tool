@@ -135,6 +135,9 @@
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
   
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  
   <!-- Custom Bootstrap Theme - Falcon Inspired -->
   <style>
     :root {
@@ -586,21 +589,21 @@
       <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
         <div class="card border-0 shadow-sm">
           <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
-            <!-- Google AdSense Left Sidebar -->
-            <ins class="adsbygoogle"
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
                  style="display:block; min-width: 160px; width: 100%;"
-                 data-ad-client="ca-pub-2042221703015293"
+             data-ad-client="ca-pub-2042221703015293"
                  data-ad-slot="9174709096"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
           </div>
-        </div>
-      </aside>
-      
+      </div>
+    </aside>
+
       <!-- Left Navigation Sidebar -->
       <div id="nav-container" class="col-12 col-lg-2 p-0">
         <!-- Navigation will be inserted here by app.js -->
-      </div>
+    </div>
 
       <!-- Main Content Area -->
       <main id="main-content" class="col-12 col-lg-6 px-3 px-sm-4 px-lg-4 py-4 py-lg-5">
@@ -608,42 +611,185 @@
         <div id="tool-content" class="w-100" style="max-width: 1200px;">
           <!-- Tool content will be loaded here dynamically -->
         </div>
-      </main>
-      
+  </main>
+
       <!-- Right Ad Sidebar (Desktop Only) -->
       <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
         <div class="card border-0 shadow-sm">
           <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
-            <!-- Google AdSense Right Sidebar -->
-            <ins class="adsbygoogle"
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
                  style="display:block; min-width: 160px; width: 100%;"
-                 data-ad-client="ca-pub-2042221703015293"
+             data-ad-client="ca-pub-2042221703015293"
                  data-ad-slot="9174709096"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
           </div>
-        </div>
-      </aside>
-      
+      </div>
+    </aside>
+    
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
       <div class="col-12 mt-auto">
         <div class="card border-0 shadow-sm m-2 m-lg-3">
           <div class="card-body text-center py-3 py-lg-4">
-            <!-- Google AdSense Bottom Banner -->
-            <ins class="adsbygoogle"
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
                  style="display:block; width: 100%; min-height: 90px;"
-                 data-ad-client="ca-pub-2042221703015293"
-                 data-ad-slot="9174709096"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- jQuery (required for Toastr) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  
+  <!-- Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  
+  <!-- Toastr Configuration -->
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      "tapToDismiss": true
+    };
+    
+    // Ensure close button works properly with smooth fadeout animations
+    $(document).ready(function() {
+      // Fix close button functionality - use event delegation
+      $(document).on('click', '.toast-close-button', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $toastWrapper = $(this).closest('#toast-container > div');
+        if ($toastWrapper.length) {
+          $toastWrapper.addClass('toast-fadeout');
+          setTimeout(function() {
+            $toastWrapper.remove();
+            // Also remove parent container if empty
+            var $container = $('#toast-container');
+            if ($container.children().length === 0) {
+              $container.remove();
+            }
+          }, 400);
+        }
+      });
+    });
+  </script>
+  
+  <!-- Toastr Simple Dark Theme Styles -->
+  <style>
+    /* Simple dark theme for toastr */
+    #toast-container {
+      top: 20px;
+      right: 20px;
+    }
+    
+    .toast {
+      background-color: rgba(30, 41, 59, 0.95) !important;
+      color: #f8fafc !important;
+      border-left: 4px solid !important;
+      opacity: 1 !important;
+    }
+    
+    .toast-success {
+      border-left-color: #10b981 !important;
+    }
+    
+    .toast-error {
+      border-left-color: #ef4444 !important;
+    }
+    
+    .toast-warning {
+      border-left-color: #f59e0b !important;
+    }
+    
+    .toast-info {
+      border-left-color: #06b6d4 !important;
+    }
+    
+    .toast-title {
+      color: #f8fafc !important;
+    }
+    
+    .toast-message {
+      color: #cbd5e1 !important;
+    }
+    
+    .toast-close-button {
+      color: rgba(255, 255, 255, 0.6) !important;
+      opacity: 1 !important;
+      cursor: pointer !important;
+    }
+    
+    .toast-close-button:hover {
+      color: #f8fafc !important;
+      opacity: 1 !important;
+    }
+    
+    /* Smooth fadeout animation */
+    @keyframes toastFadeOut {
+      from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(100px) scale(0.8);
+      }
+    }
+    
+    @keyframes toastFadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(100px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+    
+    /* Ensure toasts can fade out */
+    #toast-container > div {
+      animation: toastFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    
+    /* Fadeout animation class */
+    #toast-container > div.toast-fadeout,
+    #toast-container > div.toast-removing {
+      animation: toastFadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      opacity: 0 !important;
+      transform: translateX(100px) scale(0.8) !important;
+    }
+    
+    /* Ensure toastr's default fadeout works */
+    .toast.toast-removing {
+      opacity: 0 !important;
+      transform: translateX(100px) scale(0.8) !important;
+    }
+  </style>
   
   <!-- Libraries - Deferred for performance -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
@@ -674,7 +820,7 @@
         const adSlots = document.querySelectorAll('.adsbygoogle:not([data-ads-initialized])');
         adSlots.forEach(slot => {
           try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
+        (adsbygoogle = window.adsbygoogle || []).push({});
             slot.setAttribute('data-ads-initialized', 'true');
           } catch (e) {
             console.warn('AdSense initialization error:', e);
