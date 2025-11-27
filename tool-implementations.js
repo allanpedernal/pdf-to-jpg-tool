@@ -89,17 +89,20 @@ function initPDFToJPG() {
   
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const f = e.dataTransfer.files && e.dataTransfer.files[0];
     if (f && f.type === 'application/pdf') loadFile(f);
   }
@@ -116,8 +119,9 @@ function initPDFToJPG() {
       return;
     }
     currentFile = f;
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/10');
-    if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${f.name}`;
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${f.name}`;
     if (stats) stats.textContent = `${(f.size/1024/1024).toFixed(2)} MB selected`;
     
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
@@ -282,12 +286,24 @@ function initPDFToJPG() {
   }
   
   function updateProgress(pct) {
-    if (bar) bar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    if (bar) {
+      const percent = Math.min(100, Math.max(0, pct));
+      bar.style.width = percent + '%';
+      bar.setAttribute('aria-valuenow', percent);
+      // Ensure progress bar has color class (should already have bg-gradient-primary from HTML, but ensure it's there)
+      if (!bar.classList.contains('bg-gradient-primary') && !bar.classList.contains('bg-primary')) {
+        bar.classList.add('bg-gradient-primary');
+      }
+      // Make sure progress bar is visible
+      bar.style.display = 'block';
+      bar.style.opacity = '1';
+    }
   }
   
   dropzone.addEventListener('dragover', handleDragOver);
   dropzone.addEventListener('dragleave', handleDragLeave);
   dropzone.addEventListener('drop', handleDrop);
+  // Label automatically handles click - no need for explicit handler (prevents double trigger)
   fileInput.addEventListener('change', handleFileChange);
   if (startBtn) startBtn.addEventListener('click', handleStart);
   if (cancelBtn) cancelBtn.addEventListener('click', handleCancel);

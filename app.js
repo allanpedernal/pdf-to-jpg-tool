@@ -43,21 +43,35 @@ function switchTool(toolId) {
   const tool = getToolById(toolId);
   if (!tool) return;
   
-  // Update active nav item
+  // Update active nav item with smooth transition
   document.querySelectorAll('.nav-item').forEach(item => {
-    item.classList.remove('active');
+    item.classList.remove('active', 'text-primary');
+    item.classList.add('text-light');
   });
   const activeItem = document.querySelector(`[data-tool="${toolId}"]`);
   if (activeItem) {
-    activeItem.classList.add('active');
+    activeItem.classList.add('active', 'text-primary');
+    activeItem.classList.remove('text-light');
   }
   
-  // Update content area
+  // Update content area with fade animation
   const contentArea = document.getElementById('tool-content');
   if (contentArea) {
-    contentArea.innerHTML = getToolContent(toolId);
-    // Reinitialize tool-specific functionality
-    initializeTool(toolId);
+    // Fade out
+    contentArea.style.opacity = '0';
+    contentArea.style.transform = 'translateY(10px)';
+    
+    setTimeout(() => {
+      contentArea.innerHTML = getToolContent(toolId);
+      // Reinitialize tool-specific functionality
+      initializeTool(toolId);
+      
+      // Fade in
+      setTimeout(() => {
+        contentArea.style.opacity = '1';
+        contentArea.style.transform = 'translateY(0)';
+      }, 10);
+    }, 150);
   }
   
   // Update page title
@@ -98,56 +112,59 @@ function getToolContent(toolId) {
 
 // Initialize tool-specific functionality
 function initializeTool(toolId) {
-  // Tool-specific initialization will be handled by each tool's content
-  // This is called after content is loaded
+  // Wait for DOM to be ready, then initialize tool handlers
+  if (typeof initToolHandlers === 'function') {
+    // Small delay to ensure DOM is updated
+    setTimeout(() => {
+      initToolHandlers(toolId);
+    }, 10);
+  }
 }
 
 // Navigation initialization
 function initNavigation() {
   const navHTML = `
-    <nav class="fixed lg:sticky top-0 left-0 z-50 w-full lg:w-auto lg:h-screen bg-slate-900/98 lg:bg-slate-800/95 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-slate-700 lg:overflow-y-auto shadow-lg lg:shadow-none">
-      <div class="lg:hidden flex items-center justify-between p-3 sm:p-4 border-b border-slate-700 bg-slate-900">
-        <a href="/" class="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+    <nav class="h-auto" style="background-color: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); border-right: 1px solid rgba(255, 255, 255, 0.1);">
+      <div class="d-lg-none d-flex align-items-center justify-content-between p-3 border-bottom" style="border-color: rgba(255, 255, 255, 0.1);">
+        <a href="/" class="text-decoration-none text-gradient fw-bold fs-5">
           PDF Tools
         </a>
-        <button id="mobile-menu-toggle" class="text-slate-300 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors" aria-label="Toggle menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+        <button id="mobile-menu-toggle" class="btn btn-link text-light p-2 rounded" aria-label="Toggle menu" type="button">
+          <i class="bi bi-list fs-4"></i>
         </button>
       </div>
       
-      <div id="mobile-menu" class="hidden lg:block max-h-[calc(100vh-80px)] lg:max-h-screen overflow-y-auto">
-        <div class="p-3 sm:p-4 lg:p-5">
-          <div class="mb-4 lg:mb-6">
-            <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+      <div id="mobile-menu" class="d-none d-lg-block">
+        <div class="p-3 p-lg-4">
+          <div class="mb-4 mb-lg-5 pb-3 border-bottom" style="border-color: rgba(255, 255, 255, 0.1);">
+            <h1 class="text-gradient fw-bold mb-1" style="font-size: 1.5rem; line-height: 1.2;">
               PDF Tools
             </h1>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">Free Online Tools Suite</p>
+            <p class="text-secondary small mb-0">Free Online Tools Suite</p>
           </div>
           
           ${Object.values(TOOLS_CONFIG).map(category => `
-            <div class="mb-4 lg:mb-6">
-              <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 lg:mb-3 px-2">
+            <div class="mb-4 mb-lg-5">
+              <h2 class="text-uppercase text-secondary small fw-semibold mb-3 px-2" style="font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.7;">
                 ${category.category}
               </h2>
-              <ul class="space-y-1">
+              <ul class="list-unstyled mb-0">
                 ${category.tools.map(tool => {
                   const isActive = currentTool === tool.id;
                   return `
-                    <li>
+                    <li class="mb-1">
                       <button 
                         data-tool="${tool.id}"
-                        class="nav-item w-full flex items-center gap-2 lg:gap-3 px-2 sm:px-3 py-2 lg:py-2.5 rounded-lg transition-all duration-200 text-left ${
+                        class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 ${
                           isActive 
-                            ? 'bg-blue-500/20 text-blue-400 border-l-2 border-blue-400 shadow-lg shadow-blue-500/10' 
-                            : 'text-slate-300 hover:bg-slate-700/50 hover:text-white'
+                            ? 'active text-primary' 
+                            : 'text-light'
                         }"
                         onclick="switchTool('${tool.id}')">
-                        <span class="text-lg lg:text-xl flex-shrink-0">${tool.icon}</span>
-                        <div class="flex-1 min-w-0">
-                          <div class="text-xs sm:text-sm font-medium truncate">${tool.name}</div>
-                          <div class="text-xs text-slate-400 ${isActive ? 'text-blue-300' : ''} truncate hidden sm:block">${tool.description}</div>
+                        <span class="fs-5 flex-shrink-0">${tool.icon}</span>
+                        <div class="flex-grow-1 text-truncate">
+                          <div class="small fw-medium text-truncate">${tool.name}</div>
+                          <div class="text-secondary small text-truncate d-none d-sm-block" style="font-size: 0.75rem; opacity: 0.7;">${tool.description}</div>
                         </div>
                       </button>
                     </li>
@@ -173,13 +190,13 @@ function initNavigation() {
   if (mobileMenuToggle && mobileMenu) {
     mobileMenuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('d-none');
     });
     
     // Close mobile menu when clicking outside or on a tool
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('nav') && !mobileMenu.classList.contains('hidden') && window.innerWidth < 1024) {
-        mobileMenu.classList.add('hidden');
+      if (!e.target.closest('nav') && !mobileMenu.classList.contains('d-none') && window.innerWidth < 992) {
+        mobileMenu.classList.add('d-none');
       }
     });
     
@@ -187,8 +204,8 @@ function initNavigation() {
     setTimeout(() => {
       document.querySelectorAll('[data-tool]').forEach(btn => {
         btn.addEventListener('click', () => {
-          if (window.innerWidth < 1024) {
-            mobileMenu.classList.add('hidden');
+          if (window.innerWidth < 992) {
+            mobileMenu.classList.add('d-none');
           }
         });
       });

@@ -11,9 +11,8 @@
     if (!isMobilePrefetch) {
       // Desktop: preconnect for faster loading
       const preconnects = [
-        'https://cdn.tailwindcss.com',
-        'https://cdnjs.cloudflare.com',
-        'https://cdn.jsdelivr.net'
+        'https://cdn.jsdelivr.net',
+        'https://cdnjs.cloudflare.com'
       ];
       preconnects.forEach(url => {
         const link = document.createElement('link');
@@ -69,40 +68,19 @@
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
   
-  <!-- Critical CSS - Inline for above-the-fold content -->
+  <!-- Critical CSS - Bootstrap Customizations -->
   <style>
-    /* Critical styles for initial render */
-    body{margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);color:#f8fafc;min-height:100vh}
-    .bg-gradient-to-br{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
-    .text-slate-50{color:#f8fafc}
-    .min-h-screen{min-height:100vh}
-    .flex{display:flex}
-    .flex-col{flex-direction:column}
-    .items-center{align-items:center}
-    .justify-center{justify-content:center}
-    .w-full{width:100%}
-    .max-w-full{max-width:100%}
-    .overflow-x-hidden{overflow-x:hidden}
-    .text-center{text-align:center}
-    .mb-8{margin-bottom:2rem}
-    .mb-4{margin-bottom:1rem}
-    .mb-3{margin-bottom:0.75rem}
-    .mb-2{margin-bottom:0.5rem}
-    .mb-6{margin-bottom:1.5rem}
-    .px-4{padding-left:1rem;padding-right:1rem}
-    .py-6{padding-top:1.5rem;padding-bottom:1.5rem}
-    .text-4xl{font-size:2.25rem;line-height:2.5rem}
-    .font-bold{font-weight:700}
-    .text-lg{font-size:1.125rem;line-height:1.75rem}
-    .text-sm{font-size:0.875rem;line-height:1.25rem}
-    .border-2{border-width:2px}
-    .border-dashed{border-style:dashed}
-    .rounded-xl{border-radius:0.75rem}
-    .cursor-pointer{cursor:pointer}
-    .hidden{display:none}
-    @media(min-width:1024px){.lg\:block{display:block}}
-    *{box-sizing:border-box}
-    html,body{overflow-x:hidden;max-width:100%}
+    /* Bootstrap Dark Theme Override */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+    
+    /* Custom Animations */
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
       50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.7); }
@@ -120,6 +98,7 @@
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+    
     .animate-pulse-glow {
       animation: pulse-glow 2s ease-in-out infinite;
     }
@@ -132,64 +111,125 @@
     .animate-spin-slow {
       animation: spin-slow 3s linear infinite;
     }
-    .progress-bar {
-      transition: width 0.3s ease-out;
-    }
-    /* Sidebar width for ads - Updated to 300px for AdSense fluid ads */
-    .lg\:w-300 {
-      width: 300px;
-    }
-    @media (min-width: 1024px) {
-      .lg\:w-300 {
-        width: 300px;
-      }
-    }
+    
     /* Prevent horizontal scrollbar */
     html, body {
       overflow-x: hidden;
       max-width: 100%;
     }
+    
     /* Mobile padding adjustments */
-    @media (max-width: 640px) {
+    @media (max-width: 576px) {
       #main-content {
         padding-top: 70px;
       }
-    }
-    /* Sticky ad positioning */
-    #left-ad, #right-ad {
-      position: sticky;
-      top: 0;
-      align-self: flex-start;
     }
   </style>
   
   <!-- Shared Styles -->
   <link rel="stylesheet" href="shared/styles.css">
   
-  <!-- Tailwind CDN - Optimized loading for mobile -->
-  <script>
-    // Load Tailwind with mobile optimization
-    const isMobileTailwind = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    
-    function loadTailwind() {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.tailwindcss.com';
-      script.defer = true;
-      document.head.appendChild(script);
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  
+  <!-- Custom Bootstrap Theme - Falcon Inspired -->
+  <style>
+    :root {
+      --bs-primary: #3b82f6;
+      --bs-secondary: #64748b;
+      --bs-success: #10b981;
+      --bs-info: #06b6d4;
+      --bs-warning: #f59e0b;
+      --bs-danger: #ef4444;
+      --bs-dark: #0f172a;
+      --bs-light: #f8fafc;
+      --bs-body-bg: #0f172a;
+      --bs-body-color: #f8fafc;
+      --bs-border-color: rgba(255, 255, 255, 0.1);
     }
     
-    if (isMobileTailwind) {
-      // On mobile: load after initial render
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => setTimeout(loadTailwind, 100));
-      } else {
-        setTimeout(loadTailwind, 100);
-      }
-    } else {
-      // Desktop: load immediately with defer
-      loadTailwind();
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      color: var(--bs-body-color);
     }
-  </script>
+    
+    .bg-gradient-primary {
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%) !important;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(135deg, #60a5fa 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Card styling */
+    .card {
+      background-color: rgba(30, 41, 59, 0.6) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Form controls */
+    .form-control, .form-select {
+      background-color: rgba(30, 41, 59, 0.8) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      color: #f8fafc !important;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      background-color: rgba(30, 41, 59, 0.9) !important;
+      border-color: var(--bs-primary) !important;
+      color: #f8fafc !important;
+      box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25) !important;
+    }
+    
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%) !important;
+      border: none !important;
+    }
+    
+    /* Progress bar */
+    .progress {
+      background-color: rgba(30, 41, 59, 0.8) !important;
+    }
+    
+    .progress-bar.bg-gradient-primary,
+    .progress-bar.bg-primary {
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%) !important;
+      background-color: transparent !important;
+    }
+    
+    .progress {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Dropzone */
+    .dropzone {
+      border: 2px dashed rgba(255, 255, 255, 0.2) !important;
+      background-color: rgba(30, 41, 59, 0.4) !important;
+      cursor: pointer;
+    }
+    
+    .dropzone:hover {
+      border-color: var(--bs-primary) !important;
+      background-color: rgba(30, 41, 59, 0.6) !important;
+    }
+    
+    /* Text colors */
+    .text-light {
+      color: #f8fafc !important;
+    }
+    
+    .text-secondary {
+      color: #94a3b8 !important;
+    }
+  </style>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -538,63 +578,73 @@
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);">
 
-  <!-- Main Container - Elegant Responsive Grid System -->
-  <div id="grid-container" class="grid grid-cols-12 w-full min-h-screen overflow-x-hidden gap-0 lg:gap-4">
-    
-    <!-- Left Ad Sidebar (Desktop Only) -->
-    <aside id="left-ad" class="hidden lg:block lg:col-span-2 xl:col-span-2 sticky top-0 h-screen overflow-y-auto pt-4 pb-8 px-2">
-      <div class="w-full bg-slate-800/50 rounded-lg p-2 min-h-[250px] flex items-center justify-center">
-        <!-- Google AdSense Left Sidebar -->
-        <ins class="adsbygoogle"
-             style="display:block; min-width: 160px; width: 100%;"
-             data-ad-client="ca-pub-2042221703015293"
-             data-ad-slot="9174709096"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
-    </aside>
-    
-    <!-- Left Navigation Sidebar -->
-    <div id="nav-container" class="col-span-12 lg:col-span-3 xl:col-span-2">
-      <!-- Navigation will be inserted here by app.js -->
-    </div>
-
-    <!-- Main Content Area -->
-    <main id="main-content" class="col-span-12 lg:col-span-5 xl:col-span-6 w-full px-3 sm:px-4 lg:px-6 py-4 lg:py-6 flex flex-col items-center animate-slide-in overflow-x-hidden">
+  <!-- Main Container - Bootstrap Grid Layout -->
+  <div class="container-fluid px-0">
+    <div class="row g-0 min-vh-100">
       
-      <!-- Tool Content Area -->
-      <div id="tool-content" class="w-full max-w-4xl">
-        <!-- Tool content will be loaded here dynamically -->
+      <!-- Left Ad Sidebar (Desktop Only) -->
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+            <!-- Google AdSense Left Sidebar -->
+            <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+                 data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Left Navigation Sidebar -->
+      <div id="nav-container" class="col-12 col-lg-2 p-0">
+        <!-- Navigation will be inserted here by app.js -->
       </div>
-    </main>
-    
-    <!-- Right Ad Sidebar (Desktop Only) -->
-    <aside id="right-ad" class="hidden lg:block lg:col-span-2 xl:col-span-2 sticky top-0 h-screen overflow-y-auto pt-4 pb-8 px-2">
-      <div class="w-full bg-slate-800/50 rounded-lg p-2 min-h-[250px] flex items-center justify-center">
-        <!-- Google AdSense Right Sidebar -->
-        <ins class="adsbygoogle"
-             style="display:block; min-width: 160px; width: 100%;"
-             data-ad-client="ca-pub-2042221703015293"
-             data-ad-slot="9174709096"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
-    </aside>
-    
-    <!-- Bottom Ad Banner (Mobile & Desktop) -->
-    <div class="col-span-12 w-full bg-slate-800/30 text-center py-3 lg:py-4 mt-auto overflow-x-hidden">
-      <div class="max-w-6xl mx-auto px-2">
-        <!-- Google AdSense Bottom Banner -->
-        <ins class="adsbygoogle"
-             style="display:block; width: 100%; min-height: 90px;"
-             data-ad-client="ca-pub-2042221703015293"
-             data-ad-slot="9174709096"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+
+      <!-- Main Content Area -->
+      <main id="main-content" class="col-12 col-lg-6 px-3 px-sm-4 px-lg-4 py-4 py-lg-5">
+        <!-- Tool Content Area -->
+        <div id="tool-content" class="w-100" style="max-width: 1200px;">
+          <!-- Tool content will be loaded here dynamically -->
+        </div>
+      </main>
+      
+      <!-- Right Ad Sidebar (Desktop Only) -->
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+            <!-- Google AdSense Right Sidebar -->
+            <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+                 data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Bottom Ad Banner (Mobile & Desktop) -->
+      <div class="col-12 mt-auto">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+            <!-- Google AdSense Bottom Banner -->
+            <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+                 data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  
   <!-- Libraries - Deferred for performance -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
