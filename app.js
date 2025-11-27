@@ -126,9 +126,12 @@ function initNavigation() {
   const navHTML = `
     <nav class="h-auto" style="background-color: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); border-right: 1px solid rgba(255, 255, 255, 0.1);">
       <div class="d-lg-none d-flex align-items-center justify-content-between p-3 border-bottom" style="border-color: rgba(255, 255, 255, 0.1);">
-        <a href="/" class="text-decoration-none text-gradient fw-bold fs-5">
-          PDF Tools
-        </a>
+        <div>
+          <h1 class="text-gradient fw-bold mb-0" style="font-size: 1.25rem; line-height: 1.2;">
+            PDF Tools
+          </h1>
+          <p class="text-secondary small mb-0" style="font-size: 0.75rem;">Free Online Tools Suite</p>
+        </div>
         <button id="mobile-menu-toggle" class="btn btn-link text-light p-2 rounded" aria-label="Toggle menu" type="button">
           <i class="bi bi-list fs-4"></i>
         </button>
@@ -136,7 +139,7 @@ function initNavigation() {
       
       <div id="mobile-menu" class="d-none d-lg-block">
         <div class="p-3 p-lg-4">
-          <div class="mb-4 mb-lg-5 pb-3 border-bottom" style="border-color: rgba(255, 255, 255, 0.1);">
+          <div class="mb-4 mb-lg-5 pb-3 border-bottom d-none d-lg-block" style="border-color: rgba(255, 255, 255, 0.1);">
             <h1 class="text-gradient fw-bold mb-1" style="font-size: 1.5rem; line-height: 1.2;">
               PDF Tools
             </h1>

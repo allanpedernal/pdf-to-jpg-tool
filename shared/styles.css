@@ -127,6 +127,12 @@ nav {
 
 /* Mobile menu with smooth animations */
 @media (max-width: 991.98px) {
+  /* Force all columns to col-12 on mobile */
+  [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  
   nav {
     position: fixed !important;
     top: 0;
@@ -134,8 +140,10 @@ nav {
     z-index: 1050;
     width: 100% !important;
     max-height: 100vh;
-    overflow-y: auto; /* Allow scrolling on mobile only */
+    overflow-y: auto;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgba(15, 23, 42, 0.98) !important;
+    backdrop-filter: blur(20px);
   }
   
   #mobile-menu {
@@ -154,12 +162,65 @@ nav {
   
   #main-content {
     padding-top: 70px !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
     transition: padding-top 0.3s ease;
   }
   
   #nav-container {
-    height: 0;
+    height: auto;
     overflow: visible;
+  }
+  
+  /* Hide ads on mobile */
+  #left-ad,
+  #right-ad {
+    display: none !important;
+  }
+  
+  /* Mobile content adjustments */
+  #tool-content {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Mobile form controls */
+  .form-control {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+  
+  /* Mobile toastr positioning */
+  #toast-container {
+    top: 10px !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: calc(100% - 20px) !important;
+    max-width: calc(100% - 20px) !important;
+  }
+  
+  #toast-container > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Mobile button full width on small screens */
+  @media (max-width: 576px) {
+    .btn-lg {
+      width: 100% !important;
+    }
+    
+    .dropzone {
+      min-height: 160px !important;
+      padding: 1.5rem 1rem !important;
+    }
+    
+    h1 {
+      font-size: 1.75rem !important;
+    }
+    
+    h2 {
+      font-size: 1.25rem !important;
+    }
   }
 }
 
