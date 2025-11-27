@@ -105,30 +105,30 @@ function initializeTool(toolId) {
 // Navigation initialization
 function initNavigation() {
   const navHTML = `
-    <nav class="col-span-12 lg:col-span-4 fixed lg:relative top-0 left-0 z-50 w-full lg:h-screen bg-slate-900/98 lg:bg-slate-800/95 backdrop-blur-xl border-b lg:border-r border-slate-700 lg:overflow-y-auto">
-      <div class="lg:hidden flex items-center justify-between p-4 border-b border-slate-700 bg-slate-900">
-        <a href="/" class="text-xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+    <nav class="fixed lg:sticky top-0 left-0 z-50 w-full lg:w-auto lg:h-screen bg-slate-900/98 lg:bg-slate-800/95 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-slate-700 lg:overflow-y-auto shadow-lg lg:shadow-none">
+      <div class="lg:hidden flex items-center justify-between p-3 sm:p-4 border-b border-slate-700 bg-slate-900">
+        <a href="/" class="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
           PDF Tools
         </a>
-        <button id="mobile-menu-toggle" class="text-slate-300 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
+        <button id="mobile-menu-toggle" class="text-slate-300 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors" aria-label="Toggle menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
       </div>
       
-      <div id="mobile-menu" class="hidden lg:block">
-        <div class="p-4 lg:p-6">
-          <div class="mb-6">
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+      <div id="mobile-menu" class="hidden lg:block max-h-[calc(100vh-80px)] lg:max-h-screen overflow-y-auto">
+        <div class="p-3 sm:p-4 lg:p-5">
+          <div class="mb-4 lg:mb-6">
+            <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
               PDF Tools
             </h1>
-            <p class="text-sm text-slate-400 mt-1">Free Online Tools Suite</p>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1">Free Online Tools Suite</p>
           </div>
           
           ${Object.values(TOOLS_CONFIG).map(category => `
-            <div class="mb-6">
-              <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">
+            <div class="mb-4 lg:mb-6">
+              <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 lg:mb-3 px-2">
                 ${category.category}
               </h2>
               <ul class="space-y-1">
@@ -138,16 +138,16 @@ function initNavigation() {
                     <li>
                       <button 
                         data-tool="${tool.id}"
-                        class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left ${
+                        class="nav-item w-full flex items-center gap-2 lg:gap-3 px-2 sm:px-3 py-2 lg:py-2.5 rounded-lg transition-all duration-200 text-left ${
                           isActive 
                             ? 'bg-blue-500/20 text-blue-400 border-l-2 border-blue-400 shadow-lg shadow-blue-500/10' 
                             : 'text-slate-300 hover:bg-slate-700/50 hover:text-white'
                         }"
                         onclick="switchTool('${tool.id}')">
-                        <span class="text-xl flex-shrink-0">${tool.icon}</span>
+                        <span class="text-lg lg:text-xl flex-shrink-0">${tool.icon}</span>
                         <div class="flex-1 min-w-0">
-                          <div class="text-sm font-medium truncate">${tool.name}</div>
-                          <div class="text-xs text-slate-400 ${isActive ? 'text-blue-300' : ''} truncate">${tool.description}</div>
+                          <div class="text-xs sm:text-sm font-medium truncate">${tool.name}</div>
+                          <div class="text-xs text-slate-400 ${isActive ? 'text-blue-300' : ''} truncate hidden sm:block">${tool.description}</div>
                         </div>
                       </button>
                     </li>
@@ -161,25 +161,9 @@ function initNavigation() {
     </nav>
   `;
   
-  // Find the grid container
-  const gridContainer = document.getElementById('grid-container') || document.querySelector('.grid.grid-cols-12');
-  if (gridContainer) {
-    // Insert nav as first child of grid container
-    const navContainer = document.createElement('div');
+  const navContainer = document.getElementById('nav-container');
+  if (navContainer) {
     navContainer.innerHTML = navHTML;
-    const navElement = navContainer.firstElementChild;
-    // Insert before main content
-    const mainContent = document.getElementById('main-content');
-    if (mainContent) {
-      gridContainer.insertBefore(navElement, mainContent);
-    } else {
-      gridContainer.insertBefore(navElement, gridContainer.firstChild);
-    }
-  } else {
-    // Fallback: insert at body start
-    const navContainer = document.createElement('div');
-    navContainer.innerHTML = navHTML;
-    document.body.insertBefore(navContainer.firstElementChild, document.body.firstChild);
   }
   
   // Mobile menu toggle
@@ -187,23 +171,37 @@ function initNavigation() {
   const mobileMenu = document.getElementById('mobile-menu');
   
   if (mobileMenuToggle && mobileMenu) {
-    mobileMenuToggle.addEventListener('click', () => {
+    mobileMenuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       mobileMenu.classList.toggle('hidden');
     });
     
-    // Close mobile menu when clicking outside
+    // Close mobile menu when clicking outside or on a tool
     document.addEventListener('click', (e) => {
       if (!e.target.closest('nav') && !mobileMenu.classList.contains('hidden') && window.innerWidth < 1024) {
         mobileMenu.classList.add('hidden');
       }
     });
+    
+    // Close mobile menu when selecting a tool
+    setTimeout(() => {
+      document.querySelectorAll('[data-tool]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            mobileMenu.classList.add('hidden');
+          }
+        });
+      });
+    }, 100);
   }
   
   // Set initial active tool
-  const initialTool = document.querySelector(`[data-tool="${currentTool}"]`);
-  if (initialTool) {
-    initialTool.classList.add('active');
-  }
+  setTimeout(() => {
+    const initialTool = document.querySelector(`[data-tool="${currentTool}"]`);
+    if (initialTool) {
+      initialTool.classList.add('active');
+    }
+  }, 100);
 }
 
 // Adjust content - grid system handles spacing automatically
