@@ -1,6 +1,18 @@
 /* Shared styles for all tool pages */
 /* Falcon-Inspired Bootstrap 5 Elegant Layout */
 
+/* Ensure disabled buttons don't interfere with enabled state */
+button:not(:disabled) {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+button[disabled],
+button.disabled {
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
 /* Navigation styles - No visible scrollbar */
 nav {
   scrollbar-width: none; /* Firefox */

@@ -151,7 +151,13 @@ function initPDFToJPG() {
       return;
     }
     controller.cancelled = false;
-    if (cancelBtn) cancelBtn.disabled = false;
+    
+    // Enable cancel button
+    if (cancelBtn) {
+      cancelBtn.disabled = false;
+      cancelBtn.removeAttribute('disabled');
+    }
+    
     if (startBtn) {
       startBtn.disabled = true;
       startBtn.classList.remove('animate-pulse-glow');
@@ -167,17 +173,24 @@ function initPDFToJPG() {
     });
   }
   
-  function handleCancel() {
+  function handleCancel(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    console.log('Cancel button clicked, controller.cancelled:', controller.cancelled);
     if (controller.cancelled) return;
     controller.cancelled = true;
     if (log) {
       log.innerHTML = '<span class="inline-block animate-pulse">⏸️</span> <span>Cancelling... Please wait...</span>';
       log.style.color = '#fb923c';
     }
-    if (cancelBtn) {
-      cancelBtn.disabled = true;
-      cancelBtn.textContent = 'Cancelling...';
+    const cancelButton = document.getElementById('cancel-pdf-jpg');
+    if (cancelButton) {
+      cancelButton.disabled = true;
+      cancelButton.textContent = 'Cancelling...';
     }
+    toastr.info('Cancellation requested. Please wait for current operation to complete...');
   }
   
   async function processPDF(file, opts) {
@@ -302,24 +315,32 @@ function initPDFToJPG() {
         currentFile = null;
       }, 2000);
     } catch (err) {
-      console.error(err);
+      // Don't log cancellation as an error
+      if (err.message !== 'Cancelled by user') {
+        console.error(err);
+      }
       if (log) {
         if (err.message === 'Cancelled by user') {
           log.innerHTML = '<span class="inline-block">⏸️</span> <span>Conversion cancelled by user</span>';
           log.style.color = '#fb923c';
           if (stats) stats.textContent = 'Cancelled';
+          toastr.info('Conversion cancelled successfully');
         } else {
           log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${err.message || err}</span>`;
           log.style.color = '#f87171';
           if (stats) stats.textContent = '✗ Conversion failed';
+          toastr.error(`Conversion failed: ${err.message || err}`);
         }
       }
       updateProgress(0);
       if (startBtn) startBtn.classList.remove('opacity-75', 'cursor-not-allowed');
     } finally {
-      if (startBtn) startBtn.disabled = false;
+      if (startBtn) {
+        startBtn.disabled = false;
+      }
       if (cancelBtn) {
         cancelBtn.disabled = true;
+        cancelBtn.setAttribute('disabled', 'disabled');
         cancelBtn.textContent = 'Cancel';
       }
       controller.cancelled = false;
@@ -346,8 +367,15 @@ function initPDFToJPG() {
   dropzone.addEventListener('drop', handleDrop);
   // Label automatically handles click - no need for explicit handler (prevents double trigger)
   fileInput.addEventListener('change', handleFileChange);
-  if (startBtn) startBtn.addEventListener('click', handleStart);
-  if (cancelBtn) cancelBtn.addEventListener('click', handleCancel);
+  if (startBtn) {
+    startBtn.addEventListener('click', handleStart);
+  }
+  
+  // Setup cancel button
+  if (cancelBtn) {
+    cancelBtn.disabled = true;
+    cancelBtn.addEventListener('click', handleCancel);
+  }
 }
 
 // JPG to PDF Implementation
