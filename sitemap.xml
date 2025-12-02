@@ -4,12 +4,44 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
-  <!-- Main page (GitHub Pages automatically serves index.html from root) -->
+  <!-- Main Homepage - Highest Priority -->
   <url>
     <loc>https://www.pdf-to-jpg-tool.com/</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  
+  <!-- About Page - High Priority for Trust Signals -->
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/about.html</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Contact Page - Important for User Engagement -->
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/contact.html</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Privacy Policy - Required Legal Page -->
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/privacy-policy.html</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Terms of Service - Required Legal Page -->
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/terms-of-service.html</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>

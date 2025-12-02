@@ -11,9 +11,8 @@
     if (!isMobilePrefetch) {
       // Desktop: preconnect for faster loading
       const preconnects = [
-        'https://cdn.tailwindcss.com',
-        'https://cdnjs.cloudflare.com',
-        'https://cdn.jsdelivr.net'
+        'https://cdn.jsdelivr.net',
+        'https://cdnjs.cloudflare.com'
       ];
       preconnects.forEach(url => {
         const link = document.createElement('link');
@@ -25,15 +24,15 @@
   </script>
   
   <!-- Resource Hints -->
-  <link rel="preload" href="/preview.jpg" as="image" type="image/jpeg" fetchpriority="low">
+  <!-- Preview image preload removed for local development -->
   
   <!-- Additional Mobile & Device Meta Tags -->
   <meta name="format-detection" content="telephone=no">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="PDF to JPG">
-  <meta name="application-name" content="PDF to JPG Converter">
+  <meta name="apple-mobile-web-app-title" content="PDF Tools">
+  <meta name="application-name" content="PDF Tools Suite">
   <meta name="msapplication-TileColor" content="#0f172a">
   <meta name="msapplication-config" content="/browserconfig.xml">
   
@@ -46,14 +45,13 @@
   <!-- Security & Privacy Meta Tags -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   
   <!-- Primary SEO Meta Tags -->
-  <title>PDF to JPG Converter - Free Online PDF to Image Converter Tool</title>
-  <meta name="title" content="PDF to JPG Converter - Free Online PDF to Image Converter Tool">
-  <meta name="description" content="Convert PDF to JPG online for free. Fast, high-quality PDF to image converter for multi-page PDFs. No software required. Convert PDF pages to JPEG images instantly in your browser.">
-  <meta name="keywords" content="pdf to jpg, pdf to image, pdf converter, pdf to jpeg, convert pdf to jpg, pdf to jpg online, free pdf converter, pdf to image converter, pdf pages to images, pdf to jpg converter online">
+  <title>PDF Tools - Free Online PDF & Image Converter Suite</title>
+  <meta name="title" content="PDF Tools - Free Online PDF & Image Converter Suite">
+  <meta name="description" content="Free online PDF and image tools. Convert PDF to JPG, compress PDFs, merge PDFs, split PDFs, convert images, and more. All tools work entirely in your browser - no uploads required.">
+  <meta name="keywords" content="pdf tools, pdf converter, pdf to jpg, jpg to pdf, pdf compressor, pdf merger, pdf splitter, image converter, free pdf tools, online pdf tools">
   <meta name="author" content="PDF Tools">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
@@ -61,127 +59,35 @@
   <meta name="theme-color" content="#0f172a">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   
   <!-- PWA Manifest -->
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
   
-  <!-- Critical CSS - Inline for above-the-fold content -->
-  <style>
-    /* Critical styles for initial render */
-    body{margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);color:#f8fafc;min-height:100vh}
-    .bg-gradient-to-br{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
-    .text-slate-50{color:#f8fafc}
-    .min-h-screen{min-height:100vh}
-    .flex{display:flex}
-    .flex-col{flex-direction:column}
-    .items-center{align-items:center}
-    .justify-center{justify-content:center}
-    .w-full{width:100%}
-    .max-w-full{max-width:100%}
-    .overflow-x-hidden{overflow-x:hidden}
-    .text-center{text-align:center}
-    .mb-8{margin-bottom:2rem}
-    .mb-4{margin-bottom:1rem}
-    .mb-3{margin-bottom:0.75rem}
-    .mb-2{margin-bottom:0.5rem}
-    .mb-6{margin-bottom:1.5rem}
-    .px-4{padding-left:1rem;padding-right:1rem}
-    .py-6{padding-top:1.5rem;padding-bottom:1.5rem}
-    .text-4xl{font-size:2.25rem;line-height:2.5rem}
-    .font-bold{font-weight:700}
-    .text-lg{font-size:1.125rem;line-height:1.75rem}
-    .text-sm{font-size:0.875rem;line-height:1.25rem}
-    .border-2{border-width:2px}
-    .border-dashed{border-style:dashed}
-    .rounded-xl{border-radius:0.75rem}
-    .cursor-pointer{cursor:pointer}
-    .hidden{display:none}
-    @media(min-width:1024px){.lg\:block{display:block}}
-    *{box-sizing:border-box}
-    html,body{overflow-x:hidden;max-width:100%}
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-      50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.7); }
-    }
-    @keyframes slide-in {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes bounce-in {
-      0% { transform: scale(0.8); opacity: 0; }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .animate-pulse-glow {
-      animation: pulse-glow 2s ease-in-out infinite;
-    }
-    .animate-slide-in {
-      animation: slide-in 0.5s ease-out;
-    }
-    .animate-bounce-in {
-      animation: bounce-in 0.6s ease-out;
-    }
-    .animate-spin-slow {
-      animation: spin-slow 3s linear infinite;
-    }
-    .progress-bar {
-      transition: width 0.3s ease-out;
-    }
-    /* Sidebar width for ads - Updated to 300px for AdSense fluid ads */
-    .lg\:w-300 {
-      width: 300px;
-    }
-    @media (min-width: 1024px) {
-      .lg\:w-300 {
-        width: 300px;
-      }
-    }
-    /* Prevent horizontal scrollbar */
-    html, body {
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-  </style>
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="shared/styles.css">
   
-  <!-- Tailwind CDN - Optimized loading for mobile -->
-  <script>
-    // Load Tailwind with mobile optimization
-    const isMobileTailwind = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    
-    function loadTailwind() {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.tailwindcss.com';
-      script.defer = true;
-      document.head.appendChild(script);
-    }
-    
-    if (isMobileTailwind) {
-      // On mobile: load after initial render
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => setTimeout(loadTailwind, 100));
-      } else {
-        setTimeout(loadTailwind, 100);
-      }
-    } else {
-      // Desktop: load immediately with defer
-      loadTailwind();
-    }
-  </script>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.pdf-to-jpg-tool.com/">
-  <meta property="og:title" content="PDF to JPG Converter - Free Online PDF to Image Converter Tool">
-  <meta property="og:description" content="Convert PDF to JPG online for free. Fast, high-quality PDF to image converter for multi-page PDFs. No software required.">
+  <meta property="og:title" content="PDF Tools - Free Online PDF & Image Converter Suite">
+  <meta property="og:description" content="Free online PDF and image tools. Convert, compress, merge, split PDFs and images. All tools work entirely in your browser.">
   <meta property="og:image" content="https://www.pdf-to-jpg-tool.com/preview.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -191,8 +97,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.pdf-to-jpg-tool.com/">
-  <meta name="twitter:title" content="PDF to JPG Converter - Free Online PDF to Image Converter Tool">
-  <meta name="twitter:description" content="Convert PDF to JPG online for free. Fast, high-quality PDF to image converter for multi-page PDFs. No software required.">
+  <meta name="twitter:title" content="PDF Tools - Free Online PDF & Image Converter Suite">
+  <meta name="twitter:description" content="Free online PDF and image tools. Convert, compress, merge, split PDFs and images. All tools work entirely in your browser.">
   <meta name="twitter:image" content="https://www.pdf-to-jpg-tool.com/preview.jpg">
   <meta name="twitter:creator" content="@allanpedernal">
   
@@ -522,640 +428,269 @@
   </script>
 
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);">
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%);">
 
-  <!-- Main Container with Sidebars -->
-  <div class="flex flex-col lg:flex-row w-full min-h-screen overflow-x-hidden max-w-full">
-    
-    <!-- Left Sidebar Ad (Desktop only) -->
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;">
-      <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4" style="min-width: 250px;">
+  <!-- Main Container - Bootstrap Grid Layout -->
+  <div class="container-fluid px-0">
+    <div class="row g-0 min-vh-100">
+      
+      <!-- Left Ad Sidebar (Desktop Only) -->
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
         <!-- Google AdSense Left Sidebar -->
         <ins class="adsbygoogle"
-             style="display:block; text-align:center; min-width: 250px;"
-             data-ad-layout="in-article"
-             data-ad-format="fluid"
+                 style="display:block; min-width: 160px; width: 100%;"
              data-ad-client="ca-pub-2042221703015293"
-             data-ad-slot="5198028961"></ins>
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
       </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 flex flex-col items-center animate-slide-in overflow-x-hidden">
-    <div class="text-center mb-8">
-      <div class="inline-block mb-4">
-        <svg class="w-16 h-16 text-blue-400 animate-bounce-in" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9h6M9 13h6M9 17h4"/>
-        </svg>
-      </div>
-      <h1 class="text-4xl md:text-5xl font-bold mb-3 text-center bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent" style="color: #60a5fa;">
-        PDF → JPG Converter
-      </h1>
-      <p class="text-slate-200 text-lg mb-2 font-medium">Convert PDF to JPG instantly in your browser</p>
-      <p class="text-slate-400 text-sm">Free • Fast • No Upload Required • 100% Secure</p>
+      <!-- Left Navigation Sidebar -->
+      <div id="nav-container" class="col-12 col-lg-2 p-0">
+        <!-- Navigation will be inserted here by app.js -->
     </div>
 
-    <!-- Drag & Drop Area -->
-    <label class="w-full border-2 border-dashed border-slate-600 rounded-xl px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-slate-800/60 transition-all duration-300 mb-6 bg-slate-800/40 backdrop-blur-sm shadow-lg hover:shadow-blue-500/30 group transform max-w-full" id="dropzone" style="border-color: #475569;">
-      <div class="mb-4 relative">
-        <svg class="w-16 h-16 text-blue-400 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: #60a5fa;">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-        </svg>
-        <div class="absolute inset-0 flex items-center justify-center">
-          <svg class="w-8 h-8 text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #93c5fd;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12V4m0 0l-3 3m3-3l3 3"/>
-          </svg>
-        </div>
-      </div>
-      <span id="dropLabel" class="text-slate-200 font-semibold text-lg mb-2 group-hover:text-blue-400 transition-colors" style="color: #e2e8f0;">Drag & drop your PDF here</span>
-      <span class="text-slate-400 text-sm" style="color: #94a3b8;">or click to browse files</span>
-      <input type="file" id="file" class="hidden" accept="application/pdf" />
-    </label>
+      <!-- Main Content Area -->
+      <main id="main-content" class="col-12 col-lg-6 px-3 px-sm-4 px-lg-4 py-4">
+        <!-- Tool Content Area -->
+        <div id="tool-content" class="w-100 py-3" style="max-width: 1200px;">
+          <!-- Default Landing Content - Visible before JavaScript loads -->
+          <div id="default-content" class="w-100">
+            <div class="text-center mb-5">
+              <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+                Free Online PDF & Image Tools
+              </h1>
+              <p class="text-light fs-5 mb-2 fw-medium">Professional PDF and image conversion tools that work entirely in your browser</p>
+              <p class="text-secondary small mb-0">100% Free • No Upload Required • 100% Secure • Works Offline</p>
+            </div>
 
-    <!-- Controls -->
-    <div class="flex flex-wrap gap-4 w-full mb-6 justify-center items-end max-w-full px-2">
-      <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl p-4 shadow-lg" style="background-color: rgba(30, 41, 59, 0.7);">
-        <label class="block text-slate-200 text-sm mb-2 font-medium flex items-center gap-2" style="color: #e2e8f0;">
-          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          JPEG Quality
-        </label>
-        <input type="number" id="quality" min="0.1" max="1" step="0.1" value="0.85" class="px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all w-32" style="background-color: #334155; border-color: #475569; color: #f8fafc;">
-        <span class="text-xs text-slate-400 mt-1 block" style="color: #94a3b8;">0.1 (low) - 1.0 (high)</span>
-      </div>
-      <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl p-4 shadow-lg" style="background-color: rgba(30, 41, 59, 0.7);">
-        <label class="block text-slate-200 text-sm mb-2 font-medium flex items-center gap-2" style="color: #e2e8f0;">
-          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-          </svg>
-          Scale
-        </label>
-        <input type="number" id="scale" min="0.5" max="3" step="0.1" value="1.6" class="px-4 py-2 rounded-lg bg-slate-700 border border-slate-600 text-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all w-32" style="background-color: #334155; border-color: #475569; color: #f8fafc;">
-        <span class="text-xs text-slate-400 mt-1 block" style="color: #94a3b8;">1.0 = original size</span>
-      </div>
-      <div class="flex flex-col gap-2">
-        <button id="start" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-blue-500/50 transform hover:scale-105 flex items-center gap-2" style="background: linear-gradient(to right, #3b82f6, #06b6d4); color: #ffffff; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-          Convert PDF to JPG
-        </button>
-        <button id="cancel" class="px-6 py-2 border-2 border-slate-600 rounded-xl text-slate-300 hover:border-orange-400 hover:text-orange-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #475569; color: #cbd5e1;" disabled>
-          Cancel
-        </button>
-      </div>
-    </div>
+            <div class="card border-0 shadow-sm mb-5">
+              <div class="card-body p-4 p-lg-5">
+                <h2 class="text-gradient fw-bold mb-4" style="font-size: 2rem;">About Our PDF & Image Tools</h2>
+                <p class="text-light mb-3" style="font-size: 1.05rem; line-height: 1.8;">
+                  Welcome to our comprehensive suite of free online PDF and image conversion tools. Our platform provides professional-grade file conversion and manipulation capabilities that work entirely in your web browser. Unlike other online tools, we never upload your files to any server - all processing happens locally on your device, ensuring complete privacy and security.
+                </p>
+                <p class="text-light mb-3" style="font-size: 1.05rem; line-height: 1.8;">
+                  Our PDF tools allow you to convert PDFs to JPG images, compress PDF files to reduce file size, merge multiple PDFs into one document, split PDFs into separate files, rotate PDF pages, and extract text from PDFs using OCR technology. Our image tools enable you to convert PNG to JPG, resize images, compress images, convert HEIC images to JPG format, and convert multiple JPG images into a single PDF document.
+                </p>
+                <p class="text-light mb-0" style="font-size: 1.05rem; line-height: 1.8;">
+                  All tools are completely free to use with no hidden costs, no watermarks, and no file size limits. Simply select a tool from the navigation menu above to get started. Our tools work on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera, and are fully compatible with mobile devices.
+                </p>
+              </div>
+            </div>
 
-    <!-- Progress -->
-    <div class="w-full bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 py-6 shadow-lg mb-6 max-w-full" style="background-color: rgba(30, 41, 59, 0.7);">
-      <div class="flex items-center justify-between mb-3">
-        <span class="text-slate-200 font-medium flex items-center gap-2" style="color: #e2e8f0;">
-          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #60a5fa;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-          </svg>
-          Progress
-        </span>
-        <span id="stats" class="text-sm text-slate-300 font-medium" style="color: #cbd5e1;">No file selected</span>
-      </div>
-      <div class="w-full h-4 bg-slate-700 rounded-full overflow-hidden shadow-inner" style="background-color: #334155;">
-        <div id="bar" class="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 w-0 progress-bar rounded-full relative" style="background: linear-gradient(to right, #3b82f6, #22d3ee, #3b82f6);">
-          <div class="absolute inset-0 bg-white/30 animate-pulse"></div>
-        </div>
-      </div>
-      <p id="log" class="text-sm text-slate-200 min-h-[32px] text-center mt-4 font-medium flex items-center justify-center gap-2" style="color: #e2e8f0;">
-        <span class="inline-block">✨</span>
-        <span>Ready to convert your PDF files</span>
-      </p>
-    </div>
+            <div class="card border-0 shadow-sm mb-5">
+              <div class="card-body p-4 p-lg-5">
+                <h2 class="text-gradient fw-bold mb-4" style="font-size: 2rem;">Available Tools</h2>
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <h3 class="text-light fw-bold mb-3" style="font-size: 1.5rem;">PDF Tools</h3>
+                    <ul class="list-unstyled text-light" style="font-size: 1.05rem; line-height: 2;">
+                      <li class="mb-2">• <strong>PDF to JPG Converter</strong> - Convert PDF pages to high-quality JPG images</li>
+                      <li class="mb-2">• <strong>JPG to PDF Converter</strong> - Combine multiple JPG images into a single PDF</li>
+                      <li class="mb-2">• <strong>PDF Compressor</strong> - Reduce PDF file size while maintaining quality</li>
+                      <li class="mb-2">• <strong>PDF Merger</strong> - Combine multiple PDF files into one document</li>
+                      <li class="mb-2">• <strong>PDF Splitter</strong> - Extract specific pages from PDF documents</li>
+                      <li class="mb-2">• <strong>PDF Rotate</strong> - Rotate PDF pages to correct orientation</li>
+                      <li class="mb-2">• <strong>PDF OCR</strong> - Extract text from scanned PDF documents</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h3 class="text-light fw-bold mb-3" style="font-size: 1.5rem;">Image Tools</h3>
+                    <ul class="list-unstyled text-light" style="font-size: 1.05rem; line-height: 2;">
+                      <li class="mb-2">• <strong>PNG to JPG Converter</strong> - Convert PNG images to JPG format</li>
+                      <li class="mb-2">• <strong>Image Resizer</strong> - Resize images to any dimensions</li>
+                      <li class="mb-2">• <strong>Image Compressor</strong> - Reduce image file size</li>
+                      <li class="mb-2">• <strong>HEIC to JPG Converter</strong> - Convert iPhone HEIC images to JPG</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <!-- How It Works Section -->
-    <section class="w-full mb-8 bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 md:px-8 py-6 md:py-8 shadow-lg max-w-full">
-      <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-        How It Works
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <span class="text-3xl font-bold text-blue-400">1</span>
-          </div>
-          <h3 class="text-lg font-semibold text-slate-200 mb-2">Select PDF</h3>
-          <p class="text-slate-400 text-sm">Drag and drop your PDF file or click to browse and select from your computer.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <span class="text-3xl font-bold text-blue-400">2</span>
-          </div>
-          <h3 class="text-lg font-semibold text-slate-200 mb-2">Adjust Settings</h3>
-          <p class="text-slate-400 text-sm">Set JPEG quality (0.1-1.0) and scale (0.5-3.0) to control image size and quality.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <span class="text-3xl font-bold text-blue-400">3</span>
-          </div>
-          <h3 class="text-lg font-semibold text-slate-200 mb-2">Convert</h3>
-          <p class="text-slate-400 text-sm">Click "Convert PDF to JPG" and watch as each page is processed instantly in your browser.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-full flex items-center justify-center">
-            <span class="text-3xl font-bold text-blue-400">4</span>
-          </div>
-          <h3 class="text-lg font-semibold text-slate-200 mb-2">Download</h3>
-          <p class="text-slate-400 text-sm">All JPG images are automatically packaged in a ZIP file for easy download.</p>
-        </div>
-      </div>
-    </section>
+            <div class="card border-0 shadow-sm mb-5">
+              <div class="card-body p-4 p-lg-5">
+                <h2 class="text-gradient fw-bold mb-4" style="font-size: 2rem;">Why Choose Our Tools?</h2>
+                <div class="row g-4">
+                  <div class="col-md-6 col-lg-4">
+                    <div class="text-center">
+                      <div class="mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px; background: #f59e0b;">
+                          <i class="bi bi-lock-fill text-white" style="font-size: 2rem;"></i>
+                        </div>
+                      </div>
+                      <h4 class="text-light fw-bold mb-2">100% Private</h4>
+                      <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">All processing happens in your browser. Your files never leave your device.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4">
+                    <div class="text-center">
+                      <div class="mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px; background: #f97316;">
+                          <i class="bi bi-lightning-fill text-white" style="font-size: 2rem;"></i>
+                        </div>
+                      </div>
+                      <h4 class="text-light fw-bold mb-2">Lightning Fast</h4>
+                      <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No uploads means instant processing. Get results in seconds.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4">
+                    <div class="text-center">
+                      <div class="mb-3">
+                        <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 60px; height: 60px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                          FREE
+                        </div>
+                      </div>
+                      <h4 class="text-light fw-bold mb-2">Completely Free</h4>
+                      <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Use all tools unlimited times.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <!-- Benefits Section -->
-    <section class="w-full mb-8 bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 md:px-8 py-6 md:py-8 shadow-lg max-w-full">
-      <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-        Why Convert PDF to JPG?
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        <div class="bg-slate-700/50 rounded-lg p-6">
-          <div class="text-4xl mb-3">🔒</div>
-          <h3 class="text-xl font-semibold text-slate-200 mb-2">100% Private</h3>
-          <p class="text-slate-400">Your PDF files never leave your computer. All conversion happens locally in your browser - no uploads, no server storage, complete privacy.</p>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6">
-          <div class="text-4xl mb-3">⚡</div>
-          <h3 class="text-xl font-semibold text-slate-200 mb-2">Lightning Fast</h3>
-          <p class="text-slate-400">Convert PDF to JPG in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6">
-          <div class="text-4xl mb-3">💯</div>
-          <h3 class="text-xl font-semibold text-slate-200 mb-2">High Quality</h3>
-          <p class="text-slate-400">Adjustable quality and scale settings ensure your JPG images maintain excellent clarity and detail from your original PDF.</p>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6">
-          <div class="text-4xl mb-3">📱</div>
-          <h3 class="text-xl font-semibold text-slate-200 mb-2">Multi-Page Support</h3>
-          <p class="text-slate-400">Convert entire PDF documents with multiple pages. Each page becomes a separate JPG image, all packaged in one ZIP file.</p>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6">
-          <div class="text-4xl mb-3">🆓</div>
-          <h3 class="text-xl font-semibold text-slate-200 mb-2">Completely Free</h3>
-          <p class="text-slate-400">No hidden costs, no subscriptions, no watermarks. Convert unlimited PDFs to JPG images completely free of charge.</p>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6">
-          <div class="text-4xl mb-3">🌐</div>
-          <h3 class="text-xl font-semibold text-slate-200 mb-2">No Installation</h3>
-          <p class="text-slate-400">Works entirely in your web browser. No software downloads, no plugins required. Works on Windows, Mac, Linux, and mobile devices.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section class="w-full mb-8 bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 md:px-8 py-6 md:py-8 shadow-lg max-w-full">
-      <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-        Common Use Cases
-      </h2>
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-slate-700/50 rounded-lg">
-          <div class="text-2xl">📄</div>
-          <div>
-            <h3 class="text-lg font-semibold text-slate-200 mb-1">Extract Images from PDFs</h3>
-            <p class="text-slate-400">Convert PDF pages to JPG format to extract images, diagrams, or graphics for use in presentations, documents, or social media.</p>
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4 p-lg-5">
+                <h2 class="text-gradient fw-bold mb-4" style="font-size: 2rem;">How to Use Our Tools</h2>
+                <p class="text-light mb-3" style="font-size: 1.05rem; line-height: 1.8;">
+                  Using our tools is simple and straightforward. First, select the tool you need from the navigation menu at the top of the page. Then, drag and drop your files into the upload area or click to browse and select files from your computer. Adjust any settings if needed (such as quality, size, or format options), then click the conversion button. Your processed files will be automatically downloaded when ready.
+                </p>
+                <p class="text-light mb-0" style="font-size: 1.05rem; line-height: 1.8;">
+                  All our tools support batch processing, allowing you to convert multiple files at once. For tools that process multiple files, the results will be packaged in a ZIP file for easy download. Our tools maintain high quality output while providing fast processing times, making them ideal for both personal and professional use.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="flex items-start gap-4 p-4 bg-slate-700/50 rounded-lg">
-          <div class="text-2xl">📧</div>
-          <div>
-            <h3 class="text-lg font-semibold text-slate-200 mb-1">Email Attachments</h3>
-            <p class="text-slate-400">Convert PDF documents to JPG images for easier email sharing, as many email clients handle images better than PDF attachments.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-slate-700/50 rounded-lg">
-          <div class="text-2xl">🌐</div>
-          <div>
-            <h3 class="text-lg font-semibold text-slate-200 mb-1">Web Publishing</h3>
-            <p class="text-slate-400">Transform PDF pages into web-friendly JPG images for websites, blogs, or online portfolios where image formats are preferred.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-slate-700/50 rounded-lg">
-          <div class="text-2xl">📱</div>
-          <div>
-            <h3 class="text-lg font-semibold text-slate-200 mb-1">Mobile Viewing</h3>
-            <p class="text-slate-400">Convert PDFs to JPG for better viewing on mobile devices, as images load faster and are easier to navigate on small screens.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-slate-700/50 rounded-lg">
-          <div class="text-2xl">🎨</div>
-          <div>
-            <h3 class="text-lg font-semibold text-slate-200 mb-1">Image Editing</h3>
-            <p class="text-slate-400">Convert PDF pages to JPG format for editing in image editing software like Photoshop, GIMP, or other photo editing tools.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="w-full mb-8 bg-slate-800/60 backdrop-blur-sm rounded-xl px-4 sm:px-6 md:px-8 py-6 md:py-8 shadow-lg max-w-full" itemscope itemtype="https://schema.org/FAQPage">
-      <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-        Frequently Asked Questions
-      </h2>
-      <div class="space-y-4">
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">How do I convert PDF to JPG?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Simply drag and drop your PDF file into the upload area, adjust the quality and scale settings if needed, then click "Convert PDF to JPG". The conversion happens instantly in your browser, and all JPG images will be downloaded as a ZIP file.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">Is my PDF file uploaded to a server?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">No! Your PDF files never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">What quality settings should I use?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Quality ranges from 0.1 (lowest, smallest file) to 1.0 (highest, largest file). For most purposes, 0.85 provides an excellent balance between quality and file size. Use 1.0 for maximum quality when file size isn't a concern, or lower values for smaller file sizes.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">What does the scale setting do?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Scale controls the resolution of the output JPG images. 1.0 = original PDF size, 2.0 = double the resolution, 0.5 = half the resolution. Higher scale values produce larger, sharper images but also larger file sizes. Default is 1.6 for optimal quality.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">Can I convert multi-page PDFs?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Yes! Our PDF to JPG converter supports PDFs with any number of pages. Each page will be converted to a separate JPG image, and all images will be packaged in a single ZIP file for easy download.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">Is this service free?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can convert. Convert as many PDFs to JPG as you need, whenever you need.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">What browsers are supported?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Our PDF to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">How long does conversion take?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most PDFs convert in just a few seconds, depending on the number of pages and your device's performance.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">What file format will I get?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">You'll receive JPG (JPEG) image files. Each PDF page becomes a separate JPG file, and all files are packaged in a ZIP archive for convenient download. JPG is a widely supported image format compatible with all devices and software.</p>
-          </div>
-        </div>
-        <div class="bg-slate-700/50 rounded-lg p-6" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <h3 class="text-lg font-semibold text-slate-200 mb-2" itemprop="name">Can I convert password-protected PDFs?</h3>
-          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p class="text-slate-400" itemprop="text">Currently, password-protected PDFs cannot be converted. You'll need to remove the password protection from your PDF file first before converting it to JPG format.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-    <!-- Right Sidebar Ad (Desktop only) -->
-    <aside class="hidden lg:block lg:flex-shrink-0 lg:sticky lg:self-start" style="width: 300px; min-width: 300px; top: 20px;">
-      <div class="w-full bg-gray-700/50 p-4 mt-4 mx-2 sticky top-4" style="min-width: 250px;">
+      <!-- Right Ad Sidebar (Desktop Only) -->
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
         <!-- Google AdSense Right Sidebar -->
         <ins class="adsbygoogle"
-             style="display:block; min-width: 250px;"
-             data-ad-format="autorelaxed"
+                 style="display:block; min-width: 160px; width: 100%;"
              data-ad-client="ca-pub-2042221703015293"
-             data-ad-slot="2609300742"></ins>
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
       </div>
     </aside>
     
-  </div>
-
-  <!-- Bottom Ad Placeholder -->
-  <div class="w-full bg-gray-700 text-center py-4 mt-auto overflow-x-hidden max-w-full">
+      <!-- Bottom Ad Banner (Mobile & Desktop) -->
+      <div class="col-12 mt-auto">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
     <!-- Google AdSense Bottom Banner -->
     <ins class="adsbygoogle"
-         style="display:block"
+                 style="display:block; width: 100%; min-height: 90px;"
          data-ad-client="ca-pub-2042221703015293"
          data-ad-slot="9174709096"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- jQuery (required for Toastr) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  
+  <!-- Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  
+  <!-- Toastr Configuration -->
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      "tapToDismiss": true
+    };
+    
+    // Ensure close button works properly with smooth fadeout animations
+    $(document).ready(function() {
+      // Fix close button functionality - use event delegation
+      $(document).on('click', '.toast-close-button', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $toastWrapper = $(this).closest('#toast-container > div');
+        if ($toastWrapper.length) {
+          $toastWrapper.addClass('toast-fadeout');
+          setTimeout(function() {
+            $toastWrapper.remove();
+            // Also remove parent container if empty
+            var $container = $('#toast-container');
+            if ($container.children().length === 0) {
+              $container.remove();
+            }
+          }, 400);
+        }
+      });
+    });
+  </script>
+  
+  
   <!-- Libraries - Deferred for performance -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- PDF Encryption library - loaded on demand -->
+  <!-- <script defer src="https://unpkg.com/@pdfsmaller/pdf-encrypt-lite@1.0.0/dist/pdf-encrypt-lite.umd.js"></script> -->
+  <!-- Tesseract.js for OCR (loaded on demand) -->
+  <!-- Mammoth.js for Word conversion (loaded on demand) -->
   
-  <!-- PDF.js library - Deferred and optimized loading -->
-  <script>
-  // Wait for both DOM and PDF.js to be ready
-  let pdfjsReady = false;
+  <!-- Application Scripts -->
+  <script src="tools-config.js"></script>
+  <script src="tools.js"></script>
+  <script src="app.js"></script>
   
-  // Initialize PDF.js worker when library loads
-  function initPDFJS(workerSrc) {
-    if (typeof pdfjsLib !== 'undefined') {
-      // Set worker source
-      pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc || 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      pdfjsReady = true;
-      console.log('PDF.js initialized successfully');
-      updateReadyState();
-      return true;
-    }
-    return false;
-  }
-
-  function updateReadyState() {
-    const logEl = document.getElementById('log');
-    if (logEl && pdfjsReady) {
-      logEl.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to convert your PDF files</span>';
-      logEl.style.color = '#60a5fa'; // blue-400
-    }
-  }
-
-  // Fallback loading function
-  function loadPDFJSFallback() {
-    console.log('Trying fallback CDN for PDF.js...');
-    const pdfjsScript = document.createElement('script');
-    pdfjsScript.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
-    pdfjsScript.onload = function() {
-      if (initPDFJS('https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js')) {
-        console.log('PDF.js loaded from jsDelivr CDN');
-      } else {
-        tryUnpkgFallback();
-      }
-    };
-    pdfjsScript.onerror = function() {
-      console.error('jsDelivr CDN failed, trying unpkg...');
-      tryUnpkgFallback();
-    };
-    document.head.appendChild(pdfjsScript);
-  }
-
-  function tryUnpkgFallback() {
-    const pdfjsScript = document.createElement('script');
-    pdfjsScript.src = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js';
-    pdfjsScript.onload = function() {
-      if (initPDFJS('https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js')) {
-        console.log('PDF.js loaded from unpkg CDN');
-      } else {
-        showError();
-      }
-    };
-    pdfjsScript.onerror = function() {
-      console.error('All CDNs failed to load PDF.js');
-      showError();
-    };
-    document.head.appendChild(pdfjsScript);
-  }
-
-  function showError() {
-    const logEl = document.getElementById('log');
-    if (logEl) {
-      logEl.textContent = 'Error: Failed to load PDF.js library. Check your internet connection and refresh the page.';
-      logEl.style.color = '#f87171'; // red-400 (softer)
-    }
-  }
-
-  // Load PDF.js only when needed (lazy load) - much better for mobile performance
-  window.loadPDFJS = function() {
-    if (window.pdfjsLoading) return; // Already loading
-    window.pdfjsLoading = true;
-    
-    const pdfjsScript = document.createElement('script');
-    pdfjsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-    pdfjsScript.onload = function() {
-      if (!initPDFJS()) {
-        console.error('PDF.js loaded but initialization failed');
-        loadPDFJSFallback();
-      }
-    };
-    pdfjsScript.onerror = function() {
-      console.error('cdnjs CDN failed, trying fallback...');
-      loadPDFJSFallback();
-    };
-    document.head.appendChild(pdfjsScript);
-  };
-  
-  // On desktop: load PDF.js after page load
-  // On mobile: load only when user selects a file (handled in loadFile function)
-  const isMobilePDF = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-  if (!isMobilePDF) {
-    window.addEventListener('load', window.loadPDFJS);
-  }
-  </script>
-
-  <script>
-  // Initialize the rest when DOM is ready
-  document.addEventListener('DOMContentLoaded', function() {
-
-  const fileInput = document.getElementById('file');
-  const drop = document.getElementById('dropzone');
-  const dropLabel = document.getElementById('dropLabel');
-  const startBtn = document.getElementById('start');
-  const cancelBtn = document.getElementById('cancel');
-  const qualityInput = document.getElementById('quality');
-  const scaleInput = document.getElementById('scale');
-  const bar = document.getElementById('bar');
-  const stats = document.getElementById('stats');
-  const log = document.getElementById('log');
-
-  let currentFile = null;
-  let controller = { cancelled:false };
-
-  // No need for click listener - label automatically handles clicks on the input
-  drop.addEventListener('dragover', e => { 
-    e.preventDefault(); 
-    drop.classList.add('border-teal-400', 'bg-teal-500/20', 'scale-105');
-  });
-  drop.addEventListener('dragleave', e => { 
-    e.preventDefault(); 
-    drop.classList.remove('border-teal-400', 'bg-teal-500/20', 'scale-105');
-  });
-  drop.addEventListener('drop', e => { 
-    e.preventDefault(); 
-    drop.classList.remove('border-teal-400', 'bg-teal-500/20', 'scale-105');
-    const f = e.dataTransfer.files && e.dataTransfer.files[0]; 
-    if(f) loadFile(f); 
-  });
-  fileInput.addEventListener('change', ()=> { if(fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]); });
-
-  function loadFile(f){
-    if(f.type !== 'application/pdf'){ 
-      alert('Please select a PDF file'); 
-      return; 
-    }
-    currentFile = f;
-    drop.classList.add('border-blue-400', 'bg-blue-500/10');
-    dropLabel.innerHTML = `<span class="text-blue-400 font-bold" style="color: #60a5fa;">✓</span> ${f.name}`;
-    stats.textContent = `${(f.size/1024/1024).toFixed(2)} MB selected`;
-    
-    // On mobile: load PDF.js when user selects a file (lazy loading)
-    const isMobileFile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    if (isMobileFile && !pdfjsReady && typeof window.loadPDFJS === 'function' && !window.pdfjsLoading) {
-      window.loadPDFJS();
-    }
-    
-    if (pdfjsReady) {
-      log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to convert! Click the button below.</span>';
-      log.style.color = '#60a5fa'; // blue-400
-      startBtn.classList.add('animate-pulse-glow');
-    } else {
-      log.innerHTML = '<span class="inline-block animate-spin-slow">⏳</span> <span>Loading PDF.js library...</span>';
-      log.style.color = '#94a3b8'; // slate-400
-    }
-  }
-
-  startBtn.addEventListener('click', ()=> {
-    if(!currentFile){ 
-      alert('Choose a PDF first'); 
-      return; 
-    }
-    if(!pdfjsReady || typeof pdfjsLib === 'undefined'){
-      alert('PDF.js library is still loading. Please wait a moment and try again.');
-      return;
-    }
-    controller.cancelled = false;
-    cancelBtn.disabled = false;
-    startBtn.disabled = true;
-    startBtn.classList.remove('animate-pulse-glow');
-    startBtn.classList.add('opacity-75', 'cursor-not-allowed');
-    log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Starting conversion...</span>';
-    log.style.color = '#60a5fa'; // blue-400
-    processPDF(currentFile, { quality: parseFloat(qualityInput.value)||0.85, scale: parseFloat(scaleInput.value)||1.6 });
-  });
-
-  cancelBtn.addEventListener('click', ()=> { 
-    if(controller.cancelled) return; // Prevent multiple clicks
-    controller.cancelled = true; 
-    log.innerHTML = '<span class="inline-block animate-pulse">⏸️</span> <span>Cancelling... Please wait...</span>';
-    log.style.color = '#fb923c'; // orange-400 (softer than red)
-    cancelBtn.disabled = true;
-    cancelBtn.textContent = 'Cancelling...';
-  });
-
-  async function processPDF(file, opts){
-    try{
-      const arr = await file.arrayBuffer();
-      const loadingTask = pdfjsLib.getDocument({ data: arr });
-      const pdf = await loadingTask.promise;
-      const num = pdf.numPages;
-      const zip = new JSZip();
-      updateProgress(0);
-      stats.textContent = `Pages: ${num} — processing...`;
-      // Get base filename for better naming
-      const baseName = file.name.replace(/\.pdf$/i,'').replace(/[^a-z0-9]/gi, '_').substring(0, 50) || 'pdf';
-      
-      for(let i=1;i<=num;i++){
-        if(controller.cancelled){ throw new Error('Cancelled by user'); }
-        log.innerHTML = `<span class="inline-block animate-spin-slow">🔄</span> <span>Rendering page <strong>${i}</strong> of <strong>${num}</strong>...</span>`;
-        log.style.color = '#60a5fa'; // blue-400
-        const page = await pdf.getPage(i);
-        
-        if(controller.cancelled){ throw new Error('Cancelled by user'); }
-        
-        const viewport = page.getViewport({ scale: opts.scale });
-        const canvas = document.createElement('canvas');
-        canvas.width = Math.floor(viewport.width);
-        canvas.height = Math.floor(viewport.height);
-        const ctx = canvas.getContext('2d');
-        
-        // Clear canvas to ensure clean image
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-        
-        if(controller.cancelled){ throw new Error('Cancelled by user'); }
-        
-        // Create JPEG blob with explicit MIME type and quality
-        const blob = await new Promise(res => {
-          canvas.toBlob(res, 'image/jpeg', Math.max(0.1,Math.min(1,opts.quality)));
-        });
-        
-        if(controller.cancelled){ throw new Error('Cancelled by user'); }
-        
-        // Validate blob before adding to ZIP
-        if (!blob || blob.size === 0) {
-          throw new Error(`Failed to create image for page ${i}`);
-        }
-        
-        // Use descriptive filename and add to ZIP
-        const fileName = `${baseName}_page_${String(i).padStart(3,'0')}.jpg`;
-        zip.file(fileName, blob, { binary: true });
-        updateProgress(Math.round((i/num)*100));
-        
-        if(controller.cancelled){ throw new Error('Cancelled by user'); }
-        
-        await new Promise(r => setTimeout(r, 50));
-      }
-      
-      if(controller.cancelled){ throw new Error('Cancelled by user'); }
-      
-      log.innerHTML = '<span class="inline-block animate-spin-slow">📦</span> <span>Creating ZIP file...</span>';
-      log.style.color = '#60a5fa'; // blue-400
-      // Generate ZIP with standard compression
-      let zipCancelled = false;
-      const content = await zip.generateAsync({ 
-        type:'blob',
-        compression: 'DEFLATE',
-        compressionOptions: { level: 6 }
-      }, meta => { 
-        if(controller.cancelled) {
-          zipCancelled = true;
-        }
-        updateProgress(Math.round(meta.percent)); 
-      });
-      
-      if(controller.cancelled || zipCancelled){ throw new Error('Cancelled by user'); }
-      const zipName = baseName + '_images.zip';
-      saveAs(content, zipName);
-      log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ZIP file downloaded with <strong>${num}</strong> JPG file(s).</span>`;
-      log.style.color = '#34d399'; // emerald-400 (softer green)
-      stats.textContent = `✓ Finished: ${num} page(s) processed successfully`;
-      updateProgress(100);
-      startBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-      
-      // Track conversion in GA4
-      if (typeof trackConversion === 'function') {
-        trackConversion(num);
-      }
-    } catch(err){
-      console.error(err);
-      if(err.message === 'Cancelled by user') {
-        log.innerHTML = '<span class="inline-block">⏸️</span> <span>Conversion cancelled by user</span>';
-        log.style.color = '#fb923c'; // orange-400
-        stats.textContent = 'Cancelled';
-      } else {
-        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${err.message || err}</span>`;
-        log.style.color = '#f87171'; // red-400 (softer)
-        stats.textContent = '✗ Conversion failed';
-      }
-      updateProgress(0);
-      startBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-    } finally {
-      startBtn.disabled = false;
-      cancelBtn.disabled = true;
-      cancelBtn.textContent = 'Cancel'; // Reset button text
-      controller.cancelled = false; // Reset cancellation flag
-    }
-  }
-
-  function updateProgress(pct){ bar.style.width = Math.min(100,Math.max(0,pct)) + '%'; }
-  }); // End of DOMContentLoaded event listener
-  </script>
+  <!-- Tool Implementations -->
+  <script src="tool-implementations.js"></script>
   
   <!-- Initialize Google AdSense - Wait for script to load -->
   <script>
+    // Track if ads have been initialized to prevent duplicate pushes
+    let adsInitialized = false;
+    
     // Initialize ads when AdSense script is ready
     function initAdSense() {
+      if (adsInitialized) return; // Prevent multiple initializations
+      
       if (typeof adsbygoogle !== 'undefined') {
+        // Find all ad slots and initialize them only once
+        const adSlots = document.querySelectorAll('.adsbygoogle:not([data-ads-initialized])');
+        adSlots.forEach(slot => {
+          try {
         (adsbygoogle = window.adsbygoogle || []).push({});
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        (adsbygoogle = window.adsbygoogle || []).push({});
+            slot.setAttribute('data-ads-initialized', 'true');
+          } catch (e) {
+            console.warn('AdSense initialization error:', e);
+          }
+        });
+        adsInitialized = true;
       } else {
         // Retry if AdSense script hasn't loaded yet
         setTimeout(initAdSense, 100);
@@ -1186,5 +721,258 @@
     }
   </script>
 
+  <!-- Footer -->
+  <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
+    <!-- Decorative gradient overlay -->
+    <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>
+    
+    <div class="container-fluid px-4 px-lg-5 py-5 position-relative">
+      <div class="row g-4 g-lg-5">
+        <!-- Brand Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="mb-4">
+            <h3 class="text-gradient fw-bold mb-3" style="font-size: 1.5rem; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+              <i class="bi bi-file-earmark-pdf-fill me-2"></i>PDF Tools
+            </h3>
+            <p class="footer-text-light mb-3" style="line-height: 1.8; font-size: 0.95rem;">
+              Free online PDF and image conversion tools. All tools work entirely in your browser - no uploads required.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                <i class="bi bi-github" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
+              </a>
+              <a href="#" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                <i class="bi bi-twitter" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+            <i class="bi bi-tools text-primary me-2"></i>Tools
+          </h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3">
+              <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-to-jpg'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF to JPG</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('jpg-to-pdf'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>JPG to PDF</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-compress'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF Compressor</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-merge'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF Merger</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-split'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF Splitter</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Legal Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+            <i class="bi bi-shield-check text-primary me-2"></i>Legal
+          </h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3">
+              <a href="/privacy-policy.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Privacy Policy</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/terms-of-service.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Terms of Service</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/about.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>About Us</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/contact.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Features Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+            <i class="bi bi-star-fill text-primary me-2"></i>Features
+          </h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-check-circle-fill text-success me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">100% Free</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-cloud-upload text-info me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">No Upload Required</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-shield-lock-fill text-warning me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">100% Secure</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-wifi-off text-danger me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">Works Offline</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="row mt-5 pt-4 footer-border-top">
+        <div class="col-12">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <p class="footer-text-light mb-0 small" style="font-size: 0.9rem;">
+              &copy; <span id="current-year-footer">2024</span> PDF Tools. All rights reserved.
+            </p>
+            <div class="d-flex gap-3 flex-wrap justify-content-center">
+              <a href="/privacy-policy.html" class="footer-bottom-link footer-text-secondary" style="text-decoration: none; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0.75rem; border-radius: 6px;">
+                Privacy Policy
+              </a>
+              <span class="footer-text-secondary" style="font-size: 0.9rem; opacity: 0.5;">•</span>
+              <a href="/terms-of-service.html" class="footer-bottom-link footer-text-secondary" style="text-decoration: none; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0.75rem; border-radius: 6px;">
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Update copyright year dynamically
+      (function() {
+        const yearElement = document.getElementById('current-year-footer');
+        if (yearElement) {
+          yearElement.textContent = new Date().getFullYear();
+        }
+        
+        // Enhanced footer link interactions
+        document.querySelectorAll('.footer-link').forEach(link => {
+          link.addEventListener('mouseenter', function() {
+            this.style.color = 'var(--bs-primary)';
+            this.style.transform = 'translateX(5px)';
+            const icon = this.querySelector('.footer-link-icon');
+            if (icon) {
+              icon.style.opacity = '1';
+              icon.style.transform = 'translateX(0)';
+            }
+          });
+          
+          link.addEventListener('mouseleave', function() {
+            this.style.color = '';
+            this.style.transform = 'translateX(0)';
+            const icon = this.querySelector('.footer-link-icon');
+            if (icon) {
+              icon.style.opacity = '0';
+              icon.style.transform = 'translateX(-5px)';
+            }
+          });
+        });
+        
+        // Enhanced footer icon link interactions
+        document.querySelectorAll('.footer-icon-link').forEach(iconLink => {
+          iconLink.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(59, 130, 246, 0.2)';
+            this.style.transform = 'translateY(-4px)';
+            this.style.boxShadow = '0 6px 20px rgba(59, 130, 246, 0.4)';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1.15) rotate(8deg)';
+            }
+          });
+          
+          iconLink.addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(59, 130, 246, 0.1)';
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1) rotate(0deg)';
+            }
+          });
+        });
+        
+        // Enhanced footer feature item interactions
+        document.querySelectorAll('.footer-feature-item').forEach(item => {
+          item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(8px)';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1.2)';
+            }
+          });
+          item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1)';
+            }
+          });
+        });
+
+        // Footer bottom link interactions
+        document.querySelectorAll('.footer-bottom-link').forEach(link => {
+          link.addEventListener('mouseenter', function() {
+            this.style.color = 'var(--bs-primary)';
+            this.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+          });
+          link.addEventListener('mouseleave', function() {
+            this.style.color = '';
+            this.style.backgroundColor = 'transparent';
+          });
+        });
+      })();
+    </script>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script>
+    // Show/hide scroll to top button
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.querySelector('.scroll-top');
+      if (scrollTop) {
+        if (window.pageYOffset > 300) {
+          scrollTop.classList.add('visible');
+        } else {
+          scrollTop.classList.remove('visible');
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
+
