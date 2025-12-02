@@ -888,6 +888,310 @@ function getPDFCompressContent() {
           <p id="log-compress" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to compress your PDF</p>
         </div>
       </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PDF</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your PDF file or click to browse and select a PDF file from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Choose Compression</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Select compression level: High for maximum size reduction, Medium for balanced quality, or Low for better quality.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Compress</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Compress PDF" and watch as your PDF is processed page by page, reducing file size while maintaining quality.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your compressed PDF will be automatically downloaded. See the size comparison and savings percentage.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Compress PDF Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Compress PDF?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your PDF files never leave your computer. All compression happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compress PDFs in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-file-earmark-arrow-down text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Reduce File Size</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Significantly reduce PDF file size while maintaining good quality. Perfect for email attachments and storage optimization.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-envelope-check text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Email Friendly</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compress large PDFs to meet email size limits. Make your documents easier to share and faster to download.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Compress unlimited PDFs completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-envelope-check text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Email Attachments</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Reduce PDF size to meet email attachment limits and ensure faster delivery.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-cloud-upload text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Cloud Storage</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Save storage space in cloud services like Google Drive, Dropbox, or OneDrive.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-arrow-down text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Faster Downloads</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Make PDFs download faster for your website visitors or clients.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-folder text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Archive Storage</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Reduce file sizes for long-term archiving while maintaining readability.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-phone text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Mobile Sharing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compress PDFs for easier sharing via messaging apps and social media.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-briefcase text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Business Documents</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Optimize invoices, reports, and presentations for efficient distribution.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionCompress">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress1" aria-expanded="false" aria-controls="faqCompress1" style="font-size: 1rem; padding: 1rem;">
+                  How do I compress a PDF?
+                </button>
+              </h2>
+              <div id="faqCompress1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your PDF file into the upload area, select your preferred compression level, then click 'Compress PDF'. The compression happens instantly in your browser, and your compressed PDF will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress2" aria-expanded="false" aria-controls="faqCompress2" style="font-size: 1rem; padding: 1rem;">
+                  Is my PDF file uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqCompress2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your PDF files never leave your computer. All compression happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress3" aria-expanded="false" aria-controls="faqCompress3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What compression level should I use?
+                </button>
+              </h2>
+              <div id="faqCompress3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  High Compression (0.3) provides maximum size reduction but may slightly reduce image quality. Medium Compression (0.5) offers a good balance between file size and quality. Low Compression (0.7) maintains better quality with moderate size reduction. Choose based on your needs.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress4" aria-expanded="false" aria-controls="faqCompress4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will compression affect PDF quality?
+                </button>
+              </h2>
+              <div id="faqCompress4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Compression reduces file size by optimizing images within the PDF. Higher compression may result in slightly lower image quality, but text and overall readability remain intact. Use Medium or Low compression for better quality preservation.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress5" aria-expanded="false" aria-controls="faqCompress5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  How much can I reduce the file size?
+                </button>
+              </h2>
+              <div id="faqCompress5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  File size reduction depends on your PDF content. PDFs with many images typically see 30-70% reduction. Text-heavy PDFs may see less reduction. The tool shows you the exact savings percentage after compression.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress6" aria-expanded="false" aria-controls="faqCompress6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqCompress6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can compress. Compress as many PDFs as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress7" aria-expanded="false" aria-controls="faqCompress7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqCompress7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our PDF compressor works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress8" aria-expanded="false" aria-controls="faqCompress8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I compress password-protected PDFs?
+                </button>
+              </h2>
+              <div id="faqCompress8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Currently, password-protected PDFs cannot be compressed. You'll need to remove the password protection from your PDF file first before compressing it.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }

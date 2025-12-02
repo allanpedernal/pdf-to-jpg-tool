@@ -769,37 +769,51 @@ function initPDFCompress() {
   
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const f = e.dataTransfer.files && e.dataTransfer.files[0];
     if (f && f.type === 'application/pdf') {
       currentFile = f;
       loadFile(f);
+    } else {
+      toastr.error('Please select a PDF file');
     }
   }
   
   function handleFileChange() {
     if (fileInput.files && fileInput.files[0]) {
-      currentFile = fileInput.files[0];
+      const f = fileInput.files[0];
+      if (f.type !== 'application/pdf') {
+        toastr.error('Please select a PDF file');
+        fileInput.value = '';
+        return;
+      }
+      currentFile = f;
       loadFile(currentFile);
     }
   }
   
   function loadFile(f) {
-    if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${f.name}`;
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${f.name}`;
     const sizeMB = (f.size / 1024 / 1024).toFixed(2);
     if (fileSize) fileSize.textContent = `${sizeMB} MB`;
-    if (comparison) comparison.classList.add('hidden');
-    if (log) log.textContent = '✨ Ready to compress';
+    if (comparison) comparison.classList.add('d-none');
+    if (log) {
+      log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to compress';
+      log.style.color = '';
+    }
   }
   
   async function handleCompress() {
@@ -813,9 +827,18 @@ function initPDFCompress() {
       return;
     }
     
-    if (compressBtn) compressBtn.disabled = true;
-    if (log) log.textContent = 'Compressing PDF...';
-    if (progress) progress.style.width = '10%';
+    if (compressBtn) {
+      compressBtn.disabled = true;
+      compressBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Compressing PDF...</span>';
+      log.style.color = '#60a5fa';
+    }
+    if (progress) {
+      progress.style.width = '10%';
+      progress.setAttribute('aria-valuenow', '10');
+    }
     
     try {
       const arr = await currentFile.arrayBuffer();
@@ -858,8 +881,15 @@ function initPDFCompress() {
           outputPdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
         }
         
-        if (progress) progress.style.width = `${20 + (i / numPages) * 70}%`;
-        if (log) log.textContent = `Processing page ${i} of ${numPages}...`;
+        const percent = Math.round(20 + (i / numPages) * 70);
+        if (progress) {
+          progress.style.width = `${percent}%`;
+          progress.setAttribute('aria-valuenow', percent);
+        }
+        if (log) {
+          log.innerHTML = `<span class="inline-block animate-spin-slow">🔄</span> <span>Processing page <strong>${i}</strong> of <strong>${numPages}</strong>...</span>`;
+          log.style.color = '#60a5fa';
+        }
       }
       
       const pdfBlob = outputPdf.output('blob');
@@ -880,20 +910,59 @@ function initPDFCompress() {
       a.click();
       URL.revokeObjectURL(url);
       
-      if (progress) progress.style.width = '100%';
+      if (progress) {
+        progress.style.width = '100%';
+        progress.setAttribute('aria-valuenow', '100');
+      }
       if (log) {
-        log.textContent = `✓ Success! PDF compressed and downloaded`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! PDF compressed and downloaded - Saved <strong>${saved}%</strong></span>`;
         log.style.color = '#34d399';
       }
+      
+      // Show success toastr notification
+      toastr.success(`Successfully compressed PDF! Saved ${saved}%`, 'Compression Complete', {
+        timeOut: 5000
+      });
+      
+      // Clear and reset after a short delay
+      setTimeout(() => {
+        currentFile = null;
+        if (fileInput) fileInput.value = '';
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        if (dropLabel) dropLabel.textContent = 'Drag & drop your PDF here';
+        if (fileSize) fileSize.textContent = 'No file selected';
+        if (comparison) comparison.classList.add('d-none');
+        if (originalSize) originalSize.textContent = '';
+        if (compressedSize) compressedSize.textContent = '';
+        if (savings) savings.textContent = '';
+        if (progress) {
+          progress.style.width = '0%';
+          progress.setAttribute('aria-valuenow', '0');
+        }
+        if (log) {
+          log.innerHTML = '✨ Ready to compress your PDF';
+          log.style.color = '';
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
       if (log) {
-        log.textContent = `❌ Error: ${error.message}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${error.message || error}</span>`;
         log.style.color = '#f87171';
       }
-      if (progress) progress.style.width = '0%';
+      if (progress) {
+        progress.style.width = '0%';
+        progress.setAttribute('aria-valuenow', '0');
+      }
+      toastr.error(`Compression failed: ${error.message || error}`);
     } finally {
-      if (compressBtn) compressBtn.disabled = false;
+      if (compressBtn) {
+        compressBtn.disabled = false;
+        compressBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   
