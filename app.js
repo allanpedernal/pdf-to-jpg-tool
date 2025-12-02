@@ -57,18 +57,21 @@ function switchTool(toolId) {
   // Update content area with fade animation
   const contentArea = document.getElementById('tool-content');
   if (contentArea) {
-    // Hide default content if it exists
     const defaultContent = document.getElementById('default-content');
-    if (defaultContent) {
-      defaultContent.style.display = 'none';
-    }
     
     // Fade out
     contentArea.style.opacity = '0';
     contentArea.style.transform = 'translateY(10px)';
     
     setTimeout(() => {
+      // Set tool content FIRST (ensures content is in DOM before hiding default)
       contentArea.innerHTML = getToolContent(toolId);
+      
+      // Only hide default content AFTER tool content is set in DOM
+      if (defaultContent) {
+        defaultContent.style.display = 'none';
+      }
+      
       // Reinitialize tool-specific functionality
       initializeTool(toolId);
       
@@ -387,12 +390,16 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     const contentArea = document.getElementById('tool-content');
     if (contentArea) {
-      // Hide default content if it exists
       const defaultContent = document.getElementById('default-content');
+      
+      // Set tool content FIRST (ensures content is in DOM before hiding default)
+      contentArea.innerHTML = getToolContent(currentTool);
+      
+      // Only hide default content AFTER tool content is set in DOM
       if (defaultContent) {
         defaultContent.style.display = 'none';
       }
-      contentArea.innerHTML = getToolContent(currentTool);
+      
       initializeTool(currentTool);
     }
   }, 100);
