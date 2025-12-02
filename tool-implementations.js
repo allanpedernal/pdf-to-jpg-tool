@@ -29,12 +29,6 @@ function initToolHandlers(toolId) {
     case 'pdf-ocr':
       initPDFOCR();
       break;
-    case 'pdf-to-word':
-      initPDFToWord();
-      break;
-    case 'word-to-pdf':
-      initWordToPDF();
-      break;
     case 'png-to-jpg':
       initPNGToJPG();
       break;
@@ -972,11 +966,10 @@ function initPNGToJPG() {
   const fileInput = document.getElementById('file-png-jpg');
   const dropzone = document.getElementById('dropzone-png-jpg');
   const dropLabel = document.getElementById('dropLabel-png-jpg');
-  const imagePreview = document.getElementById('image-preview-png-jpg');
   const convertBtn = document.getElementById('convert-png-jpg');
-  const status = document.getElementById('status-png-jpg');
+  const bar = document.getElementById('bar-png-jpg');
+  const stats = document.getElementById('stats-png-jpg');
   const log = document.getElementById('log-png-jpg');
-  const progress = document.getElementById('progress-png-jpg');
   const quality = document.getElementById('quality-png-jpg');
   const bgColor = document.getElementById('bgColor-png-jpg');
   
@@ -994,72 +987,69 @@ function initPNGToJPG() {
   
   window.currentToolHandlers = handlers;
   
+  function updateProgress(percent) {
+    if (bar) {
+      bar.style.width = `${percent}%`;
+      bar.setAttribute('aria-valuenow', percent);
+    }
+  }
+  
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'image/png');
     if (files.length > 0) {
       selectedFiles = files;
-      updatePreview();
+      loadFiles(files);
+    } else {
+      toastr.error('Please select PNG image files');
     }
   }
   
   function handleFileChange() {
-    selectedFiles = Array.from(fileInput.files);
-    updatePreview();
+    const files = Array.from(fileInput.files).filter(f => f.type === 'image/png');
+    if (files.length > 0) {
+      selectedFiles = files;
+      loadFiles(files);
+    } else if (fileInput.files.length > 0) {
+      toastr.error('Please select PNG image files');
+    }
   }
   
-  function updatePreview() {
-    if (selectedFiles.length === 0) {
-      if (imagePreview) imagePreview.classList.add('hidden');
-      if (status) status.textContent = 'No images selected';
-      return;
+  function loadFiles(files) {
+    selectedFiles = files;
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${files.length} PNG image(s) selected`;
+    if (stats) {
+      const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+      stats.textContent = `${files.length} image(s) • ${(totalSize/1024/1024).toFixed(2)} MB`;
     }
     
-    if (imagePreview) {
-      imagePreview.classList.remove('hidden');
-      imagePreview.innerHTML = '';
-      if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${selectedFiles.length} PNG image(s) selected`;
-      if (status) status.textContent = `${selectedFiles.length} image(s) ready`;
-      
-      selectedFiles.forEach((file, index) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.className = 'w-full h-32 object-cover rounded-lg';
-          img.title = file.name;
-          const div = document.createElement('div');
-          div.className = 'relative';
-          div.appendChild(img);
-          const removeBtn = document.createElement('button');
-          removeBtn.textContent = '×';
-          removeBtn.className = 'absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600';
-          removeBtn.onclick = () => {
-            selectedFiles.splice(index, 1);
-            updatePreview();
-          };
-          div.appendChild(removeBtn);
-          imagePreview.appendChild(div);
-        };
-        reader.readAsDataURL(file);
-      });
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to convert! Click the button below.</span>';
+      log.style.color = '#60a5fa';
+      if (convertBtn) convertBtn.classList.add('animate-pulse-glow');
     }
+    updateProgress(0);
   }
   
   async function handleConvert() {
     if (selectedFiles.length === 0) {
-      toastr.error('Please select at least one PNG image');
+      toastr.warning('Please select at least one PNG image');
       return;
     }
     
@@ -1068,14 +1058,40 @@ function initPNGToJPG() {
       return;
     }
     
-    if (convertBtn) convertBtn.disabled = true;
-    if (log) log.textContent = 'Converting PNG to JPG...';
-    if (progress) progress.style.width = '0%';
+    if (convertBtn) {
+      convertBtn.disabled = true;
+      convertBtn.classList.remove('animate-pulse-glow');
+      convertBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Starting conversion...</span>';
+      log.style.color = '#60a5fa';
+    }
+    updateProgress(10);
     
     try {
       const zip = new JSZip();
       const qualityValue = parseFloat(quality?.value) || 0.9;
-      const backgroundColor = bgColor?.value || '#ffffff';
+      // Note: Background color is read fresh for each image to allow changes during conversion
+      
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">🖼️</span> <span>Converting PNG images...</span>';
+        log.style.color = '#60a5fa';
+      }
+      if (stats) stats.textContent = `Images: ${selectedFiles.length} — processing...`;
+      
+      // Log the background color being used for debugging
+      if (bgColor) {
+        console.log('Background color element found:', bgColor.value, 'Type:', typeof bgColor.value);
+      } else {
+        console.warn('Background color element not found, using default white');
+        // Try to find it again
+        const bgColorRetry = document.getElementById('bgColor-png-jpg');
+        if (bgColorRetry) {
+          console.log('Found background color element on retry:', bgColorRetry.value);
+        }
+      }
       
       for (let i = 0; i < selectedFiles.length; i++) {
         const file = selectedFiles[i];
@@ -1090,49 +1106,164 @@ function initPNGToJPG() {
             canvas.height = img.height;
             const ctx = canvas.getContext('2d');
             
-            ctx.fillStyle = backgroundColor;
+            // Always get the background color element fresh to ensure we have the latest value
+            const bgColorElement = document.getElementById('bgColor-png-jpg');
+            let currentBgColor = '#ffffff';
+            
+            if (bgColorElement && bgColorElement.value) {
+              currentBgColor = bgColorElement.value;
+            } else if (bgColor && bgColor.value) {
+              // Fallback to stored reference
+              currentBgColor = bgColor.value;
+            }
+            
+            // Ensure the color is in the correct format (should be #RRGGBB)
+            if (!currentBgColor.startsWith('#')) {
+              currentBgColor = '#' + currentBgColor;
+            }
+            
+            // Validate color format (should be 7 characters: #RRGGBB)
+            if (currentBgColor.length !== 7) {
+              console.warn('Invalid color format:', currentBgColor, 'using default white');
+              currentBgColor = '#ffffff';
+            }
+            
+            console.log('Using background color:', currentBgColor, 'for image:', file.name, 'Element found:', !!bgColorElement);
+            
+            // Method 1: Fill canvas with background, then draw image
+            // This should work for transparent PNGs
+            ctx.fillStyle = currentBgColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Ensure we're using the correct composite operation
+            ctx.globalCompositeOperation = 'source-over';
             ctx.drawImage(img, 0, 0);
             
+            // Convert to blob with JPEG format
             canvas.toBlob((blob) => {
+              if (!blob) {
+                console.error('Failed to create blob for:', file.name);
+                resolve();
+                return;
+              }
+              
               zip.file(file.name.replace(/\.png$/i, '.jpg'), blob);
-              if (progress) progress.style.width = `${((i + 1) / selectedFiles.length) * 100}%`;
-              if (log) log.textContent = `Processing image ${i + 1} of ${selectedFiles.length}...`;
+              const progressPercent = 10 + ((i + 1) / selectedFiles.length) * 85;
+              updateProgress(progressPercent);
+              if (log) {
+                log.innerHTML = `<span class="inline-block animate-bounce">🔄</span> <span>Processing image <strong>${i + 1}</strong> of <strong>${selectedFiles.length}</strong>...</span>`;
+                log.style.color = '#60a5fa';
+              }
               resolve();
             }, 'image/jpeg', qualityValue);
+          };
+          
+          img.onerror = () => {
+            console.error('Error loading image:', file.name);
+            resolve(); // Continue with next image
           };
         });
       }
       
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📦</span> <span>Creating ZIP file...</span>';
+        log.style.color = '#60a5fa';
+      }
+      updateProgress(95);
+      
+      const zipBlob = await zip.generateAsync({ 
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 6 }
+      });
+      
       const fileName = selectedFiles.length === 1 
         ? selectedFiles[0].name.replace(/\.png$/i, '.jpg')
         : 'png_to_jpg_converted.zip';
       
       if (selectedFiles.length === 1) {
-        const url = URL.createObjectURL(zipBlob);
+        // Extract single file from ZIP and download directly
+        const zipContent = await JSZip.loadAsync(zipBlob);
+        const firstFile = Object.keys(zipContent.files)[0];
+        const fileBlob = await zipContent.files[firstFile].async('blob');
+        const url = URL.createObjectURL(fileBlob);
         const a = document.createElement('a');
         a.href = url;
         a.download = fileName;
+        document.body.appendChild(a);
         a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
       } else {
         saveAs(zipBlob, fileName);
       }
       
+      updateProgress(100);
+      
+      // Show success toastr notification
+      toastr.success(`Successfully converted ${selectedFiles.length} image(s) to JPG!`, 'Conversion Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
-        log.textContent = `✓ Success! ${selectedFiles.length} image(s) converted`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ${selectedFiles.length === 1 ? 'JPG file' : 'ZIP file'} downloaded with <strong>${selectedFiles.length}</strong> JPG file(s).</span>`;
         log.style.color = '#34d399';
       }
-      if (progress) progress.style.width = '100%';
-    } catch (error) {
-      console.error(error);
+      if (stats) stats.textContent = `✓ Finished: ${selectedFiles.length} image(s) converted successfully`;
+      
+      if (typeof trackConversion === 'function') {
+        trackConversion(selectedFiles.length);
+      }
+      
+      // Clear and reset the form after a short delay
+      setTimeout(() => {
+        // Clear file input
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Reset dropzone
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        
+        // Reset dropzone label
+        if (dropLabel) {
+          dropLabel.innerHTML = 'Drag & drop your PNG images here';
+        }
+        
+        // Reset stats
+        if (stats) {
+          stats.textContent = 'No images selected';
+        }
+        
+        // Reset progress bar
+        updateProgress(0);
+        
+        // Reset log message
+        if (log) {
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your PNG images';
+          log.style.color = '';
+        }
+        
+        // Clear selected files
+        selectedFiles = [];
+      }, 3000);
+    } catch (err) {
+      console.error(err);
       if (log) {
-        log.textContent = `❌ Error: ${error.message}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${err.message || err}</span>`;
         log.style.color = '#f87171';
       }
+      if (stats) stats.textContent = '✗ Conversion failed';
+      updateProgress(0);
+      toastr.error(`Conversion failed: ${err.message || err}`);
     } finally {
-      if (convertBtn) convertBtn.disabled = false;
+      if (convertBtn) {
+        convertBtn.disabled = false;
+        convertBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   
@@ -1157,11 +1288,10 @@ function initImageResize() {
   const fileInput = document.getElementById('file-resize');
   const dropzone = document.getElementById('dropzone-resize');
   const dropLabel = document.getElementById('dropLabel-resize');
-  const imagePreview = document.getElementById('image-preview-resize');
   const resizeBtn = document.getElementById('resize-btn');
-  const status = document.getElementById('status-resize');
+  const bar = document.getElementById('bar-resize');
+  const stats = document.getElementById('stats-resize');
   const log = document.getElementById('log-resize');
-  const progress = document.getElementById('progress-resize');
   const widthInput = document.getElementById('width-resize');
   const heightInput = document.getElementById('height-resize');
   const aspectCheck = document.getElementById('aspect-resize');
@@ -1180,49 +1310,69 @@ function initImageResize() {
   
   window.currentToolHandlers = handlers;
   
+  function updateProgress(percent) {
+    if (bar) {
+      bar.style.width = `${percent}%`;
+      bar.setAttribute('aria-valuenow', percent);
+    }
+  }
+  
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
     if (files.length > 0) {
       selectedFiles = files;
-      updatePreview();
+      loadFiles(files);
+    } else {
+      toastr.error('Please select image files');
     }
   }
   
   function handleFileChange() {
-    selectedFiles = Array.from(fileInput.files);
-    updatePreview();
+    const files = Array.from(fileInput.files).filter(f => f.type.startsWith('image/'));
+    if (files.length > 0) {
+      selectedFiles = files;
+      loadFiles(files);
+    } else if (fileInput.files.length > 0) {
+      toastr.error('Please select image files');
+    }
   }
   
-  function updatePreview() {
-    if (selectedFiles.length === 0) {
-      if (imagePreview) imagePreview.classList.add('hidden');
-      if (status) status.textContent = 'No images selected';
-      return;
+  function loadFiles(files) {
+    selectedFiles = files;
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${files.length} image(s) selected`;
+    if (stats) {
+      const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+      stats.textContent = `${files.length} image(s) • ${(totalSize/1024/1024).toFixed(2)} MB`;
     }
     
-    if (imagePreview) {
-      imagePreview.classList.remove('hidden');
-      imagePreview.innerHTML = '';
-      if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${selectedFiles.length} image(s) selected`;
-      if (status) status.textContent = `${selectedFiles.length} image(s) ready`;
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to resize! Set dimensions and click the button below.</span>';
+      log.style.color = '#60a5fa';
+      if (resizeBtn) resizeBtn.classList.add('animate-pulse-glow');
     }
+    updateProgress(0);
   }
   
   async function handleResize() {
     if (selectedFiles.length === 0) {
-      toastr.error('Please select at least one image');
+      toastr.warning('Please select at least one image');
       return;
     }
     
@@ -1240,12 +1390,26 @@ function initImageResize() {
       return;
     }
     
-    if (resizeBtn) resizeBtn.disabled = true;
-    if (log) log.textContent = 'Resizing images...';
-    if (progress) progress.style.width = '0%';
+    if (resizeBtn) {
+      resizeBtn.disabled = true;
+      resizeBtn.classList.remove('animate-pulse-glow');
+      resizeBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Starting resize...</span>';
+      log.style.color = '#60a5fa';
+    }
+    updateProgress(10);
     
     try {
       const zip = new JSZip();
+      
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📏</span> <span>Resizing images...</span>';
+        log.style.color = '#60a5fa';
+      }
+      if (stats) stats.textContent = `Images: ${selectedFiles.length} — processing...`;
       
       for (let i = 0; i < selectedFiles.length; i++) {
         const file = selectedFiles[i];
@@ -1276,46 +1440,135 @@ function initImageResize() {
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             
+            const ext = file.name.split('.').pop().toLowerCase();
+            const mimeType = ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : 'image/jpeg';
+            
             canvas.toBlob((blob) => {
-              const ext = file.name.split('.').pop();
               zip.file(`resized_${file.name}`, blob);
-              if (progress) progress.style.width = `${((i + 1) / selectedFiles.length) * 100}%`;
-              if (log) log.textContent = `Processing image ${i + 1} of ${selectedFiles.length}...`;
+              const progressPercent = 10 + ((i + 1) / selectedFiles.length) * 85;
+              updateProgress(progressPercent);
+              if (log) {
+                log.innerHTML = `<span class="inline-block animate-bounce">🔄</span> <span>Resizing image <strong>${i + 1}</strong> of <strong>${selectedFiles.length}</strong>...</span>`;
+                log.style.color = '#60a5fa';
+              }
               resolve();
-            }, `image/${ext === 'png' ? 'png' : 'jpeg'}`, 0.95);
+            }, mimeType, ext === 'png' ? undefined : 0.95);
           };
         });
       }
       
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📦</span> <span>Creating ZIP file...</span>';
+        log.style.color = '#60a5fa';
+      }
+      updateProgress(95);
+      
+      const zipBlob = await zip.generateAsync({ 
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 6 }
+      });
+      
       const fileName = selectedFiles.length === 1 
         ? `resized_${selectedFiles[0].name}`
         : 'resized_images.zip';
       
       if (selectedFiles.length === 1) {
-        const url = URL.createObjectURL(zipBlob);
+        // Extract single file from ZIP and download directly
+        const zipContent = await JSZip.loadAsync(zipBlob);
+        const firstFile = Object.keys(zipContent.files)[0];
+        const fileBlob = await zipContent.files[firstFile].async('blob');
+        const url = URL.createObjectURL(fileBlob);
         const a = document.createElement('a');
         a.href = url;
         a.download = fileName;
+        document.body.appendChild(a);
         a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
       } else {
         saveAs(zipBlob, fileName);
       }
       
+      updateProgress(100);
+      
+      // Show success toastr notification
+      toastr.success(`Successfully resized ${selectedFiles.length} image(s)!`, 'Resize Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
-        log.textContent = `✓ Success! ${selectedFiles.length} image(s) resized`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ${selectedFiles.length === 1 ? 'Resized image' : 'ZIP file'} downloaded with <strong>${selectedFiles.length}</strong> image(s).</span>`;
         log.style.color = '#34d399';
       }
-      if (progress) progress.style.width = '100%';
-    } catch (error) {
-      console.error(error);
+      if (stats) stats.textContent = `✓ Finished: ${selectedFiles.length} image(s) resized successfully`;
+      
+      if (typeof trackConversion === 'function') {
+        trackConversion(selectedFiles.length);
+      }
+      
+      // Clear and reset the form after a short delay
+      setTimeout(() => {
+        // Clear file input
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Reset width and height inputs
+        if (widthInput) {
+          widthInput.value = '';
+        }
+        if (heightInput) {
+          heightInput.value = '';
+        }
+        
+        // Reset aspect ratio checkbox (keep it checked by default)
+        if (aspectCheck) {
+          aspectCheck.checked = true;
+        }
+        
+        // Reset dropzone
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        
+        // Reset dropzone label
+        if (dropLabel) {
+          dropLabel.innerHTML = 'Drag & drop your images here';
+        }
+        
+        // Reset stats
+        if (stats) {
+          stats.textContent = 'No images selected';
+        }
+        
+        // Reset progress bar
+        updateProgress(0);
+        
+        // Reset log message
+        if (log) {
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to resize your images';
+          log.style.color = '';
+        }
+        
+        // Clear selected files
+        selectedFiles = [];
+      }, 3000);
+    } catch (err) {
+      console.error(err);
       if (log) {
-        log.textContent = `❌ Error: ${error.message}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${err.message || err}</span>`;
         log.style.color = '#f87171';
       }
+      if (stats) stats.textContent = '✗ Resize failed';
+      updateProgress(0);
+      toastr.error(`Resize failed: ${err.message || err}`);
     } finally {
-      if (resizeBtn) resizeBtn.disabled = false;
+      if (resizeBtn) {
+        resizeBtn.disabled = false;
+        resizeBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   
@@ -1340,11 +1593,10 @@ function initImageCompress() {
   const fileInput = document.getElementById('file-compress-img');
   const dropzone = document.getElementById('dropzone-compress-img');
   const dropLabel = document.getElementById('dropLabel-compress-img');
-  const imagePreview = document.getElementById('image-preview-compress-img');
   const compressBtn = document.getElementById('compress-img-btn');
-  const status = document.getElementById('status-compress-img');
+  const bar = document.getElementById('bar-compress-img');
+  const stats = document.getElementById('stats-compress-img');
   const log = document.getElementById('log-compress-img');
-  const progress = document.getElementById('progress-compress-img');
   const qualitySlider = document.getElementById('quality-compress-img');
   const qualityValue = document.getElementById('quality-value-compress-img');
   
@@ -1363,68 +1615,111 @@ function initImageCompress() {
   
   window.currentToolHandlers = handlers;
   
+  function updateProgress(percent) {
+    if (bar) {
+      bar.style.width = `${percent}%`;
+      bar.setAttribute('aria-valuenow', percent);
+    }
+  }
+  
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
     if (files.length > 0) {
       selectedFiles = files;
-      updatePreview();
+      loadFiles(files);
+    } else {
+      toastr.error('Please select image files');
     }
   }
   
   function handleFileChange() {
-    selectedFiles = Array.from(fileInput.files);
-    updatePreview();
+    const files = Array.from(fileInput.files).filter(f => f.type.startsWith('image/'));
+    if (files.length > 0) {
+      selectedFiles = files;
+      loadFiles(files);
+    } else if (fileInput.files.length > 0) {
+      toastr.error('Please select image files');
+    }
   }
   
   function handleQualityChange() {
     if (qualityValue && qualitySlider) {
-      qualityValue.textContent = qualitySlider.value;
+      qualityValue.textContent = parseFloat(qualitySlider.value).toFixed(2);
     }
   }
   
-  function updatePreview() {
-    if (selectedFiles.length === 0) {
-      if (imagePreview) imagePreview.classList.add('hidden');
-      if (status) status.textContent = 'No images selected';
-      return;
+  function loadFiles(files) {
+    selectedFiles = files;
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${files.length} image(s) selected`;
+    if (stats) {
+      const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+      stats.textContent = `${files.length} image(s) • ${(totalSize/1024/1024).toFixed(2)} MB`;
     }
     
-    if (imagePreview) {
-      imagePreview.classList.remove('hidden');
-      imagePreview.innerHTML = '';
-      if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${selectedFiles.length} image(s) selected`;
-      if (status) status.textContent = `${selectedFiles.length} image(s) ready`;
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to compress! Adjust quality and click the button below.</span>';
+      log.style.color = '#60a5fa';
+      if (compressBtn) compressBtn.classList.add('animate-pulse-glow');
     }
+    updateProgress(0);
   }
   
   async function handleCompress() {
     if (selectedFiles.length === 0) {
-      toastr.error('Please select at least one image');
+      toastr.warning('Please select at least one image');
       return;
     }
     
-    if (compressBtn) compressBtn.disabled = true;
-    if (log) log.textContent = 'Compressing images...';
-    if (progress) progress.style.width = '0%';
+    if (typeof JSZip === 'undefined') {
+      toastr.info('Required library is loading. Please wait a moment and try again.');
+      return;
+    }
+    
+    if (compressBtn) {
+      compressBtn.disabled = true;
+      compressBtn.classList.remove('animate-pulse-glow');
+      compressBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Starting compression...</span>';
+      log.style.color = '#60a5fa';
+    }
+    updateProgress(10);
     
     try {
       const zip = new JSZip();
       const quality = parseFloat(qualitySlider?.value) || 0.8;
       
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">🗜️</span> <span>Compressing images...</span>';
+        log.style.color = '#60a5fa';
+      }
+      if (stats) stats.textContent = `Images: ${selectedFiles.length} — processing...`;
+      
+      let originalTotalSize = 0;
+      let compressedTotalSize = 0;
+      
       for (let i = 0; i < selectedFiles.length; i++) {
         const file = selectedFiles[i];
+        originalTotalSize += file.size;
         const imgData = await fileToDataURL(file);
         const img = new Image();
         img.src = imgData;
@@ -1438,47 +1733,136 @@ function initImageCompress() {
             ctx.drawImage(img, 0, 0);
             
             const ext = file.name.split('.').pop().toLowerCase();
-            const mimeType = ext === 'png' ? 'image/png' : 'image/jpeg';
+            const mimeType = ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : 'image/jpeg';
             
             canvas.toBlob((blob) => {
+              compressedTotalSize += blob.size;
               zip.file(`compressed_${file.name}`, blob);
-              if (progress) progress.style.width = `${((i + 1) / selectedFiles.length) * 100}%`;
-              if (log) log.textContent = `Processing image ${i + 1} of ${selectedFiles.length}...`;
+              const progressPercent = 10 + ((i + 1) / selectedFiles.length) * 85;
+              updateProgress(progressPercent);
+              if (log) {
+                log.innerHTML = `<span class="inline-block animate-bounce">🔄</span> <span>Compressing image <strong>${i + 1}</strong> of <strong>${selectedFiles.length}</strong>...</span>`;
+                log.style.color = '#60a5fa';
+              }
               resolve();
             }, mimeType, ext === 'png' ? undefined : quality);
           };
         });
       }
       
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📦</span> <span>Creating ZIP file...</span>';
+        log.style.color = '#60a5fa';
+      }
+      updateProgress(95);
+      
+      const zipBlob = await zip.generateAsync({ 
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 6 }
+      });
+      
       const fileName = selectedFiles.length === 1 
         ? `compressed_${selectedFiles[0].name}`
         : 'compressed_images.zip';
       
       if (selectedFiles.length === 1) {
-        const url = URL.createObjectURL(zipBlob);
+        // Extract single file from ZIP and download directly
+        const zipContent = await JSZip.loadAsync(zipBlob);
+        const firstFile = Object.keys(zipContent.files)[0];
+        const fileBlob = await zipContent.files[firstFile].async('blob');
+        const url = URL.createObjectURL(fileBlob);
         const a = document.createElement('a');
         a.href = url;
         a.download = fileName;
+        document.body.appendChild(a);
         a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
       } else {
         saveAs(zipBlob, fileName);
       }
       
+      updateProgress(100);
+      
+      const compressionRatio = ((1 - compressedTotalSize / originalTotalSize) * 100).toFixed(1);
+      
+      // Show success toastr notification
+      toastr.success(`Successfully compressed ${selectedFiles.length} image(s)! ${compressionRatio > 0 ? `(${compressionRatio}% reduction)` : ''}`, 'Compression Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
-        log.textContent = `✓ Success! ${selectedFiles.length} image(s) compressed`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ${selectedFiles.length === 1 ? 'Compressed image' : 'ZIP file'} downloaded with <strong>${selectedFiles.length}</strong> image(s). ${compressionRatio > 0 ? `<strong>${compressionRatio}%</strong> size reduction!` : ''}</span>`;
         log.style.color = '#34d399';
       }
-      if (progress) progress.style.width = '100%';
-    } catch (error) {
-      console.error(error);
+      if (stats) {
+        const originalMB = (originalTotalSize/1024/1024).toFixed(2);
+        const compressedMB = (compressedTotalSize/1024/1024).toFixed(2);
+        stats.textContent = `✓ Finished: ${selectedFiles.length} image(s) • ${originalMB} MB → ${compressedMB} MB (${compressionRatio}% reduction)`;
+      }
+      
+      if (typeof trackConversion === 'function') {
+        trackConversion(selectedFiles.length);
+      }
+      
+      // Clear and reset the form after a short delay
+      setTimeout(() => {
+        // Clear file input
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Reset quality slider to default value (0.8)
+        if (qualitySlider) {
+          qualitySlider.value = '0.8';
+        }
+        if (qualityValue) {
+          qualityValue.textContent = '0.8';
+        }
+        
+        // Reset dropzone
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        
+        // Reset dropzone label
+        if (dropLabel) {
+          dropLabel.innerHTML = 'Drag & drop your images here';
+        }
+        
+        // Reset stats
+        if (stats) {
+          stats.textContent = 'No images selected';
+        }
+        
+        // Reset progress bar
+        updateProgress(0);
+        
+        // Reset log message
+        if (log) {
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to compress your images';
+          log.style.color = '';
+        }
+        
+        // Clear selected files
+        selectedFiles = [];
+      }, 3000);
+    } catch (err) {
+      console.error(err);
       if (log) {
-        log.textContent = `❌ Error: ${error.message}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${err.message || err}</span>`;
         log.style.color = '#f87171';
       }
+      if (stats) stats.textContent = '✗ Compression failed';
+      updateProgress(0);
+      toastr.error(`Compression failed: ${err.message || err}`);
     } finally {
-      if (compressBtn) compressBtn.disabled = false;
+      if (compressBtn) {
+        compressBtn.disabled = false;
+        compressBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   
@@ -1496,7 +1880,11 @@ function initImageCompress() {
   dropzone.addEventListener('drop', handleDrop);
   fileInput.addEventListener('change', handleFileChange);
   if (compressBtn) compressBtn.addEventListener('click', handleCompress);
-  if (qualitySlider) qualitySlider.addEventListener('input', handleQualityChange);
+  if (qualitySlider) {
+    qualitySlider.addEventListener('input', handleQualityChange);
+    // Initialize quality value display
+    handleQualityChange();
+  }
 }
 
 // PDF Split Implementation
@@ -2791,308 +3179,19 @@ function initPDFOCR() {
   }
 }
 
-// PDF to Word Implementation
-function initPDFToWord() {
-  const fileInput = document.getElementById('file-pdf-word');
-  const dropzone = document.getElementById('dropzone-pdf-word');
-  const dropLabel = document.getElementById('dropLabel-pdf-word');
-  const convertBtn = document.getElementById('convert-pdf-word');
-  const status = document.getElementById('status-pdf-word');
-  const log = document.getElementById('log-pdf-word');
-  const progress = document.getElementById('progress-pdf-word');
-  
-  if (!fileInput || !dropzone) return;
-  
-  let currentFile = null;
-  
-  const handlers = [
-    () => dropzone.removeEventListener('dragover', handleDragOver),
-    () => dropzone.removeEventListener('dragleave', handleDragLeave),
-    () => dropzone.removeEventListener('drop', handleDrop),
-    () => fileInput.removeEventListener('change', handleFileChange),
-    () => convertBtn?.removeEventListener('click', handleConvert)
-  ];
-  
-  window.currentToolHandlers = handlers;
-  
-  function handleDragOver(e) {
-    e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
-  }
-  
-  function handleDragLeave(e) {
-    e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
-  }
-  
-  function handleDrop(e) {
-    e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
-    const f = e.dataTransfer.files && e.dataTransfer.files[0];
-    if (f && f.type === 'application/pdf') {
-      currentFile = f;
-      loadFile(f);
-    }
-  }
-  
-  function handleFileChange() {
-    if (fileInput.files && fileInput.files[0]) {
-      currentFile = fileInput.files[0];
-      loadFile(currentFile);
-    }
-  }
-  
-  function loadFile(file) {
-    if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${file.name}`;
-    if (status) status.textContent = 'PDF file selected';
-    if (log) log.textContent = '✨ Ready to convert to Word';
-  }
-  
-  async function handleConvert() {
-    if (!currentFile) {
-      toastr.warning('Please select a PDF file first');
-      return;
-    }
-    
-    if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-      toastr.info('PDF library is loading. Please wait a moment and try again.');
-      return;
-    }
-    
-    if (convertBtn) convertBtn.disabled = true;
-    if (log) log.textContent = 'Converting PDF to Word...';
-    if (progress) progress.style.width = '10%';
-    
-    try {
-      const arr = await currentFile.arrayBuffer();
-      const loadingTask = pdfjsLib.getDocument({ data: arr });
-      const pdf = await loadingTask.promise;
-      const numPages = pdf.numPages;
-      
-      if (log) log.textContent = 'Extracting text from PDF...';
-      if (progress) progress.style.width = '30%';
-      
-      let htmlContent = '<html><head><meta charset="UTF-8"><title>Converted from PDF</title></head><body style="font-family: Arial, sans-serif; padding: 20px;">';
-      
-      for (let i = 1; i <= numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        
-        htmlContent += `<h2>Page ${i}</h2>`;
-        htmlContent += '<div>';
-        
-        for (const item of textContent.items) {
-          if (item.str.trim()) {
-            htmlContent += `<p style="margin: 5px 0;">${item.str.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`;
-          }
-        }
-        
-        htmlContent += '</div>';
-        if (progress) progress.style.width = `${30 + (i / numPages) * 60}%`;
-        if (log) log.textContent = `Processing page ${i} of ${numPages}...`;
-      }
-      
-      htmlContent += '</body></html>';
-      
-      // Create a blob and download as .doc file (HTML format that Word can open)
-      const blob = new Blob([htmlContent], { type: 'application/msword' });
-      const fileName = currentFile.name.replace(/\.pdf$/i, '.doc');
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      URL.revokeObjectURL(url);
-      
-      if (progress) progress.style.width = '100%';
-      if (log) {
-        log.textContent = `✓ Success! Word document downloaded`;
-        log.style.color = '#34d399';
-      }
-    } catch (error) {
-      console.error(error);
-      if (log) {
-        log.textContent = `❌ Error: ${error.message || error}`;
-        log.style.color = '#f87171';
-      }
-      if (progress) progress.style.width = '0%';
-    } finally {
-      if (convertBtn) convertBtn.disabled = false;
-    }
-  }
-  
-  dropzone.addEventListener('dragover', handleDragOver);
-  dropzone.addEventListener('dragleave', handleDragLeave);
-  dropzone.addEventListener('drop', handleDrop);
-  fileInput.addEventListener('change', handleFileChange);
-  if (convertBtn) convertBtn.addEventListener('click', handleConvert);
-}
-
-// Word to PDF Implementation
-function initWordToPDF() {
-  const fileInput = document.getElementById('file-word-pdf');
-  const dropzone = document.getElementById('dropzone-word-pdf');
-  const dropLabel = document.getElementById('dropLabel-word-pdf');
-  const convertBtn = document.getElementById('convert-word-pdf');
-  const status = document.getElementById('status-word-pdf');
-  const log = document.getElementById('log-word-pdf');
-  const progress = document.getElementById('progress-word-pdf');
-  
-  if (!fileInput || !dropzone) return;
-  
-  let currentFile = null;
-  
-  const handlers = [
-    () => dropzone.removeEventListener('dragover', handleDragOver),
-    () => dropzone.removeEventListener('dragleave', handleDragLeave),
-    () => dropzone.removeEventListener('drop', handleDrop),
-    () => fileInput.removeEventListener('change', handleFileChange),
-    () => convertBtn?.removeEventListener('click', handleConvert)
-  ];
-  
-  window.currentToolHandlers = handlers;
-  
-  function handleDragOver(e) {
-    e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
-  }
-  
-  function handleDragLeave(e) {
-    e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
-  }
-  
-  function handleDrop(e) {
-    e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
-    const f = e.dataTransfer.files && e.dataTransfer.files[0];
-    if (f && (f.type.includes('word') || f.name.endsWith('.doc') || f.name.endsWith('.docx'))) {
-      currentFile = f;
-      loadFile(f);
-    }
-  }
-  
-  function handleFileChange() {
-    if (fileInput.files && fileInput.files[0]) {
-      currentFile = fileInput.files[0];
-      loadFile(currentFile);
-    }
-  }
-  
-  function loadFile(file) {
-    if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${file.name}`;
-    if (status) status.textContent = 'Word document selected';
-    if (log) log.textContent = '✨ Ready to convert to PDF';
-  }
-  
-  async function loadMammoth() {
-    if (window.mammoth) return true;
-    
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js';
-      script.onload = () => resolve(true);
-      script.onerror = () => reject(new Error('Failed to load Mammoth.js'));
-      document.head.appendChild(script);
-    });
-  }
-  
-  async function handleConvert() {
-    if (!currentFile) {
-      toastr.warning('Please select a Word document first');
-      return;
-    }
-    
-    if (typeof window.jspdf === 'undefined') {
-      toastr.info('PDF library is loading. Please wait a moment and try again.');
-      return;
-    }
-    
-    if (convertBtn) convertBtn.disabled = true;
-    if (log) log.textContent = 'Loading Word converter...';
-    if (progress) progress.style.width = '10%';
-    
-    try {
-      await loadMammoth();
-      
-      if (log) log.textContent = 'Converting Word to HTML...';
-      if (progress) progress.style.width = '30%';
-      
-      const arrayBuffer = await currentFile.arrayBuffer();
-      const result = await mammoth.convertToHtml({ arrayBuffer });
-      const html = result.value;
-      
-      if (log) log.textContent = 'Converting HTML to PDF...';
-      if (progress) progress.style.width = '60%';
-      
-      // Create a temporary div to parse HTML
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = html;
-      
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF();
-      
-      // Simple text extraction and PDF creation
-      const text = tempDiv.innerText || tempDiv.textContent || '';
-      const lines = pdf.splitTextToSize(text, pdf.internal.pageSize.getWidth() - 40);
-      
-      let y = 20;
-      const lineHeight = 7;
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      
-      for (let i = 0; i < lines.length; i++) {
-        if (y + lineHeight > pageHeight - 20) {
-          pdf.addPage();
-          y = 20;
-        }
-        pdf.text(lines[i], 20, y);
-        y += lineHeight;
-      }
-      
-      const pdfBlob = pdf.output('blob');
-      const fileName = currentFile.name.replace(/\.(doc|docx)$/i, '.pdf');
-      const url = URL.createObjectURL(pdfBlob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      URL.revokeObjectURL(url);
-      
-      if (progress) progress.style.width = '100%';
-      if (log) {
-        log.textContent = `✓ Success! PDF downloaded`;
-        log.style.color = '#34d399';
-      }
-    } catch (error) {
-      console.error(error);
-      if (log) {
-        log.textContent = `❌ Error: ${error.message || error}. Make sure the file is a valid Word document.`;
-        log.style.color = '#f87171';
-      }
-      if (progress) progress.style.width = '0%';
-    } finally {
-      if (convertBtn) convertBtn.disabled = false;
-    }
-  }
-  
-  dropzone.addEventListener('dragover', handleDragOver);
-  dropzone.addEventListener('dragleave', handleDragLeave);
-  dropzone.addEventListener('drop', handleDrop);
-  fileInput.addEventListener('change', handleFileChange);
-  if (convertBtn) convertBtn.addEventListener('click', handleConvert);
-}
+// PDF to Word and Word to PDF implementations removed (not functional)
 
 // HEIC to JPG Implementation
 function initHEICToJPG() {
   const fileInput = document.getElementById('file-heic-jpg');
   const dropzone = document.getElementById('dropzone-heic-jpg');
   const dropLabel = document.getElementById('dropLabel-heic-jpg');
-  const imagePreview = document.getElementById('image-preview-heic-jpg');
   const convertBtn = document.getElementById('convert-heic-jpg');
-  const status = document.getElementById('status-heic-jpg');
+  const bar = document.getElementById('bar-heic-jpg');
+  const stats = document.getElementById('stats-heic-jpg');
   const log = document.getElementById('log-heic-jpg');
-  const progress = document.getElementById('progress-heic-jpg');
-  const quality = document.getElementById('quality-heic-jpg');
+  const qualitySlider = document.getElementById('quality-heic-jpg');
+  const qualityValue = document.getElementById('quality-value-heic-jpg');
   
   if (!fileInput || !dropzone) return;
   
@@ -3103,24 +3202,35 @@ function initHEICToJPG() {
     () => dropzone.removeEventListener('dragleave', handleDragLeave),
     () => dropzone.removeEventListener('drop', handleDrop),
     () => fileInput.removeEventListener('change', handleFileChange),
-    () => convertBtn?.removeEventListener('click', handleConvert)
+    () => convertBtn?.removeEventListener('click', handleConvert),
+    () => qualitySlider?.removeEventListener('input', handleQualityChange)
   ];
   
   window.currentToolHandlers = handlers;
   
+  function updateProgress(percent) {
+    if (bar) {
+      bar.style.width = `${percent}%`;
+      bar.setAttribute('aria-valuenow', percent);
+    }
+  }
+  
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const files = Array.from(e.dataTransfer.files).filter(f => 
       f.type === 'image/heic' || 
       f.type === 'image/heif' || 
@@ -3129,28 +3239,49 @@ function initHEICToJPG() {
     );
     if (files.length > 0) {
       selectedFiles = files;
-      updatePreview();
+      loadFiles(files);
+    } else {
+      toastr.error('Please select HEIC or HEIF image files');
     }
   }
   
   function handleFileChange() {
-    selectedFiles = Array.from(fileInput.files);
-    updatePreview();
+    const files = Array.from(fileInput.files).filter(f => 
+      f.type === 'image/heic' || 
+      f.type === 'image/heif' || 
+      f.name.toLowerCase().endsWith('.heic') || 
+      f.name.toLowerCase().endsWith('.heif')
+    );
+    if (files.length > 0) {
+      selectedFiles = files;
+      loadFiles(files);
+    } else if (fileInput.files.length > 0) {
+      toastr.error('Please select HEIC or HEIF image files');
+    }
   }
   
-  function updatePreview() {
-    if (selectedFiles.length === 0) {
-      if (imagePreview) imagePreview.classList.add('hidden');
-      if (status) status.textContent = 'No images selected';
-      return;
+  function handleQualityChange() {
+    if (qualityValue && qualitySlider) {
+      qualityValue.textContent = parseFloat(qualitySlider.value).toFixed(2);
+    }
+  }
+  
+  function loadFiles(files) {
+    selectedFiles = files;
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${files.length} HEIC image(s) selected`;
+    if (stats) {
+      const totalSize = files.reduce((sum, f) => sum + f.size, 0);
+      stats.textContent = `${files.length} image(s) • ${(totalSize/1024/1024).toFixed(2)} MB`;
     }
     
-    if (imagePreview) {
-      imagePreview.classList.remove('hidden');
-      imagePreview.innerHTML = '';
-      if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${selectedFiles.length} HEIC image(s) selected`;
-      if (status) status.textContent = `${selectedFiles.length} image(s) ready`;
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to convert! Adjust quality and click the button below.</span>';
+      log.style.color = '#60a5fa';
+      if (convertBtn) convertBtn.classList.add('animate-pulse-glow');
     }
+    updateProgress(0);
   }
   
   async function loadHeic2any() {
@@ -3159,7 +3290,10 @@ function initHEICToJPG() {
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
-      script.onload = () => resolve(true);
+      script.onload = () => {
+        // Give the library a moment to initialize
+        setTimeout(() => resolve(true), 100);
+      };
       script.onerror = () => reject(new Error('Failed to load heic2any library'));
       document.head.appendChild(script);
     });
@@ -3167,13 +3301,21 @@ function initHEICToJPG() {
   
   async function handleConvert() {
     if (selectedFiles.length === 0) {
-      toastr.error('Please select at least one HEIC image');
+      toastr.warning('Please select at least one HEIC image');
       return;
     }
     
-    if (convertBtn) convertBtn.disabled = true;
-    if (log) log.textContent = 'Loading HEIC converter...';
-    if (progress) progress.style.width = '10%';
+    if (convertBtn) {
+      convertBtn.disabled = true;
+      convertBtn.classList.remove('animate-pulse-glow');
+      convertBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Loading converter library...</span>';
+      log.style.color = '#60a5fa';
+    }
+    updateProgress(5);
     
     try {
       await loadHeic2any();
@@ -3182,11 +3324,16 @@ function initHEICToJPG() {
         throw new Error('ZIP library not loaded');
       }
       
-      if (log) log.textContent = 'Converting HEIC to JPG...';
-      if (progress) progress.style.width = '20%';
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📷</span> <span>Converting HEIC to JPG...</span>';
+        log.style.color = '#60a5fa';
+      }
+      if (stats) stats.textContent = `Images: ${selectedFiles.length} — processing...`;
+      updateProgress(10);
       
       const zip = new JSZip();
-      const qualityValue = parseFloat(quality?.value) || 0.9;
+      const qualityValue = parseFloat(qualitySlider?.value) || 0.9;
+      let successCount = 0;
       
       for (let i = 0; i < selectedFiles.length; i++) {
         const file = selectedFiles[i];
@@ -3204,16 +3351,39 @@ function initHEICToJPG() {
           // Add to ZIP
           const fileName = file.name.replace(/\.(heic|heif)$/i, '.jpg');
           zip.file(fileName, blob);
+          successCount++;
           
-          if (progress) progress.style.width = `${20 + ((i + 1) / selectedFiles.length) * 70}%`;
-          if (log) log.textContent = `Processing image ${i + 1} of ${selectedFiles.length}...`;
+          const progressPercent = 10 + ((i + 1) / selectedFiles.length) * 85;
+          updateProgress(progressPercent);
+          if (log) {
+            log.innerHTML = `<span class="inline-block animate-bounce">🔄</span> <span>Converting image <strong>${i + 1}</strong> of <strong>${selectedFiles.length}</strong>...</span>`;
+            log.style.color = '#60a5fa';
+          }
         } catch (err) {
           console.error(`Error converting ${file.name}:`, err);
-          if (log) log.textContent = `Warning: Failed to convert ${file.name}. Skipping...`;
+          if (log) {
+            log.innerHTML = `<span class="inline-block">⚠️</span> <span>Warning: Failed to convert <strong>${file.name}</strong>. Skipping...</span>`;
+            log.style.color = '#fbbf24';
+          }
         }
       }
       
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      if (successCount === 0) {
+        throw new Error('Failed to convert any images. Please ensure the files are valid HEIC/HEIF images.');
+      }
+      
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📦</span> <span>Creating ZIP file...</span>';
+        log.style.color = '#60a5fa';
+      }
+      updateProgress(95);
+      
+      const zipBlob = await zip.generateAsync({ 
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 6 }
+      });
+      
       const fileName = selectedFiles.length === 1 
         ? selectedFiles[0].name.replace(/\.(heic|heif)$/i, '.jpg')
         : 'heic_to_jpg_converted.zip';
@@ -3227,26 +3397,96 @@ function initHEICToJPG() {
         const a = document.createElement('a');
         a.href = url;
         a.download = fileName;
+        document.body.appendChild(a);
         a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
       } else {
         saveAs(zipBlob, fileName);
       }
       
+      updateProgress(100);
+      
+      // Show success toastr notification
+      toastr.success(`Successfully converted ${successCount} image(s) to JPG!`, 'Conversion Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
-        log.textContent = `✓ Success! ${selectedFiles.length} image(s) converted`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ${selectedFiles.length === 1 ? 'Converted image' : 'ZIP file'} downloaded with <strong>${successCount}</strong> JPG image(s).</span>`;
         log.style.color = '#34d399';
       }
-      if (progress) progress.style.width = '100%';
-    } catch (error) {
-      console.error(error);
+      if (stats) stats.textContent = `✓ Finished: ${successCount} image(s) converted successfully`;
+      
+      if (typeof trackConversion === 'function') {
+        trackConversion(selectedFiles.length);
+      }
+      
+      // Clear and reset the form after a short delay
+      setTimeout(() => {
+        // Clear file input
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Reset quality slider to default value (0.9)
+        // Get fresh references to ensure elements exist
+        const qualitySliderElement = document.getElementById('quality-heic-jpg');
+        const qualityValueElement = document.getElementById('quality-value-heic-jpg');
+        
+        if (qualitySliderElement) {
+          qualitySliderElement.value = '0.9';
+          // Trigger the input event to update the display badge
+          const inputEvent = new Event('input', { bubbles: true });
+          qualitySliderElement.dispatchEvent(inputEvent);
+        }
+        // Also update the display directly as a fallback
+        if (qualityValueElement) {
+          qualityValueElement.textContent = '0.9';
+        }
+        
+        // Reset dropzone
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        
+        // Reset dropzone label
+        if (dropLabel) {
+          dropLabel.innerHTML = 'Drag & drop your HEIC images here';
+        }
+        
+        // Reset stats
+        if (stats) {
+          stats.textContent = 'No images selected';
+        }
+        
+        // Reset progress bar
+        updateProgress(0);
+        
+        // Reset log message
+        if (log) {
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your HEIC images';
+          log.style.color = '';
+        }
+        
+        // Clear selected files
+        selectedFiles = [];
+      }, 3000);
+    } catch (err) {
+      console.error(err);
       if (log) {
-        log.textContent = `❌ Error: ${error.message || error}. Make sure the files are valid HEIC images.`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${err.message || err}. Make sure the files are valid HEIC/HEIF images.</span>`;
         log.style.color = '#f87171';
       }
-      if (progress) progress.style.width = '0%';
+      if (stats) stats.textContent = '✗ Conversion failed';
+      updateProgress(0);
+      toastr.error(`Conversion failed: ${err.message || err}`);
     } finally {
-      if (convertBtn) convertBtn.disabled = false;
+      if (convertBtn) {
+        convertBtn.disabled = false;
+        convertBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   
@@ -3255,6 +3495,13 @@ function initHEICToJPG() {
   dropzone.addEventListener('drop', handleDrop);
   fileInput.addEventListener('change', handleFileChange);
   if (convertBtn) convertBtn.addEventListener('click', handleConvert);
+  if (qualitySlider) {
+    qualitySlider.addEventListener('input', handleQualityChange);
+    // Initialize quality value display
+    handleQualityChange();
+  }
 }
+
+
 
 

@@ -2332,78 +2332,65 @@ function getPDFRotateContent() {
 function getPNGToJPGContent() {
   return `
     <div class="w-100">
-      <!-- Header Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body text-center py-5">
-          <div class="mb-3">
-            <span style="font-size: 4rem;">🖼️</span>
-          </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
-            PNG to JPG Converter
-          </h1>
-          <p class="text-light fs-5 mb-2 fw-medium">Convert PNG images to JPG format instantly</p>
-          <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
+      <!-- Header Section -->
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <span style="font-size: 5rem;">🖼️</span>
         </div>
+        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+          PNG → JPG Converter
+        </h1>
+        <p class="text-light fs-5 mb-2 fw-medium">Convert PNG to JPG instantly in your browser</p>
+        <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
       
-      <!-- Dropzone Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-0">
-          <label class="dropzone w-100 border border-2 border-dashed rounded px-3 px-md-5 py-5 d-flex flex-column align-items-center justify-content-center mb-0" 
-                 id="dropzone-png-jpg" 
-                 style="min-height: 200px;">
-            <div class="mb-3">
-              <i class="bi bi-cloud-upload text-primary" style="font-size: 3.5rem;"></i>
-            </div>
-            <span id="dropLabel-png-jpg" class="text-light fw-semibold fs-5 mb-2">Drag & drop your PNG images here</span>
-            <span class="text-secondary small">or click to browse files</span>
-            <input type="file" id="file-png-jpg" class="d-none" accept="image/png" multiple />
+      <!-- Dropzone Section -->
+      <label class="dropzone w-100 border border-2 border-dashed border-secondary rounded-3 p-5 d-flex flex-column align-items-center justify-content-center cursor-pointer mb-5 bg-dark-subtle shadow-lg" 
+             id="dropzone-png-jpg" 
+             style="min-height: 220px;">
+        <div class="mb-4 position-relative">
+          <i class="bi bi-cloud-arrow-up-fill text-primary" style="font-size: 4rem;"></i>
+        </div>
+        <span id="dropLabel-png-jpg" class="text-light fw-semibold fs-5 mb-2">Drag & drop your PNG images here</span>
+        <span class="text-secondary small">or click to browse files</span>
+        <input type="file" id="file-png-jpg" class="d-none" accept="image/png" multiple />
+      </label>
+
+      <!-- Controls Section -->
+      <div class="d-flex flex-wrap gap-3 w-100 mb-5 justify-content-center align-items-end">
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-image"></i> JPEG Quality
           </label>
+          <input type="number" id="quality-png-jpg" min="0.1" max="1" step="0.1" value="0.9" class="form-control w-auto" style="width: 100px;">
+          <span class="form-text text-secondary mt-1 d-block" style="font-size: 0.75rem;">0.1 (low) - 1.0 (high)</span>
+        </div>
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-palette"></i> Background Color
+          </label>
+          <input type="color" id="bgColor-png-jpg" value="#ffffff" class="form-control form-control-color w-auto" style="width: 100px; height: 40px;">
+          <span class="form-text text-secondary mt-1 d-block" style="font-size: 0.75rem;">For transparent PNGs</span>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <button id="convert-png-jpg" class="btn btn-primary btn-lg fw-bold rounded-3 shadow-lg bg-gradient-primary d-flex align-items-center gap-2">
+            <i class="bi bi-lightning-fill"></i> Convert PNG to JPG
+          </button>
         </div>
       </div>
 
-      <!-- Image Preview Card -->
-      <div id="image-preview-png-jpg" class="card border-0 shadow-sm mb-4 d-none">
-        <div class="card-body">
-          <div class="row g-3" id="image-preview-grid-png-jpg"></div>
+      <!-- Progress Section -->
+      <div class="card bg-dark-subtle border-0 shadow-sm p-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-light fw-medium d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart"></i> Progress
+          </span>
+          <span id="stats-png-jpg" class="small text-secondary">No images selected</span>
         </div>
-      </div>
-
-      <!-- Controls Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex flex-wrap gap-3 justify-content-center align-items-end">
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">JPEG Quality</label>
-              <input type="number" id="quality-png-jpg" min="0.1" max="1" step="0.1" value="0.9" class="form-control bg-dark text-light border-secondary w-auto" style="width: 120px;">
-              <span class="form-text text-secondary mt-1 d-block">0.1 (low) - 1.0 (high)</span>
-            </div>
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">Background Color</label>
-              <input type="color" id="bgColor-png-jpg" value="#ffffff" class="form-control form-control-color w-auto" style="width: 60px; height: 40px;">
-              <span class="form-text text-secondary mt-1 d-block">For transparent PNGs</span>
-            </div>
-            <div class="d-flex flex-column gap-2">
-              <button id="convert-png-jpg" class="btn btn-primary fw-bold px-4 py-2">
-                Convert to JPG
-              </button>
-            </div>
-          </div>
+        <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
+          <div id="bar-png-jpg" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-      </div>
-
-      <!-- Progress Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <span class="text-light fw-medium">Status</span>
-            <span id="status-png-jpg" class="small text-secondary">No images selected</span>
-          </div>
-          <div class="progress" style="height: 0.5rem;">
-            <div id="progress-png-jpg" class="progress-bar" role="progressbar" style="width: 0%;"></div>
-          </div>
-          <p id="log-png-jpg" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to convert your images</p>
-        </div>
+        <p id="log-png-jpg" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your PNG images</p>
       </div>
 
       <!-- How It Works Section -->
@@ -2716,82 +2703,74 @@ function getPNGToJPGContent() {
 function getImageResizeContent() {
   return `
     <div class="w-100">
-      <!-- Header Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body text-center py-5">
-          <div class="mb-3">
-            <span style="font-size: 4rem;">📏</span>
-          </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
-            Image Resizer
-          </h1>
-          <p class="text-light fs-5 mb-2 fw-medium">Resize images to any size instantly</p>
-          <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
+      <!-- Header Section -->
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <span style="font-size: 5rem;">📏</span>
         </div>
+        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+          Image Resizer
+        </h1>
+        <p class="text-light fs-5 mb-2 fw-medium">Resize images to any size instantly in your browser</p>
+        <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
       
-      <!-- Dropzone Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-0">
-          <label class="dropzone w-100 border border-2 border-dashed rounded px-3 px-md-5 py-5 d-flex flex-column align-items-center justify-content-center mb-0" 
-                 id="dropzone-resize" 
-                 style="min-height: 200px;">
-            <div class="mb-3">
-              <i class="bi bi-cloud-upload text-primary" style="font-size: 3.5rem;"></i>
-            </div>
-            <span id="dropLabel-resize" class="text-light fw-semibold fs-5 mb-2">Drag & drop your images here</span>
-            <span class="text-secondary small">or click to browse files</span>
-            <input type="file" id="file-resize" class="d-none" accept="image/*" multiple />
+      <!-- Dropzone Section -->
+      <label class="dropzone w-100 border border-2 border-dashed border-secondary rounded-3 p-5 d-flex flex-column align-items-center justify-content-center cursor-pointer mb-5 bg-dark-subtle shadow-lg" 
+             id="dropzone-resize" 
+             style="min-height: 220px;">
+        <div class="mb-4 position-relative">
+          <i class="bi bi-cloud-arrow-up-fill text-primary" style="font-size: 4rem;"></i>
+        </div>
+        <span id="dropLabel-resize" class="text-light fw-semibold fs-5 mb-2">Drag & drop your images here</span>
+        <span class="text-secondary small">or click to browse files</span>
+        <input type="file" id="file-resize" class="d-none" accept="image/*" multiple />
+      </label>
+
+      <!-- Controls Section -->
+      <div class="d-flex flex-wrap gap-3 w-100 mb-5 justify-content-center align-items-end">
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-arrows-angle-expand"></i> Width (px)
           </label>
+          <input type="number" id="width-resize" placeholder="Auto" min="1" class="form-control w-auto" style="width: 120px;">
+          <span class="form-text text-secondary mt-1 d-block" style="font-size: 0.75rem;">Leave empty for auto</span>
+        </div>
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-arrows-angle-expand"></i> Height (px)
+          </label>
+          <input type="number" id="height-resize" placeholder="Auto" min="1" class="form-control w-auto" style="width: 120px;">
+          <span class="form-text text-secondary mt-1 d-block" style="font-size: 0.75rem;">Leave empty for auto</span>
+        </div>
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-lock"></i> Maintain Aspect Ratio
+          </label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="aspect-resize" checked>
+            <label class="form-check-label text-secondary small" for="aspect-resize" style="font-size: 0.75rem;">Keep proportions</label>
+          </div>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <button id="resize-btn" class="btn btn-primary btn-lg fw-bold rounded-3 shadow-lg bg-gradient-primary d-flex align-items-center gap-2">
+            <i class="bi bi-lightning-fill"></i> Resize Images
+          </button>
         </div>
       </div>
 
-      <!-- Image Preview Card -->
-      <div id="image-preview-resize" class="card border-0 shadow-sm mb-4 d-none">
-        <div class="card-body">
-          <div class="row g-3" id="image-preview-grid-resize"></div>
+      <!-- Progress Section -->
+      <div class="card bg-dark-subtle border-0 shadow-sm p-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-light fw-medium d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart"></i> Progress
+          </span>
+          <span id="stats-resize" class="small text-secondary">No images selected</span>
         </div>
-      </div>
-
-      <!-- Controls Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex flex-wrap gap-3 justify-content-center align-items-end">
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">Width (px)</label>
-              <input type="number" id="width-resize" placeholder="Auto" class="form-control bg-dark text-light border-secondary w-auto" style="width: 120px;">
-            </div>
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">Height (px)</label>
-              <input type="number" id="height-resize" placeholder="Auto" class="form-control bg-dark text-light border-secondary w-auto" style="width: 120px;">
-            </div>
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">Maintain Aspect Ratio</label>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="aspect-resize" checked>
-              </div>
-            </div>
-            <div class="d-flex flex-column gap-2">
-              <button id="resize-btn" class="btn btn-primary fw-bold px-4 py-2">
-                Resize Images
-              </button>
-            </div>
-          </div>
+        <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
+          <div id="bar-resize" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-      </div>
-
-      <!-- Progress Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <span class="text-light fw-medium">Status</span>
-            <span id="status-resize" class="small text-secondary">No images selected</span>
-          </div>
-          <div class="progress" style="height: 0.5rem;">
-            <div id="progress-resize" class="progress-bar" role="progressbar" style="width: 0%;"></div>
-          </div>
-          <p id="log-resize" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to resize your images</p>
-        </div>
+        <p id="log-resize" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to resize your images</p>
       </div>
 
       <!-- How It Works Section -->
@@ -3104,73 +3083,62 @@ function getImageResizeContent() {
 function getImageCompressContent() {
   return `
     <div class="w-100">
-      <!-- Header Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body text-center py-5">
-          <div class="mb-3">
-            <span style="font-size: 4rem;">🗜️</span>
-          </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
-            Image Compressor
-          </h1>
-          <p class="text-light fs-5 mb-2 fw-medium">Compress images to reduce file size</p>
-          <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
+      <!-- Header Section -->
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <span style="font-size: 5rem;">🗜️</span>
         </div>
+        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+          Image Compressor
+        </h1>
+        <p class="text-light fs-5 mb-2 fw-medium">Compress images to reduce file size instantly in your browser</p>
+        <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
       
-      <!-- Dropzone Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-0">
-          <label class="dropzone w-100 border border-2 border-dashed rounded px-3 px-md-5 py-5 d-flex flex-column align-items-center justify-content-center mb-0" 
-                 id="dropzone-compress-img" 
-                 style="min-height: 200px;">
-            <div class="mb-3">
-              <i class="bi bi-cloud-upload text-primary" style="font-size: 3.5rem;"></i>
-            </div>
-            <span id="dropLabel-compress-img" class="text-light fw-semibold fs-5 mb-2">Drag & drop your images here</span>
-            <span class="text-secondary small">or click to browse files</span>
-            <input type="file" id="file-compress-img" class="d-none" accept="image/*" multiple />
+      <!-- Dropzone Section -->
+      <label class="dropzone w-100 border border-2 border-dashed border-secondary rounded-3 p-5 d-flex flex-column align-items-center justify-content-center cursor-pointer mb-5 bg-dark-subtle shadow-lg" 
+             id="dropzone-compress-img" 
+             style="min-height: 220px;">
+        <div class="mb-4 position-relative">
+          <i class="bi bi-cloud-arrow-up-fill text-primary" style="font-size: 4rem;"></i>
+        </div>
+        <span id="dropLabel-compress-img" class="text-light fw-semibold fs-5 mb-2">Drag & drop your images here</span>
+        <span class="text-secondary small">or click to browse files</span>
+        <input type="file" id="file-compress-img" class="d-none" accept="image/*" multiple />
+      </label>
+
+      <!-- Controls Section -->
+      <div class="d-flex flex-wrap gap-3 w-100 mb-5 justify-content-center align-items-end">
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-sliders"></i> Quality
           </label>
+          <input type="range" id="quality-compress-img" min="0.1" max="1" step="0.05" value="0.8" class="form-range" style="width: 200px;">
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <span class="form-text text-secondary" style="font-size: 0.75rem;">Lower = Smaller</span>
+            <span id="quality-value-compress-img" class="badge bg-primary text-white px-3 py-1">0.8</span>
+            <span class="form-text text-secondary" style="font-size: 0.75rem;">Higher = Better</span>
+          </div>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <button id="compress-img-btn" class="btn btn-primary btn-lg fw-bold rounded-3 shadow-lg bg-gradient-primary d-flex align-items-center gap-2">
+            <i class="bi bi-lightning-fill"></i> Compress Images
+          </button>
         </div>
       </div>
 
-      <!-- Image Preview Card -->
-      <div id="image-preview-compress-img" class="card border-0 shadow-sm mb-4 d-none">
-        <div class="card-body">
-          <div class="row g-3" id="image-preview-grid-compress-img"></div>
+      <!-- Progress Section -->
+      <div class="card bg-dark-subtle border-0 shadow-sm p-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-light fw-medium d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart"></i> Progress
+          </span>
+          <span id="stats-compress-img" class="small text-secondary">No images selected</span>
         </div>
-      </div>
-
-      <!-- Controls Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex flex-wrap gap-3 justify-content-center align-items-end">
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">Quality</label>
-              <input type="range" id="quality-compress-img" min="0.1" max="1" step="0.1" value="0.8" class="form-range" style="width: 200px;">
-              <span class="form-text text-secondary mt-1 d-block" id="quality-value-compress-img">0.8</span>
-            </div>
-            <div class="d-flex flex-column gap-2">
-              <button id="compress-img-btn" class="btn btn-primary fw-bold px-4 py-2">
-                Compress Images
-              </button>
-            </div>
-          </div>
+        <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
+          <div id="bar-compress-img" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-      </div>
-
-      <!-- Progress Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <span class="text-light fw-medium">Status</span>
-            <span id="status-compress-img" class="small text-secondary">No images selected</span>
-          </div>
-          <div class="progress" style="height: 0.5rem;">
-            <div id="progress-compress-img" class="progress-bar" role="progressbar" style="width: 0%;"></div>
-          </div>
-          <p id="log-compress-img" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to compress your images</p>
-        </div>
+        <p id="log-compress-img" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to compress your images</p>
       </div>
 
       <!-- How It Works Section -->
@@ -4620,68 +4588,390 @@ function getPDFOCRContent() {
   `;
 }
 
-function getPDFToWordContent() {
+// PDF to Word content removed (not functional)
+/*function getPDFToWordContent() {
   return `
     <div class="w-100">
-      <!-- Header Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body text-center py-5">
-          <div class="mb-3">
-            <span style="font-size: 4rem;">📝</span>
-          </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
-            PDF to Word
-          </h1>
-          <p class="text-light fs-5 mb-2 fw-medium">Convert PDF documents to Word format</p>
-          <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
+      <!-- Header Section -->
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <span style="font-size: 5rem;">📝</span>
         </div>
+        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+          PDF → Word Converter
+        </h1>
+        <p class="text-light fs-5 mb-2 fw-medium">Convert PDF to Word instantly in your browser</p>
+        <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
       
-      <!-- Dropzone Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-0">
-          <label class="dropzone w-100 border border-2 border-dashed rounded px-3 px-md-5 py-5 d-flex flex-column align-items-center justify-content-center mb-0" 
-                 id="dropzone-pdf-word" 
-                 style="min-height: 200px;">
-            <div class="mb-3">
-              <i class="bi bi-cloud-upload text-primary" style="font-size: 3.5rem;"></i>
+      <!-- Dropzone Section -->
+      <label class="dropzone w-100 border border-2 border-dashed border-secondary rounded-3 p-5 d-flex flex-column align-items-center justify-content-center cursor-pointer mb-5 bg-dark-subtle shadow-lg" 
+             id="dropzone-pdf-word" 
+             style="min-height: 220px;">
+        <div class="mb-4 position-relative">
+          <i class="bi bi-cloud-arrow-up-fill text-primary" style="font-size: 4rem;"></i>
+        </div>
+        <span id="dropLabel-pdf-word" class="text-light fw-semibold fs-5 mb-2">Drag & drop your PDF here</span>
+        <span class="text-secondary small">or click to browse files</span>
+        <input type="file" id="file-pdf-word" class="d-none" accept="application/pdf" />
+      </label>
+
+      <!-- Controls Section -->
+      <div class="d-flex flex-wrap gap-3 w-100 mb-5 justify-content-center align-items-end">
+        <div class="d-flex flex-column gap-2">
+          <button id="convert-pdf-word" class="btn btn-primary btn-lg fw-bold rounded-3 shadow-lg bg-gradient-primary d-flex align-items-center gap-2">
+            <i class="bi bi-lightning-fill"></i> Convert PDF to Word
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Section -->
+      <div class="card bg-dark-subtle border-0 shadow-sm p-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-light fw-medium d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart"></i> Progress
+          </span>
+          <span id="stats-pdf-word" class="small text-secondary">No file selected</span>
+        </div>
+        <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
+          <div id="bar-pdf-word" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p id="log-pdf-word" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your PDF files</p>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PDF</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your PDF file or click to browse and select from your computer.</p>
+              </div>
             </div>
-            <span id="dropLabel-pdf-word" class="text-light fw-semibold fs-5 mb-2">Drag & drop your PDF here</span>
-            <span class="text-secondary small">or click to browse files</span>
-            <input type="file" id="file-pdf-word" class="d-none" accept="application/pdf" />
-          </label>
-        </div>
-      </div>
-
-      <!-- Controls Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex flex-wrap gap-3 justify-content-center">
-            <button id="convert-pdf-word" class="btn btn-primary fw-bold px-4 py-2">
-              Convert to Word
-            </button>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Extract Text</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Our tool extracts all text content from your PDF document, preserving structure and formatting.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Convert</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Convert PDF to Word" and watch as your PDF is processed instantly in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your Word document will be automatically downloaded, ready to edit in Microsoft Word or Google Docs.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Progress Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <span class="text-light fw-medium">Status</span>
-            <span id="status-pdf-word" class="small text-secondary">No file selected</span>
+      <!-- Why Convert PDF to Word Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Convert PDF to Word?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your PDF files never leave your computer. All conversion happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDF to Word in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-pencil text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Easy Editing</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDFs to Word format to enable easy editing, formatting changes, and content modifications.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-file-earmark-word text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Universal Format</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Word documents are widely supported and can be opened in Microsoft Word, Google Docs, LibreOffice, and more.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Convert unlimited PDFs to Word completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
           </div>
-          <div class="progress" style="height: 0.5rem;">
-            <div id="progress-pdf-word" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-pencil text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Edit Documents</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDFs to Word to edit text, add comments, or modify content that was previously locked in PDF format.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-text text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Resume Updates</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDF resumes to Word format to easily update your work experience, skills, and contact information.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-journal-text text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Academic Papers</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDF research papers or articles to Word for easier citation, annotation, and collaboration.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-briefcase text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Business Documents</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDF contracts, reports, or proposals to Word for editing and customization.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-share text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Collaboration</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDFs to Word for easier collaboration with track changes, comments, and version control.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-archive text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Format Conversion</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDFs to Word format for compatibility with various word processors and editing tools.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p id="log-pdf-word" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to convert your PDF</p>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionPDFWord">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord1" aria-expanded="false" aria-controls="faqPDFWord1" style="font-size: 1rem; padding: 1rem;">
+                  How do I convert PDF to Word?
+                </button>
+              </h2>
+              <div id="faqPDFWord1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your PDF file into the upload area, then click 'Convert PDF to Word'. The conversion happens instantly in your browser, and your Word document will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord2" aria-expanded="false" aria-controls="faqPDFWord2" style="font-size: 1rem; padding: 1rem;">
+                  Is my PDF file uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqPDFWord2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your PDF files never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord3" aria-expanded="false" aria-controls="faqPDFWord3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What file format will I get?
+                </button>
+              </h2>
+              <div id="faqPDFWord3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  You'll receive a Word document (.doc file) that can be opened in Microsoft Word, Google Docs, LibreOffice, and other word processors. The document contains the extracted text from your PDF with basic formatting preserved.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord4" aria-expanded="false" aria-controls="faqPDFWord4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will formatting be preserved?
+                </button>
+              </h2>
+              <div id="faqPDFWord4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Basic text formatting and structure are preserved, but complex layouts, images, and advanced formatting may require manual adjustment. The tool extracts text content and converts it to a Word document format.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord5" aria-expanded="false" aria-controls="faqPDFWord5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I convert multi-page PDFs?
+                </button>
+              </h2>
+              <div id="faqPDFWord5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! Our PDF to Word converter supports PDFs with any number of pages. All pages will be converted into a single Word document with page breaks between pages.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord6" aria-expanded="false" aria-controls="faqPDFWord6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqPDFWord6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can convert. Convert as many PDFs to Word as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord7" aria-expanded="false" aria-controls="faqPDFWord7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqPDFWord7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our PDF to Word converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord8" aria-expanded="false" aria-controls="faqPDFWord8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  How long does conversion take?
+                </button>
+              </h2>
+              <div id="faqPDFWord8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most PDFs convert in just a few seconds, depending on the number of pages and your device's performance.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord9" aria-expanded="false" aria-controls="faqPDFWord9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I convert scanned PDFs?
+                </button>
+              </h2>
+              <div id="faqPDFWord9" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Scanned PDFs (image-based PDFs) require OCR (Optical Character Recognition) to extract text. For scanned PDFs, please use our PDF OCR tool first to extract text, then convert that text to Word format.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord10" aria-expanded="false" aria-controls="faqPDFWord10" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I convert password-protected PDFs?
+                </button>
+              </h2>
+              <div id="faqPDFWord10" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Currently, password-protected PDFs cannot be converted. You'll need to remove the password protection from your PDF file first before converting it to Word format.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   `;
-}
+}*/
 
-function getWordToPDFContent() {
+// Word to PDF content removed (not functional)
+/*function getWordToPDFContent() {
   return `
     <div class="w-100">
       <!-- Header Card -->
@@ -4740,77 +5030,370 @@ function getWordToPDFContent() {
       </div>
     </div>
   `;
-}
+}*/
 
 function getHEICToJPGContent() {
   return `
     <div class="w-100">
-      <!-- Header Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body text-center py-5">
-          <div class="mb-3">
-            <span style="font-size: 4rem;">📷</span>
-          </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
-            HEIC to JPG Converter
-          </h1>
-          <p class="text-light fs-5 mb-2 fw-medium">Convert HEIC images to JPG format instantly</p>
-          <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
+      <!-- Header Section -->
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <span style="font-size: 5rem;">📷</span>
         </div>
+        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+          HEIC to JPG Converter
+        </h1>
+        <p class="text-light fs-5 mb-2 fw-medium">Convert HEIC images to JPG format instantly in your browser</p>
+        <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
       
-      <!-- Dropzone Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-0">
-          <label class="dropzone w-100 border border-2 border-dashed rounded px-3 px-md-5 py-5 d-flex flex-column align-items-center justify-content-center mb-0" 
-                 id="dropzone-heic-jpg" 
-                 style="min-height: 200px;">
-            <div class="mb-3">
-              <i class="bi bi-cloud-upload text-primary" style="font-size: 3.5rem;"></i>
-            </div>
-            <span id="dropLabel-heic-jpg" class="text-light fw-semibold fs-5 mb-2">Drag & drop your HEIC images here</span>
-            <span class="text-secondary small">or click to browse files</span>
-            <input type="file" id="file-heic-jpg" class="d-none" accept="image/heic,image/heif,.heic,.heif" multiple />
+      <!-- Dropzone Section -->
+      <label class="dropzone w-100 border border-2 border-dashed border-secondary rounded-3 p-5 d-flex flex-column align-items-center justify-content-center cursor-pointer mb-5 bg-dark-subtle shadow-lg" 
+             id="dropzone-heic-jpg" 
+             style="min-height: 220px;">
+        <div class="mb-4 position-relative">
+          <i class="bi bi-cloud-arrow-up-fill text-primary" style="font-size: 4rem;"></i>
+        </div>
+        <span id="dropLabel-heic-jpg" class="text-light fw-semibold fs-5 mb-2">Drag & drop your HEIC images here</span>
+        <span class="text-secondary small">or click to browse files</span>
+        <input type="file" id="file-heic-jpg" class="d-none" accept="image/heic,image/heif,.heic,.heif" multiple />
+      </label>
+
+      <!-- Controls Section -->
+      <div class="d-flex flex-wrap gap-3 w-100 mb-5 justify-content-center align-items-end">
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-sliders"></i> JPEG Quality
           </label>
+          <input type="range" id="quality-heic-jpg" min="0.1" max="1" step="0.05" value="0.9" class="form-range" style="width: 200px;">
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <span class="form-text text-secondary" style="font-size: 0.75rem;">Lower = Smaller</span>
+            <span id="quality-value-heic-jpg" class="badge bg-primary text-white px-3 py-1">0.9</span>
+            <span class="form-text text-secondary" style="font-size: 0.75rem;">Higher = Better</span>
+          </div>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <button id="convert-heic-jpg" class="btn btn-primary btn-lg fw-bold rounded-3 shadow-lg bg-gradient-primary d-flex align-items-center gap-2">
+            <i class="bi bi-lightning-fill"></i> Convert to JPG
+          </button>
         </div>
       </div>
 
-      <!-- Image Preview Card -->
-      <div id="image-preview-heic-jpg" class="card border-0 shadow-sm mb-4 d-none">
-        <div class="card-body">
-          <div class="row g-3" id="image-preview-grid-heic-jpg"></div>
+      <!-- Progress Section -->
+      <div class="card bg-dark-subtle border-0 shadow-sm p-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-light fw-medium d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart"></i> Progress
+          </span>
+          <span id="stats-heic-jpg" class="small text-secondary">No images selected</span>
         </div>
+        <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
+          <div id="bar-heic-jpg" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p id="log-heic-jpg" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your HEIC images</p>
       </div>
 
-      <!-- Controls Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex flex-wrap gap-3 justify-content-center align-items-end">
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">JPEG Quality</label>
-              <input type="number" id="quality-heic-jpg" min="0.1" max="1" step="0.1" value="0.9" class="form-control bg-dark text-light border-secondary w-auto" style="width: 120px;">
-              <span class="form-text text-secondary mt-1 d-block">0.1 (low) - 1.0 (high)</span>
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select HEIC Images</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your HEIC images or click to browse and select multiple HEIC/HEIF files from your computer.</p>
+              </div>
             </div>
-            <div class="d-flex flex-column gap-2">
-              <button id="convert-heic-jpg" class="btn btn-primary fw-bold px-4 py-2">
-                Convert to JPG
-              </button>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Adjust Quality</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Set JPEG quality (0.1-1.0) to balance file size and image quality. Higher values maintain better quality.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Convert</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Convert to JPG" and watch as your HEIC images are converted to JPG format instantly in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">All converted JPG images will be automatically downloaded. Each image is saved as a separate file.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Progress Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <span class="text-light fw-medium">Status</span>
-            <span id="status-heic-jpg" class="small text-secondary">No images selected</span>
+      <!-- Why Convert HEIC to JPG Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Convert HEIC to JPG?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your images never leave your computer. All conversion happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert HEIC to JPG in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Universal Compatibility</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">JPG format is supported by all devices, platforms, and software. Convert HEIC to JPG for maximum compatibility.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-share text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Easy Sharing</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">JPG images are easier to share via email, messaging apps, and social media platforms that may not support HEIC.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Convert unlimited HEIC images to JPG completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
           </div>
-          <div class="progress" style="height: 0.5rem;">
-            <div id="progress-heic-jpg" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-phone text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">iPhone Photos</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert iPhone HEIC photos to JPG for sharing with Android users or uploading to platforms that don't support HEIC.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-share text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Social Media</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert HEIC images to JPG for posting on social media platforms that require JPG format.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-envelope-check text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Email Attachments</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert HEIC images to JPG for easier email sharing, as many email clients don't support HEIC format.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-laptop text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Windows/PC Compatibility</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert HEIC images to JPG for viewing and editing on Windows computers that don't natively support HEIC.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-cloud-upload text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Cloud Storage</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert HEIC images to JPG before uploading to cloud storage services for better compatibility.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-printer text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Printing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert HEIC images to JPG for printing, as many printers and print services prefer JPG format.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p id="log-heic-jpg" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to convert your HEIC images</p>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionHeicJpg">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg1" aria-expanded="false" aria-controls="faqHeicJpg1" style="font-size: 1rem; padding: 1rem;">
+                  How do I convert HEIC to JPG?
+                </button>
+              </h2>
+              <div id="faqHeicJpg1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your HEIC images into the upload area, adjust the quality slider if needed, then click "Convert to JPG". The converted JPG images will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg2" aria-expanded="false" aria-controls="faqHeicJpg2" style="font-size: 1rem; padding: 1rem;">
+                  Are my images uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqHeicJpg2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your images never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg3" aria-expanded="false" aria-controls="faqHeicJpg3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What quality setting should I use?
+                </button>
+              </h2>
+              <div id="faqHeicJpg3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Quality ranges from 0.1 (maximum compression, smallest file) to 1.0 (minimum compression, largest file). For most purposes, 0.9 provides an excellent balance between file size and quality. Use higher values for better quality or lower values for smaller files.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg4" aria-expanded="false" aria-controls="faqHeicJpg4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will image quality be preserved?
+                </button>
+              </h2>
+              <div id="faqHeicJpg4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! With quality set to 0.9 or higher, the converted JPG images will maintain excellent visual quality. The conversion process preserves colors, details, and overall image appearance.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg5" aria-expanded="false" aria-controls="faqHeicJpg5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I convert multiple HEIC images at once?
+                </button>
+              </h2>
+              <div id="faqHeicJpg5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! You can select multiple HEIC images at once, and they will all be converted to JPG format. Each converted image will be downloaded as a separate file.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg6" aria-expanded="false" aria-controls="faqHeicJpg6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqHeicJpg6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of images you can convert. Convert as many HEIC images as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg7" aria-expanded="false" aria-controls="faqHeicJpg7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqHeicJpg7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our HEIC to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg8" aria-expanded="false" aria-controls="faqHeicJpg8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Why convert HEIC to JPG?
+                </button>
+              </h2>
+              <div id="faqHeicJpg8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  HEIC (High Efficiency Image Container) is a format used by Apple devices, but it's not widely supported on other platforms. Converting to JPG ensures your images can be viewed and shared on any device, platform, or software application.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -97,8 +97,6 @@ function getToolContent(toolId) {
     'pdf-merge': getPDFMergeContent(),
     'pdf-rotate': getPDFRotateContent(),
     'pdf-ocr': getPDFOCRContent(),
-    'pdf-to-word': getPDFToWordContent(),
-    'word-to-pdf': getWordToPDFContent(),
     'png-to-jpg': getPNGToJPGContent(),
     'image-resize': getImageResizeContent(),
     'image-compress': getImageCompressContent(),
