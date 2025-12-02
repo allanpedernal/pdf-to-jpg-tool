@@ -96,8 +96,6 @@ function getToolContent(toolId) {
     'pdf-split': getPDFSplitContent(),
     'pdf-merge': getPDFMergeContent(),
     'pdf-rotate': getPDFRotateContent(),
-    'pdf-unlock': getPDFUnlockContent(),
-    'pdf-protect': getPDFProtectContent(),
     'pdf-ocr': getPDFOCRContent(),
     'pdf-to-word': getPDFToWordContent(),
     'word-to-pdf': getWordToPDFContent(),

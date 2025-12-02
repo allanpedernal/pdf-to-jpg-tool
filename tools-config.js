@@ -9,8 +9,6 @@ const TOOLS_CONFIG = {
       { id: "pdf-split", name: "PDF Splitter", icon: "✂️", description: "Split PDF into separate pages" },
       { id: "pdf-merge", name: "PDF Merger", icon: "🔗", description: "Merge multiple PDFs into one" },
       { id: "pdf-rotate", name: "PDF Rotate", icon: "🔄", description: "Rotate PDF pages" },
-      { id: "pdf-unlock", name: "PDF Unlock", icon: "🔓", description: "Remove password protection" },
-      { id: "pdf-protect", name: "PDF Protect", icon: "🔒", description: "Add password protection" },
       { id: "pdf-ocr", name: "PDF OCR", icon: "👁️", description: "Extract text from PDF images" },
       { id: "pdf-to-word", name: "PDF to Word", icon: "📝", description: "Convert PDF to Word document" },
       { id: "word-to-pdf", name: "Word to PDF", icon: "📄", description: "Convert Word to PDF" }
