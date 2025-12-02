@@ -2147,26 +2147,37 @@ function initPDFRotate() {
   
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   async function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const f = e.dataTransfer.files && e.dataTransfer.files[0];
     if (f && f.type === 'application/pdf') {
       await loadFile(f);
+    } else {
+      toastr.error('Please select a PDF file');
     }
   }
   
   function handleFileChange() {
     if (fileInput.files && fileInput.files[0]) {
-      loadFile(fileInput.files[0]);
+      const f = fileInput.files[0];
+      if (f.type !== 'application/pdf') {
+        toastr.error('Please select a PDF file');
+        fileInput.value = '';
+        return;
+      }
+      loadFile(f);
     }
   }
   
@@ -2182,7 +2193,7 @@ function initPDFRotate() {
       currentPdf = await loadingTask.promise;
       numPages = currentPdf.numPages;
       
-      if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${file.name} (${numPages} pages)`;
+      if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${file.name} (${numPages} pages)`;
       if (status) status.textContent = `${numPages} pages detected`;
       
       if (pagesList) {
@@ -2190,26 +2201,31 @@ function initPDFRotate() {
         selectedPages.clear();
         for (let i = 1; i <= numPages; i++) {
           selectedPages.add(i); // Select all by default
+          const col = document.createElement('div');
+          col.className = 'col-auto';
+          
           const btn = document.createElement('button');
           btn.textContent = i;
-          btn.className = 'px-3 py-2 bg-blue-500 text-white rounded-lg text-sm transition-colors';
+          btn.className = 'btn btn-primary btn-sm';
+          btn.style.minWidth = '50px';
           btn.dataset.page = i;
           btn.addEventListener('click', () => {
             if (selectedPages.has(i)) {
               selectedPages.delete(i);
-              btn.classList.remove('bg-blue-500', 'text-white');
-              btn.classList.add('bg-slate-700');
+              btn.classList.remove('btn-primary');
+              btn.classList.add('btn-outline-secondary');
             } else {
               selectedPages.add(i);
-              btn.classList.add('bg-blue-500', 'text-white');
-              btn.classList.remove('bg-slate-700');
+              btn.classList.remove('btn-outline-secondary');
+              btn.classList.add('btn-primary');
             }
           });
-          pagesList.appendChild(btn);
+          col.appendChild(btn);
+          pagesList.appendChild(col);
         }
       }
       
-      if (pagesInfo) pagesInfo.classList.remove('hidden');
+      if (pagesInfo) pagesInfo.classList.remove('d-none');
     } catch (error) {
       toastr.error('Error loading PDF: ' + error.message);
     }
@@ -2231,9 +2247,18 @@ function initPDFRotate() {
       return;
     }
     
-    if (rotateBtn) rotateBtn.disabled = true;
-    if (log) log.textContent = 'Rotating PDF...';
-    if (progress) progress.style.width = '0%';
+    if (rotateBtn) {
+      rotateBtn.disabled = true;
+      rotateBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Rotating PDF...</span>';
+      log.style.color = '#60a5fa';
+    }
+    if (progress) {
+      progress.style.width = '0%';
+      progress.setAttribute('aria-valuenow', '0');
+    }
     
     try {
       const { jsPDF } = window.jspdf;
@@ -2281,8 +2306,15 @@ function initPDFRotate() {
           outputPdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
         }
         
-        if (progress) progress.style.width = `${(i / numPages) * 100}%`;
-        if (log) log.textContent = `Processing page ${i} of ${numPages}...`;
+        const percent = Math.round((i / numPages) * 100);
+        if (progress) {
+          progress.style.width = `${percent}%`;
+          progress.setAttribute('aria-valuenow', percent);
+        }
+        if (log) {
+          log.innerHTML = `<span class="inline-block animate-spin-slow">🔄</span> <span>Processing page <strong>${i}</strong> of <strong>${numPages}</strong>...</span>`;
+          log.style.color = '#60a5fa';
+        }
       }
       
       const pdfBlob = outputPdf.output('blob');
@@ -2294,19 +2326,64 @@ function initPDFRotate() {
       a.click();
       URL.revokeObjectURL(url);
       
-      if (progress) progress.style.width = '100%';
+      if (progress) {
+        progress.style.width = '100%';
+        progress.setAttribute('aria-valuenow', '100');
+      }
+      
+      // Show success toastr notification
+      toastr.success(`Successfully rotated PDF!`, 'Rotation Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
-        log.textContent = `✓ Success! PDF rotated and downloaded`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! PDF rotated and downloaded</span>`;
         log.style.color = '#34d399';
       }
+      if (status) {
+        status.textContent = `✓ Finished: PDF rotated successfully`;
+      }
+      
+      // Clear and reset after a short delay
+      setTimeout(() => {
+        currentPdf = null;
+        numPages = 0;
+        selectedPages.clear();
+        if (fileInput) fileInput.value = '';
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        if (dropLabel) dropLabel.textContent = 'Drag & drop your PDF here';
+        if (status) status.textContent = 'No file selected';
+        if (pagesInfo) pagesInfo.classList.add('d-none');
+        if (pagesList) pagesList.innerHTML = '';
+        if (progress) {
+          progress.style.width = '0%';
+          progress.setAttribute('aria-valuenow', '0');
+        }
+        if (log) {
+          log.innerHTML = '✨ Ready to rotate your PDF';
+          log.style.color = '';
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
       if (log) {
-        log.textContent = `❌ Error: ${error.message}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${error.message || error}</span>`;
         log.style.color = '#f87171';
       }
+      if (status) status.textContent = '✗ Rotation failed';
+      if (progress) {
+        progress.style.width = '0%';
+        progress.setAttribute('aria-valuenow', '0');
+      }
+      toastr.error(`Rotation failed: ${error.message || error}`);
     } finally {
-      if (rotateBtn) rotateBtn.disabled = false;
+      if (rotateBtn) {
+        rotateBtn.disabled = false;
+        rotateBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   

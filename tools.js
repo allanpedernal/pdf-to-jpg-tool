@@ -2021,6 +2021,310 @@ function getPDFRotateContent() {
           <p id="log-rotate" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to rotate your PDF</p>
         </div>
       </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PDF</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your PDF file or click to browse and select a PDF file from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Choose Pages</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Select which pages to rotate by clicking on page numbers. All pages are selected by default.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Set Rotation</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Choose rotation angle: 90° clockwise, 180°, or 90° counter-clockwise. Then click "Rotate PDF".</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your rotated PDF will be automatically downloaded with the selected pages rotated to your chosen angle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Rotate PDF Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Rotate PDF?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your PDF files never leave your computer. All rotation happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Rotate PDFs in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-arrow-clockwise text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Fix Orientation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Correct pages that were scanned or saved in the wrong orientation. Rotate individual pages or all pages.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-file-earmark-pdf text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Selective Rotation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Choose which pages to rotate. Rotate only the pages that need correction, leaving others unchanged.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Rotate unlimited PDFs completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-image text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Scanned Documents</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Fix pages that were scanned upside down or sideways. Correct orientation for better readability.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-pdf text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Landscape Pages</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Rotate landscape pages to portrait or vice versa for consistent document formatting.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-printer text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Print Preparation</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Rotate pages to the correct orientation before printing to avoid wasted paper.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-briefcase text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Business Documents</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Fix orientation issues in invoices, contracts, or forms for professional presentation.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-journal-text text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Academic Papers</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Correct page orientation in research papers, articles, or thesis documents.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-folder text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Archive Organization</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Standardize page orientation in archived documents for consistent viewing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionRotate">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate1" aria-expanded="false" aria-controls="faqRotate1" style="font-size: 1rem; padding: 1rem;">
+                  How do I rotate a PDF?
+                </button>
+              </h2>
+              <div id="faqRotate1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your PDF file into the upload area. Once loaded, select which pages to rotate (all pages are selected by default), choose your rotation angle (90° clockwise, 180°, or 90° counter-clockwise), then click "Rotate PDF". Your rotated PDF will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate2" aria-expanded="false" aria-controls="faqRotate2" style="font-size: 1rem; padding: 1rem;">
+                  Is my PDF file uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqRotate2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your PDF files never leave your computer. All rotation happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate3" aria-expanded="false" aria-controls="faqRotate3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I rotate only specific pages?
+                </button>
+              </h2>
+              <div id="faqRotate3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! Click on page numbers to select or deselect them. Selected pages will be highlighted. Only the selected pages will be rotated, while unselected pages remain in their original orientation.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate4" aria-expanded="false" aria-controls="faqRotate4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What rotation angles are available?
+                </button>
+              </h2>
+              <div id="faqRotate4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  You can rotate pages by 90° clockwise, 180° (upside down), or 90° counter-clockwise. These angles cover all common orientation corrections needed for PDF documents.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate5" aria-expanded="false" aria-controls="faqRotate5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will the page quality be preserved?
+                </button>
+              </h2>
+              <div id="faqRotate5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! The rotated PDF maintains the original quality of your pages. Text, images, and formatting are preserved exactly as they appear in the original document.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate6" aria-expanded="false" aria-controls="faqRotate6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqRotate6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can rotate. Rotate as many PDFs as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate7" aria-expanded="false" aria-controls="faqRotate7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqRotate7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our PDF rotator works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate8" aria-expanded="false" aria-controls="faqRotate8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I rotate password-protected PDFs?
+                </button>
+              </h2>
+              <div id="faqRotate8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Currently, password-protected PDFs cannot be rotated. You'll need to remove the password protection from your PDF file first before rotating it.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -2099,6 +2403,310 @@ function getPNGToJPGContent() {
             <div id="progress-png-jpg" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
           <p id="log-png-jpg" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to convert your images</p>
+        </div>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PNG Images</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your PNG images or click to browse and select multiple PNG files from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Adjust Settings</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Set JPEG quality (0.1-1.0) and background color for transparent PNGs. Higher quality produces larger files.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Convert</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Convert to JPG" and watch as your PNG images are converted to JPG format instantly in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">All JPG images will be automatically downloaded. Each PNG becomes a separate JPG file.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Convert PNG to JPG Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Convert PNG to JPG?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your images never leave your computer. All conversion happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PNG to JPG in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-file-earmark-arrow-down text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Smaller File Size</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">JPG files are typically smaller than PNG files, making them ideal for web use, email attachments, and storage.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Universal Format</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">JPG is the most widely supported image format. Convert PNG to JPG for better compatibility across platforms.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Convert unlimited PNGs to JPG completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-globe text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Web Optimization</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PNG to JPG for smaller file sizes and faster website loading times.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-envelope-check text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Email Attachments</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Reduce file sizes for easier email sharing. JPG files are smaller and faster to send.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-camera text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Photo Sharing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PNG screenshots or images to JPG for social media and photo sharing platforms.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-folder text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Storage Optimization</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Save storage space by converting PNG files to smaller JPG format while maintaining good quality.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-image text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Compatibility</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Ensure images work on all devices and platforms. JPG has universal support.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-printer text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Printing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PNG to JPG for better printer compatibility and faster print processing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionPNG">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG1" aria-expanded="false" aria-controls="faqPNG1" style="font-size: 1rem; padding: 1rem;">
+                  How do I convert PNG to JPG?
+                </button>
+              </h2>
+              <div id="faqPNG1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your PNG images into the upload area, adjust the JPEG quality and background color settings if needed, then click 'Convert to JPG'. The conversion happens instantly in your browser, and all JPG images will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG2" aria-expanded="false" aria-controls="faqPNG2" style="font-size: 1rem; padding: 1rem;">
+                  Are my images uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqPNG2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your images never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG3" aria-expanded="false" aria-controls="faqPNG3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What about transparent PNGs?
+                </button>
+              </h2>
+              <div id="faqPNG3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  JPG format doesn't support transparency. When converting transparent PNGs, you can choose a background color to fill the transparent areas. The default is white, but you can select any color using the color picker.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG4" aria-expanded="false" aria-controls="faqPNG4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What quality setting should I use?
+                </button>
+              </h2>
+              <div id="faqPNG4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Quality ranges from 0.1 (lowest, smallest file) to 1.0 (highest, largest file). For most purposes, 0.9 provides an excellent balance between quality and file size. Use 1.0 for maximum quality when file size isn't a concern, or lower values for smaller file sizes.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG5" aria-expanded="false" aria-controls="faqPNG5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I convert multiple PNGs at once?
+                </button>
+              </h2>
+              <div id="faqPNG5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! You can select multiple PNG files at once, and they will all be converted to JPG format. Each PNG becomes a separate JPG file, and all files will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG6" aria-expanded="false" aria-controls="faqPNG6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqPNG6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PNGs you can convert. Convert as many PNGs to JPG as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG7" aria-expanded="false" aria-controls="faqPNG7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqPNG7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our PNG to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG8" aria-expanded="false" aria-controls="faqPNG8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will image quality be preserved?
+                </button>
+              </h2>
+              <div id="faqPNG8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Image quality depends on the quality setting you choose. Higher quality settings (0.9-1.0) preserve more detail but create larger files. Lower quality settings (0.1-0.5) create smaller files but may reduce image quality. The default 0.9 provides excellent quality for most uses.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2185,6 +2793,310 @@ function getImageResizeContent() {
           <p id="log-resize" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to resize your images</p>
         </div>
       </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select Images</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your images or click to browse and select multiple image files from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Set Dimensions</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Enter desired width and height in pixels. Leave blank for auto-sizing. Enable aspect ratio to maintain proportions.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Resize</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Resize Images" and watch as your images are resized to your specified dimensions instantly in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">All resized images will be automatically downloaded. Each image is saved as a separate file.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Resize Images Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Resize Images?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your images never leave your computer. All resizing happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Resize images in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-file-earmark-arrow-down text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Reduce File Size</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Smaller dimensions mean smaller file sizes. Perfect for web use, email attachments, and storage optimization.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Web Optimization</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Resize images to optimal dimensions for websites, social media, or online platforms. Faster loading times.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Resize unlimited images completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-globe text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Website Images</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Resize images to fit your website layout and improve page loading speed.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-share text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Social Media</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Resize images to meet social media platform requirements (profile pictures, posts, covers).</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-envelope-check text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Email Attachments</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Reduce image size for easier email sharing and faster delivery.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-printer text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Print Preparation</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Resize images to specific print dimensions for professional printing.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-phone text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Mobile Optimization</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Resize images for mobile apps or responsive web design.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-folder text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Storage Management</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Reduce image file sizes to save storage space on your device or cloud.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionResize">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize1" aria-expanded="false" aria-controls="faqResize1" style="font-size: 1rem; padding: 1rem;">
+                  How do I resize images?
+                </button>
+              </h2>
+              <div id="faqResize1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your images into the upload area, enter your desired width and/or height in pixels, choose whether to maintain aspect ratio, then click "Resize Images". The resized images will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize2" aria-expanded="false" aria-controls="faqResize2" style="font-size: 1rem; padding: 1rem;">
+                  Are my images uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqResize2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your images never leave your computer. All resizing happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize3" aria-expanded="false" aria-controls="faqResize3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What does "Maintain Aspect Ratio" mean?
+                </button>
+              </h2>
+              <div id="faqResize3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  When enabled, the image proportions are maintained. If you set width to 800px, the height will automatically adjust to keep the original aspect ratio. This prevents images from appearing stretched or distorted.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize4" aria-expanded="false" aria-controls="faqResize4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I resize multiple images at once?
+                </button>
+              </h2>
+              <div id="faqResize4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! You can select multiple images at once, and they will all be resized to the same dimensions. Each resized image will be downloaded as a separate file.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize5" aria-expanded="false" aria-controls="faqResize5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will image quality be preserved?
+                </button>
+              </h2>
+              <div id="faqResize5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Resizing maintains good image quality. However, enlarging images beyond their original size may result in some quality loss. For best results, resize to smaller dimensions or maintain the original size.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize6" aria-expanded="false" aria-controls="faqResize6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqResize6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of images you can resize. Resize as many images as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize7" aria-expanded="false" aria-controls="faqResize7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What image formats are supported?
+                </button>
+              </h2>
+              <div id="faqResize7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our image resizer supports all common image formats including JPG, JPEG, PNG, GIF, BMP, and WebP. You can resize any image format supported by your browser.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize8" aria-expanded="false" aria-controls="faqResize8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqResize8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our image resizer works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -2260,6 +3172,310 @@ function getImageCompressContent() {
           <p id="log-compress-img" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to compress your images</p>
         </div>
       </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select Images</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your images or click to browse and select multiple image files from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Choose Quality</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Adjust the quality slider (0.1-1.0). Lower values create smaller files but may reduce quality. Higher values maintain better quality.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Compress</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Compress Images" and watch as your images are optimized to reduce file size while maintaining good quality.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">All compressed images will be automatically downloaded. Each image is saved as a separate file with reduced size.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Compress Images Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Compress Images?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your images never leave your computer. All compression happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compress images in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-file-earmark-arrow-down text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Reduce File Size</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Significantly reduce image file sizes while maintaining good visual quality. Perfect for web and email use.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Faster Loading</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compressed images load faster on websites, improving user experience and SEO rankings.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Compress unlimited images completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-globe text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Website Optimization</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compress images to improve website loading speed and reduce bandwidth usage.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-envelope-check text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Email Attachments</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Reduce image sizes to meet email attachment limits and ensure faster delivery.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-share text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Social Media</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compress images for social media posts to ensure faster uploads and better performance.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-cloud-upload text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Cloud Storage</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Save storage space in cloud services by compressing images before uploading.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-phone text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Mobile Sharing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Compress images for easier sharing via messaging apps and social media on mobile devices.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-folder text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Archive Storage</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Reduce file sizes for long-term archiving while maintaining acceptable image quality.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionCompressImg">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg1" aria-expanded="false" aria-controls="faqCompressImg1" style="font-size: 1rem; padding: 1rem;">
+                  How do I compress images?
+                </button>
+              </h2>
+              <div id="faqCompressImg1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your images into the upload area, adjust the quality slider to your preferred compression level, then click "Compress Images". The compressed images will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg2" aria-expanded="false" aria-controls="faqCompressImg2" style="font-size: 1rem; padding: 1rem;">
+                  Are my images uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqCompressImg2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your images never leave your computer. All compression happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg3" aria-expanded="false" aria-controls="faqCompressImg3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What quality setting should I use?
+                </button>
+              </h2>
+              <div id="faqCompressImg3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Quality ranges from 0.1 (maximum compression, smallest file) to 1.0 (minimum compression, largest file). For most purposes, 0.8 provides an excellent balance between file size and quality. Use higher values for better quality or lower values for smaller files.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg4" aria-expanded="false" aria-controls="faqCompressImg4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will compression affect image quality?
+                </button>
+              </h2>
+              <div id="faqCompressImg4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Compression reduces file size by optimizing image data. Higher compression (lower quality values) may result in slightly lower visual quality, but the difference is often minimal. Use quality 0.8 or higher for best results.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg5" aria-expanded="false" aria-controls="faqCompressImg5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I compress multiple images at once?
+                </button>
+              </h2>
+              <div id="faqCompressImg5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! You can select multiple images at once, and they will all be compressed using the same quality setting. Each compressed image will be downloaded as a separate file.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg6" aria-expanded="false" aria-controls="faqCompressImg6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqCompressImg6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of images you can compress. Compress as many images as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg7" aria-expanded="false" aria-controls="faqCompressImg7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What image formats are supported?
+                </button>
+              </h2>
+              <div id="faqCompressImg7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our image compressor supports all common image formats including JPG, JPEG, PNG, GIF, BMP, and WebP. You can compress any image format supported by your browser.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg8" aria-expanded="false" aria-controls="faqCompressImg8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqCompressImg8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our image compressor works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -2327,6 +3543,286 @@ function getPDFUnlockContent() {
             <div id="progress-unlock" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
           <p id="log-unlock" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to unlock your PDF</p>
+        </div>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PDF</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your password-protected PDF file or click to browse and select from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Enter Password</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Enter the password for your PDF file. We need the password to unlock it.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Unlock</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Unlock PDF" and the password protection will be removed from your PDF file.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your unlocked PDF will be automatically downloaded. The file is now free from password protection.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Unlock PDF Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Unlock PDF?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your PDF files never leave your computer. All unlocking happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Unlock PDFs in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-unlock text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Easy Editing</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Remove password protection to enable editing, copying, printing, and other operations on your PDF files.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-file-earmark-pdf text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Better Compatibility</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Unlocked PDFs work better with various PDF tools and software that may not support password-protected files.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Unlock unlimited PDFs completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-pencil text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Enable Editing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Remove password protection to edit text, add annotations, or modify PDF content.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-printer text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Enable Printing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Unlock PDFs that have printing restrictions to enable printing functionality.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-files text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Copy Text</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Remove copy restrictions to enable text selection and copying from PDF documents.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-tools text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">PDF Processing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Unlock PDFs for use with other PDF tools that require unprotected files.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-share text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Easy Sharing</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Share PDFs without requiring recipients to know the password.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-archive text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Archive Access</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Unlock archived PDFs for easier access and management in your document library.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionUnlock">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock1" aria-expanded="false" aria-controls="faqUnlock1" style="font-size: 1rem; padding: 1rem;">
+                  How do I unlock a PDF?
+                </button>
+              </h2>
+              <div id="faqUnlock1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your password-protected PDF file into the upload area, enter the password when prompted, then click "Unlock PDF". The unlocked PDF will be automatically downloaded.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock2" aria-expanded="false" aria-controls="faqUnlock2" style="font-size: 1rem; padding: 1rem;">
+                  Is my PDF file uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqUnlock2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your PDF files never leave your computer. All unlocking happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock3" aria-expanded="false" aria-controls="faqUnlock3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I unlock a PDF without the password?
+                </button>
+              </h2>
+              <div id="faqUnlock3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No. This tool requires the password to unlock the PDF. It removes password protection from PDFs you already have access to, enabling editing, printing, and copying.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock4" aria-expanded="false" aria-controls="faqUnlock4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will unlocking affect the PDF content?
+                </button>
+              </h2>
+              <div id="faqUnlock4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No. Unlocking only removes password protection and restrictions. All content, formatting, images, and text remain exactly the same. The PDF is identical except it's no longer password-protected.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock5" aria-expanded="false" aria-controls="faqUnlock5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqUnlock5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can unlock. Unlock as many PDFs as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock6" aria-expanded="false" aria-controls="faqUnlock6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqUnlock6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our PDF unlocker works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
