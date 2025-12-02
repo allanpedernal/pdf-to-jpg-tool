@@ -1,0 +1,252 @@
+<!-- Footer -->
+<footer class="mt-5 footer-theme" style="position: relative; overflow: hidden;">
+  <!-- Decorative gradient overlay -->
+  <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>
+  
+  <div class="container-fluid px-4 px-lg-5 py-5 position-relative">
+    <div class="row g-4 g-lg-5">
+      <!-- Brand Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="mb-4">
+          <h3 class="text-gradient fw-bold mb-3" style="font-size: 1.5rem; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            <i class="bi bi-file-earmark-pdf-fill me-2"></i>PDF Tools
+          </h3>
+          <p class="footer-text-light mb-3" style="line-height: 1.8; font-size: 0.95rem;">
+            Free online PDF and image conversion tools. All tools work entirely in your browser - no uploads required.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="#" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+              <i class="bi bi-github" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
+            </a>
+            <a href="#" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+              <i class="bi bi-twitter" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+          <i class="bi bi-tools text-primary me-2"></i>Tools
+        </h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3">
+            <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-to-jpg'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF to JPG</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('jpg-to-pdf'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>JPG to PDF</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-compress'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF Compressor</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-merge'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF Merger</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-split'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF Splitter</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+          <i class="bi bi-shield-check text-primary me-2"></i>Legal
+        </h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3">
+            <a href="/privacy-policy.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>Privacy Policy</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/terms-of-service.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>Terms of Service</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/about.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>About Us</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/contact.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Features Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+          <i class="bi bi-star-fill text-primary me-2"></i>Features
+        </h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-check-circle-fill text-success me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">100% Free</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-cloud-upload text-info me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">No Upload Required</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-shield-lock-fill text-warning me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">100% Secure</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-wifi-off text-danger me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">Works Offline</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="row mt-5 pt-4 footer-border-top">
+      <div class="col-12">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+          <p class="footer-text-light mb-0 small" style="font-size: 0.9rem;">
+            &copy; <span id="current-year-footer">2024</span> PDF Tools. All rights reserved.
+          </p>
+          <div class="d-flex gap-3 flex-wrap justify-content-center">
+            <a href="/privacy-policy.html" class="footer-bottom-link footer-text-secondary" style="text-decoration: none; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0.75rem; border-radius: 6px;">
+              Privacy Policy
+            </a>
+            <span class="footer-text-secondary" style="font-size: 0.9rem; opacity: 0.5;">•</span>
+            <a href="/terms-of-service.html" class="footer-bottom-link footer-text-secondary" style="text-decoration: none; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0.75rem; border-radius: 6px;">
+              Terms of Service
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Update copyright year dynamically
+    (function() {
+      const yearElement = document.getElementById('current-year-footer');
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+      
+      // Enhanced footer link interactions
+      document.querySelectorAll('.footer-link').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          this.style.color = 'var(--bs-primary)';
+          this.style.transform = 'translateX(5px)';
+          const icon = this.querySelector('.footer-link-icon');
+          if (icon) {
+            icon.style.opacity = '1';
+            icon.style.transform = 'translateX(0)';
+          }
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.color = '';
+          this.style.transform = 'translateX(0)';
+          const icon = this.querySelector('.footer-link-icon');
+          if (icon) {
+            icon.style.opacity = '0';
+            icon.style.transform = 'translateX(-5px)';
+          }
+        });
+      });
+      
+      // Enhanced footer icon link interactions
+      document.querySelectorAll('.footer-icon-link').forEach(iconLink => {
+        iconLink.addEventListener('mouseenter', function() {
+          this.style.background = 'rgba(59, 130, 246, 0.2)';
+          this.style.transform = 'translateY(-4px)';
+          this.style.boxShadow = '0 6px 20px rgba(59, 130, 246, 0.4)';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1.15) rotate(8deg)';
+          }
+        });
+        
+        iconLink.addEventListener('mouseleave', function() {
+          this.style.background = 'rgba(59, 130, 246, 0.1)';
+          this.style.transform = 'translateY(0)';
+          this.style.boxShadow = 'none';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1) rotate(0deg)';
+          }
+        });
+      });
+      
+      // Enhanced footer feature item interactions
+      document.querySelectorAll('.footer-feature-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateX(8px)';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1.2)';
+          }
+        });
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateX(0)';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1)';
+          }
+        });
+      });
+
+      // Footer bottom link interactions
+      document.querySelectorAll('.footer-bottom-link').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          this.style.color = 'var(--bs-primary)';
+          this.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+        });
+        link.addEventListener('mouseleave', function() {
+          this.style.color = '';
+          this.style.backgroundColor = 'transparent';
+        });
+      });
+    })();
+  </script>
+</footer>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<script>
+  // Show/hide scroll to top button
+  window.addEventListener('scroll', function() {
+    const scrollTop = document.querySelector('.scroll-top');
+    if (scrollTop) {
+      if (window.pageYOffset > 300) {
+        scrollTop.classList.add('visible');
+      } else {
+        scrollTop.classList.remove('visible');
+      }
+    }
+  });
+</script>
+
