@@ -57,6 +57,12 @@ function switchTool(toolId) {
   // Update content area with fade animation
   const contentArea = document.getElementById('tool-content');
   if (contentArea) {
+    // Hide default content if it exists
+    const defaultContent = document.getElementById('default-content');
+    if (defaultContent) {
+      defaultContent.style.display = 'none';
+    }
+    
     // Fade out
     contentArea.style.opacity = '0';
     contentArea.style.transform = 'translateY(10px)';
@@ -381,6 +387,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     const contentArea = document.getElementById('tool-content');
     if (contentArea) {
+      // Hide default content if it exists
+      const defaultContent = document.getElementById('default-content');
+      if (defaultContent) {
+        defaultContent.style.display = 'none';
+      }
       contentArea.innerHTML = getToolContent(currentTool);
       initializeTool(currentTool);
     }
