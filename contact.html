@@ -48,122 +48,264 @@
       <main id="main-content" class="col-12 col-lg-8 px-3 px-sm-4 px-lg-4 py-4 py-lg-5">
         <!-- Contact Content -->
         <div class="w-100 py-3" style="max-width: 1200px;">
-          <div class="card border-0 shadow-sm">
-            <div class="card-body p-4 p-lg-5">
-              <h1 class="text-gradient fw-bold mb-4" style="font-size: 3rem;">Contact Us</h1>
-              <p class="text-light mb-4" style="line-height: 1.8; font-size: 1.05rem;">
-                We'd love to hear from you! Whether you have questions, feedback, suggestions, or need support, please don't hesitate to reach out.
+          <!-- Header Section -->
+          <header class="privacy-header text-center mb-5">
+            <div class="container">
+              <div class="header-icon">
+                <i class="bi bi-envelope-heart-fill"></i>
+              </div>
+              <h1 class="mb-4" style="font-size: 3.5rem; font-weight: 800;">Contact Us</h1>
+              <p class="fs-4 mb-3" style="color: var(--text-primary); font-weight: 500; line-height: 1.6;">We'd love to hear from you!</p>
+              <p class="fs-6 mb-0" style="color: var(--text-secondary); font-weight: 400;">
+                <i class="bi bi-clock me-2"></i> Response Time: 24-48 hours
               </p>
-
-              <section class="mb-5">
-                <h2 class="text-light fw-bold mb-3" style="font-size: 1.5rem;">Get in Touch</h2>
-                <div class="mb-4">
-                  <h3 class="text-light fw-semibold mb-2" style="font-size: 1.2rem;">
-                    <i class="bi bi-envelope text-primary me-2"></i>Email
-                  </h3>
-                  <p class="text-light" style="line-height: 1.8; font-size: 1.05rem;">
-                    For general inquiries, please use the contact form below or send us an email. We typically respond within 24-48 hours.
-                  </p>
-                </div>
-
-                <div class="mb-4">
-                  <h3 class="text-light fw-semibold mb-2" style="font-size: 1.2rem;">
-                    <i class="bi bi-chat-dots text-primary me-2"></i>Feedback & Suggestions
-                  </h3>
-                  <p class="text-light" style="line-height: 1.8; font-size: 1.05rem;">
-                    We're constantly working to improve our tools. If you have suggestions for new features or improvements, we'd love to hear them!
-                  </p>
-                </div>
-
-                <div class="mb-4">
-                  <h3 class="text-light fw-semibold mb-2" style="font-size: 1.2rem;">
-                    <i class="bi bi-bug text-primary me-2"></i>Report Issues
-                  </h3>
-                  <p class="text-light" style="line-height: 1.8; font-size: 1.05rem;">
-                    Found a bug or experiencing issues with our tools? Please let us know so we can fix it as soon as possible.
-                  </p>
-                </div>
-              </section>
-
-              <section class="mb-5">
-                <h2 class="text-light fw-bold mb-3" style="font-size: 1.5rem;">Contact Form</h2>
-                <form id="contact-form">
-                  <div class="mb-3">
-                    <label for="name" class="form-label text-light">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="email" class="form-label text-light">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="subject" class="form-label text-light">Subject</label>
-                    <select class="form-select" id="subject" name="subject" required>
-                      <option value="">Select a subject</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="feedback">Feedback</option>
-                      <option value="bug">Report a Bug</option>
-                      <option value="feature">Feature Request</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="message" class="form-label text-light">Message</label>
-                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-                <div id="form-message" class="mt-3"></div>
-              </section>
-
-              <section class="mb-5">
-                <h2 class="text-light fw-bold mb-3" style="font-size: 1.5rem;">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
-                  <div class="accordion-item border-secondary mb-3 rounded">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                        How do I use the tools?
-                      </button>
-                    </h2>
-                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                      <div class="accordion-body text-light">
-                        Simply select a tool from the navigation menu, drag and drop your files, adjust settings if needed, and click the conversion button. Your processed files will be downloaded automatically.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item border-secondary mb-3 rounded">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                        Are my files safe?
-                      </button>
-                    </h2>
-                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                      <div class="accordion-body text-light">
-                        Yes! All processing happens entirely in your browser. Your files never leave your device, ensuring complete privacy and security.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item border-secondary mb-3 rounded">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                        Is there a file size limit?
-                      </button>
-                    </h2>
-                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                      <div class="accordion-body text-light">
-                        No, there are no file size limits. However, very large files may take longer to process depending on your device's capabilities.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
             </div>
-          </div>
+          </header>
           
-          <div class="text-center mt-4 mb-5">
-            <a href="/" class="back-btn">
-              <i class="bi bi-arrow-left"></i> Back to Home
-            </a>
+          <!-- Contact Content -->
+          <div class="container my-5">
+            <div class="row">
+              <!-- Table of Contents -->
+              <div class="col-lg-3 d-none d-lg-block">
+                <div class="toc-card">
+                  <h5 class="fw-bold mb-3" style="color: var(--text-primary);">Table of Contents</h5>
+                  <nav>
+                    <a href="#get-in-touch" class="toc-link" data-section="get-in-touch">
+                      <i class="bi bi-circle-fill"></i> Get in Touch
+                    </a>
+                    <a href="#contact-form" class="toc-link" data-section="contact-form">
+                      <i class="bi bi-circle-fill"></i> Contact Form
+                    </a>
+                    <a href="#faq" class="toc-link" data-section="faq">
+                      <i class="bi bi-circle-fill"></i> FAQ
+                    </a>
+                    <a href="#response-time" class="toc-link" data-section="response-time">
+                      <i class="bi bi-circle-fill"></i> Response Time
+                    </a>
+                  </nav>
+                </div>
+              </div>
+              
+              <!-- Contact Content -->
+              <div class="col-lg-9">
+                <div class="privacy-card">
+                  <!-- Get in Touch -->
+                  <div class="section-header active" onclick="toggleSection(this)" data-section="get-in-touch" id="get-in-touch">
+                    <div class="d-flex align-items-center">
+                      <div class="section-icon">
+                        <i class="bi bi-telephone-fill"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h2 class="mb-1">Get in Touch</h2>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Ways to reach us</p>
+                      </div>
+                      <i class="bi bi-chevron-down section-toggle"></i>
+                    </div>
+                  </div>
+                  <div class="section-content expanded">
+                    <p>Whether you have questions, feedback, suggestions, or need support, we're here to help. Choose the best way to reach us:</p>
+                    
+                    <div class="row g-4 mt-3">
+                      <div class="col-md-6">
+                        <div class="info-box">
+                          <h4 class="fw-bold mb-2">
+                            <i class="bi bi-envelope text-primary me-2"></i>Email
+                          </h4>
+                          <p class="mb-0">For general inquiries, please use the contact form below or send us an email. We typically respond within 24-48 hours during business days.</p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="info-box">
+                          <h4 class="fw-bold mb-2">
+                            <i class="bi bi-chat-dots text-primary me-2"></i>Feedback & Suggestions
+                          </h4>
+                          <p class="mb-0">We're constantly working to improve our tools. If you have suggestions for new features or improvements, we'd love to hear them!</p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="info-box">
+                          <h4 class="fw-bold mb-2">
+                            <i class="bi bi-bug text-primary me-2"></i>Report Issues
+                          </h4>
+                          <p class="mb-0">Found a bug or experiencing issues with our tools? Please let us know so we can fix it as soon as possible. Include as much detail as possible.</p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="info-box">
+                          <h4 class="fw-bold mb-2">
+                            <i class="bi bi-lightbulb text-primary me-2"></i>Feature Requests
+                          </h4>
+                          <p class="mb-0">Have an idea for a new tool or feature? Share it with us! We're always looking for ways to expand our service offerings.</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="highlight-box mt-4">
+                      <p class="mb-0"><strong>Note:</strong> Due to the client-side nature of our service, we recommend using the contact form below for the best experience. All inquiries are reviewed and responded to personally.</p>
+                    </div>
+                  </div>
+                  
+                  <!-- Contact Form -->
+                  <div class="section-header" onclick="toggleSection(this)" data-section="contact-form" id="contact-form">
+                    <div class="d-flex align-items-center">
+                      <div class="section-icon">
+                        <i class="bi bi-card-text"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h2 class="mb-1">Contact Form</h2>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Send us a message</p>
+                      </div>
+                      <i class="bi bi-chevron-down section-toggle"></i>
+                    </div>
+                  </div>
+                  <div class="section-content">
+                    <p>Fill out the form below and we'll get back to you as soon as possible:</p>
+                    <form id="contact-form-element" class="mt-4">
+                      <div class="mb-3">
+                        <label for="name" class="form-label" style="color: var(--text-primary); font-weight: 500;">Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Your full name">
+                      </div>
+                      <div class="mb-3">
+                        <label for="email" class="form-label" style="color: var(--text-primary); font-weight: 500;">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="your.email@example.com">
+                      </div>
+                      <div class="mb-3">
+                        <label for="subject" class="form-label" style="color: var(--text-primary); font-weight: 500;">Subject <span class="text-danger">*</span></label>
+                        <select class="form-select" id="subject" name="subject" required>
+                          <option value="">Select a subject</option>
+                          <option value="general">General Inquiry</option>
+                          <option value="feedback">Feedback</option>
+                          <option value="bug">Report a Bug</option>
+                          <option value="feature">Feature Request</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="message" class="form-label" style="color: var(--text-primary); font-weight: 500;">Message <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="message" name="message" rows="6" required placeholder="Please provide as much detail as possible..."></textarea>
+                        <small class="form-text" style="color: var(--text-secondary);">Minimum 10 characters required</small>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send me-2"></i> Send Message
+                      </button>
+                    </form>
+                    <div id="form-message" class="mt-3"></div>
+                  </div>
+                  
+                  <!-- FAQ -->
+                  <div class="section-header" onclick="toggleSection(this)" data-section="faq" id="faq">
+                    <div class="d-flex align-items-center">
+                      <div class="section-icon">
+                        <i class="bi bi-question-circle-fill"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h2 class="mb-1">Frequently Asked Questions</h2>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Common questions answered</p>
+                      </div>
+                      <i class="bi bi-chevron-down section-toggle"></i>
+                    </div>
+                  </div>
+                  <div class="section-content">
+                    <p>Find answers to commonly asked questions about our service:</p>
+                    <div class="accordion accordion-flush mt-3" id="faqAccordion">
+                      <div class="accordion-item border-secondary mb-3 rounded">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            <i class="bi bi-question-circle me-2"></i> How do I use the tools?
+                          </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                          <div class="accordion-body" style="color: var(--text-primary);">
+                            Simply select a tool from the navigation menu, drag and drop your files (or click to browse), adjust settings if needed, and click the conversion button. Your processed files will be downloaded automatically. All processing happens in your browser - no uploads required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item border-secondary mb-3 rounded">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            <i class="bi bi-shield-check me-2"></i> Are my files safe?
+                          </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                          <div class="accordion-body" style="color: var(--text-primary);">
+                            Yes! All processing happens entirely in your browser. Your files never leave your device, ensuring complete privacy and security. We don't have servers that receive or store your files, eliminating any risk of data breaches.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item border-secondary mb-3 rounded">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            <i class="bi bi-file-earmark me-2"></i> Is there a file size limit?
+                          </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                          <div class="accordion-body" style="color: var(--text-primary);">
+                            No, there are no file size limits. However, very large files may take longer to process depending on your device's capabilities. We recommend processing files up to 100MB for optimal performance.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item border-secondary mb-3 rounded">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            <i class="bi bi-wifi-off me-2"></i> Do I need an internet connection?
+                          </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                          <div class="accordion-body" style="color: var(--text-primary);">
+                            You need an internet connection to load our website initially. However, once loaded, our tools work offline! All processing happens locally in your browser, so you can use them without an active internet connection.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item border-secondary mb-3 rounded">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            <i class="bi bi-credit-card me-2"></i> Is it really free?
+                          </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                          <div class="accordion-body" style="color: var(--text-primary);">
+                            Yes, absolutely free! All our tools are free to use with no hidden costs, no watermarks, no file size limits, and no registration required. We're committed to keeping our service free forever.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Response Time -->
+                  <div class="section-header" onclick="toggleSection(this)" data-section="response-time" id="response-time">
+                    <div class="d-flex align-items-center">
+                      <div class="section-icon">
+                        <i class="bi bi-clock-history"></i>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h2 class="mb-1">Response Time</h2>
+                        <p class="small mb-0" style="color: var(--text-secondary);">When to expect a reply</p>
+                      </div>
+                      <i class="bi bi-chevron-down section-toggle"></i>
+                    </div>
+                  </div>
+                  <div class="section-content">
+                    <p>We aim to respond to all inquiries as quickly as possible:</p>
+                    <ul class="list-unstyled">
+                      <li class="privacy-list-item"><strong>General Inquiries:</strong> Within 24-48 hours</li>
+                      <li class="privacy-list-item"><strong>Bug Reports:</strong> Within 12-24 hours (urgent issues)</li>
+                      <li class="privacy-list-item"><strong>Feature Requests:</strong> Within 48-72 hours</li>
+                      <li class="privacy-list-item"><strong>Feedback:</strong> Within 24-48 hours</li>
+                    </ul>
+                    <div class="info-box mt-3">
+                      <p class="mb-0"><strong>Note:</strong> Response times may vary during weekends and holidays. For urgent issues, please include "URGENT" in your subject line.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Back to Home Button -->
+                <div class="text-center mt-4 mb-5">
+                  <a href="/" class="back-btn">
+                    <i class="bi bi-arrow-left"></i> Back to Home
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -294,11 +436,85 @@
   
   <!-- Contact Form Handler -->
   <script>
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+    document.getElementById('contact-form-element').addEventListener('submit', function(e) {
       e.preventDefault();
       const messageDiv = document.getElementById('form-message');
-      messageDiv.innerHTML = '<div class="alert alert-info">Thank you for your message! Due to the nature of our service, we recommend contacting us through your preferred email client. Please include your name, email, and message.</div>';
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      
+      if (message.length < 10) {
+        messageDiv.innerHTML = '<div class="alert alert-warning">Please provide a message with at least 10 characters.</div>';
+        return;
+      }
+      
+      messageDiv.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>Thank you for your message, ' + name + '! We\'ll get back to you at ' + email + ' within 24-48 hours. Due to the client-side nature of our service, we recommend also contacting us through your preferred email client if urgent.</div>';
       this.reset();
+    });
+  </script>
+  
+  <!-- Contact Page Scripts -->
+  <script>
+    function toggleSection(header) {
+      const content = header.nextElementSibling;
+      const isExpanded = content.classList.contains('expanded');
+      
+      // Close all sections
+      document.querySelectorAll('.section-content').forEach(section => {
+        section.classList.remove('expanded');
+      });
+      document.querySelectorAll('.section-header').forEach(h => {
+        h.classList.remove('active');
+      });
+      
+      // Toggle clicked section
+      if (!isExpanded) {
+        content.classList.add('expanded');
+        header.classList.add('active');
+      }
+    }
+    
+    // Update active TOC link on scroll
+    function updateTOCActive() {
+      const sections = document.querySelectorAll('.section-header');
+      const tocLinks = document.querySelectorAll('.toc-link');
+      
+      sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          if (tocLinks[index]) {
+            tocLinks[index].classList.add('active');
+          }
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', updateTOCActive);
+    
+    // TOC link clicks
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Expand the section
+            toggleSection(target);
+          }
+        }
+      });
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const firstSection = document.querySelector('.privacy-card .section-header.active');
+      if (firstSection) {
+        toggleSection(firstSection);
+      }
+      updateTOCActive();
     });
   </script>
 
