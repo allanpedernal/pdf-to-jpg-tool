@@ -1640,6 +1640,310 @@ function getPDFMergeContent() {
           <p id="log-merge" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to merge your PDFs</p>
         </div>
       </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PDFs</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop multiple PDF files or click to browse and select multiple PDF files from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Review Files</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Review the list of selected PDFs. You can remove files if needed. Files will be merged in the order shown.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Merge</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Merge PDFs" and watch as all PDFs are combined into a single document, page by page.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your merged PDF will be automatically downloaded, containing all pages from all selected PDFs in order.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Merge PDF Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Merge PDF?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your PDF files never leave your computer. All merging happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Merge PDFs in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-file-earmark-plus text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Combine Documents</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Combine multiple PDF files into one unified document. Perfect for reports, presentations, or document organization.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-files text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Organize Files</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Merge scattered PDF documents into organized, single-file documents. Keep related documents together.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Merge unlimited PDFs completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-plus text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Combine Reports</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Merge multiple monthly or quarterly reports into a single comprehensive document.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-pdf text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Create Presentations</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Combine multiple PDF slides or documents into one presentation file.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-briefcase text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Business Documents</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Merge invoices, contracts, or proposals into organized single documents.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-folder text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Archive Organization</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Combine related archived documents into single files for easier management.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-envelope-check text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Email Attachments</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Merge multiple PDFs into one file for easier email sharing and distribution.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-journal-text text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Academic Papers</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Combine research papers, articles, or chapters into comprehensive documents.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionMerge">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge1" aria-expanded="false" aria-controls="faqMerge1" style="font-size: 1rem; padding: 1rem;">
+                  How do I merge PDFs?
+                </button>
+              </h2>
+              <div id="faqMerge1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop multiple PDF files into the upload area, or click to browse and select multiple PDF files. Review the list of files, then click "Merge PDFs". All PDFs will be combined into a single document in the order they appear in the list.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge2" aria-expanded="false" aria-controls="faqMerge2" style="font-size: 1rem; padding: 1rem;">
+                  Are my PDF files uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqMerge2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your PDF files never leave your computer. All merging happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge3" aria-expanded="false" aria-controls="faqMerge3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  How many PDFs can I merge at once?
+                </button>
+              </h2>
+              <div id="faqMerge3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  You can merge as many PDF files as you need. There's no limit on the number of files or pages. However, very large merges may take longer to process depending on your device's performance.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge4" aria-expanded="false" aria-controls="faqMerge4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I change the order of PDFs before merging?
+                </button>
+              </h2>
+              <div id="faqMerge4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! You can remove PDFs from the list and re-add them in your desired order. The PDFs will be merged in the order they appear in the list from top to bottom.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge5" aria-expanded="false" aria-controls="faqMerge5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Will the quality be preserved?
+                </button>
+              </h2>
+              <div id="faqMerge5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! The merged PDF maintains the original quality of all pages. Text, images, and formatting are preserved exactly as they appear in the original documents.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge6" aria-expanded="false" aria-controls="faqMerge6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqMerge6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can merge. Merge as many PDFs as you need, whenever you need.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge7" aria-expanded="false" aria-controls="faqMerge7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqMerge7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our PDF merger works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge8" aria-expanded="false" aria-controls="faqMerge8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I merge password-protected PDFs?
+                </button>
+              </h2>
+              <div id="faqMerge8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Currently, password-protected PDFs cannot be merged. You'll need to remove the password protection from your PDF files first before merging them.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }

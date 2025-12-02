@@ -1860,63 +1860,109 @@ function initPDFMerge() {
   
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf');
     if (files.length > 0) {
       selectedFiles = [...selectedFiles, ...files];
       updatePreview();
+    } else {
+      toastr.error('Please select PDF files');
     }
   }
   
   function handleFileChange() {
-    selectedFiles = Array.from(fileInput.files);
-    updatePreview();
+    const files = Array.from(fileInput.files).filter(f => f.type === 'application/pdf');
+    if (files.length > 0) {
+      selectedFiles = [...selectedFiles, ...files];
+      updatePreview();
+    } else if (fileInput.files.length > 0) {
+      toastr.error('Please select PDF files');
+      fileInput.value = '';
+    }
   }
   
   function updatePreview() {
     if (selectedFiles.length === 0) {
-      if (pdfList) pdfList.classList.add('hidden');
+      if (pdfList) pdfList.classList.add('d-none');
       if (status) status.textContent = 'No files selected';
       return;
     }
     
     if (pdfList) {
-      pdfList.classList.remove('hidden');
-      pdfList.innerHTML = '';
-      selectedFiles.forEach((file, index) => {
-        const div = document.createElement('div');
-        div.className = 'flex items-center justify-between p-3 bg-slate-700/50 rounded-lg';
-        div.innerHTML = `
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">📄</span>
-            <div>
-              <div class="text-sm font-medium text-slate-200">${file.name}</div>
-              <div class="text-xs text-slate-400">${(file.size / 1024 / 1024).toFixed(2)} MB</div>
-            </div>
-          </div>
-          <button class="text-red-400 hover:text-red-300 p-1" onclick="removeFile(${index})">×</button>
-        `;
-        pdfList.appendChild(div);
-      });
-      
-      window.removeFile = (index) => {
-        selectedFiles.splice(index, 1);
-        updatePreview();
-      };
+      pdfList.classList.remove('d-none');
+      const pdfListContent = document.getElementById('pdf-list-content-merge');
+      if (pdfListContent) {
+        pdfListContent.innerHTML = '';
+        selectedFiles.forEach((file, index) => {
+          const row = document.createElement('div');
+          row.className = 'd-flex align-items-center justify-content-between p-3 mb-2 rounded';
+          row.style.backgroundColor = 'rgba(30, 41, 59, 0.6)';
+          
+          const leftDiv = document.createElement('div');
+          leftDiv.className = 'd-flex align-items-center gap-3';
+          
+          const icon = document.createElement('span');
+          icon.style.fontSize = '1.5rem';
+          icon.textContent = '📄';
+          
+          const fileInfo = document.createElement('div');
+          const fileName = document.createElement('div');
+          fileName.className = 'text-light small fw-medium';
+          fileName.textContent = file.name;
+          const fileSize = document.createElement('div');
+          fileSize.className = 'text-secondary';
+          fileSize.style.fontSize = '0.75rem';
+          fileSize.textContent = `${(file.size / 1024 / 1024).toFixed(2)} MB`;
+          
+          fileInfo.appendChild(fileName);
+          fileInfo.appendChild(fileSize);
+          leftDiv.appendChild(icon);
+          leftDiv.appendChild(fileInfo);
+          
+          const removeBtn = document.createElement('button');
+          removeBtn.className = 'btn btn-sm btn-danger rounded-circle';
+          removeBtn.style.width = '30px';
+          removeBtn.style.height = '30px';
+          removeBtn.style.padding = '0';
+          removeBtn.style.fontSize = '1.2rem';
+          removeBtn.style.lineHeight = '1';
+          removeBtn.innerHTML = '×';
+          removeBtn.onclick = () => {
+            selectedFiles.splice(index, 1);
+            updatePreview();
+            // Update file input
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            fileInput.files = dt.files;
+          };
+          
+          row.appendChild(leftDiv);
+          row.appendChild(removeBtn);
+          pdfListContent.appendChild(row);
+        });
+      }
     }
     
-    if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${selectedFiles.length} PDF(s) selected`;
-    if (status) status.textContent = `${selectedFiles.length} PDF(s) ready to merge`;
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${selectedFiles.length} PDF(s) selected - Will be merged into 1 PDF`;
+    if (status) {
+      const statusText = selectedFiles.length === 1
+        ? '1 PDF selected (need at least 2 to merge)'
+        : `${selectedFiles.length} PDF(s) ready to merge`;
+      status.textContent = statusText;
+    }
   }
   
   async function handleMerge() {
@@ -1930,9 +1976,18 @@ function initPDFMerge() {
       return;
     }
     
-    if (mergeBtn) mergeBtn.disabled = true;
-    if (log) log.textContent = 'Merging PDFs...';
-    if (progress) progress.style.width = '0%';
+    if (mergeBtn) {
+      mergeBtn.disabled = true;
+      mergeBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Merging PDFs...</span>';
+      log.style.color = '#60a5fa';
+    }
+    if (progress) {
+      progress.style.width = '0%';
+      progress.setAttribute('aria-valuenow', '0');
+    }
     
     try {
       const { jsPDF } = window.jspdf;
@@ -1973,8 +2028,15 @@ function initPDFMerge() {
           }
           
           const currentPage = (fileIdx * numPages) + i;
-          if (progress) progress.style.width = `${(currentPage / totalPages) * 100}%`;
-          if (log) log.textContent = `Processing page ${currentPage} of ${totalPages}...`;
+          const percent = Math.round((currentPage / totalPages) * 100);
+          if (progress) {
+            progress.style.width = `${percent}%`;
+            progress.setAttribute('aria-valuenow', percent);
+          }
+          if (log) {
+            log.innerHTML = `<span class="inline-block animate-spin-slow">🔄</span> <span>Processing page <strong>${currentPage}</strong> of <strong>${totalPages}</strong>...</span>`;
+            log.style.color = '#60a5fa';
+          }
         }
       }
       
@@ -1987,19 +2049,63 @@ function initPDFMerge() {
       a.click();
       URL.revokeObjectURL(url);
       
-      if (progress) progress.style.width = '100%';
+      if (progress) {
+        progress.style.width = '100%';
+        progress.setAttribute('aria-valuenow', '100');
+      }
+      
+      // Show success toastr notification
+      toastr.success(`Successfully merged ${selectedFiles.length} PDF(s) into 1 file with ${totalPages} page(s)!`, 'Merge Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
-        log.textContent = `✓ Success! ${totalPages} pages merged into one PDF`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ${totalPages} pages merged into one PDF</span>`;
         log.style.color = '#34d399';
       }
+      if (status) {
+        status.textContent = `✓ Finished: ${selectedFiles.length} PDF(s) merged successfully`;
+      }
+      
+      // Clear and reset after a short delay
+      setTimeout(() => {
+        selectedFiles = [];
+        if (fileInput) fileInput.value = '';
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        if (dropLabel) dropLabel.textContent = 'Drag & drop your PDFs here';
+        if (status) status.textContent = 'No files selected';
+        if (pdfList) pdfList.classList.add('d-none');
+        const pdfListContent = document.getElementById('pdf-list-content-merge');
+        if (pdfListContent) pdfListContent.innerHTML = '';
+        if (progress) {
+          progress.style.width = '0%';
+          progress.setAttribute('aria-valuenow', '0');
+        }
+        if (log) {
+          log.innerHTML = '✨ Ready to merge your PDFs';
+          log.style.color = '';
+        }
+      }, 3000);
     } catch (error) {
       console.error(error);
       if (log) {
-        log.textContent = `❌ Error: ${error.message}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${error.message || error}</span>`;
         log.style.color = '#f87171';
       }
+      if (status) status.textContent = '✗ Merge failed';
+      if (progress) {
+        progress.style.width = '0%';
+        progress.setAttribute('aria-valuenow', '0');
+      }
+      toastr.error(`Merge failed: ${error.message || error}`);
     } finally {
-      if (mergeBtn) mergeBtn.disabled = false;
+      if (mergeBtn) {
+        mergeBtn.disabled = false;
+        mergeBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   
