@@ -4217,81 +4217,403 @@ function getPDFProtectContent() {
 function getPDFOCRContent() {
   return `
     <div class="w-100">
-      <!-- Header Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body text-center py-5">
-          <div class="mb-3">
-            <span style="font-size: 4rem;">👁️</span>
-          </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
-            PDF OCR
-          </h1>
-          <p class="text-light fs-5 mb-2 fw-medium">Extract text from PDF images using OCR</p>
-          <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
+      <!-- Header Section -->
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <span style="font-size: 5rem;">👁️</span>
         </div>
+        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+          PDF OCR
+        </h1>
+        <p class="text-light fs-5 mb-2 fw-medium">Extract text from PDF images using OCR</p>
+        <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
       
-      <!-- Dropzone Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body p-0">
-          <label class="dropzone w-100 border border-2 border-dashed rounded px-3 px-md-5 py-5 d-flex flex-column align-items-center justify-content-center mb-0" 
-                 id="dropzone-ocr" 
-                 style="min-height: 200px;">
-            <div class="mb-3">
-              <i class="bi bi-cloud-upload text-primary" style="font-size: 3.5rem;"></i>
-            </div>
-            <span id="dropLabel-ocr" class="text-light fw-semibold fs-5 mb-2">Drag & drop your PDF here</span>
-            <span class="text-secondary small">or click to browse files</span>
-            <input type="file" id="file-ocr" class="d-none" accept="application/pdf" />
+      <!-- Dropzone Section -->
+      <label class="dropzone w-100 border border-2 border-dashed border-secondary rounded-3 p-5 d-flex flex-column align-items-center justify-content-center cursor-pointer mb-5 bg-dark-subtle shadow-lg" 
+             id="dropzone-ocr" 
+             style="min-height: 220px;">
+        <div class="mb-4 position-relative">
+          <i class="bi bi-cloud-arrow-up-fill text-primary" style="font-size: 4rem;"></i>
+        </div>
+        <span id="dropLabel-ocr" class="text-light fw-semibold fs-5 mb-2">Drag & drop your PDF here</span>
+        <span class="text-secondary small">or click to browse files</span>
+        <input type="file" id="file-ocr" class="d-none" accept="application/pdf" />
+      </label>
+
+      <!-- Controls Section -->
+      <div class="d-flex flex-wrap gap-3 w-100 mb-5 justify-content-center align-items-end">
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-translate"></i> Language
           </label>
+          <select id="language-ocr" class="form-select bg-dark text-light border-secondary">
+            <option value="eng">English</option>
+            <option value="spa">Spanish</option>
+            <option value="fra">French</option>
+            <option value="deu">German</option>
+            <option value="chi_sim">Chinese (Simplified)</option>
+            <option value="jpn">Japanese</option>
+            <option value="kor">Korean</option>
+            <option value="ara">Arabic</option>
+            <option value="rus">Russian</option>
+          </select>
+          <span class="form-text text-secondary mt-1 d-block" style="font-size: 0.75rem;">Select the language of text in your PDF</span>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <button id="ocr-btn" class="btn btn-primary btn-lg fw-bold rounded-3 shadow-lg bg-gradient-primary d-flex align-items-center gap-2">
+            <i class="bi bi-lightning-fill"></i> Extract Text
+          </button>
         </div>
       </div>
 
-      <!-- Controls Card -->
-      <div class="card border-0 shadow-sm mb-4">
+      <!-- Progress Section -->
+      <div class="card bg-dark-subtle border-0 shadow-sm p-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-light fw-medium d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart"></i> Progress
+          </span>
+          <span id="stats-ocr" class="small text-secondary">No file selected</span>
+        </div>
+        <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
+          <div id="bar-ocr" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p id="log-ocr" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to extract text from your PDF files</p>
+      </div>
+
+      <!-- Text Result Section -->
+      <div id="text-result-ocr" class="card border-0 shadow-sm mb-5 d-none">
         <div class="card-body">
-          <div class="d-flex flex-wrap gap-3 justify-content-center align-items-end">
-            <div class="card bg-dark-subtle border-0 shadow-sm p-3">
-              <label class="form-label text-light small fw-medium mb-2">Language</label>
-              <select id="language-ocr" class="form-select form-select-sm bg-dark text-light border-secondary">
-                <option value="eng">English</option>
-                <option value="spa">Spanish</option>
-                <option value="fra">French</option>
-                <option value="deu">German</option>
-                <option value="chi_sim">Chinese (Simplified)</option>
-              </select>
-            </div>
-            <div class="d-flex flex-column gap-2">
-              <button id="ocr-btn" class="btn btn-primary fw-bold px-4 py-2">
-                Extract Text
+          <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+            <h3 class="fs-5 fw-semibold text-light mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-file-text"></i> Extracted Text
+            </h3>
+            <div class="d-flex gap-2">
+              <button id="copy-text-ocr" class="btn btn-primary btn-sm d-flex align-items-center gap-2">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+              <button id="download-text-ocr" class="btn btn-success btn-sm d-flex align-items-center gap-2">
+                <i class="bi bi-download"></i> Download
               </button>
             </div>
           </div>
+          <textarea id="extracted-text-ocr" class="form-control bg-dark text-light border-secondary" rows="16" readonly style="font-family: monospace; font-size: 0.9rem;"></textarea>
         </div>
       </div>
 
-      <!-- Progress Card -->
-      <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <span class="text-light fw-medium">Status</span>
-            <span id="status-ocr" class="small text-secondary">No file selected</span>
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PDF</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your PDF file or click to browse and select from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Choose Language</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Select the language of the text in your PDF for better OCR accuracy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Extract Text</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Extract Text" and watch as OCR processes each page to extract text from images.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Copy Text</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">View the extracted text and copy it to use in any application or document.</p>
+              </div>
+            </div>
           </div>
-          <div class="progress" style="height: 0.5rem;">
-            <div id="progress-ocr" class="progress-bar" role="progressbar" style="width: 0%;"></div>
-          </div>
-          <p id="log-ocr" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to extract text from your PDF</p>
         </div>
       </div>
 
-      <!-- Text Result Card -->
-      <div id="text-result-ocr" class="card border-0 shadow-sm mb-4 d-none">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <h3 class="fs-5 fw-semibold text-light mb-0">Extracted Text</h3>
-            <button id="copy-text-ocr" class="btn btn-primary btn-sm">Copy</button>
+      <!-- Why Use PDF OCR Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Use PDF OCR?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your PDF files never leave your computer. All OCR processing happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Extract text from PDFs in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-file-earmark-text text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Make PDFs Searchable</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert scanned PDFs and image-based PDFs into searchable, editable text that you can copy and use.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #3b82f6;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Multi-Language Support</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Supports multiple languages including English, Spanish, French, German, Chinese, Japanese, and more.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #ef4444; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Extract text from unlimited PDFs completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
           </div>
-          <textarea id="extracted-text-ocr" class="form-control bg-dark text-light border-secondary" rows="16" readonly></textarea>
+        </div>
+      </div>
+
+      <!-- Common Use Cases Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-list-ul me-2"></i>Common Use Cases
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-file-earmark-text text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Scanned Documents</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Extract text from scanned PDFs, receipts, invoices, and other image-based documents.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-search text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Make PDFs Searchable</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert image-based PDFs into searchable documents that you can search through.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-pencil text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Edit Scanned Text</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Extract text from scanned documents to edit, modify, or reuse in other applications.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-files text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Copy Text</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Copy text from PDF images that don't have selectable text layers.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-archive text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Document Digitization</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Digitize old documents, books, or printed materials by extracting their text content.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi bi-translate text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">Translation Preparation</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">Extract text from PDFs in one language to prepare for translation to another language.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
+          </h2>
+          <div class="accordion accordion-flush" id="faqAccordionOCR">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR1" aria-expanded="false" aria-controls="faqOCR1" style="font-size: 1rem; padding: 1rem;">
+                  How do I extract text from a PDF?
+                </button>
+              </h2>
+              <div id="faqOCR1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Simply drag and drop your PDF file into the upload area, select the language of the text, then click "Extract Text". The OCR engine will process each page and extract all text, which will be displayed in the text area below.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR2" aria-expanded="false" aria-controls="faqOCR2" style="font-size: 1rem; padding: 1rem;">
+                  Is my PDF file uploaded to a server?
+                </button>
+              </h2>
+              <div id="faqOCR2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  No! Your PDF files never leave your computer. All OCR processing happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR3" aria-expanded="false" aria-controls="faqOCR3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What types of PDFs can OCR extract text from?
+                </button>
+              </h2>
+              <div id="faqOCR3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  OCR works best with scanned PDFs and image-based PDFs. PDFs that already have selectable text layers may not need OCR, but you can still use this tool to extract all text in one place. The accuracy depends on image quality and text clarity.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR4" aria-expanded="false" aria-controls="faqOCR4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  How accurate is the OCR?
+                </button>
+              </h2>
+              <div id="faqOCR4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  OCR accuracy depends on several factors: image quality, text clarity, font size, and language. High-quality scans with clear, printed text typically achieve 95%+ accuracy. Handwritten text or low-quality images may have lower accuracy. Selecting the correct language improves results.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR5" aria-expanded="false" aria-controls="faqOCR5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I extract text from multi-page PDFs?
+                </button>
+              </h2>
+              <div id="faqOCR5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes! Our PDF OCR tool supports PDFs with any number of pages. Each page is processed sequentially, and all extracted text is combined and displayed in the text area, with page separators to help you identify which text came from which page.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR6" aria-expanded="false" aria-controls="faqOCR6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Is this service free?
+                </button>
+              </h2>
+              <div id="faqOCR6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can process. Extract text from unlimited PDFs completely free.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR7" aria-expanded="false" aria-controls="faqOCR7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  What browsers are supported?
+                </button>
+              </h2>
+              <div id="faqOCR7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Our PDF OCR tool works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR8" aria-expanded="false" aria-controls="faqOCR8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  How long does OCR processing take?
+                </button>
+              </h2>
+              <div id="faqOCR8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Processing time depends on the number of pages and your device's performance. Most single-page PDFs process in a few seconds. Multi-page PDFs may take longer, but you'll see progress updates as each page is processed. Since everything happens in your browser, there's no upload delay.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR9" aria-expanded="false" aria-controls="faqOCR9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
+                  Can I extract text from password-protected PDFs?
+                </button>
+              </h2>
+              <div id="faqOCR9" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
+                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
+                  Currently, password-protected PDFs cannot be processed. You'll need to remove the password protection from your PDF file first before using OCR to extract text.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

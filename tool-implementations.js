@@ -2401,16 +2401,18 @@ function initPDFOCR() {
   const dropLabel = document.getElementById('dropLabel-ocr');
   const ocrBtn = document.getElementById('ocr-btn');
   const language = document.getElementById('language-ocr');
-  const status = document.getElementById('status-ocr');
+  const stats = document.getElementById('stats-ocr');
+  const bar = document.getElementById('bar-ocr');
   const log = document.getElementById('log-ocr');
-  const progress = document.getElementById('progress-ocr');
   const textResult = document.getElementById('text-result-ocr');
   const extractedText = document.getElementById('extracted-text-ocr');
   const copyBtn = document.getElementById('copy-text-ocr');
+  const downloadBtn = document.getElementById('download-text-ocr');
   
   if (!fileInput || !dropzone) return;
   
   let currentFile = null;
+  let extractedTextValue = '';
   
   const handlers = [
     () => dropzone.removeEventListener('dragover', handleDragOver),
@@ -2418,57 +2420,123 @@ function initPDFOCR() {
     () => dropzone.removeEventListener('drop', handleDrop),
     () => fileInput.removeEventListener('change', handleFileChange),
     () => ocrBtn?.removeEventListener('click', handleOCR),
-    () => copyBtn?.removeEventListener('click', handleCopy)
+    () => copyBtn?.removeEventListener('click', handleCopy),
+    () => downloadBtn?.removeEventListener('click', handleDownload)
   ];
   
   window.currentToolHandlers = handlers;
   
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const f = e.dataTransfer.files && e.dataTransfer.files[0];
     if (f && f.type === 'application/pdf') {
-      currentFile = f;
       loadFile(f);
+    } else {
+      toastr.error('Please select a PDF file');
     }
   }
   
   function handleFileChange() {
     if (fileInput.files && fileInput.files[0]) {
-      currentFile = fileInput.files[0];
-      loadFile(currentFile);
+      const f = fileInput.files[0];
+      if (f.type !== 'application/pdf') {
+        toastr.error('Please select a PDF file');
+        fileInput.value = '';
+        return;
+      }
+      loadFile(f);
     }
   }
   
   function handleCopy() {
-    if (extractedText) {
+    if (extractedText && extractedTextValue) {
       extractedText.select();
       document.execCommand('copy');
       if (copyBtn) {
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = 'Copied!';
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
         setTimeout(() => {
-          copyBtn.textContent = originalText;
+          copyBtn.innerHTML = originalHTML;
         }, 2000);
       }
+      toastr.success('Text copied to clipboard!');
+    } else {
+      toastr.warning('No text to copy. Please extract text first.');
     }
   }
   
-  function loadFile(file) {
-    if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${file.name}`;
-    if (status) status.textContent = 'PDF file selected';
-    if (textResult) textResult.classList.add('hidden');
-    if (log) log.textContent = '✨ Ready to extract text';
+  function handleDownload() {
+    if (!extractedTextValue || extractedTextValue.length === 0) {
+      toastr.warning('No text to download. Please extract text first.');
+      return;
+    }
+    
+    const fileName = currentFile ? currentFile.name.replace(/\.pdf$/i, '_extracted_text.txt') : 'extracted_text.txt';
+    const blob = new Blob([extractedTextValue], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    toastr.success('Text file downloaded successfully!');
+  }
+  
+  function loadFile(f) {
+    if (f.type !== 'application/pdf') {
+      toastr.error('Please select a PDF file');
+      return;
+    }
+    currentFile = f;
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${f.name}`;
+    if (stats) stats.textContent = `${(f.size/1024/1024).toFixed(2)} MB selected`;
+    
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (isMobile && !pdfjsReady && typeof loadPDFJS === 'function' && !window.pdfjsLoading) {
+      loadPDFJS();
+    }
+    
+    // Hide text result when loading a new file (user wants to extract from new file)
+    if (textResult) textResult.classList.add('d-none');
+    if (extractedText) {
+      extractedText.value = '';
+    }
+    extractedTextValue = '';
+    
+    // Disable download button when no text is available
+    if (downloadBtn) {
+      downloadBtn.disabled = true;
+      downloadBtn.classList.add('disabled');
+    }
+    
+    if (log) {
+      if (pdfjsReady) {
+        log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to extract text! Click the button below.</span>';
+        log.style.color = '#60a5fa';
+        if (ocrBtn) ocrBtn.classList.add('animate-pulse-glow');
+      } else {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">⏳</span> <span>Loading PDF.js library...</span>';
+        log.style.color = '#94a3b8';
+      }
+    }
+    updateProgress(0);
   }
   
   async function loadTesseract() {
@@ -2477,7 +2545,9 @@ function initPDFOCR() {
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js';
-      script.onload = () => resolve(true);
+      script.onload = () => {
+        setTimeout(() => resolve(true), 500); // Give it time to initialize
+      };
       script.onerror = () => reject(new Error('Failed to load Tesseract.js'));
       document.head.appendChild(script);
     });
@@ -2489,15 +2559,34 @@ function initPDFOCR() {
       return;
     }
     
-    if (ocrBtn) ocrBtn.disabled = true;
-    if (log) log.textContent = 'Loading OCR engine...';
-    if (progress) progress.style.width = '10%';
+    if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
+      toastr.info('PDF.js library is still loading. Please wait a moment and try again.');
+      return;
+    }
+    
+    if (ocrBtn) {
+      ocrBtn.disabled = true;
+      ocrBtn.classList.remove('animate-pulse-glow');
+      ocrBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Starting OCR extraction...</span>';
+      log.style.color = '#60a5fa';
+    }
+    updateProgress(5);
     
     try {
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">🔄</span> <span>Loading OCR engine...</span>';
+        log.style.color = '#60a5fa';
+      }
+      updateProgress(10);
+      
       await loadTesseract();
       
-      if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
-        throw new Error('PDF library not loaded');
+      if (!window.Tesseract) {
+        throw new Error('OCR engine failed to load');
       }
       
       const arr = await currentFile.arrayBuffer();
@@ -2505,13 +2594,22 @@ function initPDFOCR() {
       const pdf = await loadingTask.promise;
       const numPages = pdf.numPages;
       
-      if (log) log.textContent = 'Extracting text from PDF pages...';
-      if (progress) progress.style.width = '20%';
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📄</span> <span>Extracting text from PDF pages...</span>';
+        log.style.color = '#60a5fa';
+      }
+      if (stats) stats.textContent = `Pages: ${numPages} — processing...`;
+      updateProgress(15);
       
       let allText = '';
       const lang = language?.value || 'eng';
       
       for (let i = 1; i <= numPages; i++) {
+        if (log) {
+          log.innerHTML = `<span class="inline-block animate-spin-slow">🔄</span> <span>Processing page <strong>${i}</strong> of <strong>${numPages}</strong>...</span>`;
+          log.style.color = '#60a5fa';
+        }
+        
         const page = await pdf.getPage(i);
         const viewport = page.getViewport({ scale: 2.0 });
         const canvas = document.createElement('canvas');
@@ -2523,13 +2621,25 @@ function initPDFOCR() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         await page.render({ canvasContext: ctx, viewport }).promise;
         
-        if (log) log.textContent = `Processing page ${i} of ${numPages} with OCR...`;
-        if (progress) progress.style.width = `${20 + (i / numPages) * 70}%`;
+        const baseProgress = 15;
+        const pageProgress = (i / numPages) * 75;
+        updateProgress(Math.round(baseProgress + pageProgress));
+        
+        if (log) {
+          log.innerHTML = `<span class="inline-block animate-spin-slow">👁️</span> <span>Running OCR on page <strong>${i}</strong> of <strong>${numPages}</strong>...</span>`;
+          log.style.color = '#60a5fa';
+        }
         
         const { data: { text } } = await Tesseract.recognize(canvas, lang, {
           logger: m => {
             if (m.status === 'recognizing text') {
-              if (log) log.textContent = `Page ${i}: ${Math.round(m.progress * 100)}%`;
+              const pageBaseProgress = 15 + ((i - 1) / numPages) * 75;
+              const ocrProgress = (m.progress / numPages) * 75;
+              updateProgress(Math.round(pageBaseProgress + ocrProgress));
+              if (log) {
+                log.innerHTML = `<span class="inline-block animate-spin-slow">👁️</span> <span>Page <strong>${i}</strong>: ${Math.round(m.progress * 100)}% recognized...</span>`;
+                log.style.color = '#60a5fa';
+              }
             }
           }
         });
@@ -2537,25 +2647,134 @@ function initPDFOCR() {
         allText += `\n\n--- Page ${i} ---\n\n${text}`;
       }
       
-      if (extractedText) {
-        extractedText.value = allText.trim();
-      }
-      if (textResult) textResult.classList.remove('hidden');
+      extractedTextValue = allText.trim();
       
-      if (progress) progress.style.width = '100%';
-      if (log) {
-        log.textContent = `✓ Success! Text extracted from ${numPages} page(s)`;
-        log.style.color = '#34d399';
+      // Log extracted text length for debugging
+      console.log('Extracted text length:', extractedTextValue.length);
+      console.log('First 200 chars:', extractedTextValue.substring(0, 200));
+      
+      if (extractedText) {
+        extractedText.value = extractedTextValue;
+        // Force textarea to be visible
+        extractedText.style.display = 'block';
+        extractedText.style.visibility = 'visible';
       }
+      
+      // Show text result section
+      if (textResult) {
+        textResult.classList.remove('d-none');
+        textResult.style.display = 'block';
+        textResult.style.visibility = 'visible';
+        // Scroll to text result section smoothly
+        setTimeout(() => {
+          textResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+      }
+      
+      // Enable download button if text was extracted
+      if (downloadBtn && extractedTextValue.length > 0) {
+        downloadBtn.disabled = false;
+        downloadBtn.classList.remove('disabled');
+      }
+      
+      updateProgress(100);
+      
+      // Show success toastr notification
+      toastr.success(`Successfully extracted text from ${numPages} page(s)!`, 'OCR Complete', {
+        timeOut: 5000
+      });
+      
+      if (log) {
+        if (extractedTextValue.length > 0) {
+          log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! Text extracted from <strong>${numPages}</strong> page(s). Scroll down to view extracted text.</span>`;
+        } else {
+          log.innerHTML = `<span class="inline-block">⚠️</span> <span>Processing complete, but no text was extracted. The PDF might contain only images or unreadable content.</span>`;
+          log.style.color = '#fb923c';
+        }
+        log.style.color = extractedTextValue.length > 0 ? '#34d399' : '#fb923c';
+      }
+      if (stats) stats.textContent = `✓ Finished: ${numPages} page(s) processed successfully`;
+      
+      // Log extracted text length for debugging
+      console.log('Extracted text length:', extractedTextValue.length);
+      if (extractedTextValue.length === 0) {
+        console.warn('No text was extracted. The PDF might not contain readable text or OCR failed.');
+        toastr.warning('No text was extracted. The PDF might be empty or contain only images without readable text.', 'No Text Found', {
+          timeOut: 8000
+        });
+      } else {
+        console.log('Text preview (first 500 chars):', extractedTextValue.substring(0, 500));
+      }
+      
+      if (typeof trackConversion === 'function') {
+        trackConversion(numPages);
+      }
+      
+      // Clear and reset the form after a longer delay (10 seconds instead of 3)
+      setTimeout(() => {
+        // Clear file input
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Reset dropzone
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        
+        // Reset dropzone label
+        if (dropLabel) {
+          dropLabel.innerHTML = 'Drag & drop your PDF here';
+        }
+        
+        // Reset stats
+        if (stats) {
+          stats.textContent = 'No file selected';
+        }
+        
+        // Reset progress bar
+        updateProgress(0);
+        
+        // Reset log message
+        if (log) {
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to extract text from your PDF files';
+          log.style.color = '';
+        }
+        
+        // DO NOT hide text result or clear extracted text - keep it visible for user
+        // User can manually clear by selecting a new file
+        
+        // Clear current file reference (but keep extracted text visible)
+        currentFile = null;
+      }, 10000); // Delay before resetting form, but keep extracted text visible
     } catch (error) {
       console.error(error);
       if (log) {
-        log.textContent = `❌ Error: ${error.message || error}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${error.message || error}</span>`;
         log.style.color = '#f87171';
       }
-      if (progress) progress.style.width = '0%';
+      if (stats) stats.textContent = '✗ Extraction failed';
+      updateProgress(0);
+      toastr.error(`OCR extraction failed: ${error.message || error}`);
     } finally {
-      if (ocrBtn) ocrBtn.disabled = false;
+      if (ocrBtn) {
+        ocrBtn.disabled = false;
+        ocrBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
+    }
+  }
+  
+  function updateProgress(pct) {
+    if (bar) {
+      const percent = Math.min(100, Math.max(0, pct));
+      bar.style.width = percent + '%';
+      bar.setAttribute('aria-valuenow', percent);
+      if (!bar.classList.contains('bg-gradient-primary') && !bar.classList.contains('bg-primary')) {
+        bar.classList.add('bg-gradient-primary');
+      }
+      bar.style.display = 'block';
+      bar.style.opacity = '1';
     }
   }
   
@@ -2565,6 +2784,11 @@ function initPDFOCR() {
   fileInput.addEventListener('change', handleFileChange);
   if (ocrBtn) ocrBtn.addEventListener('click', handleOCR);
   if (copyBtn) copyBtn.addEventListener('click', handleCopy);
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', handleDownload);
+    downloadBtn.disabled = true; // Initially disabled until text is extracted
+    downloadBtn.classList.add('disabled');
+  }
 }
 
 // PDF to Word Implementation
@@ -3032,4 +3256,5 @@ function initHEICToJPG() {
   fileInput.addEventListener('change', handleFileChange);
   if (convertBtn) convertBtn.addEventListener('click', handleConvert);
 }
+
 
