@@ -425,7 +425,7 @@ function getJPGToPDFContent() {
               <i class="bi bi-cloud-upload text-primary" style="font-size: 3.5rem;"></i>
             </div>
             <span id="dropLabel-jpg-pdf" class="text-light fw-semibold fs-5 mb-2">Drag & drop your images here</span>
-            <span class="text-secondary small">or click to browse files (JPG, JPEG, PNG)</span>
+            <span class="text-secondary small">or click to browse files (JPG, JPEG, PNG) - Select multiple files to combine into one PDF</span>
             <input type="file" id="file-jpg-pdf" class="d-none" accept="image/jpeg,image/jpg,image/png" multiple />
           </label>
         </div>

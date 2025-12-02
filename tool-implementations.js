@@ -443,8 +443,8 @@ function initJPGToPDF() {
     if (imagePreview) {
       imagePreview.classList.remove('d-none');
       imagePreview.innerHTML = '';
-      if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${selectedFiles.length} image(s) selected`;
-      if (status) status.textContent = `${selectedFiles.length} image(s) ready`;
+      if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${selectedFiles.length} image(s) selected - Will be combined into 1 PDF`;
+      if (status) status.textContent = `${selectedFiles.length} image(s) ready - Will create 1 PDF with ${selectedFiles.length} page(s)`;
       
       selectedFiles.forEach((file, index) => {
         const reader = new FileReader();
@@ -658,15 +658,26 @@ function initJPGToPDF() {
       pdf.save(fileName);
       
       // Show success toastr notification
-      toastr.success(`Successfully converted ${selectedFiles.length} image(s) to PDF!`, 'Conversion Complete', {
+      const fileCountText = selectedFiles.length === 1 
+        ? '1 image converted to PDF' 
+        : `${selectedFiles.length} images combined into 1 PDF`;
+      toastr.success(`Successfully ${fileCountText}!`, 'Conversion Complete', {
         timeOut: 5000
       });
       
       if (log) {
-        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! PDF downloaded with <strong>${selectedFiles.length}</strong> page(s).</span>`;
+        const logText = selectedFiles.length === 1
+          ? `Success! PDF downloaded with 1 page.`
+          : `Success! ${selectedFiles.length} images combined into 1 PDF with ${selectedFiles.length} page(s).`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>${logText}</span>`;
         log.style.color = '#34d399';
       }
-      if (status) status.textContent = `✓ Finished: ${selectedFiles.length} image(s) processed successfully`;
+      if (status) {
+        const statusText = selectedFiles.length === 1
+          ? `✓ Finished: 1 image converted successfully`
+          : `✓ Finished: ${selectedFiles.length} images combined into 1 PDF`;
+        status.textContent = statusText;
+      }
       if (progress) {
         progress.style.width = '100%';
         progress.setAttribute('aria-valuenow', '100');
