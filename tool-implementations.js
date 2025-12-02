@@ -406,17 +406,20 @@ function initJPGToPDF() {
   
   function handleDragOver(e) {
     e.preventDefault();
-    dropzone.classList.add('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
   }
   
   function handleDragLeave(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
   }
   
   function handleDrop(e) {
     e.preventDefault();
-    dropzone.classList.remove('border-blue-400', 'bg-blue-500/20');
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
     const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
     if (files.length > 0) {
       selectedFiles = files;
@@ -425,42 +428,72 @@ function initJPGToPDF() {
   }
   
   function handleFileChange() {
-    selectedFiles = Array.from(fileInput.files);
+    selectedFiles = Array.from(fileInput.files).filter(f => f.type.startsWith('image/'));
     updatePreview();
   }
   
   function updatePreview() {
     if (selectedFiles.length === 0) {
-      if (imagePreview) imagePreview.classList.add('hidden');
+      if (imagePreview) imagePreview.classList.add('d-none');
+      if (dropLabel) dropLabel.textContent = 'Drag & drop your images here';
       if (status) status.textContent = 'No images selected';
       return;
     }
     
     if (imagePreview) {
-      imagePreview.classList.remove('hidden');
+      imagePreview.classList.remove('d-none');
       imagePreview.innerHTML = '';
-      if (dropLabel) dropLabel.innerHTML = `<span class="text-blue-400 font-bold">✓</span> ${selectedFiles.length} image(s) selected`;
+      if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${selectedFiles.length} image(s) selected`;
       if (status) status.textContent = `${selectedFiles.length} image(s) ready`;
       
       selectedFiles.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = (e) => {
+          const col = document.createElement('div');
+          col.className = 'col-6 col-md-4 col-lg-3';
+          
+          const card = document.createElement('div');
+          card.className = 'card border-0 shadow-sm position-relative';
+          card.style.backgroundColor = 'rgba(30, 41, 59, 0.6)';
+          
           const img = document.createElement('img');
           img.src = e.target.result;
-          img.className = 'w-full h-32 object-cover rounded-lg';
+          img.className = 'card-img-top';
+          img.style.height = '150px';
+          img.style.objectFit = 'cover';
           img.title = file.name;
-          const div = document.createElement('div');
-          div.className = 'relative';
-          div.appendChild(img);
+          
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body p-2';
+          
+          const fileName = document.createElement('small');
+          fileName.className = 'text-secondary text-truncate d-block';
+          fileName.textContent = file.name;
+          fileName.style.fontSize = '0.75rem';
+          
           const removeBtn = document.createElement('button');
-          removeBtn.textContent = '×';
-          removeBtn.className = 'absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600';
+          removeBtn.innerHTML = '×';
+          removeBtn.className = 'btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle';
+          removeBtn.style.width = '30px';
+          removeBtn.style.height = '30px';
+          removeBtn.style.padding = '0';
+          removeBtn.style.fontSize = '1.2rem';
+          removeBtn.style.lineHeight = '1';
           removeBtn.onclick = () => {
             selectedFiles.splice(index, 1);
             updatePreview();
+            // Update file input
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            fileInput.files = dt.files;
           };
-          div.appendChild(removeBtn);
-          imagePreview.appendChild(div);
+          
+          cardBody.appendChild(fileName);
+          card.appendChild(img);
+          card.appendChild(cardBody);
+          card.appendChild(removeBtn);
+          col.appendChild(card);
+          imagePreview.appendChild(col);
         };
         reader.readAsDataURL(file);
       });
@@ -473,28 +506,96 @@ function initJPGToPDF() {
       return;
     }
     
+    // Check for jsPDF library - it's loaded as jspdf.umd.min.js which exposes window.jspdf
     if (typeof window.jspdf === 'undefined') {
       toastr.info('PDF library is loading. Please wait a moment and try again.');
       return;
     }
     
-    if (convertBtn) convertBtn.disabled = true;
-    if (log) log.textContent = 'Converting images to PDF...';
-    if (progress) progress.style.width = '0%';
+    if (convertBtn) {
+      convertBtn.disabled = true;
+      convertBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Converting images to PDF...</span>';
+      log.style.color = '#60a5fa';
+    }
+    if (progress) {
+      progress.style.width = '0%';
+      progress.setAttribute('aria-valuenow', '0');
+    }
     
     try {
       const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF();
       
       const sizeMap = {
-        'a4': { width: 210, height: 297 },
-        'letter': { width: 216, height: 279 },
-        'legal': { width: 216, height: 356 },
+        'a4': { width: 210, height: 297, format: 'a4' },
+        'letter': { width: 216, height: 279, format: 'letter' },
+        'legal': { width: 216, height: 356, format: 'legal' },
         'fit': null
       };
       
       const isLandscape = orientation?.value === 'landscape';
       const pageConfig = sizeMap[pageSize?.value || 'a4'];
+      
+      // Determine page size and create PDF
+      let pdf;
+      let pageWidth, pageHeight;
+      
+      if (pageConfig === null) {
+        // Fit to image - need to load first image to determine size
+        const firstFile = selectedFiles[0];
+        const firstImgData = await fileToDataURL(firstFile);
+        const firstImg = new Image();
+        await new Promise((resolve, reject) => {
+          firstImg.onload = resolve;
+          firstImg.onerror = () => reject(new Error(`Failed to load image: ${firstFile.name}`));
+          firstImg.src = firstImgData;
+        });
+        
+        // Convert pixels to mm (assuming 96 DPI: 1 pixel ≈ 0.2646 mm)
+        // Or use 300 DPI for print quality: 1 pixel ≈ 0.0847 mm
+        // We'll use 96 DPI for screen/standard use
+        const pixelsToMm = 25.4 / 96; // 25.4 mm per inch / 96 pixels per inch
+        
+        // Calculate page size in mm based on image dimensions
+        let imgWidthMm = firstImg.width * pixelsToMm;
+        let imgHeightMm = firstImg.height * pixelsToMm;
+        
+        // Limit to reasonable PDF page sizes (max A4 landscape: 297x210mm)
+        const maxWidth = 297;
+        const maxHeight = 297;
+        if (imgWidthMm > maxWidth || imgHeightMm > maxHeight) {
+          const scale = Math.min(maxWidth / imgWidthMm, maxHeight / imgHeightMm);
+          imgWidthMm *= scale;
+          imgHeightMm *= scale;
+        }
+        
+        pageWidth = isLandscape ? Math.max(imgWidthMm, imgHeightMm) : imgWidthMm;
+        pageHeight = isLandscape ? Math.min(imgWidthMm, imgHeightMm) : imgHeightMm;
+        
+        // Ensure minimum size
+        pageWidth = Math.max(pageWidth, 50);
+        pageHeight = Math.max(pageHeight, 50);
+        
+        // Create PDF with custom size
+        pdf = new jsPDF({
+          unit: 'mm',
+          format: [pageWidth, pageHeight],
+          orientation: isLandscape ? 'landscape' : 'portrait'
+        });
+      } else {
+        // Use specified page size
+        pageWidth = isLandscape ? pageConfig.height : pageConfig.width;
+        pageHeight = isLandscape ? pageConfig.width : pageConfig.height;
+        
+        // Create PDF with specified format
+        pdf = new jsPDF({
+          unit: 'mm',
+          format: pageConfig.format,
+          orientation: isLandscape ? 'landscape' : 'portrait'
+        });
+      }
       
       for (let i = 0; i < selectedFiles.length; i++) {
         const file = selectedFiles[i];
@@ -502,37 +603,51 @@ function initJPGToPDF() {
         const img = new Image();
         img.src = imgData;
         
-        await new Promise((resolve) => {
+        await new Promise((resolve, reject) => {
           img.onload = () => {
-            if (i > 0) pdf.addPage();
-            
-            let imgWidth, imgHeight, x, y;
-            
-            if (pageConfig === null) {
-              const maxWidth = isLandscape ? 297 : 210;
-              const maxHeight = isLandscape ? 210 : 297;
-              const ratio = Math.min(maxWidth / img.width, maxHeight / img.height);
-              imgWidth = img.width * ratio;
-              imgHeight = img.height * ratio;
-              x = (maxWidth - imgWidth) / 2;
-              y = (maxHeight - imgHeight) / 2;
-              pdf.setPageSize([maxWidth, maxHeight]);
-            } else {
-              const pageWidth = isLandscape ? pageConfig.height : pageConfig.width;
-              const pageHeight = isLandscape ? pageConfig.width : pageConfig.height;
-              const ratio = Math.min(pageWidth / img.width, pageHeight / img.height);
-              imgWidth = img.width * ratio;
-              imgHeight = img.height * ratio;
-              x = (pageWidth - imgWidth) / 2;
-              y = (pageHeight - imgHeight) / 2;
-              pdf.setPageSize([pageWidth, pageHeight]);
+            try {
+              if (i > 0) {
+                pdf.addPage();
+              }
+              
+              // Convert image pixels to mm for consistent units
+              // Using 96 DPI conversion: 1 pixel ≈ 0.2646 mm
+              const pixelsToMm = 25.4 / 96;
+              const imgWidthMm = img.width * pixelsToMm;
+              const imgHeightMm = img.height * pixelsToMm;
+              
+              // Calculate scaling ratio to fit image on page while maintaining aspect ratio
+              const ratio = Math.min(pageWidth / imgWidthMm, pageHeight / imgHeightMm);
+              const imgWidth = imgWidthMm * ratio;
+              const imgHeight = imgHeightMm * ratio;
+              const x = (pageWidth - imgWidth) / 2;
+              const y = (pageHeight - imgHeight) / 2;
+              
+              // Determine image format
+              let imgFormat = 'JPEG';
+              if (file.type === 'image/png') {
+                imgFormat = 'PNG';
+              } else if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+                imgFormat = 'JPEG';
+              }
+              
+              pdf.addImage(imgData, imgFormat, x, y, imgWidth, imgHeight);
+              
+              const percent = Math.round(((i + 1) / selectedFiles.length) * 100);
+              if (progress) {
+                progress.style.width = `${percent}%`;
+                progress.setAttribute('aria-valuenow', percent);
+              }
+              if (log) {
+                log.innerHTML = `<span class="inline-block animate-spin-slow">🔄</span> <span>Processing image <strong>${i + 1}</strong> of <strong>${selectedFiles.length}</strong>...</span>`;
+                log.style.color = '#60a5fa';
+              }
+              resolve();
+            } catch (err) {
+              reject(err);
             }
-            
-            pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
-            if (progress) progress.style.width = `${((i + 1) / selectedFiles.length) * 100}%`;
-            if (log) log.textContent = `Processing image ${i + 1} of ${selectedFiles.length}...`;
-            resolve();
           };
+          img.onerror = () => reject(new Error(`Failed to load image: ${file.name}`));
         });
       }
       
@@ -541,19 +656,58 @@ function initJPGToPDF() {
         : 'images.pdf';
       
       pdf.save(fileName);
+      
+      // Show success toastr notification
+      toastr.success(`Successfully converted ${selectedFiles.length} image(s) to PDF!`, 'Conversion Complete', {
+        timeOut: 5000
+      });
+      
       if (log) {
-        log.textContent = `✓ Success! PDF downloaded with ${selectedFiles.length} page(s)`;
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! PDF downloaded with <strong>${selectedFiles.length}</strong> page(s).</span>`;
         log.style.color = '#34d399';
       }
-      if (progress) progress.style.width = '100%';
+      if (status) status.textContent = `✓ Finished: ${selectedFiles.length} image(s) processed successfully`;
+      if (progress) {
+        progress.style.width = '100%';
+        progress.setAttribute('aria-valuenow', '100');
+      }
+      
+      // Clear and reset after a short delay
+      setTimeout(() => {
+        selectedFiles = [];
+        if (fileInput) fileInput.value = '';
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        if (dropLabel) dropLabel.textContent = 'Drag & drop your images here';
+        if (status) status.textContent = 'No images selected';
+        if (imagePreview) {
+          imagePreview.classList.add('d-none');
+          imagePreview.innerHTML = '';
+        }
+        if (progress) {
+          progress.style.width = '0%';
+          progress.setAttribute('aria-valuenow', '0');
+        }
+        if (log) {
+          log.innerHTML = '✨ Ready to convert your images';
+          log.style.color = '';
+        }
+      }, 2000);
     } catch (error) {
       console.error(error);
       if (log) {
-        log.textContent = `❌ Error: ${error.message}`;
+        log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${error.message || error}</span>`;
         log.style.color = '#f87171';
       }
+      if (status) status.textContent = '✗ Conversion failed';
+      toastr.error(`Conversion failed: ${error.message || error}`);
     } finally {
-      if (convertBtn) convertBtn.disabled = false;
+      if (convertBtn) {
+        convertBtn.disabled = false;
+        convertBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
   }
   
