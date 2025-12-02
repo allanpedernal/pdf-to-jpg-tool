@@ -112,7 +112,43 @@ function getToolContent(toolId) {
     'heic-to-jpg': getHEICToJPGContent(),
   };
   
-  return toolContents[toolId] || '<div class="text-center py-12"><p class="text-slate-400">Tool coming soon...</p></div>';
+  // Fallback: If tool not found, show default content instead of "coming soon" message
+  // This ensures we never show ads without substantial content
+  if (!toolContents[toolId]) {
+    const defaultContent = document.getElementById('default-content');
+    if (defaultContent) {
+      defaultContent.style.display = 'block';
+      return '';
+    }
+    // If default content also unavailable, return substantial fallback content
+    return `
+      <div class="w-100">
+        <div class="text-center mb-5">
+          <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+            Free Online PDF & Image Tools
+          </h1>
+          <p class="text-light fs-5 mb-2 fw-medium">Professional PDF and image conversion tools that work entirely in your browser</p>
+          <p class="text-secondary small mb-0">100% Free • No Upload Required • 100% Secure • Works Offline</p>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 2rem;">About Our PDF & Image Tools</h2>
+            <p class="text-light mb-3" style="font-size: 1.05rem; line-height: 1.8;">
+              Welcome to our comprehensive suite of free online PDF and image conversion tools. Our platform provides professional-grade file conversion and manipulation capabilities that work entirely in your web browser. Unlike other online tools, we never upload your files to any server - all processing happens locally on your device, ensuring complete privacy and security.
+            </p>
+            <p class="text-light mb-3" style="font-size: 1.05rem; line-height: 1.8;">
+              Our PDF tools allow you to convert PDFs to JPG images, compress PDF files to reduce file size, merge multiple PDFs into one document, split PDFs into separate files, rotate PDF pages, and extract text from PDFs using OCR technology. Our image tools enable you to convert PNG to JPG, resize images, compress images, convert HEIC images to JPG format, and convert multiple JPG images into a single PDF document.
+            </p>
+            <p class="text-light mb-0" style="font-size: 1.05rem; line-height: 1.8;">
+              All tools are completely free to use with no hidden costs, no watermarks, and no file size limits. Simply select a tool from the navigation menu above to get started. Our tools work on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera, and are fully compatible with mobile devices.
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  return toolContents[toolId];
 }
 
 // Initialize tool-specific functionality
