@@ -6,7 +6,7 @@ function getPDFToJPGContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span style="font-size: 5rem;">📄</span>
+          <span class="emoji-document" style="font-size: 5rem;">📄</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PDF → JPG Converter
@@ -405,7 +405,7 @@ function getJPGToPDFContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">🖼️</span>
+            <span class="emoji-picture" style="font-size: 4rem;">🖼️</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             JPG to PDF Converter
@@ -815,7 +815,7 @@ function getPDFCompressContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">🗜️</span>
+            <span class="emoji-compressor" style="font-size: 4rem;">🗜️</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Compressor
@@ -1203,7 +1203,7 @@ function getPDFSplitContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">✂️</span>
+            <span class="emoji-scissors" style="font-size: 4rem;">✂️</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Splitter
@@ -1583,7 +1583,7 @@ function getPDFMergeContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">🔗</span>
+            <span class="emoji-link" style="font-size: 4rem;">🔗</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Merger
@@ -1955,7 +1955,7 @@ function getPDFRotateContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">🔄</span>
+            <span class="emoji-rotate" style="font-size: 4rem;">🔄</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Rotate
@@ -2335,7 +2335,7 @@ function getPNGToJPGContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span style="font-size: 5rem;">🖼️</span>
+          <span class="emoji-picture" style="font-size: 5rem;">🖼️</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PNG → JPG Converter
@@ -2706,7 +2706,7 @@ function getImageResizeContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span style="font-size: 5rem;">📏</span>
+          <span class="emoji-ruler" style="font-size: 5rem;">📏</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           Image Resizer
@@ -3086,7 +3086,7 @@ function getImageCompressContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span style="font-size: 5rem;">🗜️</span>
+          <span class="emoji-compressor" style="font-size: 5rem;">🗜️</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           Image Compressor
@@ -3464,7 +3464,7 @@ function getPDFOCRContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">🔓</span>
+            <span class="emoji-unlock" style="font-size: 4rem;">🔓</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Unlock
@@ -3813,7 +3813,7 @@ function getPDFProtectContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">🔒</span>
+            <span class="emoji-lock" style="font-size: 4rem;">🔒</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Protect
@@ -4188,7 +4188,7 @@ function getPDFOCRContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span style="font-size: 5rem;">👁️</span>
+          <span class="emoji-eye" style="font-size: 5rem;">👁️</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PDF OCR
@@ -4595,7 +4595,7 @@ function getPDFOCRContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span style="font-size: 5rem;">📝</span>
+          <span class="emoji-memo" style="font-size: 5rem;">📝</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PDF → Word Converter
@@ -4978,7 +4978,7 @@ function getPDFOCRContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span style="font-size: 4rem;">📄</span>
+            <span class="emoji-document" style="font-size: 4rem;">📄</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             Word to PDF
@@ -5038,7 +5038,7 @@ function getHEICToJPGContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span style="font-size: 5rem;">📷</span>
+          <span class="emoji-camera" style="font-size: 5rem;">📷</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           HEIC to JPG Converter

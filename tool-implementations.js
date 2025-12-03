@@ -2341,6 +2341,7 @@ function initPDFMerge() {
           leftDiv.className = 'd-flex align-items-center gap-3';
           
           const icon = document.createElement('span');
+          icon.className = 'emoji-document';
           icon.style.fontSize = '1.5rem';
           icon.textContent = '📄';
           
@@ -3027,7 +3028,7 @@ function initPDFOCR() {
       const numPages = pdf.numPages;
       
       if (log) {
-        log.innerHTML = '<span class="inline-block animate-spin-slow">📄</span> <span>Extracting text from PDF pages...</span>';
+        log.innerHTML = '<span class="inline-block animate-spin-slow emoji-document">📄</span> <span>Extracting text from PDF pages...</span>';
         log.style.color = '#60a5fa';
       }
       if (stats) stats.textContent = `Pages: ${numPages} — processing...`;
