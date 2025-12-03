@@ -405,7 +405,7 @@ function getJPGToPDFContent() {
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body text-center py-5">
           <div class="mb-3">
-            <span class="emoji-picture" style="font-size: 4rem;">🖼️</span>
+            <span class="emoji-document-pages" style="font-size: 4rem;">📑</span>
           </div>
           <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             JPG to PDF Converter
@@ -2335,7 +2335,7 @@ function getPNGToJPGContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span class="emoji-picture" style="font-size: 5rem;">🖼️</span>
+          <span class="emoji-palette" style="font-size: 5rem;">🎨</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PNG → JPG Converter
@@ -3086,7 +3086,7 @@ function getImageCompressContent() {
       <!-- Header Section -->
       <div class="text-center mb-5">
         <div class="mb-4">
-          <span class="emoji-compressor" style="font-size: 5rem;">🗜️</span>
+          <span class="emoji-save" style="font-size: 5rem;">💾</span>
         </div>
         <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           Image Compressor
