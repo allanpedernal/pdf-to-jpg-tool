@@ -1234,7 +1234,7 @@ function getPDFSplitContent() {
         <div class="card-body">
           <h3 class="fs-5 fw-semibold text-light mb-3">Select Pages to Extract</h3>
           <div id="pages-list-split" class="row g-2 mb-3"></div>
-          <div class="d-flex gap-2 flex-wrap">
+          <div class="d-flex gap-2 flex-wrap justify-content-center">
             <button id="select-all-split" class="btn btn-outline-secondary btn-sm">Select All</button>
             <button id="select-none-split" class="btn btn-outline-secondary btn-sm">Select None</button>
           </div>

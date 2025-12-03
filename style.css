@@ -57,6 +57,214 @@ html, body {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
+  
+  /* Center all buttons on mobile */
+  #tool-content .btn,
+  #default-content .btn,
+  #tool-content button:not(.nav-item):not(.scroll-top):not(.theme-toggle):not(.toast-close-button),
+  #default-content button:not(.nav-item):not(.scroll-top):not(.theme-toggle):not(.toast-close-button) {
+    display: flex !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  /* Center button containers on mobile */
+  #tool-content .d-flex.flex-column.gap-2,
+  #tool-content .d-flex.flex-wrap.gap-3,
+  #default-content .d-flex.flex-column.gap-2,
+  #default-content .d-flex.flex-wrap.gap-3 {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  
+  /* Center controls section on mobile */
+  #tool-content .d-flex.flex-wrap.gap-3.w-100,
+  #default-content .d-flex.flex-wrap.gap-3.w-100 {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  /* Ensure individual buttons are centered */
+  #tool-content button.btn,
+  #default-content button.btn {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+  
+  /* Make all cards above buttons full width (col-12) on mobile */
+  /* Target cards in controls section that are siblings of button containers */
+  #tool-content .d-flex.flex-wrap.gap-3.w-100 > .card,
+  #default-content .d-flex.flex-wrap.gap-3.w-100 > .card,
+  #tool-content .d-flex.flex-wrap.gap-3 > .card.bg-dark-subtle,
+  #default-content .d-flex.flex-wrap.gap-3 > .card.bg-dark-subtle,
+  #tool-content .d-flex.flex-wrap.gap-3 > .card,
+  #default-content .d-flex.flex-wrap.gap-3 > .card {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Ensure button container is also full width */
+  #tool-content .d-flex.flex-wrap.gap-3 > .d-flex.flex-column.gap-2,
+  #default-content .d-flex.flex-wrap.gap-3 > .d-flex.flex-column.gap-2 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  /* Center Common Use Cases sections on mobile */
+  /* Target rows that contain col-md-6 col-lg-4 (used in Common Use Cases) */
+  #tool-content .row.g-4,
+  #default-content .row.g-4,
+  .row.g-4 {
+    justify-content: center !important;
+  }
+  
+  /* Center Common Use Cases cards on mobile */
+  #tool-content .row.g-4 > .col-md-6.col-lg-4,
+  #default-content .row.g-4 > .col-md-6.col-lg-4,
+  #tool-content .row.g-4 > .col-md-6.col-lg-3,
+  #default-content .row.g-4 > .col-md-6.col-lg-3,
+  .row.g-4 > .col-md-6.col-lg-4,
+  .row.g-4 > .col-md-6.col-lg-3 {
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  /* Ensure Common Use Cases cards are centered and full width on mobile */
+  #tool-content .row.g-4 > .col-md-6.col-lg-4 > .card,
+  #default-content .row.g-4 > .col-md-6.col-lg-4 > .card,
+  #tool-content .row.g-4 > .col-md-6.col-lg-3 > .card,
+  #default-content .row.g-4 > .col-md-6.col-lg-3 > .card,
+  .row.g-4 > .col-md-6.col-lg-4 > .card,
+  .row.g-4 > .col-md-6.col-lg-3 > .card {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Center content inside Common Use Cases cards on mobile */
+  #tool-content .row.g-4 > .col-md-6.col-lg-4 > .card .card-body,
+  #default-content .row.g-4 > .col-md-6.col-lg-4 > .card .card-body,
+  #tool-content .row.g-4 > .col-md-6.col-lg-3 > .card .card-body,
+  #default-content .row.g-4 > .col-md-6.col-lg-3 > .card .card-body,
+  .row.g-4 > .col-md-6.col-lg-4 > .card .card-body,
+  .row.g-4 > .col-md-6.col-lg-3 > .card .card-body {
+    text-align: center !important;
+  }
+  
+  /* Center icons in Common Use Cases cards */
+  #tool-content .row.g-4 > .col-md-6.col-lg-4 > .card i,
+  #default-content .row.g-4 > .col-md-6.col-lg-4 > .card i,
+  #tool-content .row.g-4 > .col-md-6.col-lg-3 > .card i,
+  #default-content .row.g-4 > .col-md-6.col-lg-3 > .card i,
+  .row.g-4 > .col-md-6.col-lg-4 > .card i,
+  .row.g-4 > .col-md-6.col-lg-3 > .card i {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    text-align: center !important;
+  }
+  
+  /* Center headings in Common Use Cases cards */
+  #tool-content .row.g-4 > .col-md-6.col-lg-4 > .card h5,
+  #default-content .row.g-4 > .col-md-6.col-lg-4 > .card h5,
+  #tool-content .row.g-4 > .col-md-6.col-lg-3 > .card h5,
+  #default-content .row.g-4 > .col-md-6.col-lg-3 > .card h5,
+  .row.g-4 > .col-md-6.col-lg-4 > .card h5,
+  .row.g-4 > .col-md-6.col-lg-3 > .card h5 {
+    text-align: center !important;
+  }
+  
+  /* Center paragraphs in Common Use Cases cards */
+  #tool-content .row.g-4 > .col-md-6.col-lg-4 > .card p,
+  #default-content .row.g-4 > .col-md-6.col-lg-4 > .card p,
+  #tool-content .row.g-4 > .col-md-6.col-lg-3 > .card p,
+  #default-content .row.g-4 > .col-md-6.col-lg-3 > .card p,
+  .row.g-4 > .col-md-6.col-lg-4 > .card p,
+  .row.g-4 > .col-md-6.col-lg-3 > .card p {
+    text-align: center !important;
+  }
+  
+  /* Center footer content on mobile */
+  footer .row.g-4.g-lg-5,
+  footer .row.g-4 {
+    justify-content: center !important;
+  }
+  
+  /* Center footer columns on mobile */
+  footer .col-12.col-md-6.col-lg-3 {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  /* Center footer headings */
+  footer h3,
+  footer h5 {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Center footer text */
+  footer p {
+    text-align: center !important;
+  }
+  
+  /* Center footer lists */
+  footer ul.list-unstyled {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  /* Center footer links */
+  footer .footer-link {
+    justify-content: center !important;
+  }
+  
+  /* Center social media icons */
+  footer .d-flex.gap-3 {
+    justify-content: center !important;
+  }
+  
+  /* Center footer feature items */
+  footer .footer-feature-item {
+    justify-content: center !important;
+  }
+  
+  /* Center bottom bar content */
+  footer .footer-border-top .d-flex {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  
+  footer .footer-border-top .d-flex.flex-column {
+    align-items: center !important;
+  }
+  
+  footer .footer-border-top .d-flex.flex-md-row {
+    align-items: center !important;
+  }
+  
+  footer .footer-border-top p {
+    text-align: center !important;
+  }
+  
+  footer .footer-border-top .d-flex.gap-3 {
+    justify-content: center !important;
+  }
 }
 
 @media (max-width: 576px) {

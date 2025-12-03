@@ -153,12 +153,21 @@ function getToolContent(toolId) {
 
 // Initialize tool-specific functionality
 function initializeTool(toolId) {
+  // Load PDF.js on mobile if needed for PDF tools
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+  const toolsNeedingPDFJS = ['pdf-to-jpg', 'pdf-compress', 'pdf-split', 'pdf-merge', 'pdf-rotate', 'pdf-ocr'];
+  
+  if (isMobile && toolsNeedingPDFJS.includes(toolId) && !pdfjsReady && typeof loadPDFJS === 'function' && !window.pdfjsLoading) {
+    loadPDFJS();
+  }
+  
   // Wait for DOM to be ready, then initialize tool handlers
   if (typeof initToolHandlers === 'function') {
-    // Small delay to ensure DOM is updated
+    // Small delay to ensure DOM is updated and PDF.js loads on mobile
+    const delay = (isMobile && toolsNeedingPDFJS.includes(toolId) && !pdfjsReady) ? 500 : 10;
     setTimeout(() => {
       initToolHandlers(toolId);
-    }, 10);
+    }, delay);
   }
 }
 

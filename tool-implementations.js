@@ -1958,8 +1958,28 @@ function initPDFSplit() {
   }
   
   async function loadFile(file) {
+    // Check and load PDF.js on mobile if needed
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (isMobile && !pdfjsReady && typeof loadPDFJS === 'function' && !window.pdfjsLoading) {
+      loadPDFJS();
+      // Wait for PDF.js to load (with retries)
+      let retries = 0;
+      while (!pdfjsReady && retries < 10) {
+        await new Promise(resolve => setTimeout(resolve, 300));
+        retries++;
+      }
+    }
+    
     if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
       toastr.info('PDF library is loading. Please wait a moment and try again.');
+      // Retry after a delay
+      setTimeout(async () => {
+        if (pdfjsReady && typeof pdfjsLib !== 'undefined') {
+          await loadFile(file);
+        } else {
+          toastr.error('PDF library failed to load. Please refresh the page.');
+        }
+      }, 2000);
       return;
     }
     
@@ -1977,11 +1997,11 @@ function initPDFSplit() {
         selectedPages.clear();
         for (let i = 1; i <= numPages; i++) {
           const col = document.createElement('div');
-          col.className = 'col-auto';
+          col.className = 'col-auto col-6 col-sm-4 col-md-3 col-lg-2';
           
           const btn = document.createElement('button');
           btn.textContent = i;
-          btn.className = 'btn btn-outline-secondary btn-sm';
+          btn.className = 'btn btn-outline-secondary btn-sm w-100';
           btn.style.minWidth = '50px';
           btn.dataset.page = i;
           btn.addEventListener('click', () => {
@@ -2064,9 +2084,33 @@ function initPDFSplit() {
   }
   
   async function splitPDF(pages, splitAll) {
+    // Check and wait for required libraries
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    // Ensure PDF.js is loaded
+    if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
+      if (isMobile && typeof loadPDFJS === 'function' && !window.pdfjsLoading) {
+        loadPDFJS();
+        let retries = 0;
+        while (!pdfjsReady && retries < 10) {
+          await new Promise(resolve => setTimeout(resolve, 300));
+          retries++;
+        }
+      }
+      if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
+        toastr.error('PDF library not loaded. Please refresh the page.');
+        return;
+      }
+    }
+    
     if (typeof window.jspdf === 'undefined' || typeof JSZip === 'undefined') {
       toastr.info('Required libraries not loaded. Please wait a moment and try again.');
-      return;
+      // Wait a bit and retry
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (typeof window.jspdf === 'undefined' || typeof JSZip === 'undefined') {
+        toastr.error('Required libraries failed to load. Please refresh the page.');
+        return;
+      }
     }
     
     if (splitAllBtn) {
