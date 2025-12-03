@@ -690,7 +690,7 @@ function initJPGToPDF() {
           progress.setAttribute('aria-valuenow', '0');
         }
         if (log) {
-          log.innerHTML = '✨ Ready to convert your images';
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your images';
           log.style.color = '';
         }
       }, 2000);
@@ -931,7 +931,7 @@ function initPDFCompress() {
           progress.setAttribute('aria-valuenow', '0');
         }
         if (log) {
-          log.innerHTML = '✨ Ready to compress your PDF';
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to compress your PDF';
           log.style.color = '';
         }
       }, 3000);
@@ -2221,7 +2221,7 @@ function initPDFSplit() {
           progress.setAttribute('aria-valuenow', '0');
         }
         if (log) {
-          log.innerHTML = '✨ Ready to split your PDF';
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to split your PDF';
           log.style.color = '';
         }
       }, 3000);
@@ -2511,7 +2511,7 @@ function initPDFMerge() {
           progress.setAttribute('aria-valuenow', '0');
         }
         if (log) {
-          log.innerHTML = '✨ Ready to merge your PDFs';
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to merge your PDFs';
           log.style.color = '';
         }
       }, 3000);
@@ -2789,7 +2789,7 @@ function initPDFRotate() {
           progress.setAttribute('aria-valuenow', '0');
         }
         if (log) {
-          log.innerHTML = '✨ Ready to rotate your PDF';
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to rotate your PDF';
           log.style.color = '';
         }
       }, 3000);

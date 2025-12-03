@@ -473,7 +473,7 @@ function getJPGToPDFContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-jpg-pdf" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-jpg-pdf" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to convert your images</p>
+          <p id="log-jpg-pdf" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your images</p>
         </div>
       </div>
 
@@ -885,7 +885,7 @@ function getPDFCompressContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-compress" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-compress" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to compress your PDF</p>
+          <p id="log-compress" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to compress your PDF</p>
         </div>
       </div>
 
@@ -1265,7 +1265,7 @@ function getPDFSplitContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-split" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-split" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to split your PDF</p>
+          <p id="log-split" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to split your PDF</p>
         </div>
       </div>
 
@@ -1637,7 +1637,7 @@ function getPDFMergeContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-merge" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-merge" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to merge your PDFs</p>
+          <p id="log-merge" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to merge your PDFs</p>
         </div>
       </div>
 
@@ -2018,7 +2018,7 @@ function getPDFRotateContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-rotate" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-rotate" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to rotate your PDF</p>
+          <p id="log-rotate" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to rotate your PDF</p>
         </div>
       </div>
 
@@ -3519,7 +3519,7 @@ function getPDFOCRContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-unlock" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-unlock" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to unlock your PDF</p>
+          <p id="log-unlock" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to unlock your PDF</p>
         </div>
       </div>
 
@@ -3871,7 +3871,7 @@ function getPDFProtectContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-protect" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-protect" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to protect your PDF</p>
+          <p id="log-protect" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to protect your PDF</p>
         </div>
       </div>
 
@@ -5025,7 +5025,7 @@ function getPDFOCRContent() {
           <div class="progress" style="height: 0.5rem;">
             <div id="progress-word-pdf" class="progress-bar" role="progressbar" style="width: 0%;"></div>
           </div>
-          <p id="log-word-pdf" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;">✨ Ready to convert your Word document</p>
+          <p id="log-word-pdf" class="small text-light text-center mt-3 mb-0" style="min-height: 32px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your Word document</p>
         </div>
       </div>
     </div>
