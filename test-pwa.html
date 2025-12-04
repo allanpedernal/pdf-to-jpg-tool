@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Status Checker</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .test-item {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .pass { color: #22c55e; font-weight: bold; }
+    .fail { color: #ef4444; font-weight: bold; }
+    .info { color: #3b82f6; }
+    button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover { background: #2563eb; }
+    pre {
+      background: #1e293b;
+      color: #f1f5f9;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    h1 { color: #1e293b; }
+    h2 { color: #475569; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 PWA Status Checker</h1>
+  <p>This page will test if your site is properly configured as a Progressive Web App.</p>
+  
+  <div id="results"></div>
+  
+  <h2>Manual Tests</h2>
+  <div class="test-item">
+    <h3>1. Check Chrome DevTools</h3>
+    <p>Press <kbd>F12</kbd> → Go to <strong>Application</strong> tab → Check:</p>
+    <ul>
+      <li><strong>Manifest</strong> - Should show app details</li>
+      <li><strong>Service Workers</strong> - Should show "activated and is running"</li>
+      <li><strong>Cache Storage</strong> - Should show cached files</li>
+    </ul>
+  </div>
+  
+  <div class="test-item">
+    <h3>2. Test Offline Mode</h3>
+    <p>In DevTools → <strong>Network</strong> tab → Check <strong>Offline</strong> → Refresh page</p>
+    <p>Page should still load from cache ✅</p>
+  </div>
+  
+  <div class="test-item">
+    <h3>3. Test Installation</h3>
+    <p>Look for install icon in browser address bar (after visiting site a few times)</p>
+    <p>Or use Chrome menu → <strong>Install PDF Tools</strong></p>
+  </div>
+  
+  <div class="test-item">
+    <h3>4. Run Lighthouse Audit</h3>
+    <p>DevTools → <strong>Lighthouse</strong> tab → Select <strong>Progressive Web App</strong> → Generate report</p>
+    <p>Should score 90+ for PWA ✅</p>
+  </div>
+  
+  <script>
+    const results = document.getElementById('results');
+    let output = '<h2>Automated Test Results</h2>';
+    
+    const tests = {
+      serviceWorker: false,
+      manifest: false,
+      installable: false,
+      standalone: false,
+      cache: false
+    };
+    
+    // Test 1: Service Worker Support
+    output += '<div class="test-item">';
+    output += '<h3>1. Service Worker Support</h3>';
+    if ('serviceWorker' in navigator) {
+      output += '<p class="pass">✅ Service Worker API is supported</p>';
+      navigator.serviceWorker.getRegistration().then(reg => {
+        if (reg) {
+          output += '<p class="pass">✅ Service Worker is registered</p>';
+          output += `<p class="info">Scope: ${reg.scope}</p>`;
+          tests.serviceWorker = true;
+          updateResults();
+        } else {
+          output += '<p class="fail">❌ Service Worker is not registered</p>';
+          output += '<p class="info">Visit the main site first to register the service worker.</p>';
+          updateResults();
+        }
+      }).catch(err => {
+        output += `<p class="fail">❌ Error checking service worker: ${err.message}</p>`;
+        updateResults();
+      });
+    } else {
+      output += '<p class="fail">❌ Service Worker API is not supported in this browser</p>';
+      updateResults();
+    }
+    output += '</div>';
+    
+    // Test 2: Manifest
+    output += '<div class="test-item">';
+    output += '<h3>2. Web App Manifest</h3>';
+    fetch('/manifest.json')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Manifest not found');
+      })
+      .then(manifest => {
+        output += '<p class="pass">✅ Manifest file found</p>';
+        output += `<p class="info">Name: ${manifest.name}</p>`;
+        output += `<p class="info">Short Name: ${manifest.short_name}</p>`;
+        output += `<p class="info">Display Mode: ${manifest.display}</p>`;
+        output += `<p class="info">Icons: ${manifest.icons.length} icon(s) defined</p>`;
+        tests.manifest = true;
+        updateResults();
+      })
+      .catch(err => {
+        output += '<p class="fail">❌ Manifest file not found or invalid</p>';
+        output += `<p class="info">Error: ${err.message}</p>`;
+        updateResults();
+      });
+    output += '</div>';
+    
+    // Test 3: Installability
+    output += '<div class="test-item">';
+    output += '<h3>3. Installability</h3>';
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      output += '<p class="pass">✅ App is installable</p>';
+      output += '<button onclick="installApp()">Install App</button>';
+      tests.installable = true;
+      updateResults();
+    });
+    
+    // Check if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+      output += '<p class="pass">✅ App is running in standalone mode (already installed)</p>';
+      tests.standalone = true;
+    } else {
+      output += '<p class="info">ℹ️ App is running in browser (not installed yet)</p>';
+      output += '<p class="info">Visit the main site and interact with it to trigger install prompt.</p>';
+    }
+    output += '</div>';
+    
+    // Test 4: Cache Storage
+    output += '<div class="test-item">';
+    output += '<h3>4. Cache Storage</h3>';
+    if ('caches' in window) {
+      caches.keys().then(keys => {
+        if (keys.length > 0) {
+          output += `<p class="pass">✅ Found ${keys.length} cache(s)</p>`;
+          keys.forEach(key => {
+            output += `<p class="info">- ${key}</p>`;
+          });
+          tests.cache = true;
+        } else {
+          output += '<p class="info">ℹ️ No caches found (visit main site first to populate cache)</p>';
+        }
+        updateResults();
+      }).catch(err => {
+        output += `<p class="fail">❌ Error checking cache: ${err.message}</p>`;
+        updateResults();
+      });
+    } else {
+      output += '<p class="fail">❌ Cache API not supported</p>';
+      updateResults();
+    }
+    output += '</div>';
+    
+    // Test 5: HTTPS
+    output += '<div class="test-item">';
+    output += '<h3>5. HTTPS / Localhost</h3>';
+    if (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      output += '<p class="pass">✅ Running on HTTPS or localhost (required for PWA)</p>';
+    } else {
+      output += '<p class="fail">❌ Not running on HTTPS (PWA requires HTTPS in production)</p>';
+    }
+    output += '</div>';
+    
+    results.innerHTML = output;
+    
+    function updateResults() {
+      const passed = Object.values(tests).filter(t => t).length;
+      const total = Object.keys(tests).length;
+      
+      if (!document.getElementById('summary')) {
+        const summary = document.createElement('div');
+        summary.id = 'summary';
+        summary.className = 'test-item';
+        summary.style.cssText = 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; margin-top: 20px;';
+        results.appendChild(summary);
+      }
+      
+      const summary = document.getElementById('summary');
+      summary.innerHTML = `
+        <h2 style="color: white; margin-top: 0;">📊 Test Summary</h2>
+        <p style="font-size: 1.2em;">
+          ${passed}/${total} tests passed
+          ${passed === total ? '🎉' : '⚠️'}
+        </p>
+        ${passed === total 
+          ? '<p>✅ Your PWA is properly configured!</p>' 
+          : '<p>Some tests failed. Check the details above and visit the main site to complete setup.</p>'}
+      `;
+    }
+    
+    window.installApp = async function() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log('User choice:', outcome);
+        deferredPrompt = null;
+        
+        if (outcome === 'accepted') {
+          alert('App installation started!');
+        }
+      } else {
+        alert('Install prompt not available. Make sure you\'ve visited the main site and met install criteria.');
+      }
+    };
+    
+    // Initial update
+    setTimeout(updateResults, 2000);
+  </script>
+</body>
+</html>
+
