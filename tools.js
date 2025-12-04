@@ -1,5 +1,200 @@
 // Tool content generators and implementations
 
+function getPDFToPNGContent() {
+  return `
+    <div class="w-100">
+      <!-- Header Section -->
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <span class="emoji-document" style="font-size: 5rem;">🖼️</span>
+        </div>
+        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+          PDF → PNG Converter
+        </h1>
+        <p class="text-light fs-5 mb-2 fw-medium">Convert PDF to PNG instantly in your browser</p>
+        <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
+      </div>
+      
+      <!-- Dropzone Section -->
+      <label class="dropzone w-100 border border-2 border-dashed border-secondary rounded-3 p-5 d-flex flex-column align-items-center justify-content-center cursor-pointer mb-5 bg-dark-subtle shadow-lg" 
+             id="dropzone-pdf-png" 
+             style="min-height: 220px;">
+        <div class="mb-4 position-relative">
+          <i class="bi bi-cloud-arrow-up-fill text-primary" style="font-size: 4rem;"></i>
+        </div>
+        <span id="dropLabel-pdf-png" class="text-light fw-semibold fs-5 mb-2">Drag & drop your PDF here</span>
+        <span class="text-secondary small">or click to browse files</span>
+        <input type="file" id="file-pdf-png" class="d-none" accept="application/pdf" />
+      </label>
+
+      <!-- Controls Section -->
+      <div class="d-flex flex-wrap gap-3 w-100 mb-5 justify-content-center align-items-end">
+        <div class="card bg-dark-subtle border-0 shadow-sm p-4">
+          <label class="form-label text-light small fw-medium mb-2 d-flex align-items-center gap-2">
+            <i class="bi bi-zoom-in"></i> Scale
+          </label>
+          <input type="number" id="scale-pdf-png" min="0.5" max="3" step="0.1" value="1.6" class="form-control w-auto" style="width: 100px;">
+          <span class="form-text text-secondary mt-1 d-block" style="font-size: 0.75rem;">1.0 = original size</span>
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <button id="start-pdf-png" class="btn btn-primary btn-lg fw-bold rounded-3 shadow-lg bg-gradient-primary d-flex align-items-center gap-2">
+            <i class="bi bi-lightning-fill"></i> Convert PDF to PNG
+          </button>
+          <button id="cancel-pdf-png" class="btn btn-outline-secondary rounded-3 text-light" disabled>
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Section -->
+      <div class="card bg-dark-subtle border-0 shadow-sm p-4 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-light fw-medium d-flex align-items-center gap-2">
+            <i class="bi bi-bar-chart"></i> Progress
+          </span>
+          <span id="stats-pdf-png" class="small text-secondary">No file selected</span>
+        </div>
+        <div class="progress mb-3" style="height: 10px; border-radius: 5px; background-color: rgba(255, 255, 255, 0.1);">
+          <div id="bar-pdf-png" class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%; opacity: 1;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p id="log-pdf-png" class="small text-light text-center mb-0" style="min-height: 24px;"><span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your PDF files</p>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            How It Works
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    1
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Select PDF</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drag and drop your PDF file or click to browse and select from your computer.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    2
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Adjust Scale</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Set scale (0.5-3.0) to control image resolution. Higher scale produces larger, sharper PNG images.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    3
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Convert</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Click "Convert PDF to PNG" and watch as each page is processed instantly in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="text-center">
+                <div class="mb-3">
+                  <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                    4
+                  </div>
+                </div>
+                <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Download</h3>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">All PNG images are automatically packaged in a ZIP file for easy download.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Convert PDF to PNG Section -->
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
+            Why Convert PDF to PNG?
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f59e0b;">
+                    <i class="bi bi-lock-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">100% Private</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Your PDF files never leave your computer. All conversion happens locally in your browser - no uploads, no server storage, complete privacy.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #f97316;">
+                    <i class="bi bi-lightning-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lightning Fast</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert PDF to PNG in seconds. No waiting for file uploads or server processing. Instant results right in your browser.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #10b981;">
+                    <i class="bi bi-image text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Lossless Quality</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">PNG format provides lossless compression, perfect for graphics, diagrams, and images that require perfect quality preservation.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #a855f7;">
+                    <i class="bi bi-grid-3x3-gap-fill text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Multi-Page Support</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert entire PDF documents with multiple pages. Each page becomes a separate PNG image, all packaged in one ZIP file.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded text-white fw-bold" style="width: 80px; height: 80px; background: #3b82f6; font-size: 1.25rem; letter-spacing: 0.05em;">
+                    FREE
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">Completely Free</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">No hidden costs, no subscriptions, no watermarks. Convert unlimited PDFs to PNG completely free.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: #06b6d4;">
+                    <i class="bi bi-globe text-white" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">No Installation</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Works entirely in your web browser. No software downloads, no plugins required. Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function getPDFToJPGContent() {
   return `
     <div class="w-100">

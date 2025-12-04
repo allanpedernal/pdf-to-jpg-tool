@@ -1,7 +1,7 @@
 {
   "name": "PDF Tools - Free Online PDF & Image Converter Suite",
   "short_name": "PDF Tools",
-  "description": "Free online PDF and image conversion tools. Convert PDFs to JPG, compress PDFs, merge PDFs, and more. All tools work entirely in your browser.",
+  "description": "Free online PDF and image conversion tools. Convert PDFs to JPG, PDFs to PNG, compress PDFs, merge PDFs, and more. All tools work entirely in your browser.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",

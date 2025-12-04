@@ -1,7 +1,7 @@
 // Service Worker for PDF Tools PWA
-// Version 1.0.0
-const CACHE_NAME = 'pdf-tools-v1.0.0';
-const RUNTIME_CACHE = 'pdf-tools-runtime-v1.0.0';
+// Version 1.1.0 - Added PDF to PNG tool
+const CACHE_NAME = 'pdf-tools-v1.1.0';
+const RUNTIME_CACHE = 'pdf-tools-runtime-v1.1.0';
 
 // Assets to cache immediately on install
 const STATIC_ASSETS = [
@@ -19,6 +19,7 @@ const STATIC_ASSETS = [
   '/favicon-16x16.png',
   '/shared/styles.css',
   '/shared/navigation.js',
+  '/shared/pwa.js',
   '/style.css',
   '/app.js',
   '/tools-config.js',
@@ -38,7 +39,9 @@ const EXTERNAL_ASSETS = [
   'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
 ];
 
 // Install event - cache static assets

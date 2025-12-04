@@ -600,6 +600,12 @@
               </a>
             </li>
             <li class="mb-3">
+              <a href="#" onclick="if(typeof switchTool === 'function') { switchTool('pdf-to-png'); return false; } else { window.location.href='/'; return false; }" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF to PNG</span>
+              </a>
+            </li>
+            <li class="mb-3">
               <a href="/" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
                 <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
                 <span>JPG to PDF</span>

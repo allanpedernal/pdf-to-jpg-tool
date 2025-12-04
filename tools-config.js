@@ -4,6 +4,7 @@ const TOOLS_CONFIG = {
     category: "PDF Tools",
     tools: [
       { id: "pdf-to-jpg", name: "PDF to JPG", icon: "📄", description: "Convert PDF pages to JPG images" },
+      { id: "pdf-to-png", name: "PDF to PNG", icon: "🖼️", description: "Convert PDF pages to PNG images" },
       { id: "jpg-to-pdf", name: "JPG to PDF", icon: "📑", description: "Convert images to PDF document" },
       { id: "pdf-compress", name: "PDF Compressor", icon: "🗜️", description: "Reduce PDF file size" },
       { id: "pdf-split", name: "PDF Splitter", icon: "✂️", description: "Split PDF into separate pages" },

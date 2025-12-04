@@ -100,6 +100,7 @@ function switchTool(toolId) {
 function getToolContent(toolId) {
   const toolContents = {
     'pdf-to-jpg': getPDFToJPGContent(),
+    'pdf-to-png': getPDFToPNGContent(),
     'jpg-to-pdf': getJPGToPDFContent(),
     'pdf-compress': getPDFCompressContent(),
     'pdf-split': getPDFSplitContent(),
@@ -155,7 +156,7 @@ function getToolContent(toolId) {
 function initializeTool(toolId) {
   // Load PDF.js on mobile if needed for PDF tools
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-  const toolsNeedingPDFJS = ['pdf-to-jpg', 'pdf-compress', 'pdf-split', 'pdf-merge', 'pdf-rotate', 'pdf-ocr'];
+  const toolsNeedingPDFJS = ['pdf-to-jpg', 'pdf-to-png', 'pdf-compress', 'pdf-split', 'pdf-merge', 'pdf-rotate', 'pdf-ocr'];
   
   if (isMobile && toolsNeedingPDFJS.includes(toolId) && !pdfjsReady && typeof loadPDFJS === 'function' && !window.pdfjsLoading) {
     loadPDFJS();

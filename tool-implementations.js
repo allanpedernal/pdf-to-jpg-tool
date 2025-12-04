@@ -11,6 +11,9 @@ function initToolHandlers(toolId) {
     case 'pdf-to-jpg':
       initPDFToJPG();
       break;
+    case 'pdf-to-png':
+      initPDFToPNG();
+      break;
     case 'jpg-to-pdf':
       initJPGToPDF();
       break;
@@ -44,6 +47,287 @@ function initToolHandlers(toolId) {
     default:
       console.log('Tool implementation not found for:', toolId);
   }
+}
+
+// PDF to PNG Implementation
+function initPDFToPNG() {
+  const fileInput = document.getElementById('file-pdf-png');
+  const dropzone = document.getElementById('dropzone-pdf-png');
+  const dropLabel = document.getElementById('dropLabel-pdf-png');
+  const startBtn = document.getElementById('start-pdf-png');
+  const cancelBtn = document.getElementById('cancel-pdf-png');
+  const scaleInput = document.getElementById('scale-pdf-png');
+  const bar = document.getElementById('bar-pdf-png');
+  const stats = document.getElementById('stats-pdf-png');
+  const log = document.getElementById('log-pdf-png');
+  
+  if (!fileInput || !dropzone) return;
+  
+  let currentFile = null;
+  let controller = { cancelled: false };
+  
+  const handlers = [
+    () => dropzone.removeEventListener('dragover', handleDragOver),
+    () => dropzone.removeEventListener('dragleave', handleDragLeave),
+    () => dropzone.removeEventListener('drop', handleDrop),
+    () => fileInput.removeEventListener('change', handleFileChange),
+    () => startBtn?.removeEventListener('click', handleStart),
+    () => cancelBtn?.removeEventListener('click', handleCancel)
+  ];
+  
+  window.currentToolHandlers = handlers;
+  
+  function handleDragOver(e) {
+    e.preventDefault();
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+  }
+  
+  function handleDragLeave(e) {
+    e.preventDefault();
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
+  }
+  
+  function handleDrop(e) {
+    e.preventDefault();
+    dropzone.style.borderColor = '';
+    dropzone.style.backgroundColor = '';
+    const f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f && f.type === 'application/pdf') loadFile(f);
+  }
+  
+  function handleFileChange() {
+    if (fileInput.files && fileInput.files[0]) {
+      loadFile(fileInput.files[0]);
+    }
+  }
+  
+  function loadFile(f) {
+    if (f.type !== 'application/pdf') {
+      toastr.error('Please select a PDF file');
+      return;
+    }
+    currentFile = f;
+    dropzone.style.borderColor = 'var(--bs-primary)';
+    dropzone.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+    if (dropLabel) dropLabel.innerHTML = `<span class="text-primary fw-bold">✓</span> ${f.name}`;
+    if (stats) stats.textContent = `${(f.size/1024/1024).toFixed(2)} MB selected`;
+    
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (isMobile && !pdfjsReady && typeof loadPDFJS === 'function' && !window.pdfjsLoading) {
+      loadPDFJS();
+    }
+    
+    if (log) {
+      if (pdfjsReady) {
+        log.innerHTML = '<span class="inline-block animate-bounce">✨</span> <span>Ready to convert! Click the button below.</span>';
+        log.style.color = '#60a5fa';
+        if (startBtn) startBtn.classList.add('animate-pulse-glow');
+      } else {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">⏳</span> <span>Loading PDF.js library...</span>';
+        log.style.color = '#94a3b8';
+      }
+    }
+  }
+  
+  function handleStart() {
+    if (!currentFile) {
+      toastr.warning('Choose a PDF first');
+      return;
+    }
+    if (!pdfjsReady || typeof pdfjsLib === 'undefined') {
+      toastr.info('PDF.js library is still loading. Please wait a moment and try again.');
+      return;
+    }
+    controller.cancelled = false;
+    
+    if (cancelBtn) {
+      cancelBtn.disabled = false;
+      cancelBtn.removeAttribute('disabled');
+    }
+    
+    if (startBtn) {
+      startBtn.disabled = true;
+      startBtn.classList.remove('animate-pulse-glow');
+      startBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    }
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-spin-slow">⚙️</span> <span>Starting conversion...</span>';
+      log.style.color = '#60a5fa';
+    }
+    processPDF(currentFile, {
+      scale: parseFloat(scaleInput?.value) || 1.6
+    });
+  }
+  
+  function handleCancel(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (controller.cancelled) return;
+    controller.cancelled = true;
+    if (log) {
+      log.innerHTML = '<span class="inline-block animate-pulse">⏸️</span> <span>Cancelling... Please wait...</span>';
+      log.style.color = '#fb923c';
+    }
+    const cancelButton = document.getElementById('cancel-pdf-png');
+    if (cancelButton) {
+      cancelButton.disabled = true;
+      cancelButton.textContent = 'Cancelling...';
+    }
+  }
+  
+  async function processPDF(file, opts) {
+    try {
+      const arr = await file.arrayBuffer();
+      const loadingTask = pdfjsLib.getDocument({ data: arr });
+      const pdf = await loadingTask.promise;
+      const num = pdf.numPages;
+      const zip = new JSZip();
+      updateProgress(0);
+      if (stats) stats.textContent = `Pages: ${num} — processing...`;
+      const baseName = file.name.replace(/\.pdf$/i, '').replace(/[^a-z0-9]/gi, '_').substring(0, 50) || 'pdf';
+      
+      for (let i = 1; i <= num; i++) {
+        if (controller.cancelled) throw new Error('Cancelled by user');
+        if (log) {
+          log.innerHTML = `<span class="inline-block animate-spin-slow">🔄</span> <span>Rendering page <strong>${i}</strong> of <strong>${num}</strong>...</span>`;
+          log.style.color = '#60a5fa';
+        }
+        const page = await pdf.getPage(i);
+        if (controller.cancelled) throw new Error('Cancelled by user');
+        
+        const viewport = page.getViewport({ scale: opts.scale });
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        const ctx = canvas.getContext('2d');
+        
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        await page.render({ canvasContext: ctx, viewport }).promise;
+        
+        if (controller.cancelled) throw new Error('Cancelled by user');
+        
+        const blob = await new Promise(res => {
+          canvas.toBlob(res, 'image/png');
+        });
+        
+        if (controller.cancelled) throw new Error('Cancelled by user');
+        if (!blob || blob.size === 0) {
+          throw new Error(`Failed to create image for page ${i}`);
+        }
+        
+        const fileName = `${baseName}_page_${String(i).padStart(3, '0')}.png`;
+        zip.file(fileName, blob, { binary: true });
+        updateProgress(Math.round((i / num) * 100));
+        if (controller.cancelled) throw new Error('Cancelled by user');
+        await new Promise(r => setTimeout(r, 50));
+      }
+      
+      if (controller.cancelled) throw new Error('Cancelled by user');
+      
+      if (log) {
+        log.innerHTML = '<span class="inline-block animate-spin-slow">📦</span> <span>Creating ZIP file...</span>';
+        log.style.color = '#60a5fa';
+      }
+      
+      let zipCancelled = false;
+      const content = await zip.generateAsync({
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: { level: 6 }
+      }, meta => {
+        if (controller.cancelled) zipCancelled = true;
+        updateProgress(Math.round(meta.percent));
+      });
+      
+      if (controller.cancelled || zipCancelled) throw new Error('Cancelled by user');
+      const zipName = baseName + '_images.zip';
+      saveAs(content, zipName);
+      
+      toastr.success(`Successfully converted ${num} page(s) to PNG!`, 'Conversion Complete', {
+        timeOut: 5000
+      });
+      
+      if (log) {
+        log.innerHTML = `<span class="inline-block animate-bounce-in">🎉</span> <span>Success! ZIP file downloaded with <strong>${num}</strong> PNG file(s).</span>`;
+        log.style.color = '#34d399';
+      }
+      if (stats) stats.textContent = `✓ Finished: ${num} page(s) processed successfully`;
+      updateProgress(100);
+      if (startBtn) startBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      
+      if (typeof trackConversion === 'function') {
+        trackConversion(num);
+      }
+      
+      setTimeout(() => {
+        if (fileInput) fileInput.value = '';
+        if (dropzone) {
+          dropzone.style.borderColor = '';
+          dropzone.style.backgroundColor = '';
+        }
+        if (dropLabel) dropLabel.innerHTML = 'Drag & drop your PDF here';
+        if (stats) stats.textContent = 'No file selected';
+        updateProgress(0);
+        if (log) {
+          log.innerHTML = '<span class="animate-bounce" style="display: inline-block;">✨</span> Ready to convert your PDF files';
+          log.style.color = '';
+        }
+        currentFile = null;
+      }, 2000);
+    } catch (err) {
+      if (err.message !== 'Cancelled by user') {
+        console.error(err);
+      }
+      if (log) {
+        if (err.message === 'Cancelled by user') {
+          log.innerHTML = '<span class="inline-block">⏸️</span> <span>Conversion cancelled by user</span>';
+          log.style.color = '#fb923c';
+          if (stats) stats.textContent = 'Cancelled';
+          toastr.info('Conversion cancelled successfully');
+        } else {
+          log.innerHTML = `<span class="inline-block">❌</span> <span>Error: ${err.message || err}</span>`;
+          log.style.color = '#f87171';
+          if (stats) stats.textContent = '✗ Conversion failed';
+          toastr.error(`Conversion failed: ${err.message || err}`);
+        }
+      }
+      updateProgress(0);
+      if (startBtn) startBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+    } finally {
+      if (startBtn) startBtn.disabled = false;
+      if (cancelBtn) {
+        cancelBtn.disabled = true;
+        cancelBtn.setAttribute('disabled', 'disabled');
+        cancelBtn.textContent = 'Cancel';
+      }
+      controller.cancelled = false;
+    }
+  }
+  
+  function updateProgress(pct) {
+    if (bar) {
+      const percent = Math.min(100, Math.max(0, pct));
+      bar.style.width = percent + '%';
+      bar.setAttribute('aria-valuenow', percent);
+      if (!bar.classList.contains('bg-gradient-primary') && !bar.classList.contains('bg-primary')) {
+        bar.classList.add('bg-gradient-primary');
+      }
+      bar.style.display = 'block';
+      bar.style.opacity = '1';
+    }
+  }
+  
+  dropzone.addEventListener('dragover', handleDragOver);
+  dropzone.addEventListener('dragleave', handleDragLeave);
+  dropzone.addEventListener('drop', handleDrop);
+  fileInput.addEventListener('change', handleFileChange);
+  if (startBtn) startBtn.addEventListener('click', handleStart);
+  if (cancelBtn) cancelBtn.addEventListener('click', handleCancel);
 }
 
 // PDF to JPG Implementation
