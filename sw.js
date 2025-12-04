@@ -118,6 +118,18 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
+  // NEVER cache AdSense or Analytics - always fetch fresh from network
+  const hostname = url.hostname;
+  if (hostname.includes('googlesyndication.com') || 
+      hostname.includes('googletagmanager.com') || 
+      hostname.includes('google-analytics.com') ||
+      hostname.includes('doubleclick.net') ||
+      hostname.includes('googleadservices.com')) {
+    // Always fetch from network, never cache ads/analytics
+    event.respondWith(fetch(request));
+    return;
+  }
+  
   // Strategy: Cache First for static assets, Network First for HTML pages
   event.respondWith(
     caches.match(request)
@@ -126,12 +138,23 @@ self.addEventListener('fetch', (event) => {
         if (request.headers.get('accept')?.includes('text/html')) {
           return fetch(request)
             .then((networkResponse) => {
-              // Cache successful responses
+              // Cache successful responses (but NOT ads/analytics)
               if (networkResponse && networkResponse.status === 200) {
-                const responseClone = networkResponse.clone();
-                caches.open(RUNTIME_CACHE).then((cache) => {
-                  cache.put(request, responseClone);
-                });
+                // Don't cache ads/analytics
+                const requestUrl = new URL(request.url);
+                const hostname = requestUrl.hostname;
+                const isAdOrAnalytics = hostname.includes('googlesyndication.com') || 
+                                       hostname.includes('googletagmanager.com') || 
+                                       hostname.includes('google-analytics.com') ||
+                                       hostname.includes('doubleclick.net') ||
+                                       hostname.includes('googleadservices.com');
+                
+                if (!isAdOrAnalytics) {
+                  const responseClone = networkResponse.clone();
+                  caches.open(RUNTIME_CACHE).then((cache) => {
+                    cache.put(request, responseClone);
+                  });
+                }
               }
               return networkResponse;
             })
@@ -153,12 +176,23 @@ self.addEventListener('fetch', (event) => {
         // Not in cache, fetch from network
         return fetch(request)
           .then((networkResponse) => {
-            // Cache successful responses
+            // Cache successful responses (but NOT ads/analytics - already excluded above)
             if (networkResponse && networkResponse.status === 200) {
-              const responseClone = networkResponse.clone();
-              caches.open(RUNTIME_CACHE).then((cache) => {
-                cache.put(request, responseClone);
-              });
+              // Double-check: don't cache ads/analytics even if they slip through
+              const requestUrl = new URL(request.url);
+              const hostname = requestUrl.hostname;
+              const isAdOrAnalytics = hostname.includes('googlesyndication.com') || 
+                                     hostname.includes('googletagmanager.com') || 
+                                     hostname.includes('google-analytics.com') ||
+                                     hostname.includes('doubleclick.net') ||
+                                     hostname.includes('googleadservices.com');
+              
+              if (!isAdOrAnalytics) {
+                const responseClone = networkResponse.clone();
+                caches.open(RUNTIME_CACHE).then((cache) => {
+                  cache.put(request, responseClone);
+                });
+              }
             }
             return networkResponse;
           })
