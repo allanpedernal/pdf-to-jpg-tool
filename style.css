@@ -765,6 +765,11 @@ html[data-theme="light"] .footer-border-top {
   box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
 }
 
+/* When the PWA install button is visible, lift the scroll-top above it */
+body.pwa-install-visible .scroll-top {
+  bottom: 5.5rem; /* clears the ~46px-tall Install App button + gap */
+}
+
 /* Ensure toasts can fade out */
 #toast-container > div {
   animation: toastFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;

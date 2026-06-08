@@ -94,6 +94,7 @@
       if (!document.body.contains(installButton)) {
         document.body.appendChild(installButton);
       }
+      document.body.classList.add('pwa-install-visible');
       
       // Log for debugging
       console.log('[PWA] Install button should now be visible');
@@ -101,6 +102,7 @@
       installButton.addEventListener('click', async () => {
         // Hide the install button
         installButton.classList.add('d-none');
+        document.body.classList.remove('pwa-install-visible');
         
         // Show the install prompt
         deferredPrompt.prompt();
@@ -117,6 +119,7 @@
           setTimeout(() => {
             if (deferredPrompt) {
               installButton.classList.remove('d-none');
+              document.body.classList.add('pwa-install-visible');
             }
           }, 5000);
         }
