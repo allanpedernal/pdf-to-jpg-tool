@@ -5,10 +5,12 @@
 //   node scripts/generate-post.js --count 2  # generate 2 posts
 //   node scripts/generate-post.js --dry-run  # generate but don't write files
 //
-// Providers (auto-fallback): tries Gemini first, then Groq if Gemini is
-// missing/over-quota/erroring. Set whichever keys you have:
+// Providers (auto-fallback in AI_PROVIDER_ORDER): tries each in turn, moving on
+// if one is missing/over-quota/erroring. Set whichever you have:
 //   GEMINI_API_KEY   (https://aistudio.google.com/apikey  — free tier)
 //   GROQ_API_KEY     (https://console.groq.com/keys       — free tier)
+//   GITHUB_TOKEN     (GitHub Models — free GPT-4o-mini; auto-set in Actions,
+//                     or a personal access token locally)
 //
 // Quality gates (to stay clear of Google's scaled-content / spam policy):
 //   - minimum word count
@@ -124,10 +126,38 @@ async function callGroq(prompt) {
   return stripCodeFence(text);
 }
 
-// Try Gemini, fall back to Groq. Order configurable via AI_PROVIDER_ORDER.
+// GitHub Models — free access to OpenAI (GPT-4o-mini) & others via a GitHub token.
+// In GitHub Actions this uses the built-in GITHUB_TOKEN (needs `models: read`).
+// Locally, set GITHUB_TOKEN to a personal access token.
+async function callGithubModels(prompt) {
+  const token = process.env.GITHUB_MODELS_TOKEN || process.env.GITHUB_TOKEN;
+  if (!token) throw new Error('no GITHUB_TOKEN');
+  const endpoint = process.env.GITHUB_MODELS_ENDPOINT || 'https://models.github.ai/inference/chat/completions';
+  const model = process.env.GITHUB_MODELS_MODEL || 'openai/gpt-4o-mini';
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+    body: JSON.stringify({
+      model,
+      temperature: 0.7,
+      response_format: { type: 'json_object' },
+      messages: [
+        { role: 'system', content: 'You are a helpful technical writer. Always respond with a single valid JSON object.' },
+        { role: 'user', content: prompt }
+      ]
+    })
+  });
+  if (!res.ok) throw new Error(`GitHub Models HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const data = await res.json();
+  const text = data?.choices?.[0]?.message?.content || '';
+  if (!text) throw new Error('GitHub Models returned empty content');
+  return stripCodeFence(text);
+}
+
+// Try providers in order, falling back on any failure. Order via AI_PROVIDER_ORDER.
 async function generateArticle(prompt) {
-  const order = (process.env.AI_PROVIDER_ORDER || 'gemini,groq').split(',').map(s => s.trim());
-  const providers = { gemini: callGemini, groq: callGroq };
+  const order = (process.env.AI_PROVIDER_ORDER || 'gemini,groq,github').split(',').map(s => s.trim());
+  const providers = { gemini: callGemini, groq: callGroq, github: callGithubModels };
   const errors = [];
   for (const name of order) {
     const fn = providers[name];

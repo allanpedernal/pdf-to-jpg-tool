@@ -21,6 +21,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  models: read          # access GitHub Models (free GPT-4o-mini) via GITHUB_TOKEN
 
 concurrency:
   group: publish-blog
@@ -43,6 +44,9 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+          # GitHub Models first (free, no extra secret), then Groq, then Gemini.
+          AI_PROVIDER_ORDER: github,groq,gemini
         run: |
           node scripts/generate-post.js \
             --count "${{ github.event.inputs.count || '1' }}" \
