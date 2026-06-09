@@ -185,33 +185,30 @@ function pageScripts() {
 ${adInit()}`;
 }
 
-// Scoped blog styling. The site's global `.card { background: var(--card-bg) !important }`
-// (style.css) forces a dark translucent card meant for the dark tool UI. These rules
-// (higher specificity + !important) restore clean, light, readable blog cards.
+// Scoped blog styling. Uses the site's THEME VARIABLES (var(--text-primary) etc.)
+// so the blog adapts to light AND dark mode exactly like the legal pages —
+// no hardcoded colors (that caused dark-on-dark text in dark mode).
 function blogStyles() {
   return `
   <style>
-    .blog-page .card { background:#ffffff !important; border:1px solid #e5e7eb !important; backdrop-filter:none !important; border-radius:14px !important; }
     .blog-page .blog-card { overflow:hidden; transition:transform .2s ease, box-shadow .2s ease; }
-    .blog-page .blog-card:hover { transform:translateY(-4px); box-shadow:0 14px 30px rgba(15,23,42,.12) !important; }
+    .blog-page .blog-card:hover { transform:translateY(-4px); box-shadow:0 14px 30px rgba(15,23,42,.18) !important; }
     .blog-page .card-img-top { aspect-ratio:1200/630; object-fit:cover; }
     .blog-page .card .card-body { text-align:left !important; }
-    .blog-page .card-title, .blog-page .card h2, .blog-page .card h4 { color:#0f172a !important; }
-    .blog-page .blog-excerpt { color:#475569 !important; }
-    .blog-page .blog-meta { color:#64748b !important; }
-    /* keep the call-to-action card's gradient instead of the dark override */
-    .blog-page .card.tools-cta { background:linear-gradient(135deg,#eff6ff,#f5f3ff) !important; border:1px solid #dbeafe !important; }
-    /* article typography */
-    .blog-content { color:#1e293b; }
-    .blog-content h2 { font-size:1.6rem; font-weight:800; color:#0f172a; margin:2.2rem 0 .75rem; }
-    .blog-content h3 { font-size:1.2rem; font-weight:700; color:#1e293b; margin:1.6rem 0 .5rem; }
+    .blog-page .blog-card h2, .blog-page .card h4 { color:var(--text-primary) !important; }
+    .blog-page .blog-excerpt { color:var(--text-secondary) !important; }
+    .blog-page .blog-meta { color:var(--text-secondary) !important; }
+    /* article typography — all themed so it reads in light or dark */
+    .blog-content { color:var(--text-primary); }
+    .blog-content h2 { font-size:1.6rem; font-weight:800; color:var(--text-primary); margin:2.2rem 0 .75rem; }
+    .blog-content h3 { font-size:1.2rem; font-weight:700; color:var(--text-primary); margin:1.6rem 0 .5rem; }
+    .blog-content p, .blog-content li { color:var(--text-primary); }
     .blog-content p { margin:0 0 1.05rem; }
     .blog-content ul, .blog-content ol { margin:0 0 1.05rem; padding-left:1.3rem; }
     .blog-content li { margin-bottom:.45rem; }
-    .blog-content a { color:#2563eb; text-decoration:underline; text-underline-offset:2px; }
-    .blog-content blockquote { border-left:4px solid #3b82f6; background:#f8fafc; padding:1rem 1.25rem; margin:1.6rem 0; border-radius:.5rem; color:#334155; }
-    .blog-content blockquote p { margin:0; }
-    .blog-topbar a:hover { color:#3b82f6 !important; }
+    .blog-content a { color:var(--bs-primary, #3b82f6); text-decoration:underline; text-underline-offset:2px; }
+    .blog-content blockquote { border-left:4px solid var(--bs-primary, #3b82f6); background:rgba(59,130,246,0.08); padding:1rem 1.25rem; margin:1.6rem 0; border-radius:.5rem; color:var(--text-secondary); }
+    .blog-content blockquote p { margin:0; color:var(--text-secondary); }
   </style>`;
 }
 
@@ -295,7 +292,7 @@ function relatedToolsBlock(post) {
   return `
     <div class="card tools-cta border-0 shadow-sm my-5">
       <div class="card-body p-4">
-        <h3 class="h5 fw-bold mb-3" style="color:#0f172a;"><i class="bi bi-lightning-charge-fill text-primary me-2"></i>Try the tools mentioned in this guide</h3>
+        <h3 class="h5 fw-bold mb-3" style="color:var(--text-primary);"><i class="bi bi-lightning-charge-fill text-primary me-2"></i>Try the tools mentioned in this guide</h3>
         ${items}
       </div>
     </div>`;
@@ -321,8 +318,8 @@ function renderPost(post, related) {
           <a href="/blog/${esc(r.slug)}.html" class="text-decoration-none">
             <div class="card h-100 border-0 shadow-sm">
               <div class="card-body">
-                <h4 class="h6 fw-bold" style="color:#0f172a;">${esc(r.title)}</h4>
-                <p class="small mb-0" style="color:#64748b;">${esc(r.excerpt)}</p>
+                <h4 class="h6 fw-bold" style="color:var(--text-primary);">${esc(r.title)}</h4>
+                <p class="small mb-0" style="color:var(--text-secondary);">${esc(r.excerpt)}</p>
               </div>
             </div>
           </a>
@@ -338,14 +335,6 @@ ${adRail('left-ad')}
       <!-- Main Content Area -->
       <main id="main-content" class="col-12 col-lg-8 px-3 px-sm-4 px-lg-4 pt-4">
         <div class="w-100 py-3 mx-auto" style="max-width:960px;">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb small">
-              <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Home</a></li>
-              <li class="breadcrumb-item"><a href="/blog/" class="text-decoration-none">Blog</a></li>
-              <li class="breadcrumb-item active" aria-current="page">${esc(post.title)}</li>
-            </ol>
-          </nav>
-
           <!-- Header card (same treatment as the legal pages) -->
           <header class="privacy-header text-center mb-4" style="border-radius:16px; overflow:hidden; padding:3.5rem 1.5rem 3rem;">
             <div class="container">
@@ -373,10 +362,6 @@ ${post.contentHtml}
               </div>
 
               ${relatedToolsBlock(post)}
-
-              <div class="text-center my-4">
-                ${adUnit('display:block; min-height:90px;')}
-              </div>
             </div>
           </article>
 
