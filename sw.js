@@ -1,10 +1,12 @@
 // Service Worker for PDF Tools PWA
 // Version 1.1.0 - Added PDF to PNG tool
-const CACHE_NAME = 'pdf-tools-v1.1.0';
-const RUNTIME_CACHE = 'pdf-tools-runtime-v1.1.0';
+const CACHE_NAME = 'pdf-tools-v1.2.1-33c55e15';
+const RUNTIME_CACHE = 'pdf-tools-v1.2.1-runtime-33c55e15';
 
 // Assets to cache immediately on install
 const STATIC_ASSETS = [
+  '/blog/',
+  '/blog/index.html',
   '/',
   '/index.html',
   '/about.html',

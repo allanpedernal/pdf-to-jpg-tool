@@ -1,0 +1,26 @@
+{
+  "_comment": "Topic queue for the auto-blog. The generator picks the first topic whose slug isn't already published in blog/posts.json, writes an original article, then moves on. Add more topics any time. 'rssHints' are OPTIONAL feeds used only as inspiration/research — content is always rewritten, never copied.",
+  "rssHints": [],
+  "topics": [
+    { "title": "How to Reduce PDF File Size for Email Attachments", "tags": ["PDF Compression", "Email"], "relatedTools": [{ "label": "PDF Compressor", "href": "/" }] },
+    { "title": "How to Rotate PDF Pages That Were Scanned Sideways", "tags": ["PDF Rotate", "Scanning"], "relatedTools": [{ "label": "PDF Rotate Tool", "href": "/" }] },
+    { "title": "What Is OCR and How to Extract Text From a Scanned PDF", "tags": ["OCR", "PDF"], "relatedTools": [{ "label": "PDF OCR Tool", "href": "/" }] },
+    { "title": "PNG to JPG: When and Why You Should Convert", "tags": ["PNG to JPG", "Image Formats"], "relatedTools": [{ "label": "PNG to JPG Converter", "href": "/" }] },
+    { "title": "How to Resize Images Without Losing Quality", "tags": ["Image Resize", "Image Quality"], "relatedTools": [{ "label": "Image Resizer", "href": "/" }] },
+    { "title": "How to Compress Images for a Faster Website", "tags": ["Image Compression", "Web Performance"], "relatedTools": [{ "label": "Image Compressor", "href": "/" }] },
+    { "title": "Best Image Format for the Web: JPG, PNG, or WebP", "tags": ["Image Formats", "Web Performance"], "relatedTools": [{ "label": "Image Tools", "href": "/" }] },
+    { "title": "How to Convert a Multi-Page PDF Into Separate Images", "tags": ["PDF to JPG", "Tutorials"], "relatedTools": [{ "label": "PDF to JPG Converter", "href": "/" }] },
+    { "title": "How to Combine Scanned Pages Into a Single PDF", "tags": ["JPG to PDF", "Scanning"], "relatedTools": [{ "label": "JPG to PDF Converter", "href": "/" }] },
+    { "title": "How to Extract a Single Page From a PDF", "tags": ["PDF Split", "Tutorials"], "relatedTools": [{ "label": "PDF Splitter", "href": "/" }] },
+    { "title": "Why Your PDF Won't Upload — and How to Fix It", "tags": ["PDF Compression", "Troubleshooting"], "relatedTools": [{ "label": "PDF Compressor", "href": "/" }] },
+    { "title": "How to Convert Screenshots Into a PDF", "tags": ["JPG to PDF", "Productivity"], "relatedTools": [{ "label": "JPG to PDF Converter", "href": "/" }] },
+    { "title": "DPI Explained: How Resolution Affects Scans and Prints", "tags": ["Image Quality", "Printing"], "relatedTools": [{ "label": "PDF to JPG Converter", "href": "/" }] },
+    { "title": "Lossless vs Lossy Compression: What's the Difference?", "tags": ["Image Formats", "Compression"], "relatedTools": [{ "label": "Image Compressor", "href": "/" }] },
+    { "title": "How to Convert PDF to Image on Your Phone", "tags": ["PDF to JPG", "Mobile"], "relatedTools": [{ "label": "PDF to JPG Converter", "href": "/" }] },
+    { "title": "How to Prepare Images for High-Quality Printing", "tags": ["Printing", "Image Quality"], "relatedTools": [{ "label": "Image Resizer", "href": "/" }] },
+    { "title": "How to Batch Convert Many Images at Once", "tags": ["Image Formats", "Productivity"], "relatedTools": [{ "label": "Image Tools", "href": "/" }] },
+    { "title": "How to Fix a Blurry Scanned Document", "tags": ["Scanning", "Troubleshooting"], "relatedTools": [{ "label": "PDF Tools", "href": "/" }] },
+    { "title": "How to Make a PDF Smaller for Online Form Submissions", "tags": ["PDF Compression", "Forms"], "relatedTools": [{ "label": "PDF Compressor", "href": "/" }] },
+    { "title": "How to Create a Photo PDF Album From Your Pictures", "tags": ["JPG to PDF", "Photos"], "relatedTools": [{ "label": "JPG to PDF Converter", "href": "/" }] }
+  ]
+}

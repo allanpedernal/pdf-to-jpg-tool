@@ -244,6 +244,24 @@ function initNavigation() {
               </ul>
             </div>
           `).join('')}
+
+          <div class="mb-4 mb-lg-5">
+            <h2 class="text-uppercase text-secondary small fw-semibold mb-3 px-2" style="font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.7;">
+              Resources
+            </h2>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1">
+                <a href="/blog/"
+                   class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 text-light">
+                  <span class="fs-5 flex-shrink-0">📝</span>
+                  <div class="flex-grow-1 text-truncate">
+                    <div class="small fw-medium text-truncate">Blog &amp; Guides</div>
+                    <div class="text-secondary small text-truncate d-none d-sm-block" style="font-size: 0.75rem; opacity: 0.7;">Tips &amp; tutorials</div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

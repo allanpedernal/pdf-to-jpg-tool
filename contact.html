@@ -148,7 +148,12 @@
                           <h4 class="fw-bold mb-2">
                             <i class="bi bi-envelope text-primary me-2"></i>Email
                           </h4>
-                          <p class="mb-0">For general inquiries, please use the contact form below or send us an email. We typically respond within 24-48 hours during business days.</p>
+                          <p class="mb-2">For general inquiries, please use the contact form below or send us an email. We typically respond within 24-48 hours during business days.</p>
+                          <p class="mb-0">
+                            <a href="mailto:pdftojpgtool@gmail.com" class="fw-semibold" style="color: var(--bs-primary); text-decoration: none;">
+                              <i class="bi bi-envelope-at me-1"></i>pdftojpgtool@gmail.com
+                            </a>
+                          </p>
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -197,7 +202,10 @@
                   </div>
                   <div class="section-content">
                     <p>Fill out the form below and we'll get back to you as soon as possible:</p>
-                    <form id="contact-form-element" class="mt-4">
+                    <!-- Formspree-backed contact form. -->
+                    <form id="contact-form-element" class="mt-4" action="https://formspree.io/f/mbdeyjod" method="POST">
+                      <!-- Honeypot field for spam bots (hidden from real users) -->
+                      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
                       <div class="mb-3">
                         <label for="name" class="form-label" style="color: var(--text-primary); font-weight: 500;">Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="name" name="name" required placeholder="Your full name">
@@ -471,24 +479,55 @@
     }
   </script>
   
-  <!-- Contact Form Handler -->
+  <!-- Contact Form Handler - submits to Formspree via AJAX (keeps user on page) -->
   <script>
-    document.getElementById('contact-form-element').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const messageDiv = document.getElementById('form-message');
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const subject = document.getElementById('subject').value;
-      const message = document.getElementById('message').value;
-      
-      if (message.length < 10) {
-        messageDiv.innerHTML = '<div class="alert alert-warning">Please provide a message with at least 10 characters.</div>';
-        return;
-      }
-      
-      messageDiv.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>Thank you for your message, ' + name + '! We\'ll get back to you at ' + email + ' within 24-48 hours. Due to the client-side nature of our service, we recommend also contacting us through your preferred email client if urgent.</div>';
-      this.reset();
-    });
+    (function() {
+      const form = document.getElementById('contact-form-element');
+      if (!form) return;
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const messageDiv = document.getElementById('form-message');
+        const name = document.getElementById('name').value;
+        const message = document.getElementById('message').value;
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        if (message.length < 10) {
+          messageDiv.innerHTML = '<div class="alert alert-warning">Please provide a message with at least 10 characters.</div>';
+          return;
+        }
+
+        // Guard against an unconfigured endpoint so we never silently drop messages.
+        if (form.action.includes('YOUR_FORM_ID')) {
+          messageDiv.innerHTML = '<div class="alert alert-warning"><i class="bi bi-exclamation-triangle me-2"></i>The contact form isn\'t fully configured yet. Please email us directly at <a href="mailto:pdftojpgtool@gmail.com">pdftojpgtool@gmail.com</a>.</div>';
+          return;
+        }
+
+        const originalBtn = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...'; }
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            messageDiv.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>Thank you for your message, ' + name + '! We\'ll get back to you within 24-48 hours.</div>';
+            form.reset();
+          } else {
+            const data = await response.json().catch(() => ({}));
+            const errMsg = (data.errors && data.errors.map(err => err.message).join(', ')) || 'Something went wrong. Please try again or email us directly.';
+            messageDiv.innerHTML = '<div class="alert alert-danger"><i class="bi bi-x-circle me-2"></i>' + errMsg + '</div>';
+          }
+        } catch (err) {
+          messageDiv.innerHTML = '<div class="alert alert-danger"><i class="bi bi-x-circle me-2"></i>Network error. Please email us directly at <a href="mailto:pdftojpgtool@gmail.com">pdftojpgtool@gmail.com</a>.</div>';
+        } finally {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalBtn; }
+        }
+      });
+    })();
   </script>
   
   <!-- Contact Page Scripts -->
@@ -572,14 +611,6 @@
               Free online PDF and image conversion tools. All tools work entirely in your browser - no uploads required.
             </p>
             <div class="d-flex gap-3">
-              <a href="#" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
-                <i class="bi bi-github" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
-              </a>
-              <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="transition: transform 0.3s ease;">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
               <a href="https://www.facebook.com/PDFtoJPGandVATools" target="_blank" rel="noopener noreferrer" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
                 <i class="bi bi-facebook" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
               </a>
@@ -648,6 +679,12 @@
               <a href="/terms-of-service.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
                 <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
                 <span>Terms of Service</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/blog/" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Blog &amp; Guides</span>
               </a>
             </li>
             <li class="mb-3">

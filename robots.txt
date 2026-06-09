@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 
+# Internal/debug pages - keep out of the index
+Disallow: /test-pwa.html
+
 # Sitemap location
 Sitemap: https://www.pdf-to-jpg-tool.com/sitemap.xml
 

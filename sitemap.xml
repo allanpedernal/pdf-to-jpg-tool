@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <!-- Main Homepage - Highest Priority -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.pdf-to-jpg-tool.com/</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- About Page - High Priority for Trust Signals -->
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/blog/</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://www.pdf-to-jpg-tool.com/about.html</loc>
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Contact Page - Important for User Engagement -->
-  <url>
-    <loc>https://www.pdf-to-jpg-tool.com/contact.html</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- Privacy Policy - Required Legal Page -->
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/contact.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
     <loc>https://www.pdf-to-jpg-tool.com/privacy-policy.html</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.4</priority>
   </url>
-  
-  <!-- Terms of Service - Required Legal Page -->
   <url>
     <loc>https://www.pdf-to-jpg-tool.com/terms-of-service.html</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.4</priority>
   </url>
-  
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/blog/convert-heic-to-jpg-any-device.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/blog/merge-and-split-pdf-files-safely.html</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/blog/how-to-convert-jpg-to-pdf.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/blog/how-to-compress-a-pdf-free.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/blog/pdf-to-png-vs-pdf-to-jpg.html</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdf-to-jpg-tool.com/blog/convert-pdf-to-jpg-without-losing-quality.html</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
-
