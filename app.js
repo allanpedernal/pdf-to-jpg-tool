@@ -182,12 +182,9 @@ function initNavigation() {
   const navHTML = `
     <nav class="h-auto" style="background-color: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border); border-right: 1px solid var(--card-border);">
       <div class="d-lg-none d-flex align-items-center justify-content-between p-3 border-bottom" style="border-color: var(--card-border);">
-        <div>
-          <h1 class="text-gradient fw-bold mb-0" style="font-size: 1.25rem; line-height: 1.2;">
-            PDF Tools
-          </h1>
-          <p class="text-secondary small mb-0" style="font-size: 0.75rem;">Free Online Tools Suite</p>
-        </div>
+        <span class="text-secondary fw-semibold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.08em;">
+          <i class="bi bi-tools me-1"></i>Tools
+        </span>
         <div class="d-flex align-items-center gap-2">
           <button id="theme-toggle-mobile" class="btn btn-link p-1 rounded-circle d-flex align-items-center justify-content-center" aria-label="Toggle theme" type="button" style="width: 32px; height: 32px; color: var(--text-secondary); transition: all 0.2s ease; opacity: 0.7;">
             <i class="bi ${themeIcon}" style="font-size: 0.85rem;"></i>
@@ -202,12 +199,9 @@ function initNavigation() {
         <div class="p-3 p-lg-4">
           <div class="mb-4 mb-lg-3 pb-3 border-bottom d-none d-lg-block" style="border-color: var(--card-border);">
             <div class="d-flex align-items-center justify-content-between mb-2">
-              <div>
-                <h1 class="text-gradient fw-bold mb-1" style="font-size: 1.5rem; line-height: 1.2;">
-                  PDF Tools
-                </h1>
-                <p class="text-secondary small mb-0">Free Online Tools Suite</p>
-              </div>
+              <span class="text-secondary fw-semibold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.08em;">
+                <i class="bi bi-tools me-1"></i>Tools
+              </span>
               <button id="theme-toggle-desktop" class="btn btn-link p-1 rounded-circle d-flex align-items-center justify-content-center" aria-label="Toggle theme" type="button" style="width: 32px; height: 32px; color: var(--text-secondary); transition: all 0.2s ease; opacity: 0.7;">
                 <i class="bi ${themeIcon}" style="font-size: 0.85rem;"></i>
               </button>

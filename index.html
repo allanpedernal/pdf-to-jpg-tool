@@ -438,8 +438,8 @@
       <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
         <i class="bi bi-file-earmark-pdf-fill me-2" style="color:#3b82f6;"></i>PDF Tools
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list" style="font-size:1.7rem; line-height:1; color:var(--text-primary);"></i>
       </button>
       <div class="collapse navbar-collapse" id="topNav">
         <ul class="navbar-nav ms-auto">
@@ -472,15 +472,18 @@
       </div>
     </aside>
 
-      <!-- Left Navigation Sidebar -->
-      <div id="nav-container" class="col-12 col-lg-2 p-0">
-        <!-- Navigation will be inserted here by app.js -->
-    </div>
+      <!-- Main Content Area (col-8): holds the tool sidebar + content -->
+      <main id="main-content" class="col-12 col-lg-8 p-0">
+        <div class="row g-0 h-100">
 
-      <!-- Main Content Area -->
-      <main id="main-content" class="col-12 col-lg-6 px-3 px-sm-4 px-lg-4 py-4">
-        <!-- Tool Content Area -->
-        <div id="tool-content" class="w-100 py-3" style="max-width: 1200px;">
+          <!-- Left Navigation Sidebar -->
+          <div id="nav-container" class="col-12 col-lg-3 p-0">
+            <!-- Navigation will be inserted here by app.js -->
+          </div>
+
+          <!-- Tool Content Area -->
+          <div class="col-12 col-lg-9 px-3 px-sm-4 px-lg-4 py-4">
+            <div id="tool-content" class="w-100 py-3">
           <!-- Default Landing Content - Visible before JavaScript loads -->
           <div id="default-content" class="w-100">
             <div class="text-center mb-5">
@@ -593,7 +596,9 @@
             </div>
           </div>
         </div>
-  </main>
+          </div>
+        </div>
+      </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
       <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
@@ -883,15 +888,6 @@
             <p class="footer-text-light mb-0 small" style="font-size: 0.9rem;">
               &copy; <span id="current-year-footer">2024</span> PDF Tools. All rights reserved.
             </p>
-            <div class="d-flex gap-3 flex-wrap justify-content-center">
-              <a href="/privacy-policy.html" class="footer-bottom-link footer-text-secondary" style="text-decoration: none; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0.75rem; border-radius: 6px;">
-                Privacy Policy
-              </a>
-              <span class="footer-text-secondary" style="font-size: 0.9rem; opacity: 0.5;">•</span>
-              <a href="/terms-of-service.html" class="footer-bottom-link footer-text-secondary" style="text-decoration: none; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0.75rem; border-radius: 6px;">
-                Terms of Service
-              </a>
-            </div>
           </div>
         </div>
       </div>

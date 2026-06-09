@@ -362,12 +362,19 @@ html[data-theme="light"] body {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Top navigation bar (shared across all pages) */
+/* Top navigation bar (shared across all pages).
+   position:sticky !important overrides the global `nav { position:fixed }` mobile
+   rule (in shared/styles.css) which otherwise hijacks this bar and overlaps it
+   with the homepage tool nav. */
 .topnav {
+  position: sticky !important;
+  top: 0 !important;
+  left: auto !important;
   background-color: var(--nav-bg) !important;
   border-bottom: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
-  z-index: 1040;
+  width: 100% !important;
+  z-index: 1055 !important;
 }
 .topnav .navbar-brand {
   font-size: 1.3rem;
@@ -404,6 +411,24 @@ html[data-theme="light"] body {
   }
 }
 
+/* Mobile top-nav: guarantee the hamburger is visible and style the dropdown menu */
+@media (max-width: 991.98px) {
+  .topnav .navbar-toggler {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .topnav .navbar-collapse {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+  }
+  .topnav .navbar-nav { gap: 0.15rem; }
+  .topnav .nav-link { padding: 0.65rem 0.9rem !important; }
+}
+
 /* --- Ads temporarily hidden until AdSense approval --------------------------
    The left/right columns are kept as spacers so the content stays centered and
    aligned with the nav; only the empty ad boxes + bottom banner are hidden.
@@ -411,6 +436,22 @@ html[data-theme="light"] body {
 #left-ad > .card,
 #right-ad > .card { display: none !important; }
 .ad-bottom { display: none !important; }
+/* ------------------------------------------------------------------------- */
+
+/* ===== Homepage (pages with the tool sidebar #nav-container) ===============
+   The left/right ad-rail COLUMNS are PRESERVED (reserved for ads) — only the
+   empty ad boxes are hidden (above). Content stays in the middle, not full width. */
+@media (max-width: 991.98px) {
+  /* Tool nav flows BELOW the sticky top nav instead of overlapping it. */
+  body:has(#nav-container) #nav-container nav {
+    position: static !important;
+    z-index: auto !important;
+    max-height: none !important;
+    border-right: none !important;
+  }
+  /* Navs are sticky/relative now — no fixed-nav clearance gap needed. */
+  #main-content { padding-top: 1rem !important; }
+}
 /* ------------------------------------------------------------------------- */
 
 /* Form controls */
@@ -819,7 +860,7 @@ html[data-theme="light"] .footer-border-top {
 
 /* When the PWA install button is visible, lift the scroll-top above it */
 body.pwa-install-visible .scroll-top {
-  bottom: 5.5rem; /* clears the ~46px-tall Install App button + gap */
+  bottom: 5.5rem; /* clears the Install App button + gap */
 }
 
 /* Ensure toasts can fade out */

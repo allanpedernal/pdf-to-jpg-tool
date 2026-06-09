@@ -55,8 +55,8 @@
   let deferredPrompt;
   window.deferredPrompt = null; // Make available globally for debugging
   
-  // Create install button (only on index page)
-  if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+  // Create install button (shown on all pages when the browser allows install)
+  {
     const installButton = document.createElement('button');
     installButton.id = 'pwa-install-button';
     installButton.className = 'btn btn-primary d-none';

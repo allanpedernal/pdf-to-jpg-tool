@@ -104,8 +104,8 @@ function main() {
   const hash = crypto.createHash('sha1');
   // Include the template/renderer + site CSS so visual changes also bust the SW cache.
   hash.update(fs.readFileSync(path.join(__dirname, 'lib', 'template.js')));
-  for (const css of ['style.css', 'shared/styles.css']) {
-    try { hash.update(fs.readFileSync(path.join(ROOT, css))); } catch (e) { /* ignore */ }
+  for (const asset of ['style.css', 'shared/styles.css', 'app.js']) {
+    try { hash.update(fs.readFileSync(path.join(ROOT, asset))); } catch (e) { /* ignore */ }
   }
 
   // Per-post pages

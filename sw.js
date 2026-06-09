@@ -1,7 +1,7 @@
 // Service Worker for PDF Tools PWA
 // Version 1.1.0 - Added PDF to PNG tool
-const CACHE_NAME = 'pdf-tools-v1.2.1-3486a17b';
-const RUNTIME_CACHE = 'pdf-tools-v1.2.1-runtime-3486a17b';
+const CACHE_NAME = 'pdf-tools-v1.2.1-e7cfa263';
+const RUNTIME_CACHE = 'pdf-tools-v1.2.1-runtime-e7cfa263';
 
 // Assets to cache immediately on install
 const STATIC_ASSETS = [
@@ -139,8 +139,12 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(request)
       .then((cachedResponse) => {
-        // For HTML pages, try network first, then cache
-        if (request.headers.get('accept')?.includes('text/html')) {
+        // Network-first for HTML pages AND same-origin CSS/JS, so style/script
+        // updates appear immediately instead of being stuck on a cached version.
+        const reqUrl = new URL(request.url);
+        const isHtml = request.headers.get('accept')?.includes('text/html');
+        const isStyleOrScript = reqUrl.origin === self.location.origin && /\.(css|js)$/.test(reqUrl.pathname);
+        if (isHtml || isStyleOrScript) {
           return fetch(request)
             .then((networkResponse) => {
               // Cache successful responses (but NOT ads/analytics)
