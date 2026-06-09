@@ -172,8 +172,20 @@ self.addEventListener('fetch', (event) => {
               if (cachedResponse) {
                 return cachedResponse;
               }
-              // If no cache, return offline page
-              return caches.match('/index.html');
+              // No cache for this exact request. For a real page navigation,
+              // show a plain offline notice — NOT the homepage, which would
+              // make every uncached page masquerade as index.html.
+              if (request.mode === 'navigate') {
+                return new Response(
+                  '<!doctype html><meta charset="utf-8"><title>Offline</title>' +
+                  '<body style="font-family:system-ui,sans-serif;text-align:center;padding:4rem 1rem">' +
+                  '<h1>You\'re offline</h1><p>This page isn\'t available without a connection. ' +
+                  'Reconnect and reload to view it.</p></body>',
+                  { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+                );
+              }
+              // Failed CSS/JS with no cache: never substitute HTML for a script/stylesheet.
+              return Response.error();
             });
         }
         
@@ -211,8 +223,9 @@ self.addEventListener('fetch', (event) => {
               // Return a placeholder or cached image
               return new Response('', { status: 404 });
             }
-            // For other resources, return cached index.html as fallback
-            return caches.match('/index.html');
+            // For other resources, fail honestly rather than returning the
+            // homepage HTML in place of the requested asset.
+            return Response.error();
           });
       })
   );
