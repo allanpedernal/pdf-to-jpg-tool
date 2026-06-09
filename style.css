@@ -40,9 +40,10 @@ body {
   animation: spin-slow 3s linear infinite;
 }
 
-/* Prevent horizontal scrollbar */
+/* Prevent horizontal scrollbar. Use `clip` (not `hidden`) so it doesn't create
+   a scroll container — `overflow-x: hidden` here breaks position:sticky (the top nav). */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 
@@ -360,6 +361,57 @@ html[data-theme="light"] body {
   backdrop-filter: blur(10px);
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Top navigation bar (shared across all pages) */
+.topnav {
+  background-color: var(--nav-bg) !important;
+  border-bottom: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  z-index: 1040;
+}
+.topnav .navbar-brand {
+  font-size: 1.3rem;
+  color: var(--text-primary) !important;
+}
+.topnav .nav-link {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.topnav .nav-link:hover {
+  color: var(--bs-primary) !important;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+.topnav .nav-link.active {
+  color: var(--bs-primary) !important;
+  font-weight: 600;
+}
+.topnav .navbar-toggler {
+  border-color: var(--card-border);
+  color: var(--text-primary);
+}
+/* Align the top-nav content with the middle (content) grid column on desktop,
+   keeping it clear of the left/right ad-rail columns. !important overrides
+   Bootstrap's px-lg-* utilities on the inner container. */
+@media (min-width: 992px) {
+  .topnav .container-fluid {
+    padding-left: 16.6667% !important;
+    padding-right: 16.6667% !important;
+  }
+}
+
+/* --- Ads temporarily hidden until AdSense approval --------------------------
+   The left/right columns are kept as spacers so the content stays centered and
+   aligned with the nav; only the empty ad boxes + bottom banner are hidden.
+   To re-enable ads after approval, DELETE this block. */
+#left-ad > .card,
+#right-ad > .card { display: none !important; }
+.ad-bottom { display: none !important; }
+/* ------------------------------------------------------------------------- */
 
 /* Form controls */
 .form-control, .form-select {

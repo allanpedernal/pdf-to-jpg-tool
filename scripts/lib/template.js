@@ -145,7 +145,7 @@ function adRail(id) {
 function bottomAd() {
   return `
       <!-- Bottom Ad Banner -->
-      <div class="col-12 mt-auto">
+      <div class="col-12 mt-auto ad-bottom">
         <div class="card border-0 shadow-sm m-2 m-lg-3">
           <div class="card-body text-center py-3 py-lg-4">
             ${adUnit('display:block; width: 100%; min-height: 90px;')}
@@ -210,6 +210,31 @@ function blogStyles() {
     .blog-content blockquote { border-left:4px solid var(--bs-primary, #3b82f6); background:rgba(59,130,246,0.08); padding:1rem 1.25rem; margin:1.6rem 0; border-radius:.5rem; color:var(--text-secondary); }
     .blog-content blockquote p { margin:0; color:var(--text-secondary); }
   </style>`;
+}
+
+// Shared top navigation (Home / About / Blog / Contact) with icons, themed.
+function topNav(active) {
+  const cls = key => (active === key ? 'nav-link active' : 'nav-link');
+  return `
+  <!-- Top Navigation -->
+  <nav class="navbar navbar-expand-lg sticky-top topnav">
+    <div class="container-fluid px-3 px-lg-4">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
+        <i class="bi bi-file-earmark-pdf-fill me-2" style="color:#3b82f6;"></i>PDF Tools
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="${cls('home')}" href="/"><i class="bi bi-house-door me-1"></i>Home</a></li>
+          <li class="nav-item"><a class="${cls('about')}" href="/about.html"><i class="bi bi-info-circle me-1"></i>About Us</a></li>
+          <li class="nav-item"><a class="${cls('blog')}" href="/blog/"><i class="bi bi-journal-text me-1"></i>Blog</a></li>
+          <li class="nav-item"><a class="${cls('contact')}" href="/contact.html"><i class="bi bi-envelope me-1"></i>Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>`;
 }
 
 function baseHead({ title, description, canonical, image, jsonld, extraMeta }) {
@@ -313,19 +338,11 @@ function renderPost(post, related) {
     `<span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">${esc(t)}</span>`
   ).join(' ');
 
-  const relatedCards = (related || []).slice(0, 3).map(r => `
-        <div class="col-12 col-md-4">
-          <a href="/blog/${esc(r.slug)}.html" class="text-decoration-none">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body">
-                <h4 class="h6 fw-bold" style="color:var(--text-primary);">${esc(r.title)}</h4>
-                <p class="small mb-0" style="color:var(--text-secondary);">${esc(r.excerpt)}</p>
-              </div>
-            </div>
-          </a>
-        </div>`).join('');
+  // Reuse the same rich card as the blog index (cover image, tags, date, read time).
+  const relatedCards = (related || []).slice(0, 3).map(cardMarkup).join('');
 
   return `${head}
+${topNav('blog')}
 
   <!-- Main Container - Bootstrap Grid Layout (matches the rest of the site) -->
   <div class="container-fluid px-0">
@@ -493,6 +510,7 @@ function renderIndex(posts) {
   const hasMore = sorted.length > POSTS_PER_PAGE;
 
   return `${head}
+${topNav('blog')}
 
   <!-- Main Container - Bootstrap Grid Layout (matches the rest of the site) -->
   <div class="container-fluid px-0">

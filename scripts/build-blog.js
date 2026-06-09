@@ -102,8 +102,11 @@ function main() {
   fs.mkdirSync(path.join(BLOG_DIR, 'images'), { recursive: true });
 
   const hash = crypto.createHash('sha1');
-  // Include the template/renderer so visual changes also bust the SW cache.
+  // Include the template/renderer + site CSS so visual changes also bust the SW cache.
   hash.update(fs.readFileSync(path.join(__dirname, 'lib', 'template.js')));
+  for (const css of ['style.css', 'shared/styles.css']) {
+    try { hash.update(fs.readFileSync(path.join(ROOT, css))); } catch (e) { /* ignore */ }
+  }
 
   // Per-post pages
   for (const post of posts) {
