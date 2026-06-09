@@ -669,13 +669,13 @@
   <!-- Tesseract.js for OCR (loaded on demand) -->
   <!-- Mammoth.js for Word conversion (loaded on demand) -->
   
-  <!-- Application Scripts -->
-  <script src="tools-config.js"></script>
-  <script src="tools.js"></script>
-  <script src="app.js"></script>
-  
+  <!-- Application Scripts (deferred: run in order, off the parser's critical path) -->
+  <script defer src="tools-config.js"></script>
+  <script defer src="tools.js"></script>
+  <script defer src="app.js"></script>
+
   <!-- Tool Implementations -->
-  <script src="tool-implementations.js"></script>
+  <script defer src="tool-implementations.js"></script>
   
   <!-- Initialize Google AdSense - Wait for script to load -->
   <script>

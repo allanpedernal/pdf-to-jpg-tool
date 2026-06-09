@@ -417,6 +417,83 @@ function blogIndexJsonLd(posts) {
   };
 }
 
+// How many cards to render server-side (first page); the rest lazy-load on scroll.
+const POSTS_PER_PAGE = 9;
+
+// Single source of truth for a post card, used to render the first page server-side.
+function cardMarkup(p) {
+  const tags = (p.tags || []).slice(0, 2)
+    .map(t => `<span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">${esc(t)}</span>`).join(' ');
+  return `
+        <div class="col-12 col-md-6 col-lg-4">
+          <a href="/blog/${esc(p.slug)}.html" class="text-decoration-none">
+            <article class="card h-100 border-0 shadow-sm blog-card">
+              <img src="${esc(p.image || SITE.defaultImage)}" alt="${esc(p.imageAlt || p.title)}" class="card-img-top" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-2">${tags}</div>
+                <h2 class="h5 fw-bold">${esc(p.title)}</h2>
+                <p class="small flex-grow-1 blog-excerpt">${esc(p.excerpt)}</p>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>${formatDate(p.date)} · ${readingTimeMinutes(p.contentHtml)} min read</div>
+              </div>
+            </article>
+          </a>
+        </div>`;
+}
+
+// Client-side infinite scroll. Fetches the lightweight /blog/index-data.json and
+// appends the remaining cards in batches as the sentinel nears the viewport.
+// The first page is already in the HTML, so this is purely progressive enhancement.
+function infiniteScrollScript(initialOffset, perPage) {
+  return `
+  <script>
+    (function(){
+      var PER = ${perPage}, offset = ${initialOffset}, all = null, loading = false, done = false, io = null;
+      var grid = document.getElementById('blog-grid');
+      var sentinel = document.getElementById('blog-sentinel');
+      var btn = document.getElementById('load-more');
+      var spin = document.getElementById('blog-spinner');
+      if(!grid || !sentinel) return;
+      function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+      function card(p){
+        var tags = (p.tags||[]).slice(0,2).map(function(t){return '<span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">'+esc(t)+'</span>';}).join(' ');
+        return '<div class="col-12 col-md-6 col-lg-4">'
+          + '<a href="/blog/'+esc(p.slug)+'.html" class="text-decoration-none">'
+          + '<article class="card h-100 border-0 shadow-sm blog-card">'
+          + '<img src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title)+'" class="card-img-top" loading="lazy">'
+          + '<div class="card-body d-flex flex-column">'
+          + '<div class="mb-2">'+tags+'</div>'
+          + '<h2 class="h5 fw-bold">'+esc(p.title)+'</h2>'
+          + '<p class="small flex-grow-1 blog-excerpt">'+esc(p.excerpt)+'</p>'
+          + '<div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>'+esc(p.dateFormatted)+' &middot; '+esc(p.readingTime)+' min read</div>'
+          + '</div></article></a></div>';
+      }
+      function finish(){ done = true; if(sentinel) sentinel.style.display = 'none'; if(io) io.disconnect(); }
+      function loadMore(){
+        if(loading || done) return;
+        loading = true;
+        if(btn) btn.classList.add('d-none');
+        if(spin) spin.classList.remove('d-none');
+        Promise.resolve(all || fetch('/blog/index-data.json').then(function(r){ return r.json(); }))
+          .then(function(data){
+            all = data;
+            var next = all.slice(offset, offset + PER);
+            grid.insertAdjacentHTML('beforeend', next.map(card).join(''));
+            offset += next.length;
+            loading = false;
+            if(spin) spin.classList.add('d-none');
+            if(offset >= all.length) finish(); else if(btn) btn.classList.remove('d-none');
+          })
+          .catch(function(e){ console.warn('blog: load more failed', e); loading = false; if(spin) spin.classList.add('d-none'); if(btn) btn.classList.remove('d-none'); });
+      }
+      if(btn) btn.addEventListener('click', loadMore);
+      if('IntersectionObserver' in window){
+        io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) loadMore(); }); }, { rootMargin: '500px' });
+        io.observe(sentinel);
+      }
+    })();
+  </script>`;
+}
+
 function renderIndex(posts) {
   const sorted = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
   const head = baseHead({
@@ -427,20 +504,8 @@ function renderIndex(posts) {
     jsonld: blogIndexJsonLd(sorted)
   });
 
-  const cards = sorted.map(p => `
-        <div class="col-12 col-md-6 col-lg-4">
-          <a href="/blog/${esc(p.slug)}.html" class="text-decoration-none">
-            <article class="card h-100 border-0 shadow-sm blog-card" style="transition:transform .2s ease, box-shadow .2s ease;">
-              <img src="${esc(p.image || SITE.defaultImage)}" alt="${esc(p.imageAlt || p.title)}" class="card-img-top" loading="lazy" style="aspect-ratio:1200/630; object-fit:cover;">
-              <div class="card-body d-flex flex-column">
-                <div class="mb-2">${(p.tags || []).slice(0, 2).map(t => `<span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">${esc(t)}</span>`).join(' ')}</div>
-                <h2 class="h5 fw-bold">${esc(p.title)}</h2>
-                <p class="small flex-grow-1 blog-excerpt">${esc(p.excerpt)}</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>${formatDate(p.date)} · ${readingTimeMinutes(p.contentHtml)} min read</div>
-              </div>
-            </article>
-          </a>
-        </div>`).join('');
+  const firstPage = sorted.slice(0, POSTS_PER_PAGE).map(cardMarkup).join('');
+  const hasMore = sorted.length > POSTS_PER_PAGE;
 
   return `${head}
 
@@ -460,8 +525,12 @@ ${adRail('left-ad')}
             </div>
           </header>
 
-          ${sorted.length ? `<div class="row g-4">${cards}
-          </div>` : `<p class="text-center text-secondary">No posts yet — check back soon.</p>`}
+          ${sorted.length ? `<div id="blog-grid" class="row g-4">${firstPage}
+          </div>
+          ${hasMore ? `<div id="blog-sentinel" class="text-center py-4">
+            <button id="load-more" class="btn btn-outline-primary"><i class="bi bi-arrow-down-circle me-1"></i>Load more articles</button>
+            <div id="blog-spinner" class="spinner-border text-primary d-none" role="status"><span class="visually-hidden">Loading…</span></div>
+          </div>` : ''}` : `<p class="text-center text-secondary">No posts yet — check back soon.</p>`}
         </div>
       </main>
 
@@ -471,6 +540,7 @@ ${bottomAd()}
   </div>
 ${siteFooter()}
 ${pageScripts()}
+${hasMore ? infiniteScrollScript(POSTS_PER_PAGE, POSTS_PER_PAGE) : ''}
 </body>
 </html>`;
 }

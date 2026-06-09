@@ -13,7 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { SITE, renderPost, renderIndex } = require('./lib/template');
+const { SITE, renderPost, renderIndex, formatDate, readingTimeMinutes } = require('./lib/template');
 
 const ROOT = path.resolve(__dirname, '..');
 const BLOG_DIR = path.join(ROOT, 'blog');
@@ -112,9 +112,23 @@ function main() {
     hash.update(post.slug + (post.updated || post.date) + post.contentHtml);
   }
 
-  // Index
+  // Index page
   const indexHtml = renderIndex(posts);
   writeFileLogged(path.join(BLOG_DIR, 'index.html'), indexHtml);
+
+  // Lightweight data file for client-side infinite scroll (no heavy contentHtml).
+  const indexData = posts.map(p => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    image: p.image || SITE.defaultImage,
+    imageAlt: p.imageAlt || p.title,
+    tags: p.tags || [],
+    date: p.date,
+    dateFormatted: formatDate(p.date),
+    readingTime: readingTimeMinutes(p.contentHtml)
+  }));
+  writeFileLogged(path.join(BLOG_DIR, 'index-data.json'), JSON.stringify(indexData));
 
   // Sitemap
   writeFileLogged(path.join(ROOT, 'sitemap.xml'), buildSitemap(posts));
