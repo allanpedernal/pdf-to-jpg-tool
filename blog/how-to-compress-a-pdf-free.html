@@ -179,7 +179,7 @@
                 <span class="mx-2">·</span>
                 <i class="bi bi-calendar3 me-1"></i><time datetime="2026-05-29">May 29, 2026</time>
                 <span class="mx-2">·</span>
-                <i class="bi bi-clock me-1"></i>2 min read
+                <i class="bi bi-clock me-1"></i>5 min read
               </p>
             </div>
           </header>
@@ -190,44 +190,69 @@
               <img src="/blog/images/how-to-compress-a-pdf-free.svg" alt="Large PDF file being compressed into a smaller file" class="img-fluid rounded-3 shadow-sm mb-4" loading="eager" style="width:100%; aspect-ratio:1200/630; object-fit:cover;">
 
               <div class="blog-content" style="font-size:1.08rem; line-height:1.85;">
-<p>Most "file too large" errors come down to one thing: images embedded in the PDF at far higher resolution than they need to be. Compression fixes that. Here's what's actually happening and how to do it safely.</p>
+<p>Most "file too large" errors come down to one thing: images embedded in the PDF at a far higher resolution than they actually need. Compression fixes that. Here's what's really happening inside a bloated PDF, how compression shrinks it, and how to do it without wrecking quality — for free, and privately.</p>
 <h2>Why PDFs get so big</h2>
-<p>A PDF that's mostly text is tiny. The size balloons when it contains:</p>
+<p>A PDF that's mostly text is tiny — often just a few hundred kilobytes. The size balloons when it contains:</p>
 <ul>
-<li>High-resolution scanned pages (a scanner often saves at 600 DPI).</li>
-<li>Embedded photos saved at full camera resolution.</li>
-<li>Fonts embedded multiple times, or uncompressed image data.</li>
+<li>High-resolution scanned pages — scanners often save at 600 DPI, far more than a screen needs.</li>
+<li>Photos embedded at full camera resolution (several megapixels each).</li>
+<li>Fonts embedded multiple times, or image data stored without compression.</li>
+<li>Hidden extras like thumbnails, form data, or revision history.</li>
 </ul>
+<p>A single phone photo dropped into a PDF can add several megabytes on its own, which is why a "short" 5-page scan can somehow weigh 30 MB.</p>
 <h2>How PDF compression works</h2>
 <p>A compressor re-encodes the images inside the PDF: it downsamples them to a sensible resolution (say 150 DPI) and applies efficient compression. Text and vector graphics stay sharp because they aren't images — only the heavy bitmap content is reduced.</p>
-<blockquote><p><strong>Key idea:</strong> You're not lowering the quality of the <em>document</em>, you're removing resolution you can't see anyway. A 600 DPI scan viewed on a screen looks identical at 150 DPI but is a fraction of the size.</p></blockquote>
-<h2>How much can you save?</h2>
-<p>Image-heavy PDFs commonly drop by <strong>50–90%</strong>. A 25 MB scanned report can often land under 5 MB — comfortably within most email limits (Gmail's cap is 25 MB).</p>
-<h2>Step-by-step</h2>
+<blockquote><p><strong>Key idea:</strong> you're not lowering the quality of the <em>document</em>, you're removing resolution you can't even see. A 600 DPI scan viewed on screen looks identical at 150 DPI but is a fraction of the size.</p></blockquote>
+<h2>How much smaller can it get?</h2>
+<p>Image-heavy PDFs commonly drop by <strong>50–90%</strong>. A 25 MB scanned report can often land under 5 MB — comfortably within most email limits (Gmail's cap is 25 MB, and many web forms allow far less, sometimes just 2 MB).</p>
+<h2>Step-by-step: compress a PDF for free</h2>
 <ol>
-<li>Open the <a href="/">PDF compressor</a> and drop your file in.</li>
-<li>Pick a compression level. Medium is a good balance; high squeezes hardest.</li>
+<li>Open the <a href="/compress-pdf.html">PDF compressor</a> and drop your file in.</li>
+<li>Pick a compression level — medium is a good balance; high squeezes hardest.</li>
 <li>Compress, then open the result and check the smallest text is still readable.</li>
+<li>Download the smaller file.</li>
 </ol>
-<p>Everything runs in your browser, so even confidential documents stay on your machine.</p>
-<h2>Tips for the best results</h2>
+<p>Everything runs in your browser, so even confidential documents — contracts, bank statements, medical records — never get uploaded anywhere. That's a real advantage over tools that send your file to a server you don't control.</p>
+<h2>Choosing the right compression level</h2>
 <ul>
-<li>If a scan is still huge, the original was probably scanned at very high DPI — compress harder.</li>
-<li>For documents you'll print, keep at least 150 DPI; for screen-only, 96–120 DPI is plenty.</li>
-<li>Need it even smaller? Split out the pages you don't need with a <a href="/">PDF splitter</a> first.</li>
+<li><strong>Low</strong> — minimal size reduction, virtually no visible change. Good for already-lean PDFs.</li>
+<li><strong>Medium</strong> — the sweet spot for most documents: big savings, still crisp on screen.</li>
+<li><strong>High</strong> — maximum shrink for huge scans you only need to view or email; check the fine print afterwards.</li>
 </ul>
+<h2>What compression can and can't do</h2>
+<p>Compression shines on image-heavy and scanned PDFs. It does very little for documents that are already mostly text, simply because there's nothing heavy to remove — a 200 KB text PDF won't get dramatically smaller, and that's fine. If a "text" document is somehow huge, it's usually a scanned image of text rather than real text; in that case compression (or re-scanning at a lower DPI) will help a lot.</p>
+<h2>Extra tips for the smallest files</h2>
+<ul>
+<li>If a scan is still huge after compressing, the original was probably scanned at very high DPI — compress harder, or rescan at 200–300 DPI.</li>
+<li>For documents you'll print, keep at least 150 DPI; for screen-only sharing, 96–120 DPI is plenty.</li>
+<li>Don't need every page? Remove the extras first with the <a href="/split-pdf.html">PDF splitter</a>, then compress what's left.</li>
+<li>Combining several PDFs? <a href="/merge-pdf.html">Merge them</a> first, then compress the single file once.</li>
+<li>Building a PDF from photos? Convert <a href="/jpg-to-pdf.html">JPG to PDF</a>, then compress — phone photos are the usual culprit behind giant files.</li>
+</ul>
+<h2>Compression vs. quality: the honest trade-off</h2>
+<p>Every compressor balances size against fidelity. Medium settings are designed so the difference is invisible at normal viewing distance. Only push to high compression when the file must be tiny and you're viewing, not printing. If you ever over-compress, just re-run the original at a gentler level — the source is never modified, so you can experiment freely.</p>
+<h2>Why browser-based compression is safer</h2>
+<p>Server-based tools upload your document, process it on their machines, and trust you to believe it's deleted afterwards. A browser-based compressor does the work on your own device, so sensitive files never leave your computer. For anything with personal or financial information, that difference matters more than a few extra kilobytes.</p>
+<h2>Compressing PDFs on your phone</h2>
+<p>Because the compressor runs in the browser, it works just as well on a phone as on a laptop — no app required. That's genuinely useful when you're out and about: photograph a document, turn it into a PDF, and compress it before emailing, all from your phone in under a minute. On mobile, stick to medium compression for the best balance, and always open the result to confirm small text is still legible before you send it. If your phone produced a very large scan, the savings can be dramatic — often turning an un-emailable 20 MB file into a few megabytes.</p>
 <h2>Frequently asked questions</h2>
 <h3>Will compression make my text blurry?</h3>
 <p>No — text is vector data and isn't affected. Only embedded images are downsampled.</p>
 <h3>Is it safe for sensitive documents?</h3>
-<p>Yes. Because the compression happens locally in your browser, your file is never uploaded anywhere.</p>
+<p>Yes. Compression happens locally in your browser, so your file is never uploaded.</p>
+<h3>Why is my PDF still large after compressing?</h3>
+<p>It was likely scanned at very high DPI. Try a higher compression level, or split out pages you don't need.</p>
+<h3>Does compressing change the original file?</h3>
+<p>No. You download a new, smaller copy; the original stays untouched.</p>
+<h3>What's the best way to email a large PDF?</h3>
+<p>Compress it first; if it's still over the limit, split it into parts and send them separately.</p>
               </div>
 
               
     <div class="card tools-cta border-0 shadow-sm my-5">
       <div class="card-body p-4">
         <h3 class="h5 fw-bold mb-3" style="color:var(--text-primary);"><i class="bi bi-lightning-charge-fill text-primary me-2"></i>Try the tools mentioned in this guide</h3>
-        <a href="/" class="btn btn-primary btn-sm me-2 mb-2"><i class="bi bi-tools me-1"></i>PDF Compressor</a>
+        <a href="/compress-pdf.html" class="btn btn-primary btn-sm me-2 mb-2"><i class="bi bi-tools me-1"></i>PDF Compressor</a>
       </div>
     </div>
             </div>
@@ -244,7 +269,7 @@
                 <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">JPG to PDF</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">Tutorials</span></div>
                 <h2 class="h5 fw-bold">How to Convert JPG to PDF: A Complete Guide</h2>
                 <p class="small flex-grow-1 blog-excerpt">Turn one image or a whole stack of photos into a single, tidy PDF — with the right page size, orientation, and order.</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 2, 2026 · 2 min read</div>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 2, 2026 · 5 min read</div>
               </div>
             </article>
           </a>
@@ -257,7 +282,7 @@
                 <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF to JPG</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">Image Quality</span></div>
                 <h2 class="h5 fw-bold">How to Convert PDF to JPG Without Losing Quality</h2>
                 <p class="small flex-grow-1 blog-excerpt">The settings that actually matter when turning PDF pages into sharp JPG images — resolution, DPI, and compression explained in plain English.</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 20, 2026 · 2 min read</div>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 20, 2026 · 5 min read</div>
               </div>
             </article>
           </a>
@@ -270,7 +295,7 @@
                 <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">HEIC to JPG</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">iPhone</span></div>
                 <h2 class="h5 fw-bold">How to Convert HEIC to JPG (iPhone, Mac &amp; Windows)</h2>
                 <p class="small flex-grow-1 blog-excerpt">Why your iPhone photos won&#39;t open on some apps — and the fastest free way to turn HEIC files into universally compatible JPGs.</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 8, 2026 · 2 min read</div>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 8, 2026 · 5 min read</div>
               </div>
             </article>
           </a>

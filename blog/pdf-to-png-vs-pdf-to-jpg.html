@@ -179,7 +179,7 @@
                 <span class="mx-2">·</span>
                 <i class="bi bi-calendar3 me-1"></i><time datetime="2026-05-25">May 25, 2026</time>
                 <span class="mx-2">·</span>
-                <i class="bi bi-clock me-1"></i>2 min read
+                <i class="bi bi-clock me-1"></i>5 min read
               </p>
             </div>
           </header>
@@ -190,43 +190,74 @@
               <img src="/blog/images/pdf-to-png-vs-pdf-to-jpg.svg" alt="Side by side comparison of PNG and JPG image formats" class="img-fluid rounded-3 shadow-sm mb-4" loading="eager" style="width:100%; aspect-ratio:1200/630; object-fit:cover;">
 
               <div class="blog-content" style="font-size:1.08rem; line-height:1.85;">
-<p>When you export a PDF page as an image, you'll usually be asked to choose between JPG and PNG. They look similar, but under the hood they behave very differently. Picking the right one saves you from blurry text or bloated files.</p>
+<p>When you export a PDF page as an image, you'll usually be asked to choose between JPG and PNG. They look similar in the menu, but under the hood they behave very differently — and picking the wrong one leaves you with blurry text or needlessly huge files. Here's how to choose with confidence every time.</p>
 <h2>The one-line summary</h2>
-<p><strong>Use JPG for photos and smaller files. Use PNG for text, screenshots, line art, and anything that needs transparency.</strong> Everything below is just the reasoning behind that rule.</p>
-<h2>How they compress</h2>
-<p>JPG uses <em>lossy</em> compression — it discards detail your eye is unlikely to miss, which makes files small but can blur sharp edges. PNG uses <em>lossless</em> compression — nothing is thrown away, so edges stay crisp, but files are larger.</p>
+<p><strong>Use JPG for photographs and smaller files. Use PNG for text, screenshots, line art, and anything that needs transparency.</strong> Everything below is the reasoning behind that rule, with real examples you'll recognise.</p>
+<h2>How the two formats compress</h2>
+<p>JPG uses <em>lossy</em> compression: it permanently discards detail your eye is unlikely to miss, which makes files small but can blur sharp edges and add halos around text. PNG uses <em>lossless</em> compression: nothing is thrown away, so edges stay perfectly crisp — but the files are larger, especially for photographs with millions of subtle colours.</p>
+<p>That single difference — lossy versus lossless — drives every other trade-off between them.</p>
 <h2>Side-by-side comparison</h2>
 <ul>
-<li><strong>Text &amp; sharp edges:</strong> PNG wins. JPG can add halos around letters.</li>
+<li><strong>Text &amp; sharp edges:</strong> PNG wins clearly. JPG adds visible halos around letters.</li>
 <li><strong>Photographs:</strong> JPG wins. It compresses smooth gradients efficiently with no visible loss.</li>
-<li><strong>File size:</strong> JPG is typically 3–10× smaller for the same page.</li>
-<li><strong>Transparency:</strong> Only PNG supports it. JPG always has a solid background.</li>
-<li><strong>Re-saving repeatedly:</strong> PNG is safe; JPG degrades a little each time it's re-compressed.</li>
+<li><strong>File size:</strong> JPG is typically 3–10× smaller than PNG for the same page.</li>
+<li><strong>Transparency:</strong> Only PNG supports it. JPG always fills the background with a solid colour.</li>
+<li><strong>Re-saving repeatedly:</strong> PNG is safe to edit and re-save; JPG degrades a little each time it's re-compressed.</li>
+<li><strong>Colours:</strong> PNG handles flat, solid colours (logos, charts) with zero artifacts; JPG can smear them.</li>
 </ul>
+<h2>Why text looks bad in JPG</h2>
+<p>JPEG compression works by grouping pixels into blocks and simplifying each block. That's invisible on a photo of a sunset, but text is full of high-contrast edges — black letters on white — which is exactly what the algorithm struggles with. The result is the faint grey "mosquito noise" you sometimes see around words in a low-quality JPG. PNG keeps every pixel exactly as rendered, so letters stay knife-sharp.</p>
 <h2>Real-world examples</h2>
-<p><strong>A scanned contract you'll email:</strong> PNG if legibility is critical, JPG at 90% if size matters more.</p>
-<p><strong>A page that's mostly a photograph:</strong> JPG, every time.</p>
-<p><strong>A logo or diagram you'll place on a coloured background:</strong> PNG, for the transparency.</p>
+<p><strong>A scanned contract you'll email:</strong> PNG if legibility is critical; JPG at 90% if size matters more.</p>
+<p><strong>A page that's mostly a photograph:</strong> JPG, every time — PNG would balloon the file for no visible gain.</p>
+<p><strong>A logo, chart, or diagram on a coloured background:</strong> PNG, for the transparency and clean edges.</p>
+<p><strong>A long report you want to share as images:</strong> JPG at 150 DPI keeps the bundle small and readable.</p>
+<p><strong>A screenshot of an app or spreadsheet:</strong> PNG — screenshots are full of crisp text and lines.</p>
+<h2>What about quality settings?</h2>
+<p>For either format, resolution still matters most. Render at 150 DPI for screen and 300 DPI for print. With JPG you also choose a quality level — keep it at 85–95%. PNG has no quality slider because it's lossless; its only lever is resolution. For a deeper dive into sharpness, see <a href="/blog/convert-pdf-to-jpg-without-losing-quality.html">how to convert PDF to JPG without losing quality</a>.</p>
+<blockquote><p><strong>Tip:</strong> Not sure? Export one page both ways and compare at 100% zoom. The right choice is usually obvious in seconds — and the file-size difference tells you the cost.</p></blockquote>
 <h2>How to convert either way</h2>
 <ol>
 <li>Open the converter and drop in your PDF.</li>
-<li>Choose <a href="/">PDF to JPG</a> for small files or <a href="/">PDF to PNG</a> for maximum sharpness.</li>
+<li>Choose <a href="/pdf-to-jpg.html">PDF to JPG</a> for small files, or <a href="/pdf-to-png.html">PDF to PNG</a> for maximum sharpness and transparency.</li>
 <li>Set the resolution (150 DPI for screen, 300 DPI for print) and convert.</li>
+<li>Download your images individually or as a ZIP.</li>
 </ol>
-<p>Both conversions happen locally in your browser, so your files never leave your device.</p>
+<p>Both conversions happen locally in your browser, so your files never leave your device — important for anything confidential.</p>
+<h2>Can I switch formats later?</h2>
+<p>You can convert a JPG to PNG or a <a href="/png-to-jpg.html">PNG to JPG</a> afterwards, but it won't undo earlier losses — converting a blurry JPG to PNG just preserves the blur in a bigger file. Always start from the format you ultimately need, at the right resolution.</p>
+<h2>A quick word on WebP</h2>
+<p>You may also see WebP offered elsewhere. It can beat both JPG and PNG on size, but support is still patchy in older software and some print workflows, so JPG and PNG remain the safe, universal choices for sharing documents today.</p>
+<h2>A quick decision checklist</h2>
+<p>When you're in a hurry, run through these questions and the answer falls out:</p>
+<ul>
+<li><strong>Does the page have lots of text or sharp lines?</strong> Choose PNG.</li>
+<li><strong>Is it mostly a photograph?</strong> Choose JPG.</li>
+<li><strong>Do you need a transparent background?</strong> PNG is the only option.</li>
+<li><strong>Is small file size the priority (email, web, many pages)?</strong> JPG.</li>
+<li><strong>Will you edit and re-save it repeatedly?</strong> PNG, so it never degrades.</li>
+<li><strong>Will it be printed at high resolution?</strong> Either works — just render at 300 DPI.</li>
+</ul>
+<p>If two answers conflict — say, a sharp document you also need small — export both and keep whichever looks acceptable at the smaller size. It only takes a moment and removes the guesswork for good.</p>
 <h2>Frequently asked questions</h2>
 <h3>Is PNG always higher quality than JPG?</h3>
 <p>For text and sharp graphics, yes. For photographs the visible difference is tiny while PNG files are far larger.</p>
 <h3>Can I convert JPG to PNG later?</h3>
-<p>You can, but it won't restore detail JPG already discarded. Start from the format you ultimately need.</p>
+<p>You can, but it won't restore detail JPG already discarded. Choose the right format up front.</p>
+<h3>Which format is best for the web?</h3>
+<p>JPG for photos (fast loading), PNG for logos, icons and anything needing transparency.</p>
+<h3>Does PNG support multiple pages?</h3>
+<p>No — like JPG, each page becomes a separate image file. To keep pages together in one file, convert them back into a PDF.</p>
+<h3>Why is my PNG so large?</h3>
+<p>PNG is lossless, so detailed or photographic pages produce big files. If size matters and the page is a photo, use JPG instead.</p>
               </div>
 
               
     <div class="card tools-cta border-0 shadow-sm my-5">
       <div class="card-body p-4">
         <h3 class="h5 fw-bold mb-3" style="color:var(--text-primary);"><i class="bi bi-lightning-charge-fill text-primary me-2"></i>Try the tools mentioned in this guide</h3>
-        <a href="/" class="btn btn-primary btn-sm me-2 mb-2"><i class="bi bi-tools me-1"></i>PDF to JPG Converter</a>
-        <a href="/" class="btn btn-primary btn-sm me-2 mb-2"><i class="bi bi-tools me-1"></i>PDF to PNG Converter</a>
+        <a href="/pdf-to-jpg.html" class="btn btn-primary btn-sm me-2 mb-2"><i class="bi bi-tools me-1"></i>PDF to JPG Converter</a>
+        <a href="/pdf-to-png.html" class="btn btn-primary btn-sm me-2 mb-2"><i class="bi bi-tools me-1"></i>PDF to PNG Converter</a>
       </div>
     </div>
             </div>
@@ -243,7 +274,7 @@
                 <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">HEIC to JPG</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">iPhone</span></div>
                 <h2 class="h5 fw-bold">How to Convert HEIC to JPG (iPhone, Mac &amp; Windows)</h2>
                 <p class="small flex-grow-1 blog-excerpt">Why your iPhone photos won&#39;t open on some apps — and the fastest free way to turn HEIC files into universally compatible JPGs.</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 8, 2026 · 2 min read</div>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 8, 2026 · 5 min read</div>
               </div>
             </article>
           </a>
@@ -256,7 +287,7 @@
                 <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF to JPG</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">Image Quality</span></div>
                 <h2 class="h5 fw-bold">How to Convert PDF to JPG Without Losing Quality</h2>
                 <p class="small flex-grow-1 blog-excerpt">The settings that actually matter when turning PDF pages into sharp JPG images — resolution, DPI, and compression explained in plain English.</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 20, 2026 · 2 min read</div>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 20, 2026 · 5 min read</div>
               </div>
             </article>
           </a>
@@ -269,7 +300,7 @@
                 <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF Merge</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF Split</span></div>
                 <h2 class="h5 fw-bold">How to Merge &amp; Split PDF Files Safely</h2>
                 <p class="small flex-grow-1 blog-excerpt">Combine several PDFs into one, or pull out just the pages you need — without sending sensitive documents to a stranger&#39;s server.</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 5, 2026 · 2 min read</div>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 5, 2026 · 5 min read</div>
               </div>
             </article>
           </a>
