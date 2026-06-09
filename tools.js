@@ -5596,3 +5596,134 @@ function getHEICToJPGContent() {
 }
 
 
+
+// ===== Reliable canvas-based image format converters (JPG→PNG, Image→WebP) =====
+function getImageConvertContent(o) {
+  const steps = o.steps.map((s, i) => `
+              <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                  <div class="mb-3"><div class="d-inline-flex align-items-center justify-content-center rounded-circle text-white fw-bold" style="width: 60px; height: 60px; background: #3b82f6; font-size: 1.5rem;">${i + 1}</div></div>
+                  <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">${s.title}</h3>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${s.text}</p>
+                </div>
+              </div>`).join('');
+  const benefits = o.benefits.map(b => `
+              <div class="col-md-6 col-lg-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: ${b.color};"><i class="bi ${b.icon} text-white" style="font-size: 2rem;"></i></div></div>
+                  <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">${b.title}</h4>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${b.text}</p>
+                </div>
+              </div>`).join('');
+  const faqs = o.faqs.map(f => `
+              <div class="col-md-6">
+                <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                  <div class="card-body p-4">
+                    <h3 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">${f.q}</h3>
+                    <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">${f.a}</p>
+                  </div>
+                </div>
+              </div>`).join('');
+  return `
+  <div class="w-100">
+    <div class="mx-auto" style="max-width: 760px;">
+      <div class="text-center mb-4">
+        <div style="font-size: 3rem;">${o.emoji}</div>
+        <h1 class="text-gradient fw-bold mb-2" style="font-size: 2.2rem;">${o.title}</h1>
+        <p class="text-light fs-5 mb-0">${o.subtitle}</p>
+        <p class="text-secondary small mt-1 mb-0">Free • No Upload Required • 100% Secure</p>
+      </div>
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4">
+          <div id="dz-${o.id}" class="dropzone text-center p-5" role="button" tabindex="0" style="cursor: pointer;">
+            <div style="font-size: 2.5rem;">📁</div>
+            <p class="fw-semibold mb-1 text-light">Drag &amp; drop ${o.hint} here</p>
+            <p class="small text-secondary mb-0">or click to browse</p>
+            <input type="file" id="file-${o.id}" class="d-none" accept="${o.accept}" multiple>
+          </div>
+          <ul id="list-${o.id}" class="list-unstyled mt-3 mb-0 small text-light"></ul>
+          <div class="d-flex flex-column align-items-center gap-2 mt-3">
+            <button id="btn-${o.id}" class="btn btn-primary fw-bold px-4 py-2" disabled><i class="bi bi-magic me-2"></i>${o.cta}</button>
+            <span id="status-${o.id}" class="small text-secondary">No files selected</span>
+          </div>
+          <div id="result-${o.id}" class="mt-3 text-center"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="card border-0 shadow-sm mb-5">
+      <div class="card-body p-4 p-lg-5">
+        <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">How It Works</h2>
+        <div class="row g-4">${steps}
+        </div>
+      </div>
+    </div>
+
+    <!-- Why -->
+    <div class="card border-0 shadow-sm mb-5">
+      <div class="card-body p-4 p-lg-5">
+        <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">${o.whyTitle}</h2>
+        <div class="row g-4 justify-content-center">${benefits}
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card border-0 shadow-sm mb-5">
+      <div class="card-body p-4 p-lg-5">
+        <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">Frequently Asked Questions</h2>
+        <div class="row g-4">${faqs}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+function getJPGToPNGContent() {
+  return getImageConvertContent({
+    id: 'jpg-to-png', emoji: '🪄', title: 'JPG to PNG Converter',
+    subtitle: 'Convert JPG/JPEG images to PNG, right in your browser', accept: 'image/jpeg', hint: 'JPG images', cta: 'Convert to PNG',
+    whyTitle: 'Why Convert JPG to PNG?',
+    steps: [
+      { title: 'Select JPG Images', text: 'Drag and drop your JPG/JPEG images, or click to browse and select multiple files from your computer.' },
+      { title: 'Click Convert', text: 'Hit "Convert to PNG" — your images are converted to lossless PNG instantly, right in your browser.' },
+      { title: 'Stay Private', text: 'Nothing is uploaded. The whole conversion runs locally on your device, so your images stay private.' },
+      { title: 'Download', text: 'Download your PNG images individually, or grab them all at once in a single ZIP file.' }
+    ],
+    benefits: [
+      { color: '#f59e0b', icon: 'bi-shield-lock-fill', title: '100% Private', text: 'Your images never leave your device — everything is processed in your browser, not on a server.' },
+      { color: '#f97316', icon: 'bi-lightning-fill', title: 'Lightning Fast', text: 'No uploads, no waiting. Convert JPG to PNG in seconds with instant local processing.' },
+      { color: '#10b981', icon: 'bi-vector-pen', title: 'Lossless Quality', text: 'PNG is lossless, so edges and details stay perfectly crisp — ideal for graphics and editing.' }
+    ],
+    faqs: [
+      { q: 'Why convert JPG to PNG?', a: 'PNG is lossless and keeps sharp edges crisp, which is better for graphics, logos and further editing.' },
+      { q: 'Will the file get bigger?', a: 'Often yes — PNG is lossless, so photos can be larger than the JPG. That trade-off buys you perfect quality.' },
+      { q: 'Are my images uploaded?', a: 'No. Conversion happens entirely in your browser; your files never leave your device.' },
+      { q: 'Can I convert many at once?', a: 'Yes — drop in a whole batch and download them together as a ZIP.' }
+    ]
+  });
+}
+function getImageToWebpContent() {
+  return getImageConvertContent({
+    id: 'image-to-webp', emoji: '🌐', title: 'Image to WebP Converter',
+    subtitle: 'Convert JPG &amp; PNG images to modern, smaller WebP', accept: 'image/*', hint: 'images', cta: 'Convert to WebP',
+    whyTitle: 'Why Convert to WebP?',
+    steps: [
+      { title: 'Select Images', text: 'Drag and drop your JPG or PNG images, or click to browse and select multiple files.' },
+      { title: 'Click Convert', text: 'Hit "Convert to WebP" — your images are re-encoded to the modern WebP format instantly.' },
+      { title: 'Stay Private', text: 'All processing happens locally in your browser; your images are never uploaded anywhere.' },
+      { title: 'Download', text: 'Download a single WebP file, or all of them together as a ZIP.' }
+    ],
+    benefits: [
+      { color: '#10b981', icon: 'bi-speedometer2', title: 'Smaller Files', text: 'WebP is typically 25–35% smaller than JPG/PNG at similar quality — perfect for faster websites.' },
+      { color: '#f59e0b', icon: 'bi-shield-lock-fill', title: '100% Private', text: 'Your images never leave your device. Everything runs in your browser, not on a server.' },
+      { color: '#3b82f6', icon: 'bi-lightning-fill', title: 'Instant & Free', text: 'No uploads, no signup, no limits. Convert as many images as you like, instantly.' }
+    ],
+    faqs: [
+      { q: 'Why use WebP?', a: 'WebP gives smaller files at similar quality, which speeds up page loads and improves SEO.' },
+      { q: 'Is WebP supported everywhere?', a: 'All modern browsers support WebP. For very old software, keep a JPG/PNG copy as well.' },
+      { q: 'Does it reduce quality?', a: 'WebP uses smart compression — at the default setting the difference is hard to spot while files shrink a lot.' },
+      { q: 'Are my images uploaded?', a: 'No — conversion is 100% in your browser, so your files stay private.' }
+    ]
+  });
+}

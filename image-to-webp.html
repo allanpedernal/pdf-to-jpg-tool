@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" itemscope itemtype="https://schema.org/WebApplication">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  
+  <!-- DNS Prefetch & Preconnect for Performance - Optimized for mobile -->
+  <script>
+    // Only preconnect on desktop, mobile benefits from delayed connections
+    const isMobilePrefetch = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (!isMobilePrefetch) {
+      // Desktop: preconnect for faster loading
+      const preconnects = [
+        'https://cdn.jsdelivr.net',
+        'https://cdnjs.cloudflare.com'
+      ];
+      preconnects.forEach(url => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = url;
+        document.head.appendChild(link);
+      });
+    }
+  </script>
+  
+  <!-- Resource Hints -->
+  <!-- Preview image preload removed for local development -->
+  
+  <!-- Additional Mobile & Device Meta Tags -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PDF Tools">
+  <meta name="application-name" content="PDF Tools Suite">
+  <meta name="msapplication-TileColor" content="#0f172a">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+  
+  <!-- Geo & Language Meta Tags -->
+  <meta name="geo.region" content="US">
+  <meta name="geo.placename" content="United States">
+  <meta name="ICBM" content="39.8283, -98.5795">
+  <meta http-equiv="content-language" content="en-US">
+  
+  <!-- Security & Privacy Meta Tags -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Image to WebP Converter — Free, Smaller Images</title>
+  <meta name="title" content="Image to WebP Converter — Free, Smaller Images">
+  <meta name="description" content="Convert JPG &amp; PNG to WebP free in your browser. WebP makes images much smaller for faster websites — no uploads, no signup.">
+  <meta name="author" content="PDF Tools">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="theme-color" content="#0f172a">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- PWA Service Worker Registration -->
+  <script src="shared/pwa.js"></script>
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="shared/styles.css">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.pdf-to-jpg-tool.com/image-to-webp.html">
+  <meta property="og:title" content="Image to WebP Converter — Free, Smaller Images">
+  <meta property="og:description" content="Convert JPG &amp; PNG to WebP free in your browser. WebP makes images much smaller for faster websites — no uploads, no signup.">
+  <meta property="og:image" content="https://www.pdf-to-jpg-tool.com/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="PDF Tools">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.pdf-to-jpg-tool.com/image-to-webp.html">
+  <meta name="twitter:title" content="Image to WebP Converter — Free, Smaller Images">
+  <meta name="twitter:description" content="Convert JPG &amp; PNG to WebP free in your browser. WebP makes images much smaller for faster websites — no uploads, no signup.">
+  <meta name="twitter:image" content="https://www.pdf-to-jpg-tool.com/preview.jpg">
+  <meta name="twitter:creator" content="@allanpedernal">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.pdf-to-jpg-tool.com/image-to-webp.html">
+  
+  <!-- Structured Data (JSON-LD) for SEO -->
+  
+  <!-- Additional Structured Data for HowTo -->
+  
+  <!-- Organization Structured Data -->
+  
+  <!-- BreadcrumbList Structured Data -->
+  
+  <!-- SoftwareApplication Structured Data (Enhanced) -->
+  
+  <!-- FAQ Structured Data -->
+  
+  <!-- Google tag (gtag.js) - Delayed on mobile for better performance -->
+  <script>
+    // Initialize Analytics with mobile optimization
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Detect mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    // Load Analytics immediately on desktop, delay on mobile
+    function loadAnalytics() {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-G1CV3K3BXS';
+      document.head.appendChild(script);
+      
+      script.onload = function() {
+        gtag('js', new Date());
+        gtag('config', 'G-G1CV3K3BXS', {
+          'page_title': 'PDF to JPG Converter',
+          'page_location': window.location.href
+        });
+        window.gtag = gtag;
+      };
+    }
+    
+    if (isMobile) {
+      // On mobile: load after user interaction or 3 seconds
+      let loaded = false;
+      const loadOnInteraction = () => {
+        if (!loaded) {
+          loaded = true;
+          loadAnalytics();
+          ['touchstart', 'click', 'scroll'].forEach(e => window.removeEventListener(e, loadOnInteraction));
+        }
+      };
+      ['touchstart', 'click', 'scroll'].forEach(e => window.addEventListener(e, loadOnInteraction, { once: true, passive: true }));
+      setTimeout(() => { if (!loaded) loadAnalytics(); }, 3000);
+    } else {
+      // Desktop: load immediately
+      loadAnalytics();
+    }
+    
+    // Track conversion event function (available immediately)
+    window.trackConversion = function(pages) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'pdf_conversion', {
+          'event_category': 'PDF Tools',
+          'event_label': 'PDF to JPG',
+          'value': pages,
+          'pages_converted': pages
+        });
+      } else {
+        // Queue event if gtag not loaded yet
+        window.dataLayer.push({
+          'event': 'pdf_conversion',
+          'event_category': 'PDF Tools',
+          'event_label': 'PDF to JPG',
+          'value': pages,
+          'pages_converted': pages
+        });
+      }
+    };
+  </script>
+  
+  <!-- Google AdSense - Delayed on mobile for better performance -->
+  <meta name="google-adsense-account" content="ca-pub-2042221703015293">
+  <script>
+    // Delay AdSense on mobile for better performance
+    const isMobileAd = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    function loadAdSense() {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2042221703015293';
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
+    }
+    
+    if (isMobileAd) {
+      // On mobile: load after page is interactive
+      if (document.readyState === 'complete') {
+        setTimeout(loadAdSense, 2000);
+      } else {
+        window.addEventListener('load', () => setTimeout(loadAdSense, 2000));
+      }
+    } else {
+      // Desktop: load immediately
+      loadAdSense();
+    }
+  </script>
+
+  <script>window.INITIAL_TOOL = "image-to-webp";</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Image to WebP Converter",
+  "description": "Convert JPG & PNG to WebP free in your browser. WebP makes images much smaller for faster websites — no uploads, no signup.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "text": "Drag your images onto the drop zone."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "text": "Click \"Convert to WebP\"."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "text": "Download the smaller WebP files (single file or a ZIP)."
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why use WebP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WebP files are typically 25–35% smaller than JPG/PNG at similar quality, which speeds up websites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is WebP supported everywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All modern browsers support WebP; for very old software, keep a JPG/PNG copy too."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — conversion is 100% in your browser."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image to WebP Converter",
+  "url": "https://www.pdf-to-jpg-tool.com/image-to-webp.html",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+  </script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-50 min-h-screen" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%);">
+  <!-- Top Navigation -->
+  <nav class="navbar navbar-expand-lg sticky-top topnav">
+    <div class="container-fluid px-3 px-lg-4">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
+        <i class="bi bi-file-earmark-pdf-fill me-2" style="color:#3b82f6;"></i>PDF Tools
+      </a>
+      <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list" style="font-size:1.7rem; line-height:1; color:var(--text-primary);"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="/"><i class="bi bi-house-door me-1"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about.html"><i class="bi bi-info-circle me-1"></i>About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="/blog/"><i class="bi bi-journal-text me-1"></i>Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact.html"><i class="bi bi-envelope me-1"></i>Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Main Container - Bootstrap Grid Layout -->
+  <div class="container-fluid px-0">
+    <div class="row g-0 min-vh-100">
+      
+      <!-- Left Ad Sidebar (Desktop Only) -->
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
+
+      <!-- Main Content Area (col-8): holds the tool sidebar + content -->
+      <main id="main-content" class="col-12 col-lg-8 p-0">
+        <div class="row g-0 h-100">
+
+          <!-- Left Navigation Sidebar -->
+          <div id="nav-container" class="col-12 col-lg-3 p-0">
+            <!-- Navigation will be inserted here by app.js -->
+          </div>
+
+          <!-- Tool Content Area -->
+          <div class="col-12 col-lg-9 px-3 px-sm-4 px-lg-4 py-4">
+            <div id="tool-content" class="w-100 py-3"></div>
+          </div>
+        </div>
+
+      <!-- SEO content (unique per tool) -->
+      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Image to WebP Converter</h1>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert JPG and PNG images to WebP — a modern format that is far smaller at similar quality, perfect for faster-loading websites. Everything runs in your browser.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to Image to WebP Converter</h2>
+        <ol style="color:var(--text-secondary); line-height:1.9;">
+          <li>Drag your images onto the drop zone.</li>
+          <li>Click &quot;Convert to WebP&quot;.</li>
+          <li>Download the smaller WebP files (single file or a ZIP).</li>
+        </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why use WebP?</h3><p class="mb-0" style="color:var(--text-secondary);">WebP files are typically 25–35% smaller than JPG/PNG at similar quality, which speeds up websites.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is WebP supported everywhere?</h3><p class="mb-0" style="color:var(--text-secondary);">All modern browsers support WebP; for very old software, keep a JPG/PNG copy too.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my images uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No — conversion is 100% in your browser.</p></div>
+      </section>
+      </main>
+
+      <!-- Right Ad Sidebar (Desktop Only) -->
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
+    
+      <!-- Bottom Ad Banner (Mobile & Desktop) -->
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery (required for Toastr) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  
+  <!-- Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  
+  <!-- Toastr Configuration -->
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut",
+      "tapToDismiss": true
+    };
+    
+    // Ensure close button works properly with smooth fadeout animations
+    $(document).ready(function() {
+      // Fix close button functionality - use event delegation
+      $(document).on('click', '.toast-close-button', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $toastWrapper = $(this).closest('#toast-container > div');
+        if ($toastWrapper.length) {
+          $toastWrapper.addClass('toast-fadeout');
+          setTimeout(function() {
+            $toastWrapper.remove();
+            // Also remove parent container if empty
+            var $container = $('#toast-container');
+            if ($container.children().length === 0) {
+              $container.remove();
+            }
+          }, 400);
+        }
+      });
+    });
+  </script>
+  
+  
+  <!-- Libraries - Deferred for performance -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- PDF Encryption library - loaded on demand -->
+  <!-- <script defer src="https://unpkg.com/@pdfsmaller/pdf-encrypt-lite@1.0.0/dist/pdf-encrypt-lite.umd.js"></script> -->
+  <!-- Tesseract.js for OCR (loaded on demand) -->
+  <!-- Mammoth.js for Word conversion (loaded on demand) -->
+  
+  <!-- Application Scripts (deferred: run in order, off the parser's critical path) -->
+  <script defer src="tools-config.js"></script>
+  <script defer src="tools.js"></script>
+  <script defer src="app.js"></script>
+
+  <!-- Tool Implementations -->
+  <script defer src="tool-implementations.js"></script>
+  
+  <!-- Initialize Google AdSense - Wait for script to load -->
+  <script>
+    // Track if ads have been initialized to prevent duplicate pushes
+    let adsInitialized = false;
+    
+    // Initialize ads when AdSense script is ready
+    function initAdSense() {
+      if (adsInitialized) return; // Prevent multiple initializations
+      
+      if (typeof adsbygoogle !== 'undefined') {
+        // Find all ad slots and initialize them only once
+        const adSlots = document.querySelectorAll('.adsbygoogle:not([data-ads-initialized])');
+        adSlots.forEach(slot => {
+          try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+            slot.setAttribute('data-ads-initialized', 'true');
+          } catch (e) {
+            console.warn('AdSense initialization error:', e);
+          }
+        });
+        adsInitialized = true;
+      } else {
+        // Retry if AdSense script hasn't loaded yet
+        setTimeout(initAdSense, 100);
+      }
+    }
+    
+    // Delay ad initialization on mobile for better performance
+    const isMobileAdInit = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    if (isMobileAdInit) {
+      // On mobile: wait longer before initializing ads
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          if (document.readyState === 'complete') {
+            initAdSense();
+          } else {
+            document.addEventListener('DOMContentLoaded', initAdSense);
+          }
+        }, 1500);
+      });
+    } else {
+      // Desktop: initialize after DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAdSense);
+      } else {
+        initAdSense();
+      }
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
+    <!-- Decorative gradient overlay -->
+    <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>
+    
+    <div class="container-fluid px-4 px-lg-5 py-5 position-relative">
+      <div class="row g-4 g-lg-5">
+        <!-- Brand Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="mb-4">
+            <h3 class="text-gradient fw-bold mb-3" style="font-size: 1.5rem; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+              <i class="bi bi-file-earmark-pdf-fill me-2"></i>PDF Tools
+            </h3>
+            <p class="footer-text-light mb-3" style="line-height: 1.8; font-size: 0.95rem;">
+              Free online PDF and image conversion tools. All tools work entirely in your browser - no uploads required.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="https://www.facebook.com/PDFtoJPGandVATools" target="_blank" rel="noopener noreferrer" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+                <i class="bi bi-facebook" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+            <i class="bi bi-tools text-primary me-2"></i>Tools
+          </h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3">
+              <a href="/pdf-to-jpg.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF to JPG</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/jpg-to-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>JPG to PDF</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/compress-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF Compressor</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/merge-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF Merger</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/split-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>PDF Splitter</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Legal Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+            <i class="bi bi-shield-check text-primary me-2"></i>Legal
+          </h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3">
+              <a href="/privacy-policy.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Privacy Policy</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/terms-of-service.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Terms of Service</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/blog/" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Blog &amp; Guides</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/about.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>About Us</span>
+              </a>
+            </li>
+            <li class="mb-3">
+              <a href="/contact.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+                <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Features Column -->
+        <div class="col-12 col-md-6 col-lg-3">
+          <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+            <i class="bi bi-star-fill text-primary me-2"></i>Features
+          </h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-check-circle-fill text-success me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">100% Free</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-cloud-upload text-info me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">No Upload Required</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-shield-lock-fill text-warning me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">100% Secure</span>
+            </li>
+            <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+              <i class="bi bi-wifi-off text-danger me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+              <span class="footer-text-light" style="font-size: 0.95rem;">Works Offline</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="row mt-5 pt-4 footer-border-top">
+        <div class="col-12">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <p class="footer-text-light mb-0 small" style="font-size: 0.9rem;">
+              &copy; <span id="current-year-footer">2024</span> PDF Tools. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Update copyright year dynamically
+      (function() {
+        const yearElement = document.getElementById('current-year-footer');
+        if (yearElement) {
+          yearElement.textContent = new Date().getFullYear();
+        }
+        
+        // Enhanced footer link interactions
+        document.querySelectorAll('.footer-link').forEach(link => {
+          link.addEventListener('mouseenter', function() {
+            this.style.color = 'var(--bs-primary)';
+            this.style.transform = 'translateX(5px)';
+            const icon = this.querySelector('.footer-link-icon');
+            if (icon) {
+              icon.style.opacity = '1';
+              icon.style.transform = 'translateX(0)';
+            }
+          });
+          
+          link.addEventListener('mouseleave', function() {
+            this.style.color = '';
+            this.style.transform = 'translateX(0)';
+            const icon = this.querySelector('.footer-link-icon');
+            if (icon) {
+              icon.style.opacity = '0';
+              icon.style.transform = 'translateX(-5px)';
+            }
+          });
+        });
+        
+        // Enhanced footer icon link interactions
+        document.querySelectorAll('.footer-icon-link').forEach(iconLink => {
+          iconLink.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(59, 130, 246, 0.2)';
+            this.style.transform = 'translateY(-4px)';
+            this.style.boxShadow = '0 6px 20px rgba(59, 130, 246, 0.4)';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1.15) rotate(8deg)';
+            }
+          });
+          
+          iconLink.addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(59, 130, 246, 0.1)';
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1) rotate(0deg)';
+            }
+          });
+        });
+        
+        // Enhanced footer feature item interactions
+        document.querySelectorAll('.footer-feature-item').forEach(item => {
+          item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(8px)';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1.2)';
+            }
+          });
+          item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+            const icon = this.querySelector('i');
+            if (icon) {
+              icon.style.transform = 'scale(1)';
+            }
+          });
+        });
+
+        // Footer bottom link interactions
+        document.querySelectorAll('.footer-bottom-link').forEach(link => {
+          link.addEventListener('mouseenter', function() {
+            this.style.color = 'var(--bs-primary)';
+            this.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+          });
+          link.addEventListener('mouseleave', function() {
+            this.style.color = '';
+            this.style.backgroundColor = 'transparent';
+          });
+        });
+      })();
+    </script>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script>
+    // Show/hide scroll to top button
+    window.addEventListener('scroll', function() {
+      const scrollTop = document.querySelector('.scroll-top');
+      if (scrollTop) {
+        if (window.pageYOffset > 300) {
+          scrollTop.classList.add('visible');
+        } else {
+          scrollTop.classList.remove('visible');
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
+

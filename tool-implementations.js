@@ -44,6 +44,12 @@ function initToolHandlers(toolId) {
     case 'heic-to-jpg':
       initHEICToJPG();
       break;
+    case 'jpg-to-png':
+      initJPGToPNG();
+      break;
+    case 'image-to-webp':
+      initImageToWebp();
+      break;
     default:
       console.log('Tool implementation not found for:', toolId);
   }
@@ -3834,3 +3840,74 @@ function initHEICToJPG() {
 
 
 
+
+// ===== Reliable canvas-based image format converters =====
+function rtTriggerDownload(blob, name, container) {
+  if (typeof saveAs === 'function') { try { saveAs(blob, name); } catch (e) {} }
+  if (container) {
+    const url = URL.createObjectURL(blob);
+    container.innerHTML = `<a class="btn btn-success fw-bold" href="${url}" download="${name}"><i class="bi bi-download me-2"></i>Download ${name}</a>`;
+  }
+}
+function setupImageConvert(opts) {
+  const { id, outMime, outExt, accept } = opts;
+  const dz = document.getElementById('dz-' + id);
+  const input = document.getElementById('file-' + id);
+  const btn = document.getElementById('btn-' + id);
+  const status = document.getElementById('status-' + id);
+  const list = document.getElementById('list-' + id);
+  const result = document.getElementById('result-' + id);
+  if (!dz || !input || !btn) return;
+  let files = [];
+  const ok = (f) => accept === 'image/*' ? f.type.startsWith('image/') : (f.type === accept || /\.jpe?g$/i.test(f.name));
+  function setFiles(fl) {
+    files = Array.from(fl).filter(ok);
+    list.innerHTML = files.map(f => `<li>📄 ${f.name}</li>`).join('');
+    status.textContent = files.length ? `${files.length} file(s) ready` : 'No valid image files selected';
+    btn.disabled = !files.length;
+  }
+  dz.addEventListener('click', () => input.click());
+  dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') input.click(); });
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragover'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragover'); setFiles(e.dataTransfer.files); });
+  input.addEventListener('change', () => setFiles(input.files));
+
+  function convertOne(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement('canvas');
+        c.width = img.naturalWidth; c.height = img.naturalHeight;
+        c.getContext('2d').drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        const q = (outMime === 'image/webp') ? 0.9 : undefined;
+        c.toBlob(b => b ? resolve(b) : reject(new Error('Conversion failed')), outMime, q);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not read ' + file.name)); };
+      img.src = url;
+    });
+  }
+  btn.addEventListener('click', async () => {
+    if (!files.length) return;
+    btn.disabled = true; status.textContent = 'Converting…'; result.innerHTML = '';
+    try {
+      if (files.length === 1) {
+        const blob = await convertOne(files[0]);
+        rtTriggerDownload(blob, files[0].name.replace(/\.[^.]+$/, '') + '.' + outExt, result);
+      } else {
+        const zip = new JSZip();
+        for (const f of files) { const blob = await convertOne(f); zip.file(f.name.replace(/\.[^.]+$/, '') + '.' + outExt, blob); }
+        rtTriggerDownload(await zip.generateAsync({ type: 'blob' }), 'converted-' + outExt + '.zip', result);
+      }
+      status.textContent = '✅ Done!';
+      if (typeof toastr !== 'undefined') toastr.success('Conversion complete!');
+    } catch (e) {
+      status.textContent = '❌ ' + e.message;
+      if (typeof toastr !== 'undefined') toastr.error(e.message);
+    } finally { btn.disabled = false; }
+  });
+}
+function initJPGToPNG() { setupImageConvert({ id: 'jpg-to-png', outMime: 'image/png', outExt: 'png', accept: 'image/jpeg' }); }
+function initImageToWebp() { setupImageConvert({ id: 'image-to-webp', outMime: 'image/webp', outExt: 'webp', accept: 'image/*' }); }

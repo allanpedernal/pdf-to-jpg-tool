@@ -9,6 +9,70 @@ let currentTool = 'pdf-to-jpg';
     else if (initial && getToolById(initial)) { currentTool = initial; }
   } catch (e) { /* ignore */ }
 })();
+
+// ===== Retention pack (100% client-side, localStorage — works on static hosting) =====
+const RT_FAV = 'pdftools_favorites';
+const RT_RECENT = 'pdftools_recents';
+function rtGet(k) { try { return JSON.parse(localStorage.getItem(k)) || []; } catch (e) { return []; } }
+function rtSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+function rtFavorites() { return rtGet(RT_FAV); }
+function rtIsFav(id) { return rtFavorites().includes(id); }
+function rtToggleFav(id) { let f = rtFavorites(); f = f.includes(id) ? f.filter(x => x !== id) : [...f, id]; rtSet(RT_FAV, f); return f; }
+function rtRecents() { return rtGet(RT_RECENT); }
+function rtAddRecent(id) { let r = rtRecents().filter(x => x !== id); r.unshift(id); rtSet(RT_RECENT, r.slice(0, 5)); }
+
+// Compact tool button for the Favorites / Recently Used quick-access sections
+function rtQuickButton(id) {
+  const t = (typeof getToolById === 'function') && getToolById(id);
+  if (!t) return '';
+  const active = currentTool === id ? 'active text-primary' : 'text-light';
+  return `<li class="mb-1"><button data-tool="${id}" class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 ${active}" onclick="switchTool('${id}')"><span class="fs-5 flex-shrink-0">${t.icon}</span><div class="flex-grow-1 text-truncate"><div class="small fw-medium text-truncate">${t.name}</div></div></button></li>`;
+}
+
+// (Re)render the Favorites + Recently Used sections and sync star icons
+function rtRenderQuickAccess() {
+  const sectionHdr = (icon, label) => `<h2 class="text-uppercase text-secondary small fw-semibold mb-2 px-2" style="font-size:0.7rem; letter-spacing:0.1em; opacity:0.7;">${icon}${label}</h2>`;
+  const fav = document.getElementById('fav-section');
+  if (fav) {
+    const favs = rtFavorites().filter(id => (typeof getToolById === 'function') && getToolById(id));
+    fav.innerHTML = favs.length ? `${sectionHdr('<i class="bi bi-star-fill me-1" style="color:#f59e0b;"></i>', 'Favorites')}<ul class="list-unstyled mb-4">${favs.map(rtQuickButton).join('')}</ul>` : '';
+  }
+  const rec = document.getElementById('recent-section');
+  if (rec) {
+    const recs = rtRecents().filter(id => !rtIsFav(id) && (typeof getToolById === 'function') && getToolById(id));
+    rec.innerHTML = recs.length ? `${sectionHdr('<i class="bi bi-clock-history me-1"></i>', 'Recently Used')}<ul class="list-unstyled mb-4">${recs.map(rtQuickButton).join('')}</ul>` : '';
+  }
+  document.querySelectorAll('.fav-toggle').forEach(b => {
+    const on = rtIsFav(b.getAttribute('data-fav'));
+    const i = b.querySelector('i'); if (i) i.className = on ? 'bi bi-star-fill' : 'bi bi-star';
+    b.style.color = on ? '#f59e0b' : 'var(--text-secondary)';
+    b.style.opacity = on ? '1' : '0.55';
+    b.title = on ? 'Remove from favorites' : 'Add to favorites';
+  });
+}
+
+// Remember each tool's settings (quality/scale/size/etc.) across visits
+function rtRestoreSettings(toolId) {
+  const root = document.getElementById('tool-content');
+  if (!root) return;
+  root.querySelectorAll('input[type=number], input[type=range], select, input[type=checkbox], input[type=radio]').forEach(el => {
+    if (!el.id) return;
+    const key = `pdftools_set_${toolId}_${el.id}`;
+    const saved = localStorage.getItem(key);
+    if (saved !== null) {
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = (saved === 'true');
+      else el.value = saved;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    if (!el.dataset.rtBound) {
+      el.dataset.rtBound = '1';
+      el.addEventListener('change', () => {
+        localStorage.setItem(key, (el.type === 'checkbox' || el.type === 'radio') ? String(el.checked) : el.value);
+      });
+    }
+  });
+}
 let pdfjsReady = false;
 window.pdfjsReady = false;
 
@@ -83,7 +147,12 @@ function switchTool(toolId) {
       
       // Reinitialize tool-specific functionality
       initializeTool(toolId);
-      
+
+      // Retention: record recent, refresh quick-access, restore saved settings
+      rtAddRecent(toolId);
+      rtRenderQuickAccess();
+      setTimeout(() => rtRestoreSettings(toolId), 300);
+
       // Fade in
       setTimeout(() => {
         contentArea.style.opacity = '1';
@@ -120,6 +189,8 @@ function getToolContent(toolId) {
     'image-resize': getImageResizeContent(),
     'image-compress': getImageCompressContent(),
     'heic-to-jpg': getHEICToJPGContent(),
+    'jpg-to-png': getJPGToPNGContent(),
+    'image-to-webp': getImageToWebpContent(),
   };
   
   // Fallback: If tool not found, show default content instead of "coming soon" message
@@ -216,7 +287,11 @@ function initNavigation() {
               </button>
             </div>
           </div>
-          
+
+          <!-- Quick access (populated from localStorage) -->
+          <div id="fav-section"></div>
+          <div id="recent-section"></div>
+
           ${Object.values(TOOLS_CONFIG).map(category => `
             <div class="mb-4 mb-lg-5">
               <h2 class="text-uppercase text-secondary small fw-semibold mb-3 px-2" style="font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.7;">
@@ -226,20 +301,23 @@ function initNavigation() {
                 ${category.tools.map(tool => {
                   const isActive = currentTool === tool.id;
                   return `
-                    <li class="mb-1">
-                      <button 
+                    <li class="mb-1 position-relative">
+                      <button
                         data-tool="${tool.id}"
                         class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 ${
-                          isActive 
-                            ? 'active text-primary' 
+                          isActive
+                            ? 'active text-primary'
                             : 'text-light'
                         }"
                         onclick="switchTool('${tool.id}')">
                         <span class="fs-5 flex-shrink-0">${tool.icon}</span>
-                        <div class="flex-grow-1 text-truncate">
+                        <div class="flex-grow-1 text-truncate" style="padding-right: 1.4rem;">
                           <div class="small fw-medium text-truncate">${tool.name}</div>
                           <div class="text-secondary small text-truncate d-none d-sm-block" style="font-size: 0.75rem; opacity: 0.7;">${tool.description}</div>
                         </div>
+                      </button>
+                      <button type="button" class="fav-toggle btn btn-link p-0 position-absolute" data-fav="${tool.id}" aria-label="Toggle favorite for ${tool.name}" title="Add to favorites" style="top: 50%; right: 0.6rem; transform: translateY(-50%); z-index: 2; line-height: 1; color: var(--text-secondary); opacity: 0.55;">
+                        <i class="bi bi-star"></i>
                       </button>
                     </li>
                   `;
@@ -273,8 +351,21 @@ function initNavigation() {
   const navContainer = document.getElementById('nav-container');
   if (navContainer) {
     navContainer.innerHTML = navHTML;
+
+    // Favorite (star) toggles — delegated so they don't trigger switchTool
+    navContainer.addEventListener('click', (e) => {
+      const star = e.target.closest('.fav-toggle');
+      if (!star) return;
+      e.preventDefault();
+      e.stopPropagation();
+      rtToggleFav(star.getAttribute('data-fav'));
+      rtRenderQuickAccess();
+    });
+
+    // Initial render of Favorites + Recently Used + star states
+    rtRenderQuickAccess();
   }
-  
+
   // Mobile menu toggle
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');

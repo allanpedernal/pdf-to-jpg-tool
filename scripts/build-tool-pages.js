@@ -127,6 +127,24 @@ const TOOLS = [
     intro: "Convert Apple's HEIC photos from your iPhone into JPGs that open on any device, app or website. Batch-convert as many as you like — all in your browser, no uploads.",
     steps: ['Drag in your HEIC photos (one or many).', 'Convert them to JPG.', 'Download the universally-compatible JPGs.'],
     faqs: [['Why won\'t my iPhone photos open?', 'iPhones save as HEIC, which some apps and sites don\'t support — JPG opens everywhere.'], ['Can I convert many at once?', 'Yes, batch-convert a whole set and download them together.']]
+  },
+  {
+    slug: 'jpg-to-png', toolId: 'jpg-to-png',
+    title: 'JPG to PNG Converter — Free, No Upload',
+    desc: 'Convert JPG to PNG free in your browser. Turn JPG/JPEG photos into lossless PNG images — no uploads, no watermarks, no signup.',
+    h1: 'JPG to PNG Converter',
+    intro: 'Convert JPG or JPEG images into lossless PNG files, right in your browser. Useful when you need a format that supports crisp edges. Your images never leave your device.',
+    steps: ['Drag your JPG images onto the drop zone (or click to browse).', 'Click "Convert to PNG".', 'Download your PNG images — one file, or all of them as a ZIP.'],
+    faqs: [['Why convert JPG to PNG?', 'PNG is lossless and keeps sharp edges crisp; some workflows and editors prefer it.'], ['Does it upload my images?', 'No — conversion happens entirely in your browser.'], ['Can I convert many at once?', 'Yes, batch-convert and download them together as a ZIP.']]
+  },
+  {
+    slug: 'image-to-webp', toolId: 'image-to-webp',
+    title: 'Image to WebP Converter — Free, Smaller Images',
+    desc: 'Convert JPG & PNG to WebP free in your browser. WebP makes images much smaller for faster websites — no uploads, no signup.',
+    h1: 'Image to WebP Converter',
+    intro: 'Convert JPG and PNG images to WebP — a modern format that is far smaller at similar quality, perfect for faster-loading websites. Everything runs in your browser.',
+    steps: ['Drag your images onto the drop zone.', 'Click "Convert to WebP".', 'Download the smaller WebP files (single file or a ZIP).'],
+    faqs: [['Why use WebP?', 'WebP files are typically 25–35% smaller than JPG/PNG at similar quality, which speeds up websites.'], ['Is WebP supported everywhere?', 'All modern browsers support WebP; for very old software, keep a JPG/PNG copy too.'], ['Are my images uploaded?', 'No — conversion is 100% in your browser.']]
   }
 ];
 

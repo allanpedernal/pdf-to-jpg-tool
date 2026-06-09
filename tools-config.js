@@ -19,7 +19,9 @@ const TOOLS_CONFIG = {
       { id: "png-to-jpg", name: "PNG to JPG", icon: "🎨", description: "Convert PNG to JPG format" },
       { id: "image-resize", name: "Image Resizer", icon: "📏", description: "Resize images to any size" },
       { id: "image-compress", name: "Image Compressor", icon: "💾", description: "Compress image file size" },
-      { id: "heic-to-jpg", name: "HEIC to JPG", icon: "📷", description: "Convert HEIC to JPG" }
+      { id: "heic-to-jpg", name: "HEIC to JPG", icon: "📷", description: "Convert HEIC to JPG" },
+      { id: "jpg-to-png", name: "JPG to PNG", icon: "🪄", description: "Convert JPG to PNG format" },
+      { id: "image-to-webp", name: "Image to WebP", icon: "🌐", description: "Convert images to WebP" }
     ]
   }
 };
