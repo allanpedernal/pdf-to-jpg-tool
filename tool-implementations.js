@@ -50,6 +50,24 @@ function initToolHandlers(toolId) {
     case 'image-to-webp':
       initImageToWebp();
       break;
+    case 'webp-to-jpg':
+      initWebpToJPG();
+      break;
+    case 'webp-to-png':
+      initWebpToPNG();
+      break;
+    case 'pdf-pagenum':
+      initPDFPageNumbers();
+      break;
+    case 'qr-code':
+      initQRCode();
+      break;
+    case 'password-generator':
+      initPasswordGen();
+      break;
+    case 'word-counter':
+      initWordCounter();
+      break;
     default:
       console.log('Tool implementation not found for:', toolId);
   }
@@ -3911,3 +3929,175 @@ function setupImageConvert(opts) {
 }
 function initJPGToPNG() { setupImageConvert({ id: 'jpg-to-png', outMime: 'image/png', outExt: 'png', accept: 'image/jpeg' }); }
 function initImageToWebp() { setupImageConvert({ id: 'image-to-webp', outMime: 'image/webp', outExt: 'webp', accept: 'image/*' }); }
+
+function initWebpToJPG() { setupImageConvert({ id: 'webp-to-jpg', outMime: 'image/jpeg', outExt: 'jpg', accept: 'image/webp' }); }
+function initWebpToPNG() { setupImageConvert({ id: 'webp-to-png', outMime: 'image/png', outExt: 'png', accept: 'image/webp' }); }
+
+// ===== Tier 3 utility tools =====
+function loadQRCodeLib() {
+  return new Promise((res, rej) => {
+    if (window.qrcode) return res();
+    const s = document.createElement('script');
+    s.src = '/vendor/qrcode-generator.js';   // self-hosted (no external CDN)
+    s.onload = () => res();
+    s.onerror = () => rej(new Error('Failed to load QR library'));
+    document.head.appendChild(s);
+  });
+}
+function initQRCode() {
+  const txt = document.getElementById('qr-text');
+  const size = document.getElementById('qr-size');
+  const canvas = document.getElementById('qr-canvas');
+  const dl = document.getElementById('qr-download');
+  if (!txt || !canvas) return;
+  let timer;
+  function render() {
+    loadQRCodeLib().then(() => {
+      try {
+        const target = parseInt(size.value, 10) || 320;
+        const qr = qrcode(0, 'M');
+        qr.addData(txt.value || ' ');
+        qr.make();
+        const count = qr.getModuleCount();
+        const margin = 2; // quiet-zone in modules
+        const cell = Math.max(1, Math.floor(target / (count + margin * 2)));
+        const dim = cell * (count + margin * 2);
+        canvas.width = dim; canvas.height = dim;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, dim, dim);
+        ctx.fillStyle = '#000000';
+        for (let r = 0; r < count; r++) {
+          for (let c = 0; c < count; c++) {
+            if (qr.isDark(r, c)) ctx.fillRect((c + margin) * cell, (r + margin) * cell, cell, cell);
+          }
+        }
+        dl.disabled = false;
+      } catch (e) { if (typeof toastr !== 'undefined') toastr.error('Could not generate QR code'); }
+    }).catch(e => { if (typeof toastr !== 'undefined') toastr.error(e.message); });
+  }
+  txt.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(render, 150); });
+  size.addEventListener('change', render);
+  dl.addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = 'qrcode.png';
+    a.click();
+  });
+  render();
+}
+
+function initPasswordGen() {
+  const out = document.getElementById('pw-out');
+  const len = document.getElementById('pw-len');
+  const lenVal = document.getElementById('pw-len-val');
+  const gen = document.getElementById('pw-gen');
+  const copy = document.getElementById('pw-copy');
+  const strength = document.getElementById('pw-strength');
+  if (!out || !len) return;
+  const sets = { upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', lower: 'abcdefghijklmnopqrstuvwxyz', num: '0123456789', sym: '!@#$%^&*()-_=+[]{};:,.<>?' };
+  function generate() {
+    let pool = '';
+    ['upper', 'lower', 'num', 'sym'].forEach(k => { const el = document.getElementById('pw-' + k); if (el && el.checked) pool += sets[k]; });
+    if (!pool) { out.value = ''; strength.textContent = 'Select at least one character type.'; return; }
+    const n = parseInt(len.value, 10);
+    const arr = new Uint32Array(n);
+    crypto.getRandomValues(arr);
+    let pw = '';
+    for (let i = 0; i < n; i++) pw += pool[arr[i] % pool.length];
+    out.value = pw;
+    const bits = Math.round(n * Math.log2(pool.length));
+    const label = bits < 40 ? 'Weak' : bits < 70 ? 'Good' : bits < 100 ? 'Strong' : 'Very strong';
+    strength.textContent = `Strength: ${label} (~${bits} bits of entropy)`;
+    strength.style.color = bits < 40 ? '#ef4444' : bits < 70 ? '#f59e0b' : '#10b981';
+  }
+  len.addEventListener('input', () => { lenVal.textContent = len.value; generate(); });
+  ['pw-upper', 'pw-lower', 'pw-num', 'pw-sym'].forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('change', generate); });
+  gen.addEventListener('click', generate);
+  copy.addEventListener('click', () => {
+    if (!out.value) return;
+    navigator.clipboard.writeText(out.value).then(() => { if (typeof toastr !== 'undefined') toastr.success('Password copied!'); });
+  });
+  generate();
+}
+
+function initWordCounter() {
+  const t = document.getElementById('wc-text');
+  if (!t) return;
+  function upd() {
+    const v = t.value;
+    const words = (v.trim().match(/\S+/g) || []).length;
+    const chars = v.length;
+    const sentences = (v.match(/[.!?]+(?:\s|$)/g) || []).length;
+    const mins = words / 200;
+    const read = words === 0 ? '0s' : (mins < 1 ? Math.max(1, Math.ceil(mins * 60)) + 's' : Math.ceil(mins) + 'm');
+    document.getElementById('wc-words').textContent = words.toLocaleString();
+    document.getElementById('wc-chars').textContent = chars.toLocaleString();
+    document.getElementById('wc-sentences').textContent = sentences.toLocaleString();
+    document.getElementById('wc-read').textContent = read;
+  }
+  t.addEventListener('input', upd);
+  upd();
+}
+
+function loadPdfLib() {
+  return new Promise((res, rej) => {
+    if (window.PDFLib) return res();
+    const s = document.createElement('script');
+    s.src = '/vendor/pdf-lib.min.js';   // self-hosted (no external CDN)
+    s.onload = () => res();
+    s.onerror = () => rej(new Error('Failed to load PDF library'));
+    document.head.appendChild(s);
+  });
+}
+function initPDFPageNumbers() {
+  const dz = document.getElementById('dz-pdf-pagenum');
+  const input = document.getElementById('file-pdf-pagenum');
+  const btn = document.getElementById('btn-pdf-pagenum');
+  const status = document.getElementById('status-pdf-pagenum');
+  const result = document.getElementById('result-pdf-pagenum');
+  if (!dz || !input || !btn) return;
+  let file = null;
+  function setFile(f) {
+    if (f && (f.type === 'application/pdf' || /\.pdf$/i.test(f.name))) { file = f; status.textContent = f.name + ' ready'; btn.disabled = false; }
+    else { status.textContent = 'Please choose a PDF file'; }
+  }
+  dz.addEventListener('click', () => input.click());
+  dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') input.click(); });
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragover'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('dragover'); setFile(e.dataTransfer.files[0]); });
+  input.addEventListener('change', () => setFile(input.files[0]));
+  btn.addEventListener('click', async () => {
+    if (!file) return;
+    btn.disabled = true; status.textContent = 'Adding page numbers…'; result.innerHTML = '';
+    try {
+      await loadPdfLib();
+      const { PDFDocument, rgb, StandardFonts } = PDFLib;
+      const pdf = await PDFDocument.load(await file.arrayBuffer());
+      const font = await pdf.embedFont(StandardFonts.Helvetica);
+      const pages = pdf.getPages();
+      const total = pages.length;
+      const start = parseInt(document.getElementById('pn-start').value, 10) || 0;
+      const size = Math.min(40, Math.max(6, parseInt(document.getElementById('pn-size').value, 10) || 11));
+      const pos = document.getElementById('pn-position').value;
+      const fmt = document.getElementById('pn-format').value;
+      const margin = 24;
+      pages.forEach((p, i) => {
+        const num = start + i;
+        const text = fmt === 'page-n' ? ('Page ' + num) : fmt === 'n-of-total' ? (num + ' of ' + total) : String(num);
+        const { width, height } = p.getSize();
+        const tw = font.widthOfTextAtSize(text, size);
+        const x = pos.includes('center') ? (width - tw) / 2 : pos.includes('right') ? width - tw - margin : margin;
+        const y = pos.startsWith('top') ? height - margin - size : margin;
+        p.drawText(text, { x, y, size, font, color: rgb(0.3, 0.3, 0.3) });
+      });
+      const out = await pdf.save();
+      rtTriggerDownload(new Blob([out], { type: 'application/pdf' }), file.name.replace(/\.pdf$/i, '') + '-numbered.pdf', result);
+      status.textContent = '✅ Done!';
+      if (typeof toastr !== 'undefined') toastr.success('Page numbers added!');
+    } catch (e) {
+      status.textContent = '❌ ' + (e.message.includes('encrypt') ? 'This PDF is password-protected — remove the password first.' : e.message);
+      if (typeof toastr !== 'undefined') toastr.error('Could not process this PDF');
+    } finally { btn.disabled = false; }
+  });
+}

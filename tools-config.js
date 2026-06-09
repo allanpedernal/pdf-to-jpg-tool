@@ -10,7 +10,8 @@ const TOOLS_CONFIG = {
       { id: "pdf-split", name: "PDF Splitter", icon: "✂️", description: "Split PDF into separate pages" },
       { id: "pdf-merge", name: "PDF Merger", icon: "🔗", description: "Merge multiple PDFs into one" },
       { id: "pdf-rotate", name: "PDF Rotate", icon: "🔄", description: "Rotate PDF pages" },
-      { id: "pdf-ocr", name: "PDF OCR", icon: "👁️", description: "Extract text from PDF images" }
+      { id: "pdf-ocr", name: "PDF OCR", icon: "👁️", description: "Extract text from PDF images" },
+      { id: "pdf-pagenum", name: "Add Page Numbers", icon: "🔢", description: "Add page numbers to a PDF" }
     ]
   },
   image: {
@@ -21,17 +22,24 @@ const TOOLS_CONFIG = {
       { id: "image-compress", name: "Image Compressor", icon: "💾", description: "Compress image file size" },
       { id: "heic-to-jpg", name: "HEIC to JPG", icon: "📷", description: "Convert HEIC to JPG" },
       { id: "jpg-to-png", name: "JPG to PNG", icon: "🪄", description: "Convert JPG to PNG format" },
-      { id: "image-to-webp", name: "Image to WebP", icon: "🌐", description: "Convert images to WebP" }
+      { id: "image-to-webp", name: "Image to WebP", icon: "🌐", description: "Convert images to WebP" },
+      { id: "webp-to-jpg", name: "WebP to JPG", icon: "🖼️", description: "Convert WebP to JPG" },
+      { id: "webp-to-png", name: "WebP to PNG", icon: "🎨", description: "Convert WebP to PNG" }
+    ]
+  },
+  utility: {
+    category: "Utilities",
+    tools: [
+      { id: "qr-code", name: "QR Code Generator", icon: "🔳", description: "Create QR codes for any link" },
+      { id: "password-generator", name: "Password Generator", icon: "🔑", description: "Generate strong passwords" },
+      { id: "word-counter", name: "Word Counter", icon: "🔢", description: "Count words & characters" }
     ]
   }
 };
 
-// Get all tools as a flat array
+// Get all tools as a flat array (across every category)
 function getAllTools() {
-  return [
-    ...TOOLS_CONFIG.pdf.tools,
-    ...TOOLS_CONFIG.image.tools
-  ];
+  return Object.values(TOOLS_CONFIG).flatMap(category => category.tools);
 }
 
 // Get tool by ID

@@ -348,7 +348,7 @@ html[data-theme="light"] body {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #60a5fa 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -378,7 +378,6 @@ html[data-theme="light"] body {
 }
 .topnav .navbar-brand {
   font-size: 1.3rem;
-  color: var(--text-primary) !important;
 }
 .topnav .nav-link {
   color: var(--text-secondary) !important;
@@ -743,7 +742,7 @@ html[data-theme="light"] .footer-border-top {
   bottom: 2px;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
 }
@@ -818,7 +817,7 @@ html[data-theme="light"] .footer-border-top {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateX(-50%);
   border-radius: 2px;

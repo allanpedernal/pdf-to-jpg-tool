@@ -191,6 +191,12 @@ function getToolContent(toolId) {
     'heic-to-jpg': getHEICToJPGContent(),
     'jpg-to-png': getJPGToPNGContent(),
     'image-to-webp': getImageToWebpContent(),
+    'webp-to-jpg': getWebpToJPGContent(),
+    'webp-to-png': getWebpToPNGContent(),
+    'pdf-pagenum': getPDFPageNumbersContent(),
+    'qr-code': getQRCodeContent(),
+    'password-generator': getPasswordGenContent(),
+    'word-counter': getWordCounterContent(),
   };
   
   // Fallback: If tool not found, show default content instead of "coming soon" message

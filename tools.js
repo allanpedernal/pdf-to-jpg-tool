@@ -5727,3 +5727,260 @@ function getImageToWebpContent() {
     ]
   });
 }
+
+function getWebpToJPGContent() {
+  return getImageConvertContent({
+    id: 'webp-to-jpg', emoji: '🖼️', title: 'WebP to JPG Converter',
+    subtitle: 'Convert WebP images to widely-supported JPG', accept: 'image/webp', hint: 'WebP images', cta: 'Convert to JPG',
+    whyTitle: 'Why Convert WebP to JPG?',
+    steps: [
+      { title: 'Select WebP Images', text: 'Drag and drop your WebP files, or click to browse and pick multiple images.' },
+      { title: 'Click Convert', text: 'Hit "Convert to JPG" — each WebP is re-encoded to a universally-supported JPG instantly.' },
+      { title: 'Stay Private', text: 'Everything runs locally in your browser — your images are never uploaded.' },
+      { title: 'Download', text: 'Download one JPG, or all of them together as a ZIP file.' }
+    ],
+    benefits: [
+      { color: '#10b981', icon: 'bi-globe2', title: 'Universal Support', text: 'JPG opens on every device, app and website — even old software that can\'t read WebP.' },
+      { color: '#f59e0b', icon: 'bi-shield-lock-fill', title: '100% Private', text: 'Your images never leave your device. All processing happens in your browser.' },
+      { color: '#3b82f6', icon: 'bi-lightning-fill', title: 'Instant & Free', text: 'No uploads, no signup, no limits. Convert as many WebP images as you like.' }
+    ],
+    faqs: [
+      { q: 'Why convert WebP to JPG?', a: 'Some apps, editors and older devices don\'t support WebP — JPG works everywhere.' },
+      { q: 'Will quality change?', a: 'JPG is lossy, so there\'s a tiny re-compression; at the default quality it\'s not noticeable.' },
+      { q: 'Are my images uploaded?', a: 'No — conversion is 100% in your browser.' },
+      { q: 'Can I convert many at once?', a: 'Yes — batch-convert and download them together as a ZIP.' }
+    ]
+  });
+}
+function getWebpToPNGContent() {
+  return getImageConvertContent({
+    id: 'webp-to-png', emoji: '🎨', title: 'WebP to PNG Converter',
+    subtitle: 'Convert WebP images to lossless PNG', accept: 'image/webp', hint: 'WebP images', cta: 'Convert to PNG',
+    whyTitle: 'Why Convert WebP to PNG?',
+    steps: [
+      { title: 'Select WebP Images', text: 'Drag and drop your WebP files, or click to browse and select multiple images.' },
+      { title: 'Click Convert', text: 'Hit "Convert to PNG" — each WebP becomes a lossless PNG, instantly, in your browser.' },
+      { title: 'Stay Private', text: 'No uploads — the conversion runs entirely on your device.' },
+      { title: 'Download', text: 'Download a single PNG, or all of them at once as a ZIP.' }
+    ],
+    benefits: [
+      { color: '#10b981', icon: 'bi-vector-pen', title: 'Lossless Quality', text: 'PNG keeps every pixel and supports transparency — ideal for graphics and editing.' },
+      { color: '#f59e0b', icon: 'bi-shield-lock-fill', title: '100% Private', text: 'Your images never leave your device — everything is processed in your browser.' },
+      { color: '#3b82f6', icon: 'bi-lightning-fill', title: 'Instant & Free', text: 'No uploads, no signup, no limits. Convert unlimited WebP images for free.' }
+    ],
+    faqs: [
+      { q: 'Why convert WebP to PNG?', a: 'PNG is lossless, supports transparency and is widely supported by editing software.' },
+      { q: 'Does PNG keep transparency?', a: 'Yes — if the WebP has transparency, the PNG preserves it.' },
+      { q: 'Are my images uploaded?', a: 'No — conversion happens entirely in your browser.' },
+      { q: 'Can I convert in bulk?', a: 'Yes — drop in many files and download them together as a ZIP.' }
+    ]
+  });
+}
+
+// ===== Generic rich wrapper for non-converter "utility" tools =====
+function getUtilityContent(o) {
+  const steps = o.steps.map((s, i) => `
+              <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                  <div class="mb-3"><div class="d-inline-flex align-items-center justify-content-center rounded-circle text-white fw-bold" style="width: 60px; height: 60px; background: #3b82f6; font-size: 1.5rem;">${i + 1}</div></div>
+                  <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">${s.title}</h3>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${s.text}</p>
+                </div>
+              </div>`).join('');
+  const benefits = o.benefits.map(b => `
+              <div class="col-md-6 col-lg-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: ${b.color};"><i class="bi ${b.icon} text-white" style="font-size: 2rem;"></i></div></div>
+                  <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">${b.title}</h4>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${b.text}</p>
+                </div>
+              </div>`).join('');
+  const faqs = o.faqs.map(f => `
+              <div class="col-md-6">
+                <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                  <div class="card-body p-4">
+                    <h3 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">${f.q}</h3>
+                    <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">${f.a}</p>
+                  </div>
+                </div>
+              </div>`).join('');
+  return `
+  <div class="w-100">
+    <div class="mx-auto" style="max-width: 760px;">
+      <div class="text-center mb-4">
+        <div style="font-size: 3rem;">${o.emoji}</div>
+        <h1 class="text-gradient fw-bold mb-2" style="font-size: 2.2rem;">${o.title}</h1>
+        <p class="text-light fs-5 mb-0">${o.subtitle}</p>
+        <p class="text-secondary small mt-1 mb-0">Free • Private • In your browser</p>
+      </div>
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">${o.bodyHtml}</div>
+      </div>
+    </div>
+    <div class="card border-0 shadow-sm mb-5"><div class="card-body p-4 p-lg-5">
+      <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">How It Works</h2>
+      <div class="row g-4">${steps}
+      </div>
+    </div></div>
+    <div class="card border-0 shadow-sm mb-5"><div class="card-body p-4 p-lg-5">
+      <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">${o.whyTitle}</h2>
+      <div class="row g-4 justify-content-center">${benefits}
+      </div>
+    </div></div>
+    <div class="card border-0 shadow-sm mb-5"><div class="card-body p-4 p-lg-5">
+      <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">Frequently Asked Questions</h2>
+      <div class="row g-4">${faqs}
+      </div>
+    </div></div>
+  </div>`;
+}
+
+function getQRCodeContent() {
+  return getUtilityContent({
+    emoji: '🔳', title: 'QR Code Generator', subtitle: 'Create a QR code for any link or text, free', whyTitle: 'Why Use Our QR Generator?',
+    bodyHtml: `
+      <div class="mb-3">
+        <label class="form-label text-light fw-semibold" for="qr-text">Text or URL</label>
+        <textarea id="qr-text" class="form-control" rows="3" placeholder="https://example.com or any text">https://www.pdf-to-jpg-tool.com</textarea>
+      </div>
+      <div class="d-flex flex-wrap align-items-end gap-3 mb-2">
+        <div>
+          <label class="form-label text-light small" for="qr-size">Size</label>
+          <select id="qr-size" class="form-select"><option value="200">Small</option><option value="320" selected>Medium</option><option value="512">Large</option></select>
+        </div>
+      </div>
+      <div class="text-center my-4"><canvas id="qr-canvas" style="max-width:100%; height:auto;"></canvas></div>
+      <div class="text-center"><button id="qr-download" class="btn btn-success fw-bold" disabled><i class="bi bi-download me-2"></i>Download PNG</button></div>`,
+    steps: [
+      { title: 'Enter Text or URL', text: 'Type or paste the link, text, Wi-Fi details or anything you want encoded.' },
+      { title: 'Pick a Size', text: 'Choose small, medium or large depending on where you\'ll use the QR code.' },
+      { title: 'Preview Instantly', text: 'The QR code updates live as you type — no button needed.' },
+      { title: 'Download PNG', text: 'Save a high-quality PNG you can print or share anywhere.' }
+    ],
+    benefits: [
+      { color: '#3b82f6', icon: 'bi-lightning-fill', title: 'Instant & Live', text: 'The QR code generates as you type — fast, no waiting, no uploads.' },
+      { color: '#f59e0b', icon: 'bi-shield-lock-fill', title: '100% Private', text: 'Your text never leaves your device. The QR code is built right in your browser.' },
+      { color: '#10b981', icon: 'bi-infinity', title: 'Free & Unlimited', text: 'Generate as many QR codes as you want — no signup, no limits, no watermarks.' }
+    ],
+    faqs: [
+      { q: 'Do QR codes expire?', a: 'No — these are static QR codes encoded directly from your text, so they work forever.' },
+      { q: 'What can I encode?', a: 'Any URL or text — links, contact info, Wi-Fi credentials, plain notes, and more.' },
+      { q: 'Is it really free?', a: 'Yes, completely free with no signup, no limits and no watermark.' },
+      { q: 'Is my data uploaded?', a: 'No — the QR code is generated locally in your browser.' }
+    ]
+  });
+}
+
+function getPasswordGenContent() {
+  return getUtilityContent({
+    emoji: '🔑', title: 'Password Generator', subtitle: 'Create strong, random passwords instantly', whyTitle: 'Why Use Our Password Generator?',
+    bodyHtml: `
+      <div class="mb-3">
+        <div class="input-group">
+          <input id="pw-out" type="text" class="form-control fw-bold" readonly style="font-family: monospace; font-size: 1.1rem;">
+          <button id="pw-copy" class="btn btn-outline-primary" title="Copy"><i class="bi bi-clipboard"></i></button>
+        </div>
+        <div id="pw-strength" class="small mt-2 text-secondary"></div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label text-light small">Length: <span id="pw-len-val" class="fw-bold">16</span></label>
+        <input id="pw-len" type="range" min="6" max="64" value="16" class="form-range">
+      </div>
+      <div class="d-flex flex-wrap gap-3 mb-4">
+        <div class="form-check"><input id="pw-upper" type="checkbox" class="form-check-input" checked><label class="form-check-label text-light" for="pw-upper">A-Z</label></div>
+        <div class="form-check"><input id="pw-lower" type="checkbox" class="form-check-input" checked><label class="form-check-label text-light" for="pw-lower">a-z</label></div>
+        <div class="form-check"><input id="pw-num" type="checkbox" class="form-check-input" checked><label class="form-check-label text-light" for="pw-num">0-9</label></div>
+        <div class="form-check"><input id="pw-sym" type="checkbox" class="form-check-input" checked><label class="form-check-label text-light" for="pw-sym">!@#$%</label></div>
+      </div>
+      <div class="text-center"><button id="pw-gen" class="btn btn-primary fw-bold"><i class="bi bi-arrow-repeat me-2"></i>Generate Password</button></div>`,
+    steps: [
+      { title: 'Choose Length', text: 'Drag the slider from 6 to 64 characters — longer is stronger.' },
+      { title: 'Pick Character Types', text: 'Toggle uppercase, lowercase, numbers and symbols to match site rules.' },
+      { title: 'Generate', text: 'A cryptographically-random password is created instantly using your browser\'s secure RNG.' },
+      { title: 'Copy & Use', text: 'Copy it with one click and paste it wherever you need.' }
+    ],
+    benefits: [
+      { color: '#10b981', icon: 'bi-shield-check', title: 'Cryptographically Secure', text: 'Uses the browser\'s crypto RNG — truly random, not predictable.' },
+      { color: '#f59e0b', icon: 'bi-incognito', title: '100% Private', text: 'Passwords are generated locally and never sent anywhere or stored.' },
+      { color: '#3b82f6', icon: 'bi-sliders', title: 'Fully Customizable', text: 'Control length and character sets to meet any password policy.' }
+    ],
+    faqs: [
+      { q: 'Are these passwords safe?', a: 'Yes — they\'re generated with the browser\'s cryptographically-secure random generator.' },
+      { q: 'Are passwords stored or sent anywhere?', a: 'No — everything happens in your browser; nothing is uploaded or saved.' },
+      { q: 'How long should my password be?', a: 'At least 16 characters with mixed types is a strong, modern baseline.' },
+      { q: 'Can I generate many?', a: 'Yes — click Generate as many times as you like.' }
+    ]
+  });
+}
+
+function getWordCounterContent() {
+  return getUtilityContent({
+    emoji: '🔢', title: 'Word & Character Counter', subtitle: 'Count words, characters, sentences and reading time', whyTitle: 'Why Use Our Word Counter?',
+    bodyHtml: `
+      <textarea id="wc-text" class="form-control" rows="8" placeholder="Type or paste your text here…"></textarea>
+      <div class="row text-center mt-4 g-3">
+        <div class="col-6 col-md-3"><div class="h3 fw-bold text-gradient mb-0" id="wc-words">0</div><div class="small text-secondary">Words</div></div>
+        <div class="col-6 col-md-3"><div class="h3 fw-bold text-gradient mb-0" id="wc-chars">0</div><div class="small text-secondary">Characters</div></div>
+        <div class="col-6 col-md-3"><div class="h3 fw-bold text-gradient mb-0" id="wc-sentences">0</div><div class="small text-secondary">Sentences</div></div>
+        <div class="col-6 col-md-3"><div class="h3 fw-bold text-gradient mb-0" id="wc-read">0s</div><div class="small text-secondary">Read time</div></div>
+      </div>`,
+    steps: [
+      { title: 'Paste Your Text', text: 'Type or paste any text into the box — an essay, article, caption or post.' },
+      { title: 'See Live Counts', text: 'Words, characters, sentences and reading time update instantly as you type.' },
+      { title: 'Hit Your Target', text: 'Use the counts to meet word limits for essays, SEO, tweets or meta descriptions.' },
+      { title: 'Done', text: 'No saving needed — nothing is uploaded; it all runs in your browser.' }
+    ],
+    benefits: [
+      { color: '#3b82f6', icon: 'bi-lightning-fill', title: 'Real-Time', text: 'Counts update the instant you type — no button, no lag.' },
+      { color: '#f59e0b', icon: 'bi-shield-lock-fill', title: '100% Private', text: 'Your text stays in your browser and is never uploaded or stored.' },
+      { color: '#10b981', icon: 'bi-clock-history', title: 'Reading Time', text: 'Estimates reading time so you know how long your content takes to read.' }
+    ],
+    faqs: [
+      { q: 'How is reading time calculated?', a: 'Based on an average reading speed of about 200 words per minute.' },
+      { q: 'Does it count characters with spaces?', a: 'The character count includes everything you type, spaces included.' },
+      { q: 'Is my text saved or uploaded?', a: 'No — it stays entirely in your browser.' },
+      { q: 'Is there a length limit?', a: 'No practical limit — paste as much text as you like.' }
+    ]
+  });
+}
+
+function getPDFPageNumbersContent() {
+  return getUtilityContent({
+    emoji: '🔢', title: 'Add Page Numbers to PDF', subtitle: 'Stamp page numbers onto your PDF — lossless, in your browser', whyTitle: 'Why Add Page Numbers Here?',
+    bodyHtml: `
+      <div id="dz-pdf-pagenum" class="dropzone text-center p-5" role="button" tabindex="0" style="cursor: pointer;">
+        <div style="font-size: 2.5rem;">📄</div>
+        <p class="fw-semibold mb-1 text-light">Drag &amp; drop your PDF here</p>
+        <p class="small text-secondary mb-0">or click to browse</p>
+        <input type="file" id="file-pdf-pagenum" class="d-none" accept="application/pdf">
+      </div>
+      <div id="status-pdf-pagenum" class="small text-secondary mt-2 text-center">No file selected</div>
+      <div class="row g-3 mt-2">
+        <div class="col-sm-6"><label class="form-label text-light small" for="pn-position">Position</label>
+          <select id="pn-position" class="form-select"><option value="bottom-center" selected>Bottom center</option><option value="bottom-right">Bottom right</option><option value="bottom-left">Bottom left</option><option value="top-center">Top center</option><option value="top-right">Top right</option><option value="top-left">Top left</option></select></div>
+        <div class="col-sm-6"><label class="form-label text-light small" for="pn-format">Format</label>
+          <select id="pn-format" class="form-select"><option value="n" selected>1, 2, 3…</option><option value="page-n">Page 1, Page 2…</option><option value="n-of-total">1 of N</option></select></div>
+        <div class="col-sm-6"><label class="form-label text-light small" for="pn-start">Start at</label><input id="pn-start" type="number" value="1" min="0" class="form-control"></div>
+        <div class="col-sm-6"><label class="form-label text-light small" for="pn-size">Font size</label><input id="pn-size" type="number" value="11" min="6" max="40" class="form-control"></div>
+      </div>
+      <div class="text-center mt-4"><button id="btn-pdf-pagenum" class="btn btn-primary fw-bold" disabled><i class="bi bi-123 me-2"></i>Add Page Numbers</button></div>
+      <div id="result-pdf-pagenum" class="mt-3 text-center"></div>`,
+    steps: [
+      { title: 'Upload your PDF', text: 'Drag and drop your PDF or click to browse — it stays on your device.' },
+      { title: 'Choose Style', text: 'Pick the position, number format (1, "Page 1", or "1 of N"), starting number and size.' },
+      { title: 'Stamp Numbers', text: 'Page numbers are added to every page losslessly — your text and images are untouched.' },
+      { title: 'Download', text: 'Download your numbered PDF instantly.' }
+    ],
+    benefits: [
+      { color: '#10b981', icon: 'bi-file-earmark-check', title: 'Lossless', text: 'Built on pdf-lib — your original text and images are preserved exactly; numbers are simply added.' },
+      { color: '#f59e0b', icon: 'bi-shield-lock-fill', title: '100% Private', text: 'Your PDF never leaves your device — page numbers are added right in your browser.' },
+      { color: '#3b82f6', icon: 'bi-sliders', title: 'Flexible', text: 'Control position, format, start number and font size to match your document.' }
+    ],
+    faqs: [
+      { q: 'Does it change my PDF content?', a: 'No — it only adds page numbers on top; your existing text and images stay exactly as they were.' },
+      { q: 'Is my PDF uploaded?', a: 'No — everything is processed locally in your browser.' },
+      { q: 'Can I start numbering from a specific page value?', a: 'Yes — set the "Start at" number (e.g., start at 0 or any value).' },
+      { q: 'What if my PDF is password-protected?', a: 'Remove the password first — encrypted PDFs can\'t be edited in the browser.' }
+    ]
+  });
+}

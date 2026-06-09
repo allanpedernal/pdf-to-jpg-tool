@@ -145,6 +145,60 @@ const TOOLS = [
     intro: 'Convert JPG and PNG images to WebP — a modern format that is far smaller at similar quality, perfect for faster-loading websites. Everything runs in your browser.',
     steps: ['Drag your images onto the drop zone.', 'Click "Convert to WebP".', 'Download the smaller WebP files (single file or a ZIP).'],
     faqs: [['Why use WebP?', 'WebP files are typically 25–35% smaller than JPG/PNG at similar quality, which speeds up websites.'], ['Is WebP supported everywhere?', 'All modern browsers support WebP; for very old software, keep a JPG/PNG copy too.'], ['Are my images uploaded?', 'No — conversion is 100% in your browser.']]
+  },
+  {
+    slug: 'webp-to-jpg', toolId: 'webp-to-jpg',
+    title: 'WebP to JPG Converter — Free, No Upload',
+    desc: 'Convert WebP to JPG free in your browser. Turn WebP images into universally-supported JPG files — no uploads, no signup.',
+    h1: 'WebP to JPG Converter',
+    intro: 'Convert WebP images into JPG that opens on any device, app or website. Everything runs locally in your browser — no uploads.',
+    steps: ['Drag your WebP images onto the drop zone.', 'Click "Convert to JPG".', 'Download one JPG or all of them as a ZIP.'],
+    faqs: [['Why convert WebP to JPG?', 'Some apps and older software don\'t support WebP — JPG works everywhere.'], ['Are my images uploaded?', 'No — conversion happens entirely in your browser.']]
+  },
+  {
+    slug: 'webp-to-png', toolId: 'webp-to-png',
+    title: 'WebP to PNG Converter — Free, Lossless',
+    desc: 'Convert WebP to PNG free in your browser. Get lossless PNG images (with transparency) from WebP — no uploads, no signup.',
+    h1: 'WebP to PNG Converter',
+    intro: 'Convert WebP images into lossless PNG files, preserving transparency. Runs entirely in your browser with no uploads.',
+    steps: ['Drag your WebP images in.', 'Click "Convert to PNG".', 'Download a single PNG or all of them as a ZIP.'],
+    faqs: [['Does it keep transparency?', 'Yes — transparent WebP areas are preserved in the PNG.'], ['Are my images uploaded?', 'No — it all happens in your browser.']]
+  },
+  {
+    slug: 'add-page-numbers-to-pdf', toolId: 'pdf-pagenum',
+    title: 'Add Page Numbers to PDF — Free Online',
+    desc: 'Add page numbers to a PDF free in your browser. Choose position, format and start number — lossless, no uploads, no signup.',
+    h1: 'Add Page Numbers to PDF',
+    intro: 'Stamp page numbers onto every page of your PDF, with control over position, format and starting number. It is lossless (your text and images are untouched) and runs entirely in your browser.',
+    steps: ['Upload your PDF (it stays on your device).', 'Pick the position, format, start number and size.', 'Click "Add Page Numbers" and download the result.'],
+    faqs: [['Does it change my content?', 'No — it only adds numbers on top; your existing content is preserved.'], ['Is my PDF uploaded?', 'No — page numbers are added locally in your browser.'], ['Can I start at a custom number?', 'Yes — set any starting value.']]
+  },
+  {
+    slug: 'qr-code-generator', toolId: 'qr-code',
+    title: 'QR Code Generator — Free, No Signup',
+    desc: 'Free QR code generator. Create a QR code for any link or text and download a high-quality PNG — no signup, no expiry, in your browser.',
+    h1: 'QR Code Generator',
+    intro: 'Create a QR code for any URL or text and download it as a PNG. The codes are static (they never expire) and are generated right in your browser.',
+    steps: ['Type or paste your link or text.', 'Pick a size — the QR code previews live.', 'Download the PNG and print or share it.'],
+    faqs: [['Do these QR codes expire?', 'No — they\'re static, encoded directly from your text, so they work forever.'], ['Is it free?', 'Yes — unlimited QR codes, no signup, no watermark.'], ['Is my data uploaded?', 'No — the QR code is generated locally in your browser.']]
+  },
+  {
+    slug: 'password-generator', toolId: 'password-generator',
+    title: 'Password Generator — Free & Secure',
+    desc: 'Free secure password generator. Create strong, random passwords with custom length and character sets — generated privately in your browser.',
+    h1: 'Password Generator',
+    intro: 'Generate strong, truly-random passwords using your browser\'s cryptographically-secure generator. Control the length and character types. Nothing is ever sent or stored.',
+    steps: ['Choose a length (6–64).', 'Pick character types (A-Z, a-z, 0-9, symbols).', 'Click Generate and copy your password.'],
+    faqs: [['Are these passwords safe?', 'Yes — they use the browser\'s cryptographically-secure random generator.'], ['Are passwords stored or sent anywhere?', 'No — everything happens locally; nothing is uploaded or saved.'], ['How long should it be?', 'At least 16 characters with mixed types is a strong baseline.']]
+  },
+  {
+    slug: 'word-counter', toolId: 'word-counter',
+    title: 'Word Counter — Free Word & Character Count',
+    desc: 'Free word and character counter. Count words, characters, sentences and reading time as you type — private, in your browser, no signup.',
+    h1: 'Word & Character Counter',
+    intro: 'Count words, characters, sentences and estimated reading time in real time as you type. Perfect for essays, SEO meta descriptions, tweets and more. Your text stays in your browser.',
+    steps: ['Type or paste your text.', 'See live word, character and sentence counts.', 'Use the counts to hit your target length.'],
+    faqs: [['How is reading time calculated?', 'Based on an average of about 200 words per minute.'], ['Is my text uploaded?', 'No — it stays entirely in your browser.'], ['Is there a length limit?', 'No practical limit — paste as much as you like.']]
   }
 ];
 

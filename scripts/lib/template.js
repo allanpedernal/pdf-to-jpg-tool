@@ -220,7 +220,7 @@ function topNav(active) {
   <nav class="navbar navbar-expand-lg sticky-top topnav">
     <div class="container-fluid px-3 px-lg-4">
       <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
-        <i class="bi bi-file-earmark-pdf-fill me-2" style="color:#3b82f6;"></i>PDF Tools
+        <i class="bi bi-file-earmark-pdf-fill me-2" style="color:#3b82f6;"></i><span class="text-gradient">PDF Tools</span>
       </a>
       <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
         <i class="bi bi-list" style="font-size:1.7rem; line-height:1; color:var(--text-primary);"></i>
