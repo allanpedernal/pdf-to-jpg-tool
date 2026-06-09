@@ -191,8 +191,13 @@ function main() {
     // pre-select the tool + tool-specific structured data, injected into <head>
     const headInject = `  <script>window.INITIAL_TOOL = ${JSON.stringify(t.toolId)};</script>\n${toolJsonLd(t)}\n</head>`;
     html = html.replace('</head>', headInject);
-    // unique supporting content below the tool, inside the main column
-    html = html.replace('      </main>', `${seoSection(t)}\n      </main>`);
+    // Empty #tool-content (the tool fills it via JS) so we don't ship the homepage's
+    // landing copy/H1 on every tool page (avoids duplicate content + double H1),
+    // then add the unique supporting content below it.
+    html = html.replace(
+      /<div id="tool-content"[\s\S]*?<\/main>/,
+      `<div id="tool-content" class="w-100 py-3"></div>\n          </div>\n        </div>\n${seoSection(t)}\n      </main>`
+    );
     fs.writeFileSync(path.join(ROOT, `${t.slug}.html`), html);
     console.log(`[tool-pages] wrote ${t.slug}.html  (${t.toolId})`);
   }
