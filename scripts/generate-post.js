@@ -73,7 +73,8 @@ Return ONLY a JSON object with EXACTLY these keys:
 
 Strict rules for contentHtml:
 - Use only these tags: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, <em>, <blockquote>, <a>. Do NOT include <h1>, <html>, <head>, <style>, or scripts.
-- 700-1200 words of real, specific, accurate information. No invented statistics. No "as an AI".
+- LENGTH IS A STRICT REQUIREMENT: the contentHtml MUST be at least 800 words (aim for 900-1200). Do not stop early or summarize; write full, detailed sections. An article under 800 words will be rejected.
+- Real, specific, accurate information only. No invented statistics. No "as an AI".
 - Include at least 3 <h2> sections and a step-by-step list where it makes sense.
 - Include a final section "<h2>Frequently asked questions</h2>" with at least two "<h3>" question headings and answers.
 - Mention that the tools run in the browser with no uploads (privacy) where relevant.
@@ -112,6 +113,7 @@ async function callGroq(prompt) {
     body: JSON.stringify({
       model,
       temperature: 0.7,
+      max_tokens: 4000,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: 'You are a helpful technical writer. Always respond with a single valid JSON object.' },
@@ -140,6 +142,7 @@ async function callGithubModels(prompt) {
     body: JSON.stringify({
       model,
       temperature: 0.7,
+      max_tokens: 4000,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: 'You are a helpful technical writer. Always respond with a single valid JSON object.' },
