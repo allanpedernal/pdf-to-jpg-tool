@@ -260,6 +260,9 @@ function baseHead({ title, description, canonical, image, jsonld, extraMeta }) {
   <link rel="manifest" href="/manifest.json">
   <script src="/shared/pwa.js"></script>
 
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="${esc(SITE.name)} Blog" href="/blog/rss.xml">
+
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="${esc(canonical)}">

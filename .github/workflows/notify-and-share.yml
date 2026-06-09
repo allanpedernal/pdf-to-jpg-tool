@@ -1,0 +1,55 @@
+name: Notify & Share
+
+# When new/updated content lands on the live site (push to main), tell search
+# engines immediately via IndexNow, and share any new blog post to social.
+# Both steps are white-hat and degrade gracefully if not configured.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sitemap.xml'
+      - 'blog/**'
+      - '*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: notify-and-share
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 2   # needed to diff against the previous commit
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Tell Bing/Yandex/IndexNow network about all current URLs (no secret needed).
+      - name: Ping IndexNow
+        run: node scripts/indexnow.js
+
+      # Only share when a blog post was actually added/changed in this push.
+      - name: Detect new blog post
+        id: blog
+        run: |
+          if git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null | grep -q '^blog/posts.json$'; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Share newest post to social
+        if: steps.blog.outputs.changed == 'true'
+        env:
+          WEBHOOK_URL: ${{ secrets.SOCIAL_WEBHOOK_URL }}
+        run: node scripts/social-post.js

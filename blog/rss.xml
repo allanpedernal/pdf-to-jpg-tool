@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PDF Tools Blog</title>
+    <link>https://www.pdf-to-jpg-tool.com/blog/</link>
+    <atom:link href="https://www.pdf-to-jpg-tool.com/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Guides and tutorials on converting, compressing and managing PDF and image files.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jun 2026 09:00:00 +0000</lastBuildDate>
+    <item>
+      <title>How to Convert HEIC to JPG (iPhone, Mac &amp; Windows)</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/convert-heic-to-jpg-any-device.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/convert-heic-to-jpg-any-device.html</guid>
+      <description>Why your iPhone photos won't open on some apps — and the fastest free way to turn HEIC files into universally compatible JPGs.</description>
+      <pubDate>Mon, 08 Jun 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Merge &amp; Split PDF Files Safely</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/merge-and-split-pdf-files-safely.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/merge-and-split-pdf-files-safely.html</guid>
+      <description>Combine several PDFs into one, or pull out just the pages you need — without sending sensitive documents to a stranger's server.</description>
+      <pubDate>Fri, 05 Jun 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Convert JPG to PDF: A Complete Guide</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/how-to-convert-jpg-to-pdf.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/how-to-convert-jpg-to-pdf.html</guid>
+      <description>Turn one image or a whole stack of photos into a single, tidy PDF — with the right page size, orientation, and order.</description>
+      <pubDate>Tue, 02 Jun 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Compress a PDF for Free Without Losing Quality</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/how-to-compress-a-pdf-free.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/how-to-compress-a-pdf-free.html</guid>
+      <description>Email bouncing because your PDF is too big? Here's how PDF compression works and how to shrink files in your browser without wrecking quality.</description>
+      <pubDate>Fri, 29 May 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>PDF to PNG vs PDF to JPG: Which Should You Use?</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/pdf-to-png-vs-pdf-to-jpg.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/pdf-to-png-vs-pdf-to-jpg.html</guid>
+      <description>JPG is smaller, PNG is sharper. Here's a simple decision guide for choosing the right format for documents, screenshots, and photos.</description>
+      <pubDate>Mon, 25 May 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Convert PDF to JPG Without Losing Quality</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/convert-pdf-to-jpg-without-losing-quality.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/convert-pdf-to-jpg-without-losing-quality.html</guid>
+      <description>The settings that actually matter when turning PDF pages into sharp JPG images — resolution, DPI, and compression explained in plain English.</description>
+      <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Reduce PDF File Size for Email Attachments</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/reduce-pdf-size-for-email.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/reduce-pdf-size-for-email.html</guid>
+      <description>Email bouncing your PDF back? Here's how to get any PDF under common attachment limits without losing readability.</description>
+      <pubDate>Mon, 18 May 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Rotate PDF Pages That Were Scanned Sideways</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/rotate-pdf-pages-scanned-sideways.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/rotate-pdf-pages-scanned-sideways.html</guid>
+      <description>Pages showing up sideways or upside down? Here's how to permanently fix PDF orientation in seconds.</description>
+      <pubDate>Tue, 12 May 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>What Is OCR and How to Extract Text From a Scanned PDF</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/what-is-ocr-extract-text-from-pdf.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/what-is-ocr-extract-text-from-pdf.html</guid>
+      <description>Can't select the text in a scanned PDF? OCR turns the picture of words back into real, copyable text. Here's how.</description>
+      <pubDate>Wed, 06 May 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>PNG to JPG: When and Why You Should Convert</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/png-to-jpg-when-and-why.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/png-to-jpg-when-and-why.html</guid>
+      <description>PNG files can be huge. Here's when converting to JPG makes sense — and when you should keep the PNG.</description>
+      <pubDate>Tue, 28 Apr 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Resize Images Without Losing Quality</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/resize-images-without-losing-quality.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/resize-images-without-losing-quality.html</guid>
+      <description>Resizing the right way keeps images sharp. Here's how to scale photos for the web, social media, and uploads.</description>
+      <pubDate>Mon, 20 Apr 2026 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>How to Compress Images for a Faster Website</title>
+      <link>https://www.pdf-to-jpg-tool.com/blog/compress-images-for-faster-website.html</link>
+      <guid isPermaLink="true">https://www.pdf-to-jpg-tool.com/blog/compress-images-for-faster-website.html</guid>
+      <description>Images are usually the heaviest thing on a page. Compressing them is the quickest way to speed up your site.</description>
+      <pubDate>Sun, 12 Apr 2026 09:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

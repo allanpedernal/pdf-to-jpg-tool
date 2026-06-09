@@ -85,6 +85,43 @@ ${entries}
 `;
 }
 
+function rfc822(dateStr) {
+  // dateStr = "YYYY-MM-DD" -> RFC-822 (e.g. "Tue, 20 May 2026 09:00:00 +0000")
+  const [y, m, d] = dateStr.slice(0, 10).split('-').map(Number);
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const mons = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dt = new Date(Date.UTC(y, m - 1, d, 9, 0, 0));
+  return `${days[dt.getUTCDay()]}, ${String(d).padStart(2,'0')} ${mons[m-1]} ${y} 09:00:00 +0000`;
+}
+
+function buildRss(posts) {
+  const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const sorted = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const items = sorted.map(p => {
+    const url = `${SITE.url}/blog/${p.slug}.html`;
+    return `    <item>
+      <title>${esc(p.title)}</title>
+      <link>${url}</link>
+      <guid isPermaLink="true">${url}</guid>
+      <description>${esc(p.excerpt || p.description || '')}</description>
+      <pubDate>${rfc822(p.updated || p.date)}</pubDate>
+    </item>`;
+  }).join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>${SITE.name} Blog</title>
+    <link>${SITE.url}/blog/</link>
+    <atom:link href="${SITE.url}/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>Guides and tutorials on converting, compressing and managing PDF and image files.</description>
+    <language>en-us</language>
+    <lastBuildDate>${rfc822((sorted[0] && (sorted[0].updated || sorted[0].date)) || '2026-01-01')}</lastBuildDate>
+${items}
+  </channel>
+</rss>
+`;
+}
+
 function updateServiceWorker(contentHash) {
   const swPath = path.join(ROOT, 'sw.js');
   let sw = fs.readFileSync(swPath, 'utf8');
@@ -138,6 +175,9 @@ function main() {
     readingTime: readingTimeMinutes(p.contentHtml)
   }));
   writeFileLogged(path.join(BLOG_DIR, 'index-data.json'), JSON.stringify(indexData));
+
+  // RSS feed (syndication / discovery)
+  writeFileLogged(path.join(BLOG_DIR, 'rss.xml'), buildRss(posts));
 
   // Sitemap
   writeFileLogged(path.join(ROOT, 'sitemap.xml'), buildSitemap(posts));
