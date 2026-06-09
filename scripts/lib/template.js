@@ -327,7 +327,7 @@ function renderPost(post, related) {
   const canonical = postUrl(post);
   const image = postImage(post);
   const head = baseHead({
-    title: `${post.title} | ${SITE.name} Blog`,
+    title: `${post.title} | ${SITE.name}`,
     description: post.description || post.excerpt,
     canonical,
     image,

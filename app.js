@@ -1,5 +1,14 @@
 // Main application logic for single-page app with tabs
 let currentTool = 'pdf-to-jpg';
+// Allow tool landing pages (/pdf-to-png.html etc.) and ?tool= links to pre-select a tool.
+(function () {
+  try {
+    var fromParam = new URLSearchParams(window.location.search).get('tool');
+    var initial = window.INITIAL_TOOL || fromParam;
+    if (initial && typeof getToolById !== 'function') { currentTool = initial; }
+    else if (initial && getToolById(initial)) { currentTool = initial; }
+  } catch (e) { /* ignore */ }
+})();
 let pdfjsReady = false;
 window.pdfjsReady = false;
 

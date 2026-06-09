@@ -65,7 +65,13 @@ function buildSitemap(posts) {
     priority: '0.8',
     lastmod: (p.updated || p.date).slice(0, 10)
   }));
-  const entries = [...staticUrls, ...postUrls].map(u => `  <url>
+  // Per-tool landing pages (high priority — primary keyword pages)
+  let toolUrls = [];
+  try {
+    const { TOOLS } = require('./build-tool-pages');
+    toolUrls = TOOLS.map(t => ({ loc: `${SITE.url}/${t.slug}.html`, changefreq: 'weekly', priority: '0.9', lastmod: today }));
+  } catch (e) { /* tool pages optional */ }
+  const entries = [...staticUrls, ...toolUrls, ...postUrls].map(u => `  <url>
     <loc>${u.loc}</loc>
     <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
