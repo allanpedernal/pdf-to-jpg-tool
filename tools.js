@@ -1,5 +1,58 @@
 // Tool content generators and implementations
 
+// ---- Reusable content-section builders (match the inline tool styling) ----
+// Every tool page shows: tool UI + How It Works + Why…? + Common Use Cases + FAQ.
+function sectionWhy(title, cards) {
+  return `
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">${title}</h2>
+          <div class="row g-4 justify-content-center">${cards.map(c => `
+            <div class="col-md-6 col-lg-4">
+              <div class="text-center h-100">
+                <div class="mb-3"><div class="d-inline-flex align-items-center justify-content-center rounded" style="width: 80px; height: 80px; background: ${c.color};"><i class="bi ${c.icon} text-white" style="font-size: 2.5rem;"></i></div></div>
+                <h4 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">${c.title}</h4>
+                <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${c.text}</p>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+}
+function sectionUseCases(cards) {
+  return `
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;"><i class="bi bi-list-ul me-2"></i>Common Use Cases</h2>
+          <div class="row g-4">${cards.map(c => `
+            <div class="col-md-6 col-lg-4">
+              <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
+                <div class="card-body p-4">
+                  <i class="bi ${c.icon} text-primary mb-3 d-block" style="font-size: 2rem;"></i>
+                  <h5 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">${c.title}</h5>
+                  <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">${c.text}</p>
+                </div>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+}
+function sectionFAQ(faqs) {
+  return `
+      <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;"><i class="bi bi-question-circle me-2"></i>Frequently Asked Questions</h2>
+          <div class="accordion accordion-flush" id="faqAccordion">${faqs.map((f, i) => `
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h2 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqx${i}" aria-expanded="false" style="font-size: 1rem; padding: 1rem;">${f.q}</button></h2>
+              <div id="faqx${i}" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">${f.a}</div></div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+}
+
 function getPDFToPNGContent() {
   return `
     <div class="w-100">
@@ -191,6 +244,22 @@ function getPDFToPNGContent() {
           </div>
         </div>
       </div>
+      ${sectionUseCases([
+        { icon: 'bi-file-earmark-image', title: 'Screenshots & Docs', text: 'Drop a contract or invoice page into chat, email or slides as a clean image.' },
+        { icon: 'bi-easel', title: 'Presentations', text: 'Pull diagrams and charts from a PDF to reuse in slides.' },
+        { icon: 'bi-pencil-square', title: 'Editing', text: 'Edit PDF pages in Photoshop, GIMP or any image editor.' },
+        { icon: 'bi-globe', title: 'Web Previews', text: 'Show crisp document previews or thumbnails on a website.' },
+        { icon: 'bi-layers', title: 'Transparency', text: 'Keep sharp edges and transparency that JPG cannot.' },
+        { icon: 'bi-printer', title: 'Printing', text: 'Export high-DPI PNGs for sharp printing.' }
+      ])}
+      ${sectionFAQ([
+        { q: 'When should I use PNG instead of JPG?', a: 'Use PNG for text, screenshots, diagrams and line art where sharp edges matter, or when you need transparency. Use JPG for photos where a smaller file matters more.' },
+        { q: 'Does converting to PNG reduce quality?', a: 'No — PNG is lossless, so there are no compression artifacts. The image is as sharp as the resolution you choose.' },
+        { q: 'Are my files uploaded to a server?', a: 'No. Conversion runs entirely in your browser, so your PDF never leaves your device.' },
+        { q: 'Can I convert a multi-page PDF at once?', a: 'Yes. Every page is rendered to its own PNG, and you can download them individually or all together.' },
+        { q: 'What resolution (DPI) should I choose?', a: 'For on-screen use a standard scale keeps files small; for printing or zooming in, pick a higher scale for sharper results.' },
+        { q: 'Is it free and does it work on mobile?', a: 'Yes — completely free with no sign-up, and it works in any modern browser on phones, tablets and computers.' }
+      ])}
     </div>
   `;
 }
@@ -5615,15 +5684,6 @@ function getImageConvertContent(o) {
                   <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${b.text}</p>
                 </div>
               </div>`).join('');
-  const faqs = o.faqs.map(f => `
-              <div class="col-md-6">
-                <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
-                  <div class="card-body p-4">
-                    <h3 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">${f.q}</h3>
-                    <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">${f.a}</p>
-                  </div>
-                </div>
-              </div>`).join('');
   return `
   <div class="w-100">
     <div class="mx-auto" style="max-width: 760px;">
@@ -5669,14 +5729,16 @@ function getImageConvertContent(o) {
       </div>
     </div>
 
-    <!-- FAQ -->
+    <!-- Common Use Cases -->
     <div class="card border-0 shadow-sm mb-5">
       <div class="card-body p-4 p-lg-5">
-        <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">Frequently Asked Questions</h2>
-        <div class="row g-4">${faqs}
+        <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">Common Use Cases</h2>
+        <div class="row g-4 justify-content-center">${(o.useCases || []).map(u => `<div class="col-md-6 col-lg-3"><div class="card border-0 h-100 text-center" style="background-color: rgba(30,41,59,.8);"><div class="card-body p-4"><div class="mb-2"><i class="bi ${u.icon} text-primary" style="font-size:1.8rem;"></i></div><h3 class="text-light fw-bold mb-1" style="font-size:1.05rem;">${u.title}</h3><p class="text-secondary mb-0" style="font-size:.9rem; line-height:1.5;">${u.text}</p></div></div></div>`).join('')}
         </div>
       </div>
     </div>
+
+    ${sectionFAQ(o.faqs)}
   </div>`;
 }
 function getJPGToPNGContent() {
@@ -5684,6 +5746,12 @@ function getJPGToPNGContent() {
     id: 'jpg-to-png', emoji: '🪄', title: 'JPG to PNG Converter',
     subtitle: 'Convert JPG/JPEG images to PNG, right in your browser', accept: 'image/jpeg', hint: 'JPG images', cta: 'Convert to PNG',
     whyTitle: 'Why Convert JPG to PNG?',
+    useCases: [
+      { icon: 'bi-palette', title: 'Logos & Graphics', text: 'Keep logos and graphics crisp with lossless PNG edges.' },
+      { icon: 'bi-pencil-square', title: 'Editing', text: 'Get a clean PNG to edit further without JPG artifacts.' },
+      { icon: 'bi-layers', title: 'Transparency-ready', text: 'Move to a format built for transparency in design work.' },
+      { icon: 'bi-window', title: 'Web & Apps', text: 'Use sharp PNGs for UI elements, icons and screenshots.' }
+    ],
     steps: [
       { title: 'Select JPG Images', text: 'Drag and drop your JPG/JPEG images, or click to browse and select multiple files from your computer.' },
       { title: 'Click Convert', text: 'Hit "Convert to PNG" — your images are converted to lossless PNG instantly, right in your browser.' },
@@ -5708,6 +5776,12 @@ function getImageToWebpContent() {
     id: 'image-to-webp', emoji: '🌐', title: 'Image to WebP Converter',
     subtitle: 'Convert JPG &amp; PNG images to modern, smaller WebP', accept: 'image/*', hint: 'images', cta: 'Convert to WebP',
     whyTitle: 'Why Convert to WebP?',
+    useCases: [
+      { icon: 'bi-speedometer2', title: 'Faster Websites', text: 'Shrink images to speed up page loads and Core Web Vitals.' },
+      { icon: 'bi-hdd', title: 'Save Storage', text: 'Store more photos in less space with smaller WebP files.' },
+      { icon: 'bi-cloud-arrow-up', title: 'Email & Upload', text: 'Send lighter images that fit attachment and upload limits.' },
+      { icon: 'bi-images', title: 'Galleries', text: 'Serve large image galleries without the bandwidth cost.' }
+    ],
     steps: [
       { title: 'Select Images', text: 'Drag and drop your JPG or PNG images, or click to browse and select multiple files.' },
       { title: 'Click Convert', text: 'Hit "Convert to WebP" — your images are re-encoded to the modern WebP format instantly.' },
@@ -5733,6 +5807,12 @@ function getWebpToJPGContent() {
     id: 'webp-to-jpg', emoji: '🖼️', title: 'WebP to JPG Converter',
     subtitle: 'Convert WebP images to widely-supported JPG', accept: 'image/webp', hint: 'WebP images', cta: 'Convert to JPG',
     whyTitle: 'Why Convert WebP to JPG?',
+    useCases: [
+      { icon: 'bi-check2-circle', title: 'Universal Support', text: 'Open images in apps that do not accept WebP.' },
+      { icon: 'bi-printer', title: 'Printing', text: 'Convert to JPG for print shops and photo services.' },
+      { icon: 'bi-share', title: 'Sharing', text: 'Share photos in the format every device understands.' },
+      { icon: 'bi-camera', title: 'Photo Editing', text: 'Use JPG in older editors that lack WebP support.' }
+    ],
     steps: [
       { title: 'Select WebP Images', text: 'Drag and drop your WebP files, or click to browse and pick multiple images.' },
       { title: 'Click Convert', text: 'Hit "Convert to JPG" — each WebP is re-encoded to a universally-supported JPG instantly.' },
@@ -5757,6 +5837,12 @@ function getWebpToPNGContent() {
     id: 'webp-to-png', emoji: '🎨', title: 'WebP to PNG Converter',
     subtitle: 'Convert WebP images to lossless PNG', accept: 'image/webp', hint: 'WebP images', cta: 'Convert to PNG',
     whyTitle: 'Why Convert WebP to PNG?',
+    useCases: [
+      { icon: 'bi-vector-pen', title: 'Lossless Quality', text: 'Convert WebP to lossless PNG for editing and design.' },
+      { icon: 'bi-layers', title: 'Transparency', text: 'Keep transparent backgrounds intact in PNG format.' },
+      { icon: 'bi-check2-circle', title: 'Compatibility', text: 'Use PNGs in tools and sites that do not support WebP.' },
+      { icon: 'bi-window', title: 'UI & Icons', text: 'Drop crisp PNG assets into apps and websites.' }
+    ],
     steps: [
       { title: 'Select WebP Images', text: 'Drag and drop your WebP files, or click to browse and select multiple images.' },
       { title: 'Click Convert', text: 'Hit "Convert to PNG" — each WebP becomes a lossless PNG, instantly, in your browser.' },
@@ -5795,15 +5881,6 @@ function getUtilityContent(o) {
                   <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${b.text}</p>
                 </div>
               </div>`).join('');
-  const faqs = o.faqs.map(f => `
-              <div class="col-md-6">
-                <div class="card border-0 h-100" style="background-color: rgba(30, 41, 59, 0.8);">
-                  <div class="card-body p-4">
-                    <h3 class="text-light fw-bold mb-2" style="font-size: 1.1rem;">${f.q}</h3>
-                    <p class="text-secondary mb-0" style="font-size: 0.95rem; line-height: 1.6;">${f.a}</p>
-                  </div>
-                </div>
-              </div>`).join('');
   return `
   <div class="w-100">
     <div class="mx-auto" style="max-width: 760px;">
@@ -5828,16 +5905,23 @@ function getUtilityContent(o) {
       </div>
     </div></div>
     <div class="card border-0 shadow-sm mb-5"><div class="card-body p-4 p-lg-5">
-      <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">Frequently Asked Questions</h2>
-      <div class="row g-4">${faqs}
+      <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">Common Use Cases</h2>
+      <div class="row g-4 justify-content-center">${(o.useCases || []).map(u => `<div class="col-md-6 col-lg-3"><div class="card border-0 h-100 text-center" style="background-color: rgba(30,41,59,.8);"><div class="card-body p-4"><div class="mb-2"><i class="bi ${u.icon} text-primary" style="font-size:1.8rem;"></i></div><h3 class="text-light fw-bold mb-1" style="font-size:1.05rem;">${u.title}</h3><p class="text-secondary mb-0" style="font-size:.9rem; line-height:1.5;">${u.text}</p></div></div></div>`).join('')}
       </div>
     </div></div>
+    ${sectionFAQ(o.faqs)}
   </div>`;
 }
 
 function getQRCodeContent() {
   return getUtilityContent({
     emoji: '🔳', title: 'QR Code Generator', subtitle: 'Create a QR code for any link or text, free', whyTitle: 'Why Use Our QR Generator?',
+    useCases: [
+      { icon: 'bi-link-45deg', title: 'Share Links', text: 'Turn any URL into a scannable code for posters or slides.' },
+      { icon: 'bi-shop', title: 'Menus & Signage', text: 'Add QR codes to menus, flyers and shop windows.' },
+      { icon: 'bi-wifi', title: 'Wi-Fi & Contact', text: 'Encode Wi-Fi details or contact info for quick sharing.' },
+      { icon: 'bi-printer', title: 'Print Materials', text: 'Download a high-res PNG to print on anything.' }
+    ],
     bodyHtml: `
       <div class="mb-3">
         <label class="form-label text-light fw-semibold" for="qr-text">Text or URL</label>
@@ -5874,6 +5958,12 @@ function getQRCodeContent() {
 function getPasswordGenContent() {
   return getUtilityContent({
     emoji: '🔑', title: 'Password Generator', subtitle: 'Create strong, random passwords instantly', whyTitle: 'Why Use Our Password Generator?',
+    useCases: [
+      { icon: 'bi-box-arrow-in-right', title: 'New Accounts', text: 'Create a strong unique password for every signup.' },
+      { icon: 'bi-arrow-repeat', title: 'Password Resets', text: 'Replace weak or reused passwords with secure ones.' },
+      { icon: 'bi-safe2', title: 'Password Managers', text: 'Generate entries to store in your password vault.' },
+      { icon: 'bi-shield-lock', title: 'Wi-Fi & Devices', text: 'Set tough passwords for routers, devices and admin logins.' }
+    ],
     bodyHtml: `
       <div class="mb-3">
         <div class="input-group">
@@ -5916,6 +6006,12 @@ function getPasswordGenContent() {
 function getWordCounterContent() {
   return getUtilityContent({
     emoji: '🔢', title: 'Word & Character Counter', subtitle: 'Count words, characters, sentences and reading time', whyTitle: 'Why Use Our Word Counter?',
+    useCases: [
+      { icon: 'bi-pencil', title: 'Essays & Assignments', text: 'Hit exact word counts for school and university work.' },
+      { icon: 'bi-megaphone', title: 'Social & SEO', text: 'Stay within character limits for posts and meta tags.' },
+      { icon: 'bi-file-text', title: 'Articles & Blogs', text: 'Track length and estimated reading time as you write.' },
+      { icon: 'bi-translate', title: 'Editing', text: 'Tighten copy by watching words, sentences and characters.' }
+    ],
     bodyHtml: `
       <textarea id="wc-text" class="form-control" rows="8" placeholder="Type or paste your text here…"></textarea>
       <div class="row text-center mt-4 g-3">
@@ -5947,6 +6043,12 @@ function getWordCounterContent() {
 function getPDFPageNumbersContent() {
   return getUtilityContent({
     emoji: '🔢', title: 'Add Page Numbers to PDF', subtitle: 'Stamp page numbers onto your PDF — lossless, in your browser', whyTitle: 'Why Add Page Numbers Here?',
+    useCases: [
+      { icon: 'bi-file-earmark-text', title: 'Reports & Theses', text: 'Number long documents for easy reference and printing.' },
+      { icon: 'bi-journal', title: 'Contracts', text: 'Add page numbers to legal docs so nothing goes missing.' },
+      { icon: 'bi-printer', title: 'Print-ready PDFs', text: 'Prepare booklets and handouts with clear pagination.' },
+      { icon: 'bi-collection', title: 'Merged PDFs', text: 'Re-number a combined PDF into one consistent sequence.' }
+    ],
     bodyHtml: `
       <div id="dz-pdf-pagenum" class="dropzone text-center p-5" role="button" tabindex="0" style="cursor: pointer;">
         <div style="font-size: 2.5rem;">📄</div>
