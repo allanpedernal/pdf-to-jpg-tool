@@ -26,7 +26,7 @@ function rtQuickButton(id) {
   const t = (typeof getToolById === 'function') && getToolById(id);
   if (!t) return '';
   const active = currentTool === id ? 'active text-primary' : 'text-light';
-  return `<li class="mb-1"><button data-tool="${id}" class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 ${active}" onclick="switchTool('${id}')"><span class="fs-5 flex-shrink-0">${t.icon}</span><div class="flex-grow-1 text-truncate"><div class="small fw-medium text-truncate">${t.name}</div></div></button></li>`;
+  return `<li class="mb-1"><a href="${t.path}" data-tool="${id}" class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 text-decoration-none ${active}"><span class="fs-5 flex-shrink-0">${t.icon}</span><div class="flex-grow-1 text-truncate"><div class="small fw-medium text-truncate">${t.name}</div></div></a></li>`;
 }
 
 // (Re)render the Favorites + Recently Used sections and sync star icons
@@ -308,20 +308,20 @@ function initNavigation() {
                   const isActive = currentTool === tool.id;
                   return `
                     <li class="mb-1 position-relative">
-                      <button
+                      <a
+                        href="${tool.path}"
                         data-tool="${tool.id}"
-                        class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 ${
+                        class="nav-item btn w-100 d-flex align-items-center gap-2 gap-lg-3 px-3 py-2 rounded text-start border-0 text-decoration-none ${
                           isActive
                             ? 'active text-primary'
                             : 'text-light'
-                        }"
-                        onclick="switchTool('${tool.id}')">
+                        }">
                         <span class="fs-5 flex-shrink-0">${tool.icon}</span>
                         <div class="flex-grow-1 text-truncate" style="padding-right: 1.4rem;">
                           <div class="small fw-medium text-truncate">${tool.name}</div>
                           <div class="text-secondary small text-truncate d-none d-sm-block" style="font-size: 0.75rem; opacity: 0.7;">${tool.description}</div>
                         </div>
-                      </button>
+                      </a>
                       <button type="button" class="fav-toggle btn btn-link p-0 position-absolute" data-fav="${tool.id}" aria-label="Toggle favorite for ${tool.name}" title="Add to favorites" style="top: 50%; right: 0.6rem; transform: translateY(-50%); z-index: 2; line-height: 1; color: var(--text-secondary); opacity: 0.55;">
                         <i class="bi bi-star"></i>
                       </button>

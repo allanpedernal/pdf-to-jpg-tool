@@ -1,9 +1,24 @@
 // Shared PWA functionality for all pages
 (function() {
   'use strict';
-  
-  // Register Service Worker for PWA functionality
-  if ('serviceWorker' in navigator) {
+
+  // On localhost the service worker only hides fresh edits behind a stale cache.
+  // During local development we skip registration AND tear down any worker/cache
+  // left from a previous visit. Production (real hostname) is unaffected.
+  var isLocalhost = ['localhost', '127.0.0.1', '[::1]', '0.0.0.0'].indexOf(location.hostname) !== -1;
+  if (isLocalhost && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(regs) {
+      regs.forEach(function(r) { r.unregister(); });
+    }).catch(function() {});
+    if (window.caches && caches.keys) {
+      caches.keys().then(function(keys) {
+        keys.forEach(function(k) { caches.delete(k); });
+      }).catch(function() {});
+    }
+  }
+
+  // Register Service Worker for PWA functionality (production only)
+  if (!isLocalhost && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js')
         .then((registration) => {

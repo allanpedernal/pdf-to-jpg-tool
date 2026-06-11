@@ -1,7 +1,10 @@
 // Service Worker for PDF Tools PWA
 // Version 1.1.0 - Added PDF to PNG tool
-const CACHE_NAME = 'pdf-tools-v1.2.2-bloghero';
+const CACHE_NAME = 'pdf-tools-v1.3.2-localhost-killswitch';
 const RUNTIME_CACHE = 'pdf-tools-v1.2.1-runtime-aff98c08';
+// On localhost the worker only serves stale edits. Detect it so the existing
+// activate/fetch handlers below can self-unregister + skip caching. Prod unaffected.
+const IS_LOCALHOST = ['localhost', '127.0.0.1', '[::1]', '0.0.0.0'].includes(self.location.hostname);
 
 // Assets to cache immediately on install
 const STATIC_ASSETS = [
@@ -86,6 +89,19 @@ self.addEventListener('install', (event) => {
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   console.log('[Service Worker] Activating...');
+
+  // Localhost: wipe every cache, unregister, and reload open tabs so local
+  // development never sees stale content again.
+  if (IS_LOCALHOST) {
+    event.waitUntil((async () => {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((k) => caches.delete(k)));
+      await self.registration.unregister();
+      const wins = await self.clients.matchAll({ type: 'window' });
+      wins.forEach((c) => c.navigate(c.url));
+    })());
+    return;
+  }
   
   event.waitUntil(
     caches.keys()
@@ -110,6 +126,8 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
+  // Localhost: don't intercept — let the browser hit the network directly.
+  if (IS_LOCALHOST) return;
   const { request } = event;
   const url = new URL(request.url);
   
