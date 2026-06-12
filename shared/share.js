@@ -78,6 +78,18 @@
     background:var(--card-bg,#fff);border:1px solid var(--card-border,rgba(0,0,0,.08));
     box-shadow:0 10px 28px rgba(15,23,42,.16);max-height:calc(100dvh - 9rem);overflow-y:auto}
   .share-rail.open .share-toggle{grid-column:1 / -1;order:9}
+  /* Smooth show/hide: buttons pop in (staggered) and fade out */
+  @keyframes shareBtnIn{from{opacity:0;transform:scale(.3) translateY(10px)}to{opacity:1;transform:scale(1)}}
+  @keyframes shareBtnOut{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.4) translateY(8px)}}
+  .share-rail.open:not(.closing) > .share-btn:not(.share-toggle){animation:shareBtnIn .24s cubic-bezier(.34,1.56,.64,1) backwards}
+  .share-rail.open:not(.closing) > .share-btn:nth-child(3){animation-delay:.02s}
+  .share-rail.open:not(.closing) > .share-btn:nth-child(4){animation-delay:.04s}
+  .share-rail.open:not(.closing) > .share-btn:nth-child(5){animation-delay:.06s}
+  .share-rail.open:not(.closing) > .share-btn:nth-child(6){animation-delay:.08s}
+  .share-rail.open:not(.closing) > .share-btn:nth-child(7){animation-delay:.10s}
+  .share-rail.open:not(.closing) > .share-btn:nth-child(8){animation-delay:.12s}
+  .share-rail.closing > .share-btn:not(.share-toggle){animation:shareBtnOut .15s ease forwards}
+  @media (prefers-reduced-motion:reduce){.share-rail > .share-btn{animation-duration:.01ms!important}}
   /* "Copied!" tooltip to the LEFT so it never runs off the right edge */
   .share-copied{position:relative}
   .share-copied::after{content:"Copied!";position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);
@@ -101,8 +113,17 @@
   rail.setAttribute('aria-label', 'Share this tool');
   rail.innerHTML = `<button type="button" class="share-toggle share-btn" aria-label="Share" aria-expanded="false"><i class="bi bi-share-fill"></i></button><span class="share-cap">Share</span>${targetButtons}${copyBtn}`;
 
+  let closeTimer;
   function setOpen(root, open) {
-    root.classList.toggle('open', open);
+    clearTimeout(closeTimer);
+    if (open) {
+      root.classList.remove('closing');
+      root.classList.add('open');
+    } else if (root.classList.contains('open')) {
+      // Play the close animation, then actually collapse (display:none)
+      root.classList.add('closing');
+      closeTimer = setTimeout(() => root.classList.remove('open', 'closing'), 170);
+    }
     const t = root.querySelector('.share-toggle');
     if (t) {
       t.setAttribute('aria-expanded', String(open));
