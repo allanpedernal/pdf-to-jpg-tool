@@ -266,21 +266,7 @@ function initNavigation() {
   const themeIcon = currentTheme === 'light' ? 'bi-sun-fill' : 'bi-moon-fill';
   
   const navHTML = `
-    <nav class="h-auto" style="background-color: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border); border-right: 1px solid var(--card-border);">
-      <div class="d-lg-none d-flex align-items-center justify-content-between p-3 border-bottom" style="border-color: var(--card-border);">
-        <span class="text-secondary fw-semibold text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.08em;">
-          <i class="bi bi-tools me-1"></i>Tools
-        </span>
-        <div class="d-flex align-items-center gap-2">
-          <button id="theme-toggle-mobile" class="btn btn-link p-1 rounded-circle d-flex align-items-center justify-content-center" aria-label="Toggle theme" type="button" style="width: 32px; height: 32px; color: var(--text-secondary); transition: all 0.2s ease; opacity: 0.7;">
-            <i class="bi ${themeIcon}" style="font-size: 0.85rem;"></i>
-          </button>
-          <button id="mobile-menu-toggle" class="btn btn-link p-2 rounded" aria-label="Toggle menu" type="button" style="color: var(--text-primary);">
-            <i class="bi bi-list fs-4"></i>
-          </button>
-        </div>
-      </div>
-      
+    <nav class="h-auto d-none d-lg-block" style="background-color: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border); border-right: 1px solid var(--card-border);">
       <div id="mobile-menu" class="d-none d-lg-block">
         <div class="p-3 p-lg-4">
           <div class="mb-4 mb-lg-3 pb-3 border-bottom d-none d-lg-block" style="border-color: var(--card-border);">
@@ -372,34 +358,10 @@ function initNavigation() {
     rtRenderQuickAccess();
   }
 
-  // Mobile menu toggle
-  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
-  if (mobileMenuToggle && mobileMenu) {
-    mobileMenuToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      mobileMenu.classList.toggle('d-none');
-    });
-    
-    // Close mobile menu when clicking outside or on a tool
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('nav') && !mobileMenu.classList.contains('d-none') && window.innerWidth < 992) {
-        mobileMenu.classList.add('d-none');
-      }
-    });
-    
-    // Close mobile menu when selecting a tool
-    setTimeout(() => {
-      document.querySelectorAll('[data-tool]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          if (window.innerWidth < 992) {
-            mobileMenu.classList.add('d-none');
-          }
-        });
-      });
-    }, 100);
-  }
+  // Mobile: the left sidebar is hidden (desktop-only). Fold the full tool list and
+  // a theme toggle into the single top-nav hamburger (#topNav) so phones get ONE
+  // clean header with ONE menu button — no separate stacked "Tools" bar.
+  buildMobileTopNav(themeIcon);
   
   // Set initial active tool
   setTimeout(() => {
@@ -408,6 +370,83 @@ function initNavigation() {
       initialTool.classList.add('active');
     }
   }, 100);
+}
+
+// Mobile-only: build a single clean header. The desktop left sidebar is hidden on
+// phones, so we (1) drop a theme toggle into the top bar next to the hamburger, and
+// (2) fold the whole tool list into the top-nav collapse (#topNav). One header, one
+// menu button — Home/About/Blog/Contact + every tool, all behind the same hamburger.
+function buildMobileTopNav(themeIcon) {
+  const topNav = document.getElementById('topNav');
+  if (!topNav) return;
+
+  // 0) One-time: polished styling for the mobile hamburger menu so it reads as a
+  //    refined app menu — rounded inset rows, soft hover/active, tidy section labels
+  //    — instead of raw full-bleed Bootstrap nav-links. Desktop (>=992px) untouched.
+  if (!document.getElementById('mobilenav-css')) {
+    const st = document.createElement('style');
+    st.id = 'mobilenav-css';
+    st.textContent = `
+      @media (max-width:991.98px){
+        #topNav{padding:.35rem .3rem .65rem}
+        #topNav .navbar-nav{align-items:stretch;width:100%}
+        #topNav .nav-item{width:100%}
+        #topNav .nav-link{display:flex;align-items:center;gap:.7rem;
+          padding:.62rem .7rem;margin:.06rem .1rem;border-radius:.7rem;
+          font-size:.95rem;font-weight:500;color:var(--text-primary);line-height:1.25;
+          transition:background .15s ease,color .15s ease}
+        #topNav .nav-link i{color:var(--text-secondary);font-size:1rem;margin:0!important;width:1.6rem;text-align:center;flex:0 0 auto}
+        #topNav .nav-link .tnav-ico{width:1.6rem;text-align:center;flex:0 0 auto;font-size:1.1rem;line-height:1}
+        #topNav .nav-link:hover,#topNav .nav-link:focus-visible{
+          background:color-mix(in srgb,var(--bs-primary,#3b82f6) 9%,transparent);color:#2563eb;outline:none}
+        #topNav .nav-link:hover i,#topNav .nav-link:focus-visible i{color:#2563eb}
+        #topNav .nav-link.active{font-weight:600;color:#2563eb;
+          background:linear-gradient(135deg,color-mix(in srgb,#3b82f6 14%,transparent),color-mix(in srgb,#06b6d4 14%,transparent))}
+        #topNav .nav-link.active i{color:#2563eb}
+        #topNav .tnav-label{display:block;text-transform:uppercase;font-weight:700;
+          font-size:.64rem;letter-spacing:.13em;color:var(--text-secondary);opacity:.55;
+          padding:.5rem .85rem .18rem}
+        #topNav .tnav-sep{height:1px;background:var(--card-border);opacity:.7;margin:.5rem .7rem .2rem}
+      }`;
+    document.head.appendChild(st);
+  }
+
+  // 1) Theme toggle in the top bar (mobile only), just before the hamburger.
+  const bar = document.querySelector('.topnav .container-fluid');
+  const toggler = bar && bar.querySelector('.navbar-toggler');
+  if (toggler && !document.getElementById('theme-toggle-mobile')) {
+    const tb = document.createElement('button');
+    tb.id = 'theme-toggle-mobile';
+    tb.type = 'button';
+    tb.className = 'btn btn-link d-lg-none p-1 me-1 d-inline-flex align-items-center justify-content-center';
+    tb.setAttribute('aria-label', 'Toggle theme');
+    // margin-left:auto pushes the toggle (and the hamburger after it) to the right,
+    // so it sits next to the hamburger instead of getting centered by the navbar's
+    // space-between layout.
+    tb.style.cssText = 'width:40px;height:40px;margin-left:auto;color:var(--text-primary);';
+    tb.innerHTML = `<i class="bi ${themeIcon}" style="font-size:1.1rem;"></i>`;
+    toggler.parentNode.insertBefore(tb, toggler);
+  }
+
+  // 2) Fold the tool list into the hamburger menu (mobile only, d-lg-none so the
+  //    desktop inline navbar is untouched). Real <a href> links → full-page nav.
+  const list = topNav.querySelector('.navbar-nav');
+  if (list && !list.querySelector('.topnav-tools-hdr')) {
+    const tools = Object.values(TOOLS_CONFIG).map(cat => `
+      <li class="nav-item d-lg-none"><span class="tnav-label">${cat.category}</span></li>
+      ${cat.tools.map(tool => `
+        <li class="nav-item d-lg-none">
+          <a class="nav-link${tool.id === currentTool ? ' active' : ''}" href="${tool.path}">
+            <span class="tnav-ico">${tool.icon}</span><span>${tool.name}</span>
+          </a>
+        </li>`).join('')}
+    `).join('');
+    list.insertAdjacentHTML('beforeend', `
+      <li class="nav-item d-lg-none topnav-tools-hdr"><div class="tnav-sep"></div></li>
+      <li class="nav-item d-lg-none"><span class="tnav-label" style="opacity:.72;"><i class="bi bi-tools me-1" style="width:auto;font-size:.7rem;"></i>All Tools</span></li>
+      ${tools}
+    `);
+  }
 }
 
 // Theme Management
@@ -453,7 +492,7 @@ function updateThemeIcons(theme) {
       } else {
         icon.className = 'bi bi-moon-fill';
       }
-      icon.style.fontSize = '0.85rem';
+      // Keep each toggle's own inline font-size (desktop 0.85rem, mobile 1.1rem).
       icon.style.opacity = '1';
     }
   });
