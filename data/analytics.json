@@ -1,0 +1,27 @@
+{
+  "_comment": "Analytics baseline. Starts at ZERO — every tool at count 0 and no history. Real usage accumulates live in each browser's localStorage and the dashboard merges it over this file. To persist live data permanently, use 'Export merged JSON' on the dashboard and commit the result here.",
+  "seededAt": "2026-06-12",
+  "tools": {
+    "pdf-to-jpg":         { "name": "PDF to JPG",         "icon": "📄", "category": "PDF Tools",  "count": 0 },
+    "pdf-to-png":         { "name": "PDF to PNG",         "icon": "🖼️", "category": "PDF Tools",  "count": 0 },
+    "jpg-to-pdf":         { "name": "JPG to PDF",         "icon": "📑", "category": "PDF Tools",  "count": 0 },
+    "pdf-compress":       { "name": "PDF Compressor",     "icon": "🗜️", "category": "PDF Tools",  "count": 0 },
+    "pdf-split":          { "name": "PDF Splitter",       "icon": "✂️", "category": "PDF Tools",  "count": 0 },
+    "pdf-merge":          { "name": "PDF Merger",         "icon": "🔗", "category": "PDF Tools",  "count": 0 },
+    "pdf-rotate":         { "name": "PDF Rotate",         "icon": "🔄", "category": "PDF Tools",  "count": 0 },
+    "pdf-ocr":            { "name": "PDF OCR",            "icon": "👁️", "category": "PDF Tools",  "count": 0 },
+    "pdf-pagenum":        { "name": "Add Page Numbers",   "icon": "🔢", "category": "PDF Tools",  "count": 0 },
+    "png-to-jpg":         { "name": "PNG to JPG",         "icon": "🎨", "category": "Image Tools", "count": 0 },
+    "image-resize":       { "name": "Image Resizer",      "icon": "📏", "category": "Image Tools", "count": 0 },
+    "image-compress":     { "name": "Image Compressor",   "icon": "💾", "category": "Image Tools", "count": 0 },
+    "heic-to-jpg":        { "name": "HEIC to JPG",        "icon": "📷", "category": "Image Tools", "count": 0 },
+    "jpg-to-png":         { "name": "JPG to PNG",         "icon": "🪄", "category": "Image Tools", "count": 0 },
+    "image-to-webp":      { "name": "Image to WebP",      "icon": "🌐", "category": "Image Tools", "count": 0 },
+    "webp-to-jpg":        { "name": "WebP to JPG",        "icon": "🖼️", "category": "Image Tools", "count": 0 },
+    "webp-to-png":        { "name": "WebP to PNG",        "icon": "🎨", "category": "Image Tools", "count": 0 },
+    "qr-code":            { "name": "QR Code Generator",  "icon": "🔳", "category": "Utilities",   "count": 0 },
+    "password-generator": { "name": "Password Generator", "icon": "🔑", "category": "Utilities",   "count": 0 },
+    "word-counter":       { "name": "Word Counter",       "icon": "🔢", "category": "Utilities",   "count": 0 }
+  },
+  "daily": {}
+}

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Analytics Dashboard — PDF Tools</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Apply saved theme before paint -->
+  <script>(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+
+  <!-- Auth guard: bounce to login before anything renders -->
+  <script src="shared/auth.js"></script>
+  <script>if(!window.AdminAuth||!AdminAuth.isAuthed()){location.replace('login.html');}</script>
+
+  <link rel="stylesheet" href="shared/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    .dash-nav{position:sticky;top:0;z-index:1020;background:var(--nav-bg,#fff);
+      border-bottom:1px solid var(--card-border);backdrop-filter:blur(10px)}
+    .dash-brand{font-weight:800;color:var(--text-primary);display:flex;align-items:center;gap:.55rem}
+    .dash-brand .logo{width:34px;height:34px;border-radius:.6rem;display:flex;align-items:center;justify-content:center;
+      color:#fff;background:linear-gradient(135deg,#3b82f6,#06b6d4);font-size:1rem}
+    .icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--card-border);background:var(--card-bg);
+      color:var(--text-secondary);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s ease}
+    .icon-btn:hover{color:#3b82f6;border-color:#3b82f6}
+    .btn-logout{border:1px solid var(--card-border);background:var(--card-bg);color:var(--text-primary);
+      border-radius:.6rem;padding:.45rem .9rem;font-weight:600;font-size:.88rem;transition:all .15s ease}
+    .btn-logout:hover{border-color:#ef4444;color:#ef4444}
+    .kpi{background:var(--card-bg);border:1px solid var(--card-border);border-radius:1rem;padding:1.15rem 1.25rem;height:100%}
+    .kpi .k-ico{width:44px;height:44px;border-radius:.7rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem;color:#fff}
+    .kpi .k-val{font-size:1.7rem;font-weight:800;color:var(--text-primary);line-height:1.1}
+    .kpi .k-label{font-size:.78rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+    .panel{background:var(--card-bg);border:1px solid var(--card-border);border-radius:1rem;padding:1.25rem}
+    .panel h2{font-size:1rem;font-weight:700;color:var(--text-primary);margin:0 0 1rem;display:flex;align-items:center;gap:.5rem}
+    .chart-box{position:relative;height:300px}
+    .chart-box.sm{height:260px}
+    table.tools-table{width:100%;border-collapse:collapse}
+    table.tools-table th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-secondary);
+      text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--card-border);font-weight:700}
+    table.tools-table td{padding:.55rem .6rem;border-bottom:1px solid var(--card-border);color:var(--text-primary);font-size:.9rem;vertical-align:middle}
+    table.tools-table tr:last-child td{border-bottom:none}
+    .t-bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#3b82f6,#06b6d4)}
+    .t-bar-track{background:var(--card-border);border-radius:3px;overflow:hidden;min-width:60px}
+    .data-note{font-size:.78rem;color:var(--text-secondary);line-height:1.5}
+    .badge-soft{background:rgba(59,130,246,.12);color:#3b82f6;border-radius:.4rem;padding:.12rem .45rem;font-size:.72rem;font-weight:600}
+  </style>
+</head>
+<body>
+  <!-- Top bar -->
+  <nav class="dash-nav">
+    <div class="container-xxl px-3 py-2 d-flex align-items-center justify-content-between">
+      <div class="dash-brand"><span class="logo"><i class="bi bi-bar-chart-fill"></i></span>
+        <span>Analytics <span class="d-none d-sm-inline">Dashboard</span></span>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="data-note d-none d-md-inline me-1">Signed in as <strong id="who">allan</strong></span>
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"><i class="bi bi-sun-fill"></i></button>
+        <button class="btn-logout" id="logout"><i class="bi bi-box-arrow-right me-1"></i>Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container-xxl px-3 py-4">
+    <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
+      <div>
+        <h1 style="font-size:1.5rem;font-weight:800;color:var(--text-primary);margin:0;">Tool Usage Analytics</h1>
+        <p class="data-note mb-0">Conversions tracked across all PDF &amp; image tools. <span id="updated"></span></p>
+      </div>
+      <a href="/" class="data-note text-decoration-none"><i class="bi bi-arrow-left me-1"></i>Back to site</a>
+    </div>
+
+    <!-- KPI row -->
+    <div class="row g-3 mb-4" id="kpis">
+      <div class="col-6 col-lg-3"><div class="kpi d-flex align-items-center gap-3">
+        <div class="k-ico" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)"><i class="bi bi-arrow-repeat"></i></div>
+        <div><div class="k-val" id="kpi-total">—</div><div class="k-label">Total Conversions</div></div></div></div>
+      <div class="col-6 col-lg-3"><div class="kpi d-flex align-items-center gap-3">
+        <div class="k-ico" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="bi bi-calendar-check"></i></div>
+        <div><div class="k-val" id="kpi-today">—</div><div class="k-label">Today</div></div></div></div>
+      <div class="col-6 col-lg-3"><div class="kpi d-flex align-items-center gap-3">
+        <div class="k-ico" style="background:linear-gradient(135deg,#f59e0b,#f97316)"><i class="bi bi-people-fill"></i></div>
+        <div><div class="k-val" id="kpi-visitors">—</div><div class="k-label">Unique Visitors</div></div></div></div>
+      <div class="col-6 col-lg-3"><div class="kpi d-flex align-items-center gap-3">
+        <div class="k-ico" style="background:linear-gradient(135deg,#a855f7,#7c3aed)"><i class="bi bi-trophy-fill"></i></div>
+        <div><div class="k-val" id="kpi-top" style="font-size:1.15rem">—</div><div class="k-label">Top Tool</div></div></div></div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-lg-8"><div class="panel">
+        <h2><i class="bi bi-graph-up-arrow" style="color:#3b82f6"></i>Conversions Over Time</h2>
+        <div class="chart-box"><canvas id="chart-daily"></canvas></div>
+      </div></div>
+      <div class="col-12 col-lg-4"><div class="panel">
+        <h2><i class="bi bi-pie-chart-fill" style="color:#a855f7"></i>By Category</h2>
+        <div class="chart-box sm"><canvas id="chart-cat"></canvas></div>
+      </div></div>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-lg-7"><div class="panel">
+        <h2><i class="bi bi-bar-chart-line-fill" style="color:#06b6d4"></i>Top Tools</h2>
+        <div class="chart-box"><canvas id="chart-tools"></canvas></div>
+      </div></div>
+      <div class="col-12 col-lg-5"><div class="panel">
+        <h2><i class="bi bi-table" style="color:#22c55e"></i>All Tools</h2>
+        <div style="max-height:340px;overflow-y:auto">
+          <table class="tools-table"><thead><tr><th>Tool</th><th>Category</th><th class="text-end">Uses</th><th style="width:80px">Share</th></tr></thead>
+          <tbody id="tools-tbody"></tbody></table>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- Visitors & devices -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-3"><div class="panel h-100">
+        <h2><i class="bi bi-browser-chrome" style="color:#3b82f6"></i>Browsers</h2>
+        <div class="chart-box" style="height:215px"><canvas id="chart-browser"></canvas></div>
+      </div></div>
+      <div class="col-6 col-lg-3"><div class="panel h-100">
+        <h2><i class="bi bi-phone-fill" style="color:#22c55e"></i>Devices</h2>
+        <div class="chart-box" style="height:215px"><canvas id="chart-device"></canvas></div>
+      </div></div>
+      <div class="col-6 col-lg-3"><div class="panel h-100">
+        <h2><i class="bi bi-window-stack" style="color:#a855f7"></i>Operating System</h2>
+        <div class="chart-box" style="height:215px"><canvas id="chart-os"></canvas></div>
+      </div></div>
+      <div class="col-6 col-lg-3"><div class="panel h-100">
+        <h2><i class="bi bi-geo-alt-fill" style="color:#f59e0b"></i>Top Locations</h2>
+        <div id="geo-list" class="data-note" style="height:215px;overflow:auto"></div>
+      </div></div>
+    </div>
+
+    <!-- Activity by hour + detailed log -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-lg-4"><div class="panel h-100">
+        <h2><i class="bi bi-clock-history" style="color:#06b6d4"></i>Activity by Hour</h2>
+        <div class="chart-box sm"><canvas id="chart-hour"></canvas></div>
+      </div></div>
+      <div class="col-12 col-lg-8"><div class="panel h-100">
+        <h2><i class="bi bi-people" style="color:#22c55e"></i>Recent Activity &mdash; Who Used a Tool
+          <span class="badge-soft ms-1" id="event-count">0</span></h2>
+        <div style="max-height:380px;overflow:auto">
+          <table class="tools-table" id="activity-table">
+            <thead><tr>
+              <th>When</th><th>Tool</th><th>Visitor</th>
+              <th>Device · Browser · OS</th><th>Location</th><th>Source</th>
+            </tr></thead>
+            <tbody id="activity-tbody"></tbody>
+          </table>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- Data source note + actions -->
+    <div class="panel">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <p class="data-note mb-0" style="max-width:640px">
+          <i class="bi bi-info-circle me-1"></i><strong>Data source:</strong> baseline from
+          <code>data/analytics.json</code> merged with live conversions tracked in this browser
+          (<span class="badge-soft" id="live-count">0 live</span>). A static site can't write back to the
+          JSON file — use <em>Export merged JSON</em> to download an updated file and commit it to make the live numbers permanent.
+        </p>
+        <div class="d-flex gap-2 flex-shrink-0">
+          <button class="btn-logout" id="export-json"><i class="bi bi-download me-1"></i>Export merged JSON</button>
+          <button class="btn-logout" id="reset-live" style="color:#ef4444;border-color:rgba(239,68,68,.4)"><i class="bi bi-trash me-1"></i>Reset live data</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+      if (!window.AdminAuth || !AdminAuth.isAuthed()) return; // guarded already
+
+      var USAGE_KEY = 'pdftools_usage';
+      var PALETTE = ['#3b82f6','#06b6d4','#22c55e','#f59e0b','#a855f7','#ef4444','#14b8a6','#f97316',
+                     '#8b5cf6','#0ea5e9','#84cc16','#ec4899','#eab308','#10b981','#6366f1','#f43f5e',
+                     '#06b6d4','#3b82f6','#a855f7','#22c55e'];
+      var charts = {};
+      var merged = null;
+
+      function fmt(n){ return (n||0).toLocaleString(); }
+      function todayStr(){ return new Date().toISOString().slice(0,10); }
+      function themeColors(){
+        var cs = getComputedStyle(document.documentElement);
+        return { text: cs.getPropertyValue('--text-secondary').trim() || '#64748b',
+                 grid: cs.getPropertyValue('--card-border').trim() || 'rgba(0,0,0,.08)' };
+      }
+
+      function readUsage(){
+        try { return JSON.parse(localStorage.getItem(USAGE_KEY) || '{}'); } catch(e){ return {}; }
+      }
+
+      function mergeData(seed, usage){
+        var tools = {};
+        Object.keys(seed.tools||{}).forEach(function(id){ tools[id] = Object.assign({count:0}, seed.tools[id]); });
+        if (usage && usage.tools) Object.keys(usage.tools).forEach(function(id){
+          if (!tools[id]) tools[id] = Object.assign({count:0}, usage.tools[id]);
+          else tools[id].count = (tools[id].count||0) + (usage.tools[id].count||0);
+        });
+        var daily = Object.assign({}, seed.daily||{});
+        if (usage && usage.daily) Object.keys(usage.daily).forEach(function(d){ daily[d] = (daily[d]||0) + usage.daily[d]; });
+        return { tools: tools, daily: daily };
+      }
+
+      function liveTotal(usage){
+        var n = 0; if (usage && usage.tools) Object.keys(usage.tools).forEach(function(id){ n += usage.tools[id].count||0; }); return n;
+      }
+
+      function renderKPIs(d, events){
+        var ids = Object.keys(d.tools);
+        var total = ids.reduce(function(s,id){ return s + (d.tools[id].count||0); }, 0);
+        var top = ids.slice().sort(function(a,b){ return d.tools[b].count - d.tools[a].count; })[0];
+        document.getElementById('kpi-total').textContent = fmt(total);
+        document.getElementById('kpi-today').textContent = fmt(d.daily[todayStr()] || 0);
+        document.getElementById('kpi-visitors').textContent = fmt(uniqueVisitors(events));
+        document.getElementById('kpi-top').textContent = (top && d.tools[top].count > 0) ? (d.tools[top].icon + ' ' + d.tools[top].name) : '—';
+      }
+
+      function renderTable(d){
+        var rows = Object.keys(d.tools).map(function(id){ return Object.assign({id:id}, d.tools[id]); })
+          .sort(function(a,b){ return b.count - a.count; });
+        var max = rows.length ? rows[0].count : 1;
+        var tb = document.getElementById('tools-tbody');
+        tb.innerHTML = rows.map(function(r){
+          var pct = max ? Math.round((r.count/max)*100) : 0;
+          return '<tr><td><span style="margin-right:.4rem">'+(r.icon||'🧰')+'</span>'+r.name+'</td>'+
+            '<td><span class="data-note">'+(r.category||'')+'</span></td>'+
+            '<td class="text-end fw-semibold">'+fmt(r.count)+'</td>'+
+            '<td><div class="t-bar-track"><div class="t-bar" style="width:'+pct+'%"></div></div></td></tr>';
+        }).join('');
+      }
+
+      function buildCharts(d){
+        var tc = themeColors();
+        Chart.defaults.color = tc.text;
+        Chart.defaults.font.family = "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
+
+        // Daily line
+        var days = Object.keys(d.daily).sort();
+        var dayLabels = days.map(function(s){ var p = s.split('-'); return new Date(p[0],p[1]-1,p[2]).toLocaleDateString('en-US',{month:'short',day:'numeric'}); });
+        var dayVals = days.map(function(s){ return d.daily[s]; });
+        charts.daily = new Chart(document.getElementById('chart-daily'), {
+          type:'line',
+          data:{ labels:dayLabels, datasets:[{ label:'Conversions', data:dayVals, borderColor:'#3b82f6',
+            backgroundColor:'rgba(59,130,246,.12)', fill:true, tension:.35, pointRadius:3, pointBackgroundColor:'#3b82f6', borderWidth:2 }] },
+          options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+            scales:{ x:{grid:{color:tc.grid}}, y:{beginAtZero:true, grid:{color:tc.grid}} } }
+        });
+
+        // Category doughnut
+        var cats = {};
+        Object.keys(d.tools).forEach(function(id){ var c = d.tools[id].category||'Other'; cats[c]=(cats[c]||0)+(d.tools[id].count||0); });
+        var catNames = Object.keys(cats);
+        charts.cat = new Chart(document.getElementById('chart-cat'), {
+          type:'doughnut',
+          data:{ labels:catNames, datasets:[{ data:catNames.map(function(c){return cats[c];}),
+            backgroundColor:['#3b82f6','#a855f7','#22c55e','#f59e0b','#06b6d4'], borderWidth:0 }] },
+          options:{ responsive:true, maintainAspectRatio:false, cutout:'62%',
+            plugins:{ legend:{ position:'bottom', labels:{ padding:14, usePointStyle:true, pointStyle:'circle' } } } }
+        });
+
+        // Top tools bar
+        var rows = Object.keys(d.tools).map(function(id){ return d.tools[id]; }).sort(function(a,b){ return b.count-a.count; }).slice(0,10);
+        charts.tools = new Chart(document.getElementById('chart-tools'), {
+          type:'bar',
+          data:{ labels:rows.map(function(r){return r.name;}),
+            datasets:[{ label:'Conversions', data:rows.map(function(r){return r.count;}),
+              backgroundColor:rows.map(function(_,i){return PALETTE[i%PALETTE.length];}), borderRadius:6, maxBarThickness:34 }] },
+          options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+            scales:{ x:{grid:{display:false}}, y:{beginAtZero:true, grid:{color:tc.grid}} } }
+        });
+      }
+
+      function destroyCharts(){ Object.keys(charts).forEach(function(k){ if(charts[k]) charts[k].destroy(); }); charts={}; }
+
+      /* ---------- detailed visitor / device / activity ---------- */
+      function uniqueVisitors(events){ var s={}; events.forEach(function(e){ if(e.visitor) s[e.visitor]=1; }); return Object.keys(s).length; }
+      function aggCount(events, key){ var m={}; events.forEach(function(e){ var k=e[key]||'Unknown'; m[k]=(m[k]||0)+1; }); return m; }
+
+      function makeDoughnut(id, map){
+        var labels = Object.keys(map), vals = labels.map(function(l){ return map[l]; });
+        var colors = labels.map(function(_,i){ return PALETTE[i%PALETTE.length]; });
+        var empty = !labels.length;
+        if(empty){ labels=['No data yet']; vals=[1]; colors=['#cbd5e1']; }
+        return new Chart(document.getElementById(id), {
+          type:'doughnut',
+          data:{ labels:labels, datasets:[{ data:vals, backgroundColor:colors, borderWidth:0 }] },
+          options:{ responsive:true, maintainAspectRatio:false, cutout:'58%',
+            plugins:{ legend:{ position:'bottom', labels:{ padding:8, usePointStyle:true, pointStyle:'circle', font:{size:10} } },
+              tooltip:{ enabled: !empty } } }
+        });
+      }
+
+      function renderGeoList(events){
+        var map = {};
+        events.forEach(function(e){
+          if(e.geo && (e.geo.country || e.geo.city)){
+            var k = (e.geo.flag? e.geo.flag+' ':'') + (e.geo.city? e.geo.city+', ':'') + (e.geo.country||'');
+            map[k] = (map[k]||0)+1;
+          }
+        });
+        var rows = Object.keys(map).map(function(k){ return {k:k,n:map[k]}; }).sort(function(a,b){ return b.n-a.n; });
+        var el = document.getElementById('geo-list');
+        if(!rows.length){ el.innerHTML='<div style="text-align:center;padding:1.5rem;opacity:.7">No location data yet.</div>'; return; }
+        el.innerHTML = rows.map(function(r){
+          return '<div class="d-flex justify-content-between align-items-center py-1" style="border-bottom:1px solid var(--card-border)"><span>'+r.k+'</span><strong style="color:var(--text-primary)">'+r.n+'</strong></div>';
+        }).join('');
+      }
+
+      function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+      function renderActivity(events){
+        var tb = document.getElementById('activity-tbody');
+        document.getElementById('event-count').textContent = events.length;
+        if(!events.length){
+          tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:1.75rem" class="data-note">No activity yet — use any tool and the detailed log will appear here.</td></tr>';
+          return;
+        }
+        var recent = events.slice().sort(function(a,b){ return b.ts-a.ts; }).slice(0,150);
+        tb.innerHTML = recent.map(function(e){
+          var d = new Date(e.ts);
+          var when = d.toLocaleString('en-US',{ month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+          var loc = e.geo ? ((e.geo.flag? e.geo.flag+' ':'') + (e.geo.city? e.geo.city+', ':'') + (e.geo.country||'—')) : '—';
+          var src;
+          if(!e.referrer || e.referrer==='direct') src='Direct';
+          else { try { src = new URL(e.referrer).hostname; } catch(x){ src = e.referrer; } }
+          var vis = e.visitor ? e.visitor.replace(/^v_/,'').slice(0,8) : '—';
+          return '<tr>'+
+            '<td class="data-note" style="white-space:nowrap">'+esc(when)+'</td>'+
+            '<td style="white-space:nowrap">'+esc(e.toolIcon||'')+' '+esc(e.toolName)+'</td>'+
+            '<td class="data-note" style="white-space:nowrap"><code>'+esc(vis)+'</code>'+(e.newVisitor?' <span class="badge-soft">new</span>':'')+'</td>'+
+            '<td class="data-note">'+esc(e.device)+' · '+esc(e.browser)+' · '+esc(e.os)+'</td>'+
+            '<td class="data-note">'+esc(loc)+'</td>'+
+            '<td class="data-note">'+esc(src)+'</td>'+
+          '</tr>';
+        }).join('');
+      }
+
+      function renderDetail(events){
+        var tc = themeColors();
+        charts.browser = makeDoughnut('chart-browser', aggCount(events,'browser'));
+        charts.device  = makeDoughnut('chart-device',  aggCount(events,'device'));
+        charts.os      = makeDoughnut('chart-os',      aggCount(events,'os'));
+        var hours = []; for(var h=0;h<24;h++) hours.push(0);
+        events.forEach(function(e){ if(typeof e.hour==='number') hours[e.hour]++; });
+        charts.hour = new Chart(document.getElementById('chart-hour'), {
+          type:'bar',
+          data:{ labels: hours.map(function(_,h){ return (h<10?'0':'')+h; }),
+            datasets:[{ data:hours, backgroundColor:'#06b6d4', borderRadius:3, maxBarThickness:14 }] },
+          options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+            scales:{ x:{grid:{display:false}, ticks:{font:{size:9}, maxRotation:0, autoSkip:true, maxTicksLimit:12}},
+                     y:{beginAtZero:true, grid:{color:tc.grid}, ticks:{precision:0}} } }
+        });
+        renderGeoList(events);
+        renderActivity(events);
+      }
+
+      function renderAll(){
+        var events = readUsage().events || [];
+        renderKPIs(merged, events);
+        renderTable(merged);
+        destroyCharts();
+        buildCharts(merged);
+        renderDetail(events);
+        document.getElementById('live-count').textContent = fmt(liveTotal(readUsage())) + ' live';
+      }
+
+      function load(){
+        // cache-bust so a freshly-committed JSON shows up
+        fetch('data/analytics.json?_=' + Date.now()).then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; })
+          .then(function(seed){
+            seed = seed || {}; seed.tools = seed.tools || {}; seed.daily = seed.daily || {};
+            document.getElementById('updated').textContent = seed.seededAt ? ('Baseline: ' + seed.seededAt) : '';
+            merged = mergeData(seed, readUsage());
+            window.__seed = seed;
+            renderAll();
+          });
+      }
+
+      // Theme toggle
+      function applyTheme(t){
+        document.documentElement.setAttribute('data-theme', t);
+        try { localStorage.setItem('theme', t); } catch(e){}
+        document.querySelector('#theme-toggle i').className = t === 'light' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+        if (merged) renderAll();
+      }
+      document.getElementById('theme-toggle').addEventListener('click', function(){
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        applyTheme(cur === 'light' ? 'dark' : 'light');
+      });
+      document.querySelector('#theme-toggle i').className =
+        (document.documentElement.getAttribute('data-theme')||'light') === 'light' ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+
+      // Logout
+      document.getElementById('logout').addEventListener('click', function(){ AdminAuth.logout(); location.replace('login.html'); });
+
+      // Export merged JSON (baseline + live) so it can be committed back
+      document.getElementById('export-json').addEventListener('click', function(){
+        var out = { seededAt: todayStr(), tools: merged.tools, daily: merged.daily };
+        var blob = new Blob([JSON.stringify(out, null, 2)], {type:'application/json'});
+        var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'analytics.json'; a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+      });
+
+      // Reset live (localStorage) data
+      document.getElementById('reset-live').addEventListener('click', function(){
+        if (!confirm('Clear all live usage data tracked in this browser? The JSON baseline is unaffected.')) return;
+        try { localStorage.removeItem(USAGE_KEY); } catch(e){}
+        merged = mergeData(window.__seed || {tools:{},daily:{}}, {});
+        renderAll();
+      });
+
+      load();
+    })();
+  </script>
+</body>
+</html>

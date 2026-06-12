@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Admin Sign In — PDF Tools</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Apply saved theme before paint to avoid a flash -->
+  <script>(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+
+  <link rel="stylesheet" href="shared/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Argon2 (WASM) for credential verification, and the shared session helper -->
+  <script src="https://cdn.jsdelivr.net/npm/hash-wasm@4.12.0/dist/argon2.umd.min.js"></script>
+  <script src="shared/auth.js"></script>
+
+  <style>
+    body { display: flex; align-items: center; justify-content: center; padding: 1.25rem; }
+    .login-card {
+      width: 100%; max-width: 410px;
+      background: var(--card-bg, #fff);
+      border: 1px solid var(--card-border, rgba(0,0,0,.08));
+      border-radius: 1.25rem;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, .18);
+      padding: 2.25rem 2rem 1.75rem;
+      animation: bounce-in .5s ease-out;
+    }
+    .login-logo {
+      width: 58px; height: 58px; border-radius: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; color: #fff;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      box-shadow: 0 8px 22px rgba(59, 130, 246, .4);
+      margin: 0 auto .9rem;
+    }
+    .login-card h1 { font-size: 1.4rem; font-weight: 800; color: var(--text-primary); margin: 0; text-align: center; }
+    .login-sub { color: var(--text-secondary); font-size: .9rem; text-align: center; margin: .25rem 0 1.5rem; }
+    .login-field label { font-size: .82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: .3rem; }
+    .input-wrap { position: relative; }
+    .input-wrap > i.lead-ico {
+      position: absolute; left: .85rem; top: 50%; transform: translateY(-50%);
+      color: var(--text-secondary); font-size: 1rem; pointer-events: none;
+    }
+    .login-field .form-control {
+      background: var(--card-bg); color: var(--text-primary);
+      border: 1px solid var(--card-border);
+      border-radius: .7rem; padding: .7rem .85rem .7rem 2.5rem; font-size: .95rem;
+    }
+    .login-field .form-control:focus {
+      border-color: #3b82f6; box-shadow: 0 0 0 .2rem rgba(59,130,246,.18); background: var(--card-bg); color: var(--text-primary);
+    }
+    .toggle-pw {
+      position: absolute; right: .5rem; top: 50%; transform: translateY(-50%);
+      border: none; background: transparent; color: var(--text-secondary);
+      width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+    }
+    .toggle-pw:hover { color: #3b82f6; }
+    .btn-signin {
+      width: 100%; border: none; border-radius: .7rem; padding: .72rem; font-weight: 700; color: #fff;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      box-shadow: 0 8px 20px rgba(59,130,246,.35); transition: transform .12s ease, filter .15s ease;
+    }
+    .btn-signin:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.04); }
+    .btn-signin:disabled { opacity: .75; cursor: not-allowed; }
+    .login-error {
+      display: none; align-items: center; gap: .5rem;
+      background: rgba(239, 68, 68, .1); color: #ef4444; border: 1px solid rgba(239,68,68,.25);
+      border-radius: .6rem; padding: .6rem .75rem; font-size: .85rem; font-weight: 500; margin-bottom: 1rem;
+    }
+    .login-error.show { display: flex; animation: slide-in .25s ease-out; }
+    .login-note { text-align: center; color: var(--text-secondary); font-size: .72rem; margin: 1.1rem 0 0; opacity: .8; }
+    .login-back { display: block; text-align: center; margin-top: .9rem; font-size: .82rem; color: var(--text-secondary); text-decoration: none; }
+    .login-back:hover { color: #3b82f6; }
+    .spinner-sm { width: 1rem; height: 1rem; border-width: .15em; }
+  </style>
+</head>
+<body>
+  <main class="login-card" role="main">
+    <div class="login-logo"><i class="bi bi-shield-lock-fill"></i></div>
+    <h1>Admin Sign In</h1>
+    <p class="login-sub">PDF Tools — Analytics Dashboard</p>
+
+    <div id="login-error" class="login-error" role="alert">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      <span id="login-error-text">Invalid username or password.</span>
+    </div>
+
+    <form id="login-form" autocomplete="off" novalidate>
+      <div class="login-field mb-3">
+        <label for="username">Username</label>
+        <div class="input-wrap">
+          <i class="bi bi-person lead-ico"></i>
+          <input type="text" id="username" class="form-control" placeholder="Enter username" autocomplete="username" required>
+        </div>
+      </div>
+
+      <div class="login-field mb-3">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <i class="bi bi-key lead-ico"></i>
+          <input type="password" id="password" class="form-control" placeholder="Enter password" autocomplete="current-password" required>
+          <button type="button" class="toggle-pw" id="toggle-pw" aria-label="Show password" title="Show password">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-signin" id="signin-btn">
+        <span id="signin-label"><i class="bi bi-box-arrow-in-right me-1"></i>Sign In</span>
+      </button>
+    </form>
+
+    <p class="login-note"><i class="bi bi-lock-fill me-1"></i>Credentials are verified with Argon2id in your browser. Authorized access only.</p>
+    <a class="login-back" href="/"><i class="bi bi-arrow-left me-1"></i>Back to PDF Tools</a>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Argon2id encoded hashes (PHC strings) for the two hard-coded credentials.
+      // argon2Verify re-derives the salt + params from the encoded string itself.
+      var USERNAME_HASH = '$argon2id$v=19$m=19456,t=2,p=1$DTJXfKHG6xA1Wn+kye4TOA$oi7eJgtsi13qiZNOvpv3lhVJCveqqHY87sQyC/BBWl8';
+      var PASSWORD_HASH = '$argon2id$v=19$m=19456,t=2,p=1$DTJXfKHG6xA1Wn+kye4TOA$NeopSs8XOY403qUxhyzzgMv6745iSoGco3W9fMrgq2E';
+
+      // Already signed in? Skip straight to the dashboard.
+      if (window.AdminAuth && AdminAuth.isAuthed()) { location.replace('dashboard.html'); return; }
+
+      var form = document.getElementById('login-form');
+      var userEl = document.getElementById('username');
+      var passEl = document.getElementById('password');
+      var btn = document.getElementById('signin-btn');
+      var label = document.getElementById('signin-label');
+      var errBox = document.getElementById('login-error');
+      var errText = document.getElementById('login-error-text');
+
+      // Show/hide password
+      document.getElementById('toggle-pw').addEventListener('click', function () {
+        var show = passEl.type === 'password';
+        passEl.type = show ? 'text' : 'password';
+        this.querySelector('i').className = show ? 'bi bi-eye-slash' : 'bi bi-eye';
+        this.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      });
+
+      function showError(msg) {
+        errText.textContent = msg || 'Invalid username or password.';
+        errBox.classList.add('show');
+      }
+      function clearError() { errBox.classList.remove('show'); }
+
+      function setLoading(on) {
+        btn.disabled = on;
+        label.innerHTML = on
+          ? '<span class="spinner-border spinner-sm me-2" role="status" aria-hidden="true"></span>Verifying…'
+          : '<i class="bi bi-box-arrow-in-right me-1"></i>Sign In';
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        clearError();
+
+        var u = userEl.value.trim();
+        var p = passEl.value;
+        if (!u || !p) { showError('Please enter both username and password.'); return; }
+
+        if (typeof hashwasm === 'undefined' || !hashwasm.argon2Verify) {
+          showError('Security module failed to load. Check your connection and retry.');
+          return;
+        }
+
+        setLoading(true);
+        try {
+          // Verify both with Argon2id. Constant work regardless of which is wrong.
+          var results = await Promise.all([
+            hashwasm.argon2Verify({ password: u, hash: USERNAME_HASH }),
+            hashwasm.argon2Verify({ password: p, hash: PASSWORD_HASH })
+          ]);
+          if (results[0] && results[1]) {
+            AdminAuth.setSession('allan');
+            label.innerHTML = '<i class="bi bi-check-lg me-1"></i>Success';
+            location.href = 'dashboard.html';
+            return;
+          }
+          showError('Invalid username or password.');
+        } catch (err) {
+          showError('Something went wrong verifying your credentials.');
+        } finally {
+          if (!AdminAuth.isAuthed()) setLoading(false);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
