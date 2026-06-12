@@ -54,23 +54,41 @@
 
   // ---- styles ----
   const css = `
-  .share-rail{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:1030;
-    display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.6rem .45rem;border-radius:999px;
-    background:var(--card-bg,#fff);border:1px solid var(--card-border,rgba(0,0,0,.08));
-    box-shadow:0 10px 28px rgba(15,23,42,.16)}
-  .share-rail .share-cap{font-size:.58rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--text-secondary,#64748b);margin-bottom:.05rem}
-  .share-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;
+  /* Floating Share widget: a gradient FAB in the bottom-right corner (directly
+     above the scroll-to-top button, same style) that expands the buttons upward
+     on tap. Consistent on all screen sizes. */
+  .share-rail{position:fixed;right:2rem;bottom:2rem;z-index:1030;
+    display:flex;flex-direction:column-reverse;align-items:center;gap:.5rem}
+  .share-cap{display:none}
+  .share-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;
     border-radius:50%;border:none;cursor:pointer;font-size:1.15rem;color:#fff;background:var(--sc);
     text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;line-height:1}
   .share-btn:hover{transform:scale(1.1);filter:brightness(1.05);box-shadow:0 6px 16px color-mix(in srgb,var(--sc) 45%,transparent);color:#fff}
   .share-btn:focus-visible{outline:3px solid color-mix(in srgb,var(--sc) 55%,transparent);outline-offset:2px}
+  /* The toggle is a gradient FAB matching the scroll-to-top button */
+  .share-rail .share-toggle{display:inline-flex;width:52px;height:52px;font-size:1.25rem;
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);box-shadow:0 4px 16px rgba(59,130,246,.4)}
+  .share-rail .share-toggle:hover{transform:translateY(-3px) scale(1.04);filter:none}
+  /* Collapsed: only the FAB shows; .open reveals the platform buttons */
+  .share-rail:not(.open) > :not(.share-toggle){display:none}
+  /* Expanded: compact 2-column grid so all buttons fit without clipping behind
+     the nav; scrolls instead of clipping on very short screens. */
+  .share-rail.open{display:grid;grid-template-columns:repeat(2,auto);gap:.45rem;
+    justify-items:center;align-items:center;padding:.6rem;border-radius:1.25rem;
+    background:var(--card-bg,#fff);border:1px solid var(--card-border,rgba(0,0,0,.08));
+    box-shadow:0 10px 28px rgba(15,23,42,.16);max-height:calc(100dvh - 9rem);overflow-y:auto}
+  .share-rail.open .share-toggle{grid-column:1 / -1;order:9}
   /* "Copied!" tooltip to the LEFT so it never runs off the right edge */
   .share-copied{position:relative}
   .share-copied::after{content:"Copied!";position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);
     background:#0f172a;color:#fff;font-size:.72rem;font-weight:600;padding:.2rem .5rem;border-radius:.35rem;white-space:nowrap}
-  @media (max-width:991px){.share-rail{gap:.4rem;padding:.5rem .4rem}.share-rail .share-btn{width:38px;height:38px;font-size:1.05rem}}
-  @media (max-width:575px){.share-rail .share-cap{display:none}}
+  /* Sit directly above the scroll-to-top button. The To-Top only appears after
+     scrolling >300px (.share-rail gets .scrolled then), so until then the FAB
+     drops into the To-Top's slot — no floating gap. 4 states (scroll × install): */
+  .share-rail.scrolled{bottom:6rem}                                   /* scrolled, no install -> above To-Top (2rem) */
+  body.pwa-install-visible .share-rail{bottom:5.5rem}                 /* top of page, install -> above Install, in To-Top slot */
+  body.pwa-install-visible .share-rail.scrolled{bottom:9.5rem}       /* scrolled + install -> above To-Top (5.5rem) */
+  @media (max-width:991px){.share-rail .share-btn:not(.share-toggle){width:40px;height:40px;font-size:1.05rem}}
   @media (prefers-reduced-motion:reduce){.share-btn{transition:none}}
   `;
   const style = document.createElement('style');
@@ -81,9 +99,27 @@
   const rail = document.createElement('div');
   rail.className = 'share-rail';
   rail.setAttribute('aria-label', 'Share this tool');
-  rail.innerHTML = `<span class="share-cap">Share</span>${targetButtons}${copyBtn}`;
+  rail.innerHTML = `<button type="button" class="share-toggle share-btn" aria-label="Share" aria-expanded="false"><i class="bi bi-share-fill"></i></button><span class="share-cap">Share</span>${targetButtons}${copyBtn}`;
+
+  function setOpen(root, open) {
+    root.classList.toggle('open', open);
+    const t = root.querySelector('.share-toggle');
+    if (t) {
+      t.setAttribute('aria-expanded', String(open));
+      const i = t.querySelector('i');
+      if (i) i.className = open ? 'bi bi-x-lg' : 'bi bi-share-fill';
+    }
+  }
 
   function wire(root) {
+    // Mobile: the toggle FAB expands/collapses the rail
+    const toggle = root.querySelector('.share-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setOpen(root, !root.classList.contains('open'));
+      });
+    }
     const copy = root.querySelector('.share-copy');
     if (!copy) return;
     copy.addEventListener('click', async () => {
@@ -102,6 +138,15 @@
   function mount() {
     document.body.appendChild(rail);
     wire(rail);
+    // Tap anywhere outside the rail collapses it (mobile)
+    document.addEventListener('click', (e) => {
+      if (!rail.contains(e.target)) setOpen(rail, false);
+    });
+    // Track scroll (same 300px threshold as the scroll-to-top button) so the FAB
+    // sits directly above it when shown, and drops into its slot when hidden.
+    const onScroll = () => rail.classList.toggle('scrolled', window.pageYOffset > 300);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   if (document.readyState === 'loading') {
