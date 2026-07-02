@@ -231,6 +231,7 @@ function topNav(active) {
           <li class="nav-item"><a class="${cls('about')}" href="/about.html"><i class="bi bi-info-circle me-1"></i>About Us</a></li>
           <li class="nav-item"><a class="${cls('blog')}" href="/blog/"><i class="bi bi-journal-text me-1"></i>Blog</a></li>
           <li class="nav-item"><a class="${cls('contact')}" href="/contact.html"><i class="bi bi-envelope me-1"></i>Contact Us</a></li>
+          <li class="nav-item"><a class="${cls('login')}" href="/login.html"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a></li>
         </ul>
       </div>
     </div>
