@@ -32,7 +32,8 @@ const POSTS_JSON = path.join(ROOT, 'blog', 'posts.json');
 const TOPICS_JSON = path.join(ROOT, 'scripts', 'topics.json');
 const IMAGES_DIR = path.join(ROOT, 'blog', 'images');
 
-const MIN_WORDS = 650;
+const MIN_WORDS = Number(process.env.MIN_WORDS) || 650;
+const MAX_ATTEMPTS = Math.max(2, Number(process.env.GEN_MAX_ATTEMPTS) || 4);
 
 // --- args ------------------------------------------------------------------
 const argv = process.argv.slice(2);
@@ -73,13 +74,32 @@ Return ONLY a JSON object with EXACTLY these keys:
 
 Strict rules for contentHtml:
 - Use only these tags: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, <em>, <blockquote>, <a>. Do NOT include <h1>, <html>, <head>, <style>, or scripts.
-- LENGTH IS A STRICT REQUIREMENT: the contentHtml MUST be at least 800 words (aim for 900-1200). Do not stop early or summarize; write full, detailed sections. An article under 800 words will be rejected.
+- LENGTH IS A STRICT REQUIREMENT: the contentHtml MUST be at least 900 words (aim for 1000-1300). Do not stop early or summarize; write full, detailed sections. An article that is too short will be rejected.
 - Real, specific, accurate information only. No invented statistics. No "as an AI".
-- Include at least 3 <h2> sections and a step-by-step list where it makes sense.
+- Include at least 5 <h2> sections, each with 2-4 full paragraphs, plus a step-by-step list where it makes sense. Longer, genuinely useful sections are better than short ones.
 - Include a final section "<h2>Frequently asked questions</h2>" with at least two "<h3>" question headings and answers.
 - Mention that the tools run in the browser with no uploads (privacy) where relevant.
 - Include at least ONE internal link using href="/" to one of these tools: ${toolLinks}. Use a descriptive anchor, e.g. <a href="/">PDF compressor</a>.
 - Output must be valid JSON. Escape any quotes inside strings.`;
+}
+
+// Retry prompt: feed the rejected draft back and demand a longer, richer rewrite.
+// This is what reliably gets concise models (e.g. GPT-4o-mini) over the word gate.
+function buildExpandPrompt(topic, article, problems) {
+  return `You previously wrote a draft article for the "PDF Tools" blog on the topic "${topic.title}", but it was REJECTED by our quality checker for: ${problems.join('; ')}.
+
+Here is your previous draft's contentHtml:
+"""
+${article.contentHtml}
+"""
+
+Rewrite and substantially EXPAND it so it clearly passes. Requirements:
+- It MUST be at least ${MIN_WORDS + 200} words (aim for 1100-1400). This is the most important fix — do NOT return anything shorter than before.
+- Keep it accurate and genuinely useful. Add real depth, concrete examples, and at least one ADDITIONAL <h2> section — do not pad with repetition or filler.
+- Keep every required element: at least five <h2> sections, a "<h2>Frequently asked questions</h2>" section with two or more <h3> Q&A pairs, and at least one internal link using href="/" to a relevant tool.
+- Use only these tags: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, <em>, <blockquote>, <a>. No <h1>.
+
+Return ONLY the same JSON object shape as before (keys: title, excerpt, description, tags, imagePrompt, contentHtml), with the expanded contentHtml.`;
 }
 
 // --- providers -------------------------------------------------------------
@@ -93,7 +113,7 @@ async function callGemini(prompt) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.7, responseMimeType: 'application/json', maxOutputTokens: 4096 }
+      generationConfig: { temperature: 0.7, responseMimeType: 'application/json', maxOutputTokens: 8192 }
     })
   });
   if (!res.ok) throw new Error(`Gemini HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
@@ -113,7 +133,7 @@ async function callGroq(prompt) {
     body: JSON.stringify({
       model,
       temperature: 0.7,
-      max_tokens: 4000,
+      max_tokens: 6000,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: 'You are a helpful technical writer. Always respond with a single valid JSON object.' },
@@ -142,7 +162,7 @@ async function callGithubModels(prompt) {
     body: JSON.stringify({
       model,
       temperature: 0.7,
-      max_tokens: 4000,
+      max_tokens: 6000,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: 'You are a helpful technical writer. Always respond with a single valid JSON object.' },
@@ -157,10 +177,37 @@ async function callGithubModels(prompt) {
   return stripCodeFence(text);
 }
 
+// Offline, deterministic provider for testing the pipeline without API keys/quota:
+//   AI_PROVIDER_ORDER=mock node scripts/generate-post.js --dry-run
+// Returns a too-short draft first, then a long one when asked to expand — so it
+// exercises the expand/retry loop end-to-end. Never used in production ordering.
+async function callMock(prompt) {
+  const expanding = /EXPAND|previous draft|previously wrote/i.test(prompt);
+  const sentence = 'This is a clear, specific, and genuinely helpful sentence about the topic that gives the reader real, practical value. ';
+  const para = n => `<p>${sentence.repeat(n).trim()}</p>`;
+  const body = expanding
+    ? Array.from({ length: 12 }, () => para(6)).join('')
+    : Array.from({ length: 4 }, () => para(4)).join('');
+  const html =
+    '<h2>Overview</h2>' + body +
+    '<h2>Step by step</h2><ol><li>First step.</li><li>Second step.</li><li>Third step.</li></ol>' +
+    '<p>Try our <a href="/">PDF compressor</a> — it runs in your browser with no uploads.</p>' +
+    '<h2>Tips</h2><p>' + sentence.repeat(4).trim() + '</p>' +
+    '<h2>Frequently asked questions</h2><h3>Is it free?</h3><p>Yes, completely.</p><h3>Is it private?</h3><p>Yes — files never leave your device.</p>';
+  return JSON.stringify({
+    title: 'Mock: ' + ((prompt.match(/"([^"]{5,70})"/) || [])[1] || 'Test Article'),
+    excerpt: 'A mock excerpt for pipeline testing.',
+    description: 'A mock SEO description for pipeline testing.',
+    tags: ['test', 'mock'],
+    imagePrompt: 'abstract blue and purple shapes',
+    contentHtml: html
+  });
+}
+
 // Try providers in order, falling back on any failure. Order via AI_PROVIDER_ORDER.
 async function generateArticle(prompt) {
   const order = (process.env.AI_PROVIDER_ORDER || 'gemini,groq,github').split(',').map(s => s.trim());
-  const providers = { gemini: callGemini, groq: callGroq, github: callGithubModels };
+  const providers = { gemini: callGemini, groq: callGroq, github: callGithubModels, mock: callMock };
   const errors = [];
   for (const name of order) {
     const fn = providers[name];
@@ -196,6 +243,7 @@ function validateArticle(a) {
 
 // --- image -----------------------------------------------------------------
 async function fetchCoverImage(slug, imagePrompt) {
+  if (DRY_RUN) { log('dry-run: skipping cover image fetch'); return writeSvgCover(slug, imagePrompt); }
   const prompt = encodeURIComponent(`${imagePrompt}. Clean modern flat vector illustration, soft blue and purple palette, no text, no words`);
   const url = `https://image.pollinations.ai/prompt/${prompt}?width=1200&height=630&nologo=true&model=flux`;
   try {
@@ -245,14 +293,30 @@ async function generateOne(posts, topics) {
   log(`topic: "${topic.title}"`);
 
   let article = null;
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    article = await generateArticle(buildPrompt(topic));
-    const problems = validateArticle(article);
-    if (problems.length === 0) break;
-    log(`attempt ${attempt} failed quality gate: ${problems.join('; ')}`);
-    article = null;
+  let best = null;            // most complete rejected draft, used as the base to expand
+  let lastProblems = [];
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    // First attempt writes fresh; later attempts expand the best draft with feedback.
+    const prompt = (attempt > 1 && best && best.contentHtml)
+      ? buildExpandPrompt(topic, best, lastProblems)
+      : buildPrompt(topic);
+    let candidate;
+    try {
+      candidate = await generateArticle(prompt);
+    } catch (err) {
+      log(`attempt ${attempt} generation error: ${err.message}`);
+      continue;
+    }
+    const problems = validateArticle(candidate);
+    if (problems.length === 0) { article = candidate; break; }
+    lastProblems = problems;
+    log(`attempt ${attempt} failed quality gate: ${problems.join('; ')} (${wordCount(candidate.contentHtml || '')} words)`);
+    if (candidate.contentHtml &&
+        (!best || wordCount(candidate.contentHtml) > wordCount(best.contentHtml || ''))) {
+      best = candidate;
+    }
   }
-  if (!article) throw new Error('Article failed quality gates after 2 attempts');
+  if (!article) throw new Error(`Article failed quality gates after ${MAX_ATTEMPTS} attempts`);
 
   const title = article.title.trim();
   const slug = slugify(topic.title); // slug tied to topic so dedupe is stable
