@@ -116,9 +116,17 @@ function analysePage(relPath, html) {
   const robotsMatch = html.match(/<meta[^>]+name=["']robots["'][^>]*>/i);
   const noindex = robotsMatch ? /noindex/i.test(attr(robotsMatch[0], 'content') || '') : false;
 
+  // Similarity must compare the UNIQUE per-tool prose, not the shared shell.
+  // Every tool page carries the same nav, footer and tool UI labels, so a
+  // whole-page comparison reports ~40% overlap even when the prose is entirely
+  // different — a number that would send a loop chasing a gate it cannot pass.
+  const seoBlock = html.match(/<!--\s*SEO content[^>]*-->([\s\S]*?)<\/section>/i);
+  const uniqueProse = seoBlock ? normalize(visibleText(seoBlock[1])) : null;
+
   return {
     page: relPath,
     crawlableWords: countWords(html),
+    uniqueProseWords: uniqueProse ? uniqueProse.split(/\s+/).filter(Boolean).length : 0,
     h1Count: h1,
     h2Count: h2,
     schemaOrphans: orphans,
@@ -127,7 +135,8 @@ function analysePage(relPath, html) {
     ogImageShared: !!ogImage && /\/preview\.jpg$/.test(ogImage),
     adUnits,
     noindex,
-    _norm: norm, // stripped before serialising
+    _norm: norm,          // stripped before serialising
+    _prose: uniqueProse,  // ditto
   };
 }
 
@@ -192,7 +201,9 @@ for (const rel of listHtml()) {
 
 // near-duplicate detection across tool pages
 const tools = pages.filter(p => p.kind === 'tool');
-const shingleMap = new Map(tools.map(p => [p.page, shingles(p._norm)]));
+// Compare the injected SEO section where present, falling back to the whole
+// page only for tool pages that have not been regenerated yet.
+const shingleMap = new Map(tools.map(p => [p.page, shingles(p._prose || p._norm)]));
 const duplicatePairs = [];
 for (let i = 0; i < tools.length; i++) {
   for (let j = i + 1; j < tools.length; j++) {
@@ -332,7 +343,7 @@ async function liveCheck() {
       sitemapUrls: sitemapUrls.length,
     },
     gates,
-    pages: pages.map(p => { const { _norm, ...rest } = p; return rest; }),
+    pages: pages.map(p => { const { _norm, _prose, ...rest } = p; return rest; }),
     blog: {
       newestPostAgeDays,
       largestGapDays,
@@ -370,7 +381,8 @@ function printSummary(audit) {
   console.log('  ' + pad('PAGE', 52) + pad('H1', 4) + pad('H2', 4) + 'WORDS');
   for (const p of audit.pages.filter(x => x.kind === 'tool')) {
     const flag = p.crawlableWords < WORD_TARGET ? ' <' : '';
-    console.log('  ' + pad(p.page, 52) + pad(p.h1Count, 4) + pad(p.h2Count, 4) + String(p.crawlableWords).padStart(5) + flag);
+    console.log('  ' + pad(p.page, 52) + pad(p.h1Count, 4) + pad(p.h2Count, 4) + String(p.crawlableWords).padStart(5)
+      + String(p.uniqueProseWords ? '  (' + p.uniqueProseWords + ' unique)' : '').padStart(15) + flag);
   }
   for (const p of audit.pages.filter(x => x.kind !== 'tool')) {
     console.log('  ' + pad(p.page, 52) + pad(p.h1Count, 4) + pad(p.h2Count, 4) + String(p.crawlableWords).padStart(5));

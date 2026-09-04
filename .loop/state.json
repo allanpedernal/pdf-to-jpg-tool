@@ -2,7 +2,7 @@
   "$schema": "seeded by scripts/seo-audit.js — see adsense-loop-plan.txt L5",
   "phase": "phase0",
   "seededAt": "2026-09-04",
-  "lastAuditAt": "2026-09-04T23:30:11.745Z",
+  "lastAuditAt": "2026-09-04T23:39:03.806Z",
   "gates": {
     "G1": {
       "pass": false,
@@ -10,13 +10,13 @@
       "blocking": true
     },
     "G2": {
-      "pass": false,
-      "value": "0/20 tool pages have exactly one H1",
+      "pass": true,
+      "value": "20/20 tool pages have exactly one H1",
       "blocking": true
     },
     "G3": {
       "pass": false,
-      "value": "180 schema orphans on 21 pages",
+      "value": "32 schema orphans on 6 pages",
       "blocking": true
     },
     "G4": {
@@ -75,6 +75,7 @@
   ],
   "openPRs": [],
   "notes": [
+    "2026-09-05 B1a: ran build-tool-pages.js. G2 now passes; schema orphans 180 -> 32. Tool pages 79 -> ~175 words (~96 unique prose words each). Still 425 words/page short of G1; ~8,500 words of editorial work remain.",
     "B5 is already satisfied: login/dashboard/test-pwa carry noindex and are absent from sitemap.xml (G7 passes). See constraint C12 — do not add robots.txt Disallow entries for them.",
     "G9 passes: posts.json carries authors and the bylines render. B7 reduces to the Formspree ID only.",
     "G6 reports the 88-day gap between 2026-06-08 and 2026-09-04. It clears once four consecutive weeks of posts exist."
