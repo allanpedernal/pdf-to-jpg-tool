@@ -106,7 +106,7 @@ Return ONLY the same JSON object shape as before (keys: title, excerpt, descript
 // Google retires model aliases without notice (gemini-2.0-flash started 404ing),
 // so never rely on a single hardcoded name: try a candidate list, and if none of
 // them exist, ask the API which models it actually has and use the newest flash.
-const GEMINI_CANDIDATES = ['gemini-flash-latest', 'gemini-3.5-flash', 'gemini-2.5-flash'];
+const GEMINI_CANDIDATES = ['gemini-3.6-flash', 'gemini-flash-latest', 'gemini-3.5-flash', 'gemini-2.5-flash'];
 let geminiModelCache = null;
 
 async function geminiListModels(key) {
@@ -120,8 +120,12 @@ async function geminiListModels(key) {
 
 // Prefer a plain "flash" model: cheap, fast, and on the free tier. Avoid the
 // preview/experimental/thinking/image variants, which have different quotas.
+function usableGeminiModels(names) {
+  return names.filter(n => !/preview|exp|thinking|image|tts|audio|embedding|live|vision|omni/i.test(n));
+}
+
 function pickGeminiModel(names) {
-  const usable = names.filter(n => !/preview|exp|thinking|image|tts|embedding|live/i.test(n));
+  const usable = usableGeminiModels(names);
   return usable.find(n => /flash-latest$/.test(n))
     || usable.find(n => /flash$/.test(n))
     || usable.find(n => /flash/.test(n))
@@ -175,9 +179,13 @@ async function callGemini(prompt) {
   const discover = async () => {
     log('no known Gemini model worked, querying ListModels...');
     const live = await geminiListModels(key);
-    const extra = live.filter(n => !candidates.includes(n));
+    // Only ever fall back to real text models — the raw list also contains
+    // TTS, embedding and image variants that cannot write an article at all.
+    const extra = usableGeminiModels(live.filter(n => !candidates.includes(n)));
     const picked = pickGeminiModel(extra);
-    return picked ? [picked, ...extra.filter(n => n !== picked).slice(0, 3)] : [];
+    if (!picked) return [];
+    const rest = extra.filter(n => n !== picked && /flash|pro/.test(n)).slice(0, 3);
+    return [picked, ...rest];
   };
 
   for (let round = 0; round < 2; round++) {
