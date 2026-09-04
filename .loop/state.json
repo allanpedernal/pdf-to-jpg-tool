@@ -2,7 +2,7 @@
   "$schema": "seeded by scripts/seo-audit.js — see adsense-loop-plan.txt L5",
   "phase": "phase0",
   "seededAt": "2026-09-04",
-  "lastAuditAt": "2026-09-04T23:47:31.347Z",
+  "lastAuditAt": "2026-09-04T23:51:24.723Z",
   "gates": {
     "G1": {
       "pass": false,
@@ -15,8 +15,8 @@
       "blocking": true
     },
     "G3": {
-      "pass": false,
-      "value": "27 schema orphans on 1 pages",
+      "pass": true,
+      "value": "0 schema orphans on 0 pages",
       "blocking": true
     },
     "G4": {
@@ -74,9 +74,11 @@
     }
   ],
   "openPRs": [
-    "loop/verifier-entity-decoding"
+    "loop/verifier-entity-decoding",
+    "loop/b2-render-homepage-schema (stacked)"
   ],
   "notes": [
+    "2026-09-05 B2: index.html now renders its own HowTo (4 steps) + FAQPage (10 Q&A) as #home-seo-content. G3 FAIL -> PASS, 27 -> 0 orphans. index.html 849 -> 1353 words. build-tool-pages.js strips the block from tool pages so the PDF-to-JPG-specific copy is not cloned onto 20 URLs.",
     "2026-09-05 verifier: schema comparison now decodes HTML entities. G3 32 -> 27 orphans; the 5 tool-page orphans were false positives (&quot; vs \"). All 27 remaining are real and all on index.html: a 3-step HowTo and a 10-question FAQPage marked up but never rendered.",
     "2026-09-05 B4: ad-density guard added to build-tool-pages.js. G8 FAIL -> PASS. Guard is conditional on AD_MIN_WORDS=300, so ads return automatically once B1 copy lands — no second edit needed.",
     "2026-09-05 B1a: ran build-tool-pages.js. G2 now passes; schema orphans 180 -> 32. Tool pages 79 -> ~175 words (~96 unique prose words each). Still 425 words/page short of G1; ~8,500 words of editorial work remain.",

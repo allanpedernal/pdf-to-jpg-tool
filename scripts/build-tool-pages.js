@@ -316,6 +316,12 @@ function main() {
     let html = replaceMeta(shell, t);
     // Strip the homepage's JSON-LD (it's about the homepage, conflicts on a tool page)
     html = html.replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
+
+    // index.html renders its own HowTo + FAQ block (see #home-seo-content).
+    // Tool pages must not inherit it: it is PDF-to-JPG-specific copy, and
+    // cloning it onto 20 pages would create exactly the near-duplicate
+    // content the per-tool sections below exist to avoid.
+    html = removeElement(html, /<section id="home-seo-content"/i, 'section');
     // pre-select the tool + tool-specific structured data, injected into <head>
     const headInject = `  <script>window.INITIAL_TOOL = ${JSON.stringify(t.toolId)};</script>\n${toolJsonLd(t)}\n</head>`;
     html = html.replace('</head>', headInject);
