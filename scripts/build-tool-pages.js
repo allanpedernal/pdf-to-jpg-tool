@@ -202,6 +202,62 @@ const TOOLS = [
   }
 ];
 
+// --- ad density guard (G8) -------------------------------------------------
+// AdSense policy: no ads on pages with little or no content. A generated tool
+// page inherits three ad units from the index.html shell, so a page whose
+// injected content leaves it under AD_MIN_WORDS must ship without them.
+//
+// This is deliberately conditional rather than a blanket strip: as the per-tool
+// copy grows past the threshold the ads come back on their own, with no second
+// edit. Do not "simplify" it into an unconditional removal.
+const AD_MIN_WORDS = 300;
+
+// Same measurement as scripts/seo-audit.js — keep the two in step.
+function crawlableWords(html) {
+  const t = html
+    .replace(/<script\b[\s\S]*?<\/script\s*>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style\s*>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .trim();
+  return t ? t.split(/\s+/).length : 0;
+}
+
+// Remove one balanced element starting at the first match of `startRe`.
+// Regex alone cannot do this: the bottom banner nests three divs deep.
+function removeElement(html, startRe, tag) {
+  const m = html.match(startRe);
+  if (!m) return html;
+  const start = m.index;
+  const open = new RegExp(`<${tag}\\b`, 'gi');
+  const close = new RegExp(`</${tag}\\s*>`, 'gi');
+  let depth = 0, i = start;
+  while (i < html.length) {
+    open.lastIndex = i; close.lastIndex = i;
+    const o = open.exec(html), c = close.exec(html);
+    if (!c) break;
+    if (o && o.index < c.index) { depth++; i = o.index + o[0].length; }
+    else {
+      depth--;
+      i = c.index + c[0].length;
+      if (depth === 0) return html.slice(0, start) + html.slice(i);
+    }
+  }
+  return html;
+}
+
+function stripAdUnits(html) {
+  html = removeElement(html, /<aside id="left-ad"/i, 'aside');
+  html = removeElement(html, /<aside id="right-ad"/i, 'aside');
+  html = removeElement(html, /<div class="col-12 mt-auto ad-bottom"/i, 'div');
+  // The sidebars were col-lg-2 each; without them main must span the row or
+  // the content sits in 8 of 12 columns with dead space beside it.
+  return html.replace(
+    /(<main id="main-content" class=")col-12 col-lg-8( p-0")/,
+    '$1col-12$2'
+  );
+}
+
 // --- build -----------------------------------------------------------------
 function toolJsonLd(t) {
   const howto = {
@@ -270,8 +326,16 @@ function main() {
       /<div id="tool-content"[\s\S]*?<\/main>/,
       `<div id="tool-content" class="w-100 py-3"></div>\n          </div>\n        </div>\n${seoSection(t)}\n      </main>`
     );
+    // G8: strip inherited ad units while the page is still thin.
+    const words = crawlableWords(html);
+    let adNote = '';
+    if (words < AD_MIN_WORDS) {
+      html = stripAdUnits(html);
+      adNote = `  [ads stripped — ${words}w < ${AD_MIN_WORDS}]`;
+    }
+
     fs.writeFileSync(path.join(ROOT, `${t.slug}.html`), html);
-    console.log(`[tool-pages] wrote ${t.slug}.html  (${t.toolId})`);
+    console.log(`[tool-pages] wrote ${t.slug}.html  (${t.toolId})${adNote}`);
   }
   console.log(`[tool-pages] done — ${TOOLS.length} pages. Slugs: ${TOOLS.map(t => t.slug).join(', ')}`);
 }
