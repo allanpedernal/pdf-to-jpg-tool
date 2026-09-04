@@ -1,0 +1,246 @@
+================================================================
+SEO & FUNNEL PLAN — pdf-to-jpg-tool.com
+Goal: rank in Google for "pdf to jpg" and related searches
+Date: 12 June 2026
+================================================================
+
+----------------------------------------------------------------
+1. REALITY CHECK (read this first)
+----------------------------------------------------------------
+- "pdf to jpg" gets roughly 400-600k global searches/month and is
+  dominated by Adobe, iLovePDF, Smallpdf and Canva (DA 90+ sites).
+  A newer site cannot win that head term in months. The path is:
+  (1) own the long-tail variants first, (2) build real backlinks,
+  (3) let the head term follow in 9-18 months.
+- Paid search is economically upside-down for this site: a click
+  for "pdf to jpg" costs ~$0.30-$1.50, while AdSense earns roughly
+  $2-8 per 1,000 pageviews (~$0.005 per view). Buying traffic to
+  an ad-monetised free tool loses money. Spend effort, not budget.
+- Your one real differentiator vs every big competitor: files are
+  processed in the browser, never uploaded. Lead with privacy in
+  every title, description and pitch.
+
+----------------------------------------------------------------
+2. THE FUNNEL
+----------------------------------------------------------------
+TOFU (awareness)
+  Searches: "why is my jpg blurry", "what dpi for printing"
+  Asset:    blog posts (your Mon/Wed/Fri auto-blog pipeline)
+  Next:     inline links to tool pages
+
+MOFU (evaluation)
+  Searches: "best free pdf to jpg converter", "pdf to jpg
+            without upload", "is it safe to use online converters"
+  Asset:    comparison/listicle posts + privacy-angle articles
+  Next:     tool page
+
+BOFU (action)
+  Searches: "pdf to jpg", "convert pdf to jpg free"
+  Asset:    pdf-to-jpg.html and the sibling tool pages
+  Next:     use the tool -> AdSense impressions
+
+RETENTION
+  Asset:    PWA install prompt, related-tool cross-links
+  Value:    repeat/direct traffic, branded searches (a ranking
+            signal in itself)
+
+Because revenue is AdSense RPM, the funnel goal is sessions x
+pages-per-session. Internal linking matters as much as rankings.
+
+----------------------------------------------------------------
+3. PHASE 1 — FOUNDATION (week 1)
+----------------------------------------------------------------
+a) Google Search Console: verify the domain property and submit
+   sitemap.xml. You have IndexNow but no GSC verification found.
+   Without GSC you have zero keyword/coverage data. Do this first.
+b) Regenerate tool pages: the tool pages on disk are STALE — they
+   are missing the unique SEO content sections that
+   scripts/build-tool-pages.js is designed to inject. As deployed,
+   your money pages have almost no crawlable text (the tool UI is
+   injected by JavaScript). Run: node scripts/build-tool-pages.js
+   and verify each page then carries its H1/intro/how-to/FAQ.
+c) Tool -> blog internal links: blog posts already link to tools,
+   but tool pages never link back. Add a "related guides" block
+   (2-3 contextual blog links) to the tool page template.
+d) Related-tools block on every tool page ("Also need to:
+   Compress PDF / PDF to PNG / JPG to PDF") — raises pages per
+   session and spreads link equity.
+e) Visible breadcrumbs on tool pages (BreadcrumbList schema
+   already exists in places — render it for users too).
+f) Unique og:image per tool page (all pages currently share
+   preview.jpg). 1200x630, tool name + "free, no upload".
+g) Sitemap lastmod: stamp real per-file dates (e.g. from git
+   history) instead of "today" for everything — Google learns to
+   distrust always-fresh lastmod values.
+h) Fix the topic queue data: scripts/topics.json relatedTools all
+   point to "/" — point them at the real tool pages
+   (/pdf-to-jpg.html etc.). Same fix in the generate-post.js
+   prompt, which currently tells the AI to use href="/".
+
+----------------------------------------------------------------
+4. PHASE 2 — KEYWORD-MAPPED CONTENT ENGINE (weeks 1-8)
+----------------------------------------------------------------
+The auto-blog (generate-post.js + topics.json, Mon/Wed/Fri) is the
+engine. The work is feeding it the right keyword map. Reorder /
+extend topics.json with these clusters, highest priority first:
+
+PLATFORM LONG-TAILS (low competition, direct intent — do first)
+  - How to convert PDF to JPG on iPhone (free, no app)
+  - ... on Mac — 3 free ways
+  - ... on Windows 11 without installing software
+  - ... on Android (free, no app)
+  - ... on a Chromebook
+
+PRIVACY ANGLE (your differentiator — no big competitor can claim it)
+  - How to convert PDF to JPG without uploading your file anywhere
+  - Is it safe to use online PDF converters? What to check first
+
+QUALITY / SPEC LONG-TAILS
+  - PDF to JPG in high resolution (300 DPI for print)
+  - Convert a multi-page PDF into separate JPG images (batch + ZIP)
+  - PDF to JPG without losing quality (already published — good)
+
+MOFU LISTICLES (these attract backlinks)
+  - "7 best free PDF to JPG converters compared (2026)" — include
+    competitors honestly, win on the no-upload/privacy axis.
+
+SIBLING-TOOL CLUSTERS (rank faster, lift overall domain authority)
+  - Mirror the same clusters for HEIC-to-JPG and the WebP tools —
+    far lower competition than pdf-to-jpg, quicker page-1 wins.
+
+Keep the human PR-review step in the workflow. It is the guardrail
+against a repeat of the AdSense "low-value content" rejection and
+against Google's scaled-content policy.
+
+----------------------------------------------------------------
+5. PHASE 3 — AUTHORITY & BACKLINKS (weeks 2-12, ongoing)
+----------------------------------------------------------------
+This is the bottleneck for the head term. In order of effort/return:
+a) Free-tool directories: AlternativeTo, Product Hunt, SaaSHub,
+   Slant, ToolFinder, free-for.dev-style lists. 10-20 decent links,
+   roughly an afternoon each.
+b) Open-source angle: if the repo can be public, a proper GitHub
+   README with the live link earns organic stars/links; submit to
+   "awesome-pdf" style lists.
+c) Privacy story pitch: short outreach to privacy/productivity
+   newsletters and relevant subreddits — "a PDF converter that
+   never uploads your file" is genuinely pitchable. Post as a
+   maker, not as spam.
+d) Linkable asset: publish a "DPI / image-size cheat sheet"
+   reference page (pixel dimensions for A4/Letter/photo sizes at
+   150/300/600 DPI). Bloggers cite pages like this; it earns links
+   passively and links out to your resize/convert tools.
+
+----------------------------------------------------------------
+6. PHASE 4 — PAID (small and surgical, optional)
+----------------------------------------------------------------
+- SKIP Google Ads on "pdf to jpg" (negative ROI vs AdSense — see
+  section 1).
+- If you want to spend something: Microsoft/Bing Ads, exact-match
+  long-tails only, $5-10/day cap. CPCs are often $0.05-0.20. Use it
+  to learn which queries produce multi-page sessions, then kill it
+  after 4-6 weeks of data.
+- Product Hunt launch day is the highest-ROI "campaign" available
+  and costs nothing: backlinks + traffic spike + branded searches.
+
+----------------------------------------------------------------
+7. PHASE 5 — INTERNATIONAL (months 3-6, biggest untapped lever)
+----------------------------------------------------------------
+Conversion-tool traffic is majority non-English and far less
+competitive. Translate the top 5 tool pages (Spanish, Portuguese,
+Indonesian, Hindi, French) as static pages with proper hreflang.
+Defer until Phases 1-3 show traction.
+
+----------------------------------------------------------------
+8. KPIs & TIMELINE
+----------------------------------------------------------------
+0-3 months   All pages indexed in GSC. Long-tails (platform
+             queries, "heic to jpg no upload") reach page 1-2.
+             1-5k organic visits/month.
+3-6 months   Mid-tails ("convert pdf to jpg high resolution")
+             top 10. 10-30k visits/month. 20+ referring domains.
+6-12 months  Secondary head terms ("pdf to jpg converter free no
+             upload") page 1. "pdf to jpg" top 20.
+12-18 months "pdf to jpg" page-1 contention — only if the backlink
+             work in Phase 3 actually happened.
+
+Track: GSC (queries/positions), GA4 (pdf_conversion event is
+already wired + pages/session), and a free rank tracker for ~20
+mapped keywords.
+
+----------------------------------------------------------------
+9. MONETIZATION BEYOND ADSENSE (GitHub Pages compatible)
+----------------------------------------------------------------
+Constraint: static hosting only — no backend, no accounts, no
+metered APIs. Everything below works on GitHub Pages as-is.
+Ranked by fit with the current setup:
+
+a) AFFILIATE LINKS (best fit — start now)
+   Slots straight into the blog/comparison content engine.
+   - PDF software: Wondershare PDFelement, UPDF, Soda PDF run
+     affiliate programs, often 30-50% on a $50-80 license. Frame
+     as "when you need more than a free tool" inside posts.
+   - VPNs / privacy tools: NordVPN, Surfshark, Proton pay $30-100+
+     per signup. Natural match for the "no upload, privacy-first"
+     positioning and the "is it safe to use online converters?"
+     article cluster.
+   - Amazon Associates: scanners, printers, photo paper inside
+     DPI/printing/scanning articles. Low rates (~3%), zero
+     friction to join.
+   Expectation: starts at tens of $/month at current traffic, but
+   scales with content quality — one well-ranked comparison post
+   can out-earn the whole site's display ads.
+
+b) DONATIONS (one hour of work, small but free money)
+   Buy Me a Coffee / Ko-fi / GitHub Sponsors button in the footer
+   plus a soft ask after a successful conversion ("This tool is
+   free and keeps your files private — buy us a coffee").
+   Privacy-conscious users are the demographic most likely to tip.
+
+c) "PRO" UNLOCK VIA GUMROAD / LEMON SQUEEZY (no backend needed)
+   They handle checkout, payment and license keys on their side;
+   your static JS validates the key against their public API and
+   unlocks features client-side. Candidate Pro features: bigger
+   batch limits, extra OCR languages, no ads, an offline desktop
+   build (the PWA wrapped in Electron, sold as a download).
+   Client-side gating is piratable — irrelevant in practice;
+   honest users pay, and a $10-15 lifetime unlock from 0.1% of
+   users beats their AdSense value many times over.
+
+d) BETTER AD NETWORKS LATER (traffic-gated — know the thresholds)
+   - Ezoic: works with GitHub Pages via DNS integration; pointless
+     under ~10k visits/month.
+   - Monumetric: 10k pageviews/month minimum.
+   - Mediavine: 50k sessions/month minimum.
+   These typically pay 2-5x AdSense RPM. Until then, keep AdSense.
+
+e) WHITE-LABEL / SELL THE CODE
+   A "self-host this tool suite on your own domain" license on
+   Gumroad, marketed through a public GitHub repo. Agencies and
+   niche-site builders pay $50-200 for this. Small revenue, and it
+   doubles as the Phase-3 backlink play.
+
+SKIP: sponsorship slots and newsletter monetization (need traffic
+you don't have yet), crypto ad networks (poison AdSense standing),
+anything needing a backend (paid API, accounts, usage-limited
+subscriptions) — that's a different architecture (e.g. Cloudflare
+Workers), not GitHub Pages.
+
+Order of execution: affiliate links into existing/planned content
+-> donation button -> Pro unlock. All three coexist with AdSense.
+None of them creates traffic — they multiply it. SEO comes first.
+
+----------------------------------------------------------------
+10. CHECKLIST — THINGS ONLY YOU CAN DO
+----------------------------------------------------------------
+[ ] Verify domain in Google Search Console, submit sitemap.xml
+[ ] Run node scripts/build-tool-pages.js (tool pages are stale)
+[ ] Submit to AlternativeTo / SaaSHub / directories
+[ ] Plan + execute a Product Hunt launch
+[ ] (Optional) Bing Ads long-tail experiment, $5-10/day capped
+[ ] Revisit international (hreflang) once organic traction shows
+[ ] Join 1-2 affiliate programs (PDF software + a VPN) and add
+    links to the comparison/privacy articles
+[ ] Add a donation button (Buy Me a Coffee / Ko-fi)
+[ ] (Later) Prototype a Pro unlock via Lemon Squeezy or Gumroad
+================================================================

@@ -1,0 +1,438 @@
+================================================================
+LOOP PLAN — DRIVING THE ADSENSE APPROVAL RUNBOOK TO DONE
+Site: www.pdf-to-jpg-tool.com (static, GitHub Pages)
+Date: 5 September 2026
+Executes: AdSense Approval Runbook (artifact 7e63e5f9)
+Detail:   adsense-approval-plan.txt
+================================================================
+
+----------------------------------------------------------------
+L0. WHAT THIS IS
+----------------------------------------------------------------
+The runbook says WHAT to fix. This says HOW the work gets driven
+to completion on a schedule without you holding it in your head
+for six weeks.
+
+Four loops, not one. They have different cadences, different risk
+profiles and different stop conditions. Running them as a single
+"fix my SEO" loop is how loops burn budget and drift.
+
+  LOOP A  Phase 0 remediation      intensive, runs until done
+  LOOP B  Crawlable-content guard  weekly, permanent regression tripwire
+  LOOP C  Content cadence watchdog Mon/Wed/Fri, guards the blog pipeline
+  LOOP D  Reapply gate             weekly, read-only, opens the gate once
+
+The whole plan rests on one thing that does not exist yet: a
+machine-checkable definition of "done". Build that first (L1) or
+none of the loops have ground truth and every iteration ends in
+the model's opinion instead of a measurement.
+
+----------------------------------------------------------------
+L1. PREREQUISITE — THE VERIFIER (build before any loop runs)
+----------------------------------------------------------------
+New file: scripts/seo-audit.js
+No dependencies (the repo has no package.json — keep it that way).
+
+WHAT IT DOES
+  For every .html file in the repo root and blog/, excluding
+  test-pwa.html:
+    1. Strip <script>...</script>, <style>...</style> and <!-- -->
+    2. Strip remaining tags, collapse whitespace, count tokens
+       -> crawlableWords
+    3. Count <h1> and <h2> occurrences
+    4. Extract every application/ld+json block; for each
+       FAQPage question and HowTo step name, check whether that
+       string also appears in the stripped visible text
+       -> schemaOrphans[]
+    5. Read <link rel="canonical"> and flag any that is not
+       https://www.pdf-to-jpg-tool.com/<path>
+    6. Read og:image and flag any still pointing at preview.jpg
+    7. Count <ins class="adsbygoogle"> -> adUnits
+    8. Detect <meta name="robots" content="noindex">
+
+  Then reads blog/posts.json for:
+    9. postCount, newestPostAgeDays, largestGapDays
+   10. posts missing an author field
+
+  Then reads sitemap.xml for:
+   11. URLs present in the sitemap that are noindexed or absent
+       from disk
+
+OUTPUT
+  Writes .loop/audit.json and prints a human summary.
+  Exits 0 if every gate passes, 1 if any fails.
+
+THE GATES (these are the Phase 0 exit criteria, made executable)
+  G1  every tool page: crawlableWords >= 600
+  G2  every tool page: h1Count == 1
+  G3  schemaOrphans is empty across all pages
+  G4  postCount >= 20
+  G5  newestPostAgeDays <= 7
+  G6  largestGapDays <= 10 measured over the last 4 weeks
+  G7  login.html, dashboard.html, test-pwa.html: noindex AND
+      absent from sitemap.xml  [PASSING as of 2026-09-05]
+  G8  no page with crawlableWords < 300 has adUnits > 0
+  G9  every post has a non-empty author
+  G10 every canonical is the www host, self-referencing
+  G11 no page still uses preview.jpg as og:image
+
+  G1-G9 gate the AdSense reapply. G10-G11 are Phase 02 hygiene:
+  reported, not blocking.
+
+CRITICAL DETAIL
+  The audit must run against BUILT files as committed, and Loop B
+  must additionally fetch the LIVE URLs over HTTP and re-run the
+  same word count on the response body. The three-month blind spot
+  happened because the rendered browser view looked fine. Local
+  pass + live fail is the exact failure mode that produced
+  "Valuable inventory: no content". Both checks or neither.
+
+----------------------------------------------------------------
+L2. LOOP CONSTRAINTS (binding — read at the start of every run)
+----------------------------------------------------------------
+New file: loop-constraints.md, enforced by every loop.
+
+  C1  Never push to main. Every change opens a PR. No auto-merge,
+      ever, for any loop, at any confidence level.
+  C2  Verify the GitHub identity before any gh or push command.
+      Run `gh auth status`. If the account is recruitonlineallan,
+      STOP and escalate. That is the wrong identity for this repo.
+  C3  Free services only. No new paid dependency, no npm install,
+      no package.json, no build toolchain. GitHub Pages + Actions.
+  C4  Never touch the human PR-review gate in publish-blog.yml.
+      Do not raise the cron above 3x/week. This is the Scaled
+      Content Abuse guardrail and it is not negotiable.
+  C5  Never claim a gate passed without the audit.json line that
+      proves it. No gate is satisfied by narration.
+  C6  Never perform, simulate or advise on an AdSense reapply.
+      Loop D opens the gate; the human clicks the button.
+  C7  One concern per PR. B1 does not arrive in the same PR as B5.
+  C8  Content edits stay factual. Never invent an author name, a
+      credential, a testimonial, a statistic or a review.
+  C9  If two consecutive iterations produce no measurable gate
+      movement, stop and escalate rather than iterate.
+  C10 Budget ceiling per iteration stated in each loop below.
+      Over budget = stop and report, never "one more try".
+
+----------------------------------------------------------------
+L3. THE LOOPS
+----------------------------------------------------------------
+
+................................................................
+LOOP A — PHASE 0 REMEDIATION
+................................................................
+Purpose   Close blockers B1-B8. This is the only loop that ships
+          substantial code and content changes.
+Primitive /loop, dynamic pacing, in an interactive session you
+          are around for. Not a cloud cron — these PRs need you.
+Cadence   Self-paced within a session. Expect 20-40 min between
+          iterations while you review PRs; the loop schedules long
+          fallback wakeups (1200s+) rather than polling.
+SESSION   /loop is SESSION-SCOPED. It ends when you close the
+SCOPE     session, and its wakeups are capped at 1 hour, so it
+          cannot run overnight or unattended. The "1-2 weeks"
+          below is the CALENDAR span of this workstream across
+          many sessions - not one continuous run.
+          Working pattern: open a session, start Loop A, let it
+          iterate for an hour or two opening PRs, review and
+          merge, close the session. Restart it the next working
+          day. .loop/state.json is what makes that resumable —
+          it is the reason Loop A can be stopped and restarted
+          at all. Loops B, C and D use /schedule (cloud cron)
+          precisely because THEY must survive session close.
+Budget    ~60k tokens/iteration. Hard stop at 8 iterations
+          without a merged PR.
+Lifespan  Ends when G1-G9 all pass. Typically 5-12 iterations
+          spread over several sessions across 1-2 weeks.
+
+ITERATION PROTOCOL
+  1 READ    loop-constraints.md. Then `node scripts/seo-audit.js`.
+  2 TRIAGE  Pick the single highest-priority FAILING gate in this
+            fixed order: G3 (spam risk) -> G1/G2 (the rejection
+            cause) -> G8 (policy risk) -> G7 -> G9 -> G4/G5/G6.
+            Order is fixed so the loop cannot rationalise a
+            cheaper target.
+  3 CHECK   Is there an open PR already addressing this gate?
+            If yes: do not open a second one. Report and wait.
+  4 ACT     Smallest change that moves that one gate. Branch
+            `loop/phase0-<gate>-<n>`. One concern per PR (C7).
+  5 VERIFY  Re-run the audit on the branch. The PR body must
+            include the before/after audit lines for the gate,
+            and must state that no other gate regressed.
+  6 REPORT  One line: gate targeted, gate value before -> after,
+            PR link, gates still failing.
+
+BLOCKER-BY-BLOCKER EXECUTION
+  B1  Run `node scripts/build-tool-pages.js`, commit the 20
+      regenerated pages. Then audit. Expect G1 to still fail on
+      some pages — the generator's per-tool prose is short. The
+      loop's real work is expanding intro/how-to/FAQ copy in the
+      TOOLS table in build-tool-pages.js (never by hand-editing
+      generated HTML, which the next build would discard) until
+      every page clears 600 words.
+      Also enforce a similarity check: no two tool pages sharing
+      more than 30% of their prose. Twenty near-duplicates is its
+      own low-value signal, so a loop that pads by templating
+      makes the rejection worse. Flag >30% and rewrite.
+      Suggested split: 6 PRs of 3-4 tools each, not one PR of 20.
+  B2  After B1, G3 must be zero. Where a FAQ question or HowTo
+      step has no visible counterpart, the fix is to RENDER the
+      copy, not to delete the schema — deleting is the fallback
+      only when the copy genuinely does not belong on the page.
+  B3  Not a code fix. The loop's job is to confirm the pipeline
+      works and keep the queue fed: verify publish-blog.yml opened
+      a PR on two consecutive scheduled runs, and that 7 more
+      approved posts land to clear G4. Owned day to day by Loop C.
+  B4  Audit ad density. Remove <ins> units from any page under 300
+      words. Post-B1, cap at one above-fold and one mid-content.
+      Additionally flag any ad unit rendered within 150px of a
+      tool control in the template — accidental-click layouts are
+      a permanent-ban risk and no loop should ship one.
+  B5  ALREADY SATISFIED — G7 passes as of the first audit. All
+      three pages carry noindex and are out of the sitemap.
+      The loop must NOT add robots.txt Disallow entries for them
+      (constraint C12): a disallowed page is never crawled, so
+      Google never sees the noindex. Nothing to do.
+      NOTE: this removes the intended "easy first PR". Use B4
+      (strip ad units from the sub-300-word pages, gate G8)
+      instead to prove the branch -> PR -> audit -> review flow.
+  B6  HUMAN ONLY. Search Console verification cannot be automated.
+      The loop's role: detect that no verification token exists,
+      escalate once, then treat G-none as blocked and stop
+      re-reporting it every iteration.
+  B7  Split. Author bylines + bio block + Article schema across
+      blog templates: automatable. The Formspree form ID: HUMAN
+      ONLY — the loop must never invent an ID. It escalates and
+      moves on.
+  B8  Fetch https://www.pdf-to-jpg-tool.com/ads.txt over HTTP and
+      assert the pub ID is in the response body. One-line check,
+      belongs in Loop B permanently.
+
+................................................................
+LOOP B — CRAWLABLE-CONTENT GUARD
+................................................................
+Purpose   Make the 79-word regression structurally impossible to
+          repeat. This is the loop that would have caught the
+          original problem three months early.
+Primitive /schedule (cloud cron routine) — must outlive any
+          session and keep running long after approval.
+Cadence   Weekly, Monday 08:00 local.
+Budget    ~15k tokens/iteration. It is a check, not a project.
+Lifespan  Permanent. Never stops.
+
+EACH RUN
+  1 `node scripts/seo-audit.js` against the repo.
+  2 Fetch all 39 sitemap URLs over plain HTTP (no JS execution)
+    and re-run the word count on each response body.
+  3 Fetch /ads.txt and /robots.txt and assert both serve correctly
+    and that the service worker is not intercepting them.
+  4 Compare against last week's .loop/audit.json.
+  5 Report ONLY on: any page whose live word count dropped below
+    600, any new schema orphan, any new ad unit on a thin page,
+    any newly-broken canonical, ads.txt not serving.
+  6 Silent when nothing changed. A guard that reports every week
+    gets ignored by week three.
+
+ESCALATE IMMEDIATELY, do not wait for the weekly slot, if the
+live word count for any tool page falls below 300 — that means a
+deploy shipped the pre-JS shell again.
+
+................................................................
+LOOP C — CONTENT CADENCE WATCHDOG
+................................................................
+Purpose   Guarantee G4/G5/G6 never regress. The three-month gap
+          (8 Jun -> 4 Sep) happened because a broken workflow
+          failed silently. Silence is the failure mode being
+          guarded against.
+Primitive /schedule, cloud cron.
+Cadence   Mon/Wed/Fri 11:00 UTC — two hours after publish-blog.yml
+          at 09:00 UTC, so it checks the outcome of that run.
+Budget    ~10k tokens/iteration.
+Lifespan  Permanent.
+
+EACH RUN
+  1 Did the 09:00 workflow run succeed? Check the Actions API.
+  2 Did it open a PR? A green run that opened nothing is the
+    silent failure that caused the gap — treat it as a FAILURE,
+    not a pass.
+  3 Is a generated-post PR older than 4 days still unreviewed?
+    Nudge with the post title and the PR link.
+  4 newestPostAgeDays > 7? Escalate — the pipeline is dead again.
+  5 postCount < 20? Report the shortfall against G4.
+  6 Never approve or merge a post PR (C1). Never generate a post
+    outside the workflow. The review gate is the whole point.
+
+QUALITY SPOT-CHECK, once per month, on the most recent post:
+  does it link to its primary tool with a real path (not "/"),
+  does it link to two sibling posts, does it carry a byline, is
+  it over 1200 words. This is where topics.json relatedTools
+  pointing at "/" gets caught if the Phase 02 fix regresses.
+
+................................................................
+LOOP D — REAPPLY GATE
+................................................................
+Purpose   Decide, on evidence, the one moment you are allowed to
+          reapply. Read-only. Ships nothing.
+Primitive /schedule, cloud cron.
+Cadence   Weekly, Friday 16:00 local.
+Budget    ~12k tokens/iteration.
+Lifespan  Ends the week it says GO.
+
+EACH RUN, evaluate the full gate:
+  [ ] G1-G9 all passing in the LOCAL audit
+  [ ] G1-G3 also passing against LIVE fetched HTML
+  [ ] the above true for 4 consecutive weekly runs, not just today
+  [ ] GSC verified, sitemap submitted, tool pages showing indexed
+      (human-reported — the loop asks, it cannot check)
+  [ ] no manual action in GSC (human-reported)
+  [ ] contact form confirmed working (human-reported)
+
+OUTPUT is exactly one of three verdicts:
+  HOLD — with the specific failing gates and the current values.
+  READY-PENDING-HUMAN — machine gates pass; here are the 3-4
+       human confirmations still outstanding, listed by name.
+  GO — everything above satisfied, four weeks stable. Then it
+       prints the pre-flight list and stops: read five tool pages
+       with JS disabled, run each template through the Rich
+       Results Test, check GSC for manual actions.
+
+The loop never clicks reapply (C6). It hands you a decision with
+the evidence attached.
+
+----------------------------------------------------------------
+L4. COVERAGE — EVERY RUNBOOK ITEM HAS AN OWNER
+----------------------------------------------------------------
+RUNBOOK ITEM                      LOOP   AUTOMATABLE   GATE
+--------------------------------------------------------------
+B1 regenerate tool pages           A     yes           G1 G2
+B2 schema/visible reconcile        A     yes           G3
+B3 close publishing gap            A,C   partial       G4 G5 G6
+B4 reduce ad density               A     yes           G8
+B5 noindex thin pages              A     yes           G7
+B6 Search Console verify           -     NO — human    n/a
+B7 author bylines                  A     yes           G9
+B7 Formspree form ID               -     NO — human    n/a
+B8 ads.txt serves                  B     yes           live
+--------------------------------------------------------------
+02 sitemap lastmod from git        A     yes           report
+02 canonical www self-ref          A,B   yes           G10
+02 unique og:image per page        A     partial*      G11
+02 visible breadcrumbs             A     yes           G3-style
+02 sw.js network-first for HTML    A     yes           live
+02 code-split tools.js 395KB       A     yes           report
+02 internal linking tool<->blog    A     yes           report
+--------------------------------------------------------------
+03 fix topics.json relatedTools    A     yes           report
+03 fix generate-post.js href="/"   A     yes           report
+03 keyword clusters into queue     A     yes           report
+03 2-3 posts/week published        C     gated by human review
+--------------------------------------------------------------
+04 directory submissions           -     NO — human    n/a
+04 Product Hunt launch             -     NO — human    n/a
+04 outreach                        -     NO — human    n/a
+04 DPI cheat-sheet page            A     yes           G1-style
+--------------------------------------------------------------
+05 reapply decision                D     evidence only, human acts
+05 post-approval ad placement      B     yes           G8
+05 hreflang / international        -     deferred, re-plan first
+05 network graduation, affiliates  -     NO — human    n/a
+--------------------------------------------------------------
+06 KPI tracking                    B,D   partial**     report
+
+  *  og:image generation needs an image pipeline; the loop can
+     detect and report duplicates, and generate the HTML tags,
+     but you supply or approve the images.
+  ** GSC and AdSense figures are not reachable from a loop
+     without API credentials. The loops track the on-site
+     proxies (word counts, post cadence, index-eligibility) and
+     ask you for the platform numbers.
+
+TWELVE ITEMS ARE HUMAN-ONLY. That is not a gap in the plan —
+it is the plan being honest about where a loop stops. Every one
+of them is named above so none goes quietly missing.
+
+----------------------------------------------------------------
+L5. SHARED STATE
+----------------------------------------------------------------
+.loop/                        (add to .gitignore except state.json)
+  audit.json        latest full audit output
+  audit-prev.json   last week's, for Loop B diffing
+  state.json        committed; the loops' shared memory
+
+state.json:
+  {
+    "phase": "phase0" | "hardening" | "ready" | "reapplied",
+    "gates": { "G1": {"pass": false, "value": "3/20 pages"}, ... },
+    "consecutivePassingWeeks": 0,
+    "humanBlocked": [
+      {"id":"B6","asked":"2026-09-05","note":"GSC verification"},
+      {"id":"B7b","asked":"2026-09-05","note":"Formspree form ID"}
+    ],
+    "openPRs": [],
+    "lastReapply": null,
+    "rejectionReasons": []
+  }
+
+Rules: every loop reads it, only Loop A and the audit write to it.
+An item in humanBlocked is reported ONCE, then goes quiet — it is
+re-raised only by Loop D at the gate. A loop that renags every
+iteration trains you to ignore it.
+
+----------------------------------------------------------------
+L6. STOP CONDITIONS AND ESCALATION
+----------------------------------------------------------------
+STOP THE LOOP AND ASK when:
+  - two consecutive iterations move no gate (C9)
+  - the fix requires inventing content: an author's real name, a
+    form ID, a credential, a claim about the product
+  - a gate can only be passed by weakening the gate. If a loop
+    ever proposes editing seo-audit.js thresholds, that is the
+    tell. Gate definitions change only by human decision.
+  - `gh auth status` shows an unexpected account (C2)
+  - the audit passes locally but the live fetch fails — this is a
+    deploy or service-worker problem, not a content problem, and
+    it is the exact signature of the original failure
+  - AdSense returns a rejection: record the reason string in
+    state.json and STOP all loops. Reason strings route the
+    restart: "Low value content" -> Loop A on G1/G4.
+    "Site down or unavailable" -> crawl/robots/sw.js.
+    "Valuable inventory: no content" -> B1 never reached live.
+
+NEVER, under any loop, at any confidence:
+  - push to main, merge a PR, or enable auto-merge
+  - raise the blog cron above 3x/week or remove the review gate
+  - reapply to AdSense, or advise on gaming the review
+  - add an ad unit to a page under 300 words
+  - fabricate an author, a testimonial or a statistic
+
+----------------------------------------------------------------
+L7. START SEQUENCE
+----------------------------------------------------------------
+Do these in order. Step 1 is not optional — every loop below it
+depends on the audit existing.
+
+  1. Build scripts/seo-audit.js to the L1 spec. Run it. Confirm
+     it reproduces the runbook's numbers: 79 words for
+     pdf-to-jpg.html, 1,277 for the blog post. If it does not
+     reproduce those, the verifier is wrong and every gate built
+     on it is wrong.
+  2. Write loop-constraints.md from L2.
+  3. Create .loop/state.json with all gates failing.
+  4. Start LOOP A in an interactive session. Let it take B4 first
+     (strip ad units from the sub-300-word pages — smallest, fully
+     mechanical, and it clears a live policy violation) to prove
+     the PR flow end to end before it touches the 20 tool pages.
+     B5 turned out to be already done; see its entry above. Expect to restart it
+     each working day — it does not survive session close, and it
+     resumes from .loop/state.json.
+  5. Once Loop A has merged its first PR, schedule LOOP B and
+     LOOP C as cloud routines. They are permanent.
+  6. Schedule LOOP D only after G1 and G2 pass. Before that it has
+     nothing to weigh and just adds noise.
+  7. When Loop D says GO, you reapply. Not before.
+
+Expected shape: Loop A runs hot across roughly 1-2 weeks of
+working sessions, then closes for good. Loops B and C run forever
+on cloud cron. Loop D runs about four weeks and retires. Only
+Loop A needs you at the keyboard.
+================================================================

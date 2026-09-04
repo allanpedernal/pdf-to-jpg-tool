@@ -1,0 +1,4 @@
+
+# Loop working files — state.json is committed, the audits are not
+.loop/audit.json
+.loop/audit-prev.json

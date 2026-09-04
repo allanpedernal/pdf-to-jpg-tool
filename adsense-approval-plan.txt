@@ -1,0 +1,332 @@
+================================================================
+ADSENSE APPROVAL + SEO PLAN — www.pdf-to-jpg-tool.com
+Static site, GitHub Pages. Publisher ID ca-pub-2042221703015293
+Date: 5 September 2026
+Companion to: seo-plan.txt (12 June 2026)
+================================================================
+
+----------------------------------------------------------------
+0. THE VERDICT — WHAT IS ACTUALLY WRONG
+----------------------------------------------------------------
+The rejection reason you were given translates to "Low value
+content". You read that as "AdSense wants dynamic content, and my
+site is static". That is not what it means, and chasing a dynamic
+backend would waste months.
+
+AdSense does not care whether HTML is generated at build time or
+request time. Its reviewers fetch a URL and read the HTML that
+comes back. "Dynamic content" in their feedback means *substantive,
+regularly updated, original content that a human reader would find
+valuable* — not server-side rendering.
+
+Here is what their crawler actually receives today. I stripped
+<script>, <style> and comments from each deployed page and counted
+the remaining words:
+
+  PAGE                          H1   H2   CRAWLABLE WORDS
+  ---------------------------------------------------------
+  pdf-to-jpg.html                0    0    79   <-- money page
+  pdf-to-png.html                0    0    78
+  jpg-to-pdf.html                0    0    79
+  compress-pdf.html              0    0    79
+  merge-pdf.html                 0    0    78
+  split-pdf.html                 0    0    78
+  rotate-pdf.html                0    0    78
+  pdf-ocr.html                   0    0    79
+  heic-to-jpg.html               0    0    79
+  png-to-jpg.html                0    0    79
+  jpg-to-png.html                0    0    79
+  webp-to-jpg.html               0    0    79
+  webp-to-png.html               0    0    78
+  image-to-webp.html             0    0    79
+  compress-image.html            0    0    78
+  resize-image.html              0    0    78
+  add-page-numbers-to-pdf.html   0    0    79
+  qr-code-generator.html         0    0    78
+  password-generator.html        0    0    77
+  word-counter.html              0    0    79
+  ---------------------------------------------------------
+  index.html                     1    5   849
+  about.html                     1    7   983
+  privacy-policy.html            1    8   770
+  terms-of-service.html          1   12  1011
+  contact.html                   1    9   587
+  blog/convert-pdf-to-jpg...     1   13  1277
+
+TWENTY of your twenty-eight indexable pages — every single tool
+page, the pages that ARE the product — serve 79 words and ZERO
+headings. The entire tool UI, the H1, the how-to steps and the FAQ
+are injected by JavaScript after load. To a reviewer skimming the
+raw response, and to any crawler that does not execute your JS,
+this site is twenty near-identical 79-word stubs wrapped around an
+ad unit. That is a textbook "low value content" / "site does not
+have enough original content" rejection, and it is also why the
+tool pages are not ranking.
+
+There is a second, sharper problem on the same pages. They emit
+FAQPage and HowTo structured data describing questions and steps
+that DO NOT EXIST in the served HTML. Google treats structured
+data that is not visible to the user as a spam violation
+("Marked-up content is not visible to users"). That can earn a
+manual action on top of the AdSense rejection. Fix this before
+reapplying, not after.
+
+The good news: the fix already exists in your repo.
+scripts/build-tool-pages.js contains the H1, intro, how-to and FAQ
+copy for every tool (verified — the data table is populated for all
+20 tools). The generated pages were never committed. This is a
+build step that was never run, not content that needs writing.
+
+DO NOT REAPPLY UNTIL PHASE 0 IS DONE. Every rejection makes the
+next review stricter, and you cannot reapply immediately.
+
+----------------------------------------------------------------
+1. PHASE 0 — APPROVAL BLOCKERS (do these first, ~1 week)
+----------------------------------------------------------------
+B1. Regenerate every tool page with real, crawlable content.
+    Run: node scripts/build-tool-pages.js
+    Then verify, per page, that the SERVED HTML contains:
+      - one <h1> matching the page's target keyword
+      - a 150-250 word intro that is genuinely different per tool
+        (not a template with the noun swapped — near-duplicate
+        pages across 20 URLs is its own low-value signal)
+      - a visible "How to..." step list
+      - a visible FAQ whose questions match the FAQPage schema
+        word for word
+      - a related-tools block and 2-3 links to relevant blog posts
+    Target: 600+ crawlable words per tool page, and no two pages
+    sharing more than ~30% of their prose.
+    Verify with: curl the live URL and count words with JS
+    disabled. Not with the browser's rendered view — that is the
+    mistake that hid this for three months.
+
+B2. Reconcile structured data with visible content.
+    After B1, every FAQPage question and HowTo step must appear as
+    readable text on the page. If any schema block cannot be
+    matched to visible copy, delete the schema block. Validate
+    each template at search.google.com/test/rich-results.
+
+B3. Restore publishing cadence and close the content gap.
+    posts.json shows 13 posts, but the dates run 2026-04-12 to
+    2026-06-08 and then jump to 2026-09-04 — a three-month dead
+    period where the workflow was broken (fixed in b243ac0).
+    A blog whose last post is three months old reads as abandoned.
+    Publish weekly for the four weeks before you reapply so the
+    reviewer sees an active site. Verify the Mon/Wed/Fri cron in
+    .github/workflows/publish-blog.yml actually produced a PR two
+    consecutive cycles before you trust it again.
+
+B4. Reduce ad density until you are approved.
+    index.html currently carries 3 <ins class="adsbygoogle"> units
+    against 849 words. Serving ads on 79-word tool pages is
+    "ads on pages with little or no content" — a policy violation
+    in its own right. Until B1 lands, either remove the ad units
+    from the tool pages or leave them and finish B1 first. After
+    B1, one ad above the fold and one mid-content is plenty.
+    Never place an ad where it could be mistaken for a tool
+    control ("Download" / "Convert") — accidental-click layouts
+    are the fastest route to a permanent ban.
+
+B5. Exclude non-content pages from the index. ALREADY DONE.
+    CORRECTION to the first draft of this plan: login.html (37
+    words), dashboard.html (129) and test-pwa.html all already
+    carry <meta name="robots" content="noindex, nofollow"> and are
+    already absent from sitemap.xml. The audit confirms it (G7
+    passes). The original draft checked robots.txt but not the
+    meta tags and called for work that is not needed.
+    DO NOT add robots.txt Disallow entries for these pages. A
+    disallowed page cannot be crawled, so Google never reads the
+    noindex and the page can persist in the index. noindex and
+    Disallow are alternatives, not a belt-and-braces pair, and
+    noindex is already the correct choice here.
+    Nothing to do for B5. It is retained in the numbering so the
+    loop's gate map and this plan stay aligned.
+
+B6. Verify the domain in Google Search Console.
+    No google-site-verification meta tag exists on index.html and
+    no verification file is present. Without GSC you are blind:
+    no index-coverage data, no way to see whether the tool pages
+    are even indexed, no manual-action notifications. Verify the
+    domain, submit sitemap.xml, and confirm the tool pages appear
+    under "Indexed" before reapplying.
+
+B7. Make the site accountable to a human.
+    AdSense reviewers look for a real publisher. You have
+    about.html, contact.html, privacy-policy.html and
+    terms-of-service.html — good. Two gaps:
+      - contact.html still ships the Formspree placeholder
+        YOUR_FORM_ID. A contact form that cannot receive a message
+        is worse than no form. Swap in the real ID or replace it
+        with the pdftojpgtool@gmail.com mailto link.
+      - Blog posts carry no visible author. Add a byline and a
+        two-line author bio linking to /about.html on every post,
+        plus Article schema with a real author name. This is the
+        cheapest E-E-A-T signal available to you.
+
+B8. Confirm ads.txt is live and correct.
+    Your ads.txt is right (pub-2042221703015293, DIRECT). Confirm
+    it actually serves at https://www.pdf-to-jpg-tool.com/ads.txt
+    and is not swallowed by the SPA fallback or the service worker.
+
+PHASE 0 EXIT CRITERIA — all must be true before you reapply:
+  [ ] Every tool page serves 600+ words and one H1 with JS off
+  [ ] No FAQPage/HowTo schema without matching visible text
+  [ ] 4 consecutive weeks of published posts, newest < 7 days old
+  [ ] >= 20 posts total (13 today — 7 more to write)
+  [ ] login/dashboard/test-pwa noindexed and out of the sitemap
+  [ ] GSC verified, sitemap submitted, tool pages showing indexed
+  [ ] Contact form works; posts have a named author
+  [ ] Ad units only on pages with substantial content
+
+----------------------------------------------------------------
+2. PHASE 1 — TECHNICAL SEO FOUNDATION (week 2)
+----------------------------------------------------------------
+a) Sitemap lastmod: stamp real per-file dates from git history
+   instead of "today" for all 39 URLs. Always-fresh lastmod values
+   train Google to ignore the signal entirely.
+b) Canonical tags: confirm every page self-canonicalises to the
+   https://www. host. A canonical pointing at the apex domain while
+   the CNAME serves www splits your signals.
+c) Unique og:image per page. All pages currently share preview.jpg.
+   1200x630, tool name + "free — never uploaded".
+d) Visible breadcrumbs on tool and blog pages, matching the
+   BreadcrumbList schema (same visible/marked-up rule as B2).
+e) Service worker: sw.js must never serve a stale HTML shell to a
+   crawler. Use network-first for HTML documents, cache-first only
+   for static assets. A cached shell can serve Googlebot an empty
+   page.
+f) Core Web Vitals: tools.js is 395KB and tool-implementations.js
+   is 152KB. Load per-tool bundles on demand rather than shipping
+   all of it on every page. This is both a ranking factor and an
+   ad-viewability factor (AdSense RPM drops when ads render late).
+g) Internal linking: tool pages currently link nowhere. Every tool
+   page should link to 3-4 sibling tools and 2-3 blog posts, and
+   every blog post back to its primary tool. Pages-per-session is
+   your RPM multiplier — it matters as much as rankings.
+
+----------------------------------------------------------------
+3. PHASE 2 — THE CONTENT ENGINE (weeks 2-10)
+----------------------------------------------------------------
+The auto-blog is the right machine; it needs the right queue. Keep
+the human PR-review gate in publish-blog.yml — it is your guardrail
+against both a repeat rejection and Google's Scaled Content Abuse
+policy. Never move to un-reviewed daily auto-commit.
+
+Also fix the queue data: scripts/topics.json relatedTools all point
+at "/", and the generate-post.js prompt tells the model to use
+href="/". Point them at the real tool URLs or the internal-linking
+work in Phase 1 is undone on every new post.
+
+Priority clusters, highest first:
+
+PLATFORM LONG-TAILS (lowest competition, direct intent)
+  - Convert PDF to JPG on iPhone (free, no app)
+  - ... on Mac — 3 free ways
+  - ... on Windows 11 without installing software
+  - ... on Android / on a Chromebook
+
+PRIVACY ANGLE (your only real differentiator)
+  - Convert PDF to JPG without uploading your file anywhere
+  - Is it safe to use online PDF converters? What to check first
+  No competitor with a server-side pipeline can honestly claim
+  this. Lead with it in every title, description and pitch.
+
+QUALITY / SPEC LONG-TAILS
+  - PDF to JPG at 300 DPI for print
+  - Convert a multi-page PDF into separate JPGs (batch + ZIP)
+
+MOFU LISTICLES (these attract backlinks)
+  - "7 best free PDF to JPG converters compared (2026)" — include
+    competitors honestly; win on the no-upload axis.
+
+SIBLING CLUSTERS (faster wins, lift the whole domain)
+  - Mirror the above for HEIC-to-JPG and the WebP tools.
+
+Cadence: 2-3 posts/week, 1200+ words, every post linking to its
+tool and to two sibling posts.
+
+----------------------------------------------------------------
+4. PHASE 3 — AUTHORITY & BACKLINKS (weeks 3-16, ongoing)
+----------------------------------------------------------------
+a) Free-tool directories: AlternativeTo, Product Hunt, SaaSHub,
+   Slant, ToolFinder, free-for.dev-style lists.
+b) Open-source angle: a public repo with a proper README and the
+   live link; submit to "awesome-pdf" style lists.
+c) Privacy-story outreach: privacy/productivity newsletters and
+   relevant subreddits. Post as a maker, not as spam.
+d) Linkable asset: a DPI / image-size cheat sheet (pixel
+   dimensions for A4, Letter and photo sizes at 150/300/600 DPI).
+   Reference pages like this earn links passively and link out to
+   your resize and convert tools.
+
+----------------------------------------------------------------
+5. PHASE 4 — REAPPLY
+----------------------------------------------------------------
+Timing: after Phase 0 exits AND the site has run four weeks with
+the new tool pages live, weekly posts, and GSC showing the tool
+pages indexed. Roughly 5-6 weeks from today if Phase 0 starts now.
+
+Before you click reapply:
+  - Fetch 5 tool pages with JS disabled and read them as a
+    stranger would. If any reads as a stub, you are not ready.
+  - Run every template through the Rich Results Test.
+  - Check GSC for manual actions. Fix any before applying.
+  - Confirm ads.txt, privacy policy (must name Google, AdSense and
+    cookie use), and a working contact route.
+
+If rejected again, the reason string matters more than anything
+else. "Low value content" = keep building content. "Site down or
+unavailable" = crawl/robots/service-worker problem. "Valuable
+inventory: no content" = the crawler saw the pre-JS shell, meaning
+B1 did not actually land on the live site.
+
+----------------------------------------------------------------
+6. PHASE 5 — AFTER APPROVAL
+----------------------------------------------------------------
+- Ad placement: one unit above the fold, one mid-content, one at
+  the end of long posts. Never adjacent to tool controls.
+- Enable Auto ads only after you have manual-placement RPM data to
+  compare against; Auto ads often place units badly on tool UIs.
+- International (months 3-6, biggest untapped lever): conversion
+  traffic is majority non-English and far less competitive.
+  Translate the top 5 tool pages (Spanish, Portuguese, Indonesian,
+  Hindi, French) as static pages with proper hreflang.
+- Better networks are traffic-gated: Ezoic (~10k visits/mo, works
+  with GitHub Pages via DNS), Monumetric (10k pageviews/mo),
+  Mediavine (50k sessions/mo). These pay 2-5x AdSense RPM.
+- Diversify (all GitHub-Pages compatible): affiliate links in the
+  comparison and privacy posts (PDF software, privacy tools), a
+  Ko-fi / Buy Me a Coffee button, and later a client-side "Pro"
+  unlock via Gumroad or Lemon Squeezy. Details in seo-plan.txt §9.
+- Never add crypto ad networks or anything that needs a backend.
+
+----------------------------------------------------------------
+7. KPIs
+----------------------------------------------------------------
+APPROVAL GATE   20/20 tool pages > 600 crawlable words; 20+ posts;
+                0 schema mismatches; GSC verified and clean.
+0-3 months      All pages indexed. Platform long-tails page 1-2.
+                1-5k organic visits/month.
+3-6 months      Mid-tails top 10. 10-30k visits/month.
+                20+ referring domains.
+6-12 months     "pdf to jpg converter free no upload" page 1.
+                "pdf to jpg" top 20.
+12-18 months    "pdf to jpg" page-1 contention — only if the
+                Phase 3 backlink work actually happened.
+
+Track: GSC (queries, positions, index coverage), GA4 G-G1CV3K3BXS
+(pdf_conversion event, pages/session), and AdSense RPM by page
+once approved.
+
+----------------------------------------------------------------
+8. CHECKLIST — THINGS ONLY YOU CAN DO
+----------------------------------------------------------------
+[ ] Run node scripts/build-tool-pages.js and commit the output
+[ ] Verify the domain in Google Search Console, submit sitemap.xml
+[ ] Swap the real Formspree ID into contact.html
+[ ] Confirm the blog workflow opens a PR two cycles running
+[ ] Write/approve 7 more posts to clear 20 total
+[ ] Submit to AlternativeTo / SaaSHub / Product Hunt
+[ ] Reapply to AdSense only after the Phase 0 exit criteria pass
+[ ] Join 1-2 affiliate programs and add a donation button
+================================================================

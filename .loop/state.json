@@ -1,0 +1,84 @@
+{
+  "$schema": "seeded by scripts/seo-audit.js — see adsense-loop-plan.txt L5",
+  "phase": "phase0",
+  "seededAt": "2026-09-04",
+  "lastAuditAt": "2026-09-04T23:30:11.745Z",
+  "gates": {
+    "G1": {
+      "pass": false,
+      "value": "0/20 tool pages >= 600 words",
+      "blocking": true
+    },
+    "G2": {
+      "pass": false,
+      "value": "0/20 tool pages have exactly one H1",
+      "blocking": true
+    },
+    "G3": {
+      "pass": false,
+      "value": "180 schema orphans on 21 pages",
+      "blocking": true
+    },
+    "G4": {
+      "pass": false,
+      "value": "13/20 posts",
+      "blocking": true
+    },
+    "G5": {
+      "pass": true,
+      "value": "newest post 0d old (max 7)",
+      "blocking": true
+    },
+    "G6": {
+      "pass": false,
+      "value": "largest gap in last 28d: 88d (max 10)",
+      "blocking": true
+    },
+    "G7": {
+      "pass": true,
+      "value": "3/3 thin pages noindexed and out of sitemap",
+      "blocking": true
+    },
+    "G8": {
+      "pass": false,
+      "value": "20 pages under 300 words carrying ad units",
+      "blocking": true
+    },
+    "G9": {
+      "pass": true,
+      "value": "0 posts without an author, 0 without a visible byline",
+      "blocking": true
+    },
+    "G10": {
+      "pass": false,
+      "value": "1 pages with a non-self-referencing www canonical",
+      "blocking": false
+    },
+    "G11": {
+      "pass": false,
+      "value": "26 pages still using preview.jpg as og:image",
+      "blocking": false
+    }
+  },
+  "consecutivePassingWeeks": 0,
+  "humanBlocked": [
+    {
+      "id": "B6",
+      "asked": "2026-09-04",
+      "note": "Search Console domain verification + submit sitemap.xml. Cannot be automated."
+    },
+    {
+      "id": "B7b",
+      "asked": "2026-09-04",
+      "note": "Real Formspree form ID for contact.html (placeholder YOUR_FORM_ID still shipped). Loop must never invent one."
+    }
+  ],
+  "openPRs": [],
+  "notes": [
+    "B5 is already satisfied: login/dashboard/test-pwa carry noindex and are absent from sitemap.xml (G7 passes). See constraint C12 — do not add robots.txt Disallow entries for them.",
+    "G9 passes: posts.json carries authors and the bylines render. B7 reduces to the Formspree ID only.",
+    "G6 reports the 88-day gap between 2026-06-08 and 2026-09-04. It clears once four consecutive weeks of posts exist."
+  ],
+  "lastReapply": null,
+  "rejectionReasons": []
+}
