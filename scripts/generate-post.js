@@ -103,10 +103,32 @@ Return ONLY the same JSON object shape as before (keys: title, excerpt, descript
 }
 
 // --- providers -------------------------------------------------------------
-async function callGemini(prompt) {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error('no GEMINI_API_KEY');
-  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+// Google retires model aliases without notice (gemini-2.0-flash started 404ing),
+// so never rely on a single hardcoded name: try a candidate list, and if none of
+// them exist, ask the API which models it actually has and use the newest flash.
+const GEMINI_CANDIDATES = ['gemini-flash-latest', 'gemini-3.5-flash', 'gemini-2.5-flash'];
+let geminiModelCache = null;
+
+async function geminiListModels(key) {
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${key}&pageSize=200`);
+  if (!res.ok) throw new Error(`Gemini ListModels HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const data = await res.json();
+  return (data.models || [])
+    .filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
+    .map(m => String(m.name).replace(/^models\//, ''));
+}
+
+// Prefer a plain "flash" model: cheap, fast, and on the free tier. Avoid the
+// preview/experimental/thinking/image variants, which have different quotas.
+function pickGeminiModel(names) {
+  const usable = names.filter(n => !/preview|exp|thinking|image|tts|embedding|live/i.test(n));
+  return usable.find(n => /flash-latest$/.test(n))
+    || usable.find(n => /flash$/.test(n))
+    || usable.find(n => /flash/.test(n))
+    || usable[0];
+}
+
+async function geminiGenerate(key, model, prompt) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
   const res = await fetch(url, {
     method: 'POST',
@@ -116,11 +138,76 @@ async function callGemini(prompt) {
       generationConfig: { temperature: 0.7, responseMimeType: 'application/json', maxOutputTokens: 8192 }
     })
   });
-  if (!res.ok) throw new Error(`Gemini HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  if (!res.ok) {
+    const err = new Error(`Gemini HTTP ${res.status} (${model}): ${(await res.text()).slice(0, 200)}`);
+    err.status = res.status;
+    throw err;
+  }
   const data = await res.json();
   const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
-  if (!text) throw new Error('Gemini returned empty content');
+  if (!text) throw new Error(`Gemini returned empty content (${model})`);
   return stripCodeFence(text);
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// Failure taxonomy decides what to do next:
+//   404/400 -> the model name is wrong/retired; move straight to the next one.
+//   503/429 -> transient overload or rate limit; back off and retry, then try
+//              another model, since a different model may not be saturated.
+//   anything else (401/403) -> the key itself is bad; no model will help.
+function geminiFailureKind(status) {
+  if (status === 404 || status === 400) return 'next-model';
+  if (status === 503 || status === 429 || status === 500) return 'retry';
+  return 'fatal';
+}
+
+async function callGemini(prompt) {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) throw new Error('no GEMINI_API_KEY');
+
+  const retries = Math.max(1, Number(process.env.GEMINI_RETRIES) || 4);
+  const tried = [];
+  let candidates = geminiModelCache ? [geminiModelCache]
+    : (process.env.GEMINI_MODEL ? [process.env.GEMINI_MODEL, ...GEMINI_CANDIDATES] : [...GEMINI_CANDIDATES]);
+
+  // If every known name is gone, ask the API what it actually has.
+  const discover = async () => {
+    log('no known Gemini model worked, querying ListModels...');
+    const live = await geminiListModels(key);
+    const extra = live.filter(n => !candidates.includes(n));
+    const picked = pickGeminiModel(extra);
+    return picked ? [picked, ...extra.filter(n => n !== picked).slice(0, 3)] : [];
+  };
+
+  for (let round = 0; round < 2; round++) {
+    for (const model of candidates) {
+      for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+          const out = await geminiGenerate(key, model, prompt);
+          if (geminiModelCache !== model) log(`gemini model: ${model}`);
+          geminiModelCache = model;
+          return out;
+        } catch (err) {
+          const kind = geminiFailureKind(err.status);
+          tried.push(`${model}#${attempt}: ${err.message.slice(0, 90)}`);
+          geminiModelCache = null;
+          if (kind === 'fatal') throw err;
+          if (kind === 'next-model') break;
+          if (attempt === retries) break;
+          const wait = Math.min(30000, 2000 * 2 ** (attempt - 1));
+          log(`gemini ${model} overloaded (HTTP ${err.status}), retrying in ${wait / 1000}s...`);
+          await sleep(wait);
+        }
+      }
+    }
+    if (round === 0) {
+      candidates = await discover();
+      if (!candidates.length) break;
+    }
+  }
+
+  throw new Error(`Gemini exhausted all models -> ${tried.slice(-4).join(' | ')}`);
 }
 
 async function callGroq(prompt) {
@@ -284,8 +371,15 @@ function writeSvgCover(slug, title) {
 
 // --- main ------------------------------------------------------------------
 async function generateOne(posts, topics) {
+  // Dedupe on BOTH slug and normalised title: several early posts were written
+  // by hand with slugs that don't match slugify(title) (e.g. "reduce-pdf-size-for-email"
+  // for "How to Reduce PDF File Size for Email Attachments"), so a slug-only
+  // check silently re-generates topics we've already published.
+  const norm = str => String(str).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const publishedSlugs = new Set(posts.map(p => p.slug));
-  const topic = topics.topics.find(t => !publishedSlugs.has(slugify(t.title)));
+  const publishedTitles = new Set(posts.map(p => norm(p.title)));
+  const isPublished = t => publishedSlugs.has(slugify(t.title)) || publishedTitles.has(norm(t.title));
+  const topic = topics.topics.find(t => !isPublished(t));
   if (!topic) {
     log('No unused topics left in topics.json — nothing to generate. Add more topics to continue.');
     return null;

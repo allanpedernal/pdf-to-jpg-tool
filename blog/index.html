@@ -19,7 +19,6 @@
   <!-- PWA -->
   <link rel="manifest" href="/manifest.json">
   <script src="/shared/pwa.js"></script>
-  <script src="/shared/share.js" defer></script>
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="PDF Tools Blog" href="/blog/rss.xml">
@@ -74,6 +73,13 @@
   "url": "https://www.pdf-to-jpg-tool.com/blog/",
   "description": "Guides, tips and tutorials on converting, compressing and managing PDF and image files.",
   "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Best Image Format for the Web: JPG, PNG, or WebP",
+      "url": "https://www.pdf-to-jpg-tool.com/blog/best-image-format-for-the-web-jpg-png-or-webp.html",
+      "datePublished": "2026-09-04",
+      "image": "https://www.pdf-to-jpg-tool.com/blog/images/best-image-format-for-the-web-jpg-png-or-webp.jpg"
+    },
     {
       "@type": "BlogPosting",
       "headline": "How to Convert HEIC to JPG (iPhone, Mac & Windows)",
@@ -238,8 +244,8 @@
 
       <!-- Main Content Area -->
       <main id="main-content" class="col-12 col-lg-8 px-3 px-sm-4 px-lg-4 pt-4">
-        <div class="w-100 py-3">
-          <header class="privacy-header text-center mb-5">
+        <div class="w-100 py-3" style="max-width:1200px;">
+          <header class="privacy-header text-center mb-5" style="border-radius:16px; overflow:hidden;">
             <div class="container">
               <div class="header-icon"><i class="bi bi-journal-text"></i></div>
               <h1 class="mb-3" style="font-size:3rem; font-weight:800;">Blog &amp; Guides</h1>
@@ -248,6 +254,19 @@
           </header>
 
           <div id="blog-grid" class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <a href="/blog/best-image-format-for-the-web-jpg-png-or-webp.html" class="text-decoration-none">
+            <article class="card h-100 border-0 shadow-sm blog-card">
+              <img src="/blog/images/best-image-format-for-the-web-jpg-png-or-webp.jpg" alt="Best Image Format for the Web: JPG, PNG, or WebP" class="card-img-top" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">Web Design</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">Image Optimization</span></div>
+                <h2 class="h5 fw-bold">Best Image Format for the Web: JPG, PNG, or WebP</h2>
+                <p class="small flex-grow-1 blog-excerpt">Learn the differences between JPG, PNG, and WebP, and discover how to choose the right format to boost your site speed and image quality.</p>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>September 4, 2026 · 7 min read</div>
+              </div>
+            </article>
+          </a>
+        </div>
         <div class="col-12 col-md-6 col-lg-4">
           <a href="/blog/convert-heic-to-jpg-any-device.html" class="text-decoration-none">
             <article class="card h-100 border-0 shadow-sm blog-card">
@@ -348,19 +367,6 @@
                 <h2 class="h5 fw-bold">How to Rotate PDF Pages That Were Scanned Sideways</h2>
                 <p class="small flex-grow-1 blog-excerpt">Pages showing up sideways or upside down? Here&#39;s how to permanently fix PDF orientation in seconds.</p>
                 <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 12, 2026 · 2 min read</div>
-              </div>
-            </article>
-          </a>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <a href="/blog/what-is-ocr-extract-text-from-pdf.html" class="text-decoration-none">
-            <article class="card h-100 border-0 shadow-sm blog-card">
-              <img src="/blog/images/what-is-ocr-extract-text-from-pdf.svg" alt="What Is OCR and How to Extract Text From a Scanned PDF" class="card-img-top" loading="lazy">
-              <div class="card-body d-flex flex-column">
-                <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">OCR</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF</span></div>
-                <h2 class="h5 fw-bold">What Is OCR and How to Extract Text From a Scanned PDF</h2>
-                <p class="small flex-grow-1 blog-excerpt">Can&#39;t select the text in a scanned PDF? OCR turns the picture of words back into real, copyable text. Here&#39;s how.</p>
-                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 6, 2026 · 2 min read</div>
               </div>
             </article>
           </a>

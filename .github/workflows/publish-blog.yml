@@ -45,8 +45,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
-          # GitHub Models first (free, no extra secret), then Groq, then Gemini.
-          AI_PROVIDER_ORDER: github,groq,gemini
+          # Gemini first: GitHub Models is being retired (returns HTTP 410) and is
+          # kept only as a last-resort fallback in case it comes back.
+          AI_PROVIDER_ORDER: gemini,groq,github
         run: |
           node scripts/generate-post.js \
             --count "${{ github.event.inputs.count || '1' }}" \
