@@ -50,7 +50,27 @@ function countWords(html) {
   return t ? t.split(/\s+/).length : 0;
 }
 
-const normalize = s => String(s).toLowerCase().replace(/\s+/g, ' ').trim();
+// Schema markup carries raw characters ("Convert to PNG") while the rendered
+// page carries entities (&quot;Convert to PNG&quot;). Comparing the two without
+// decoding reports orphans for copy that is plainly visible — a false positive
+// that would send a loop hunting for content already on the page.
+const ENTITIES = { quot: '"', apos: "'", amp: '&', lt: '<', gt: '>', nbsp: ' ', '#39': "'", '#34': '"' };
+function decodeEntities(s) {
+  return String(s).replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (m, code) => {
+    const key = code.toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(ENTITIES, key)) return ENTITIES[key];
+    if (key[0] === '#') {
+      const n = key[1] === 'x' ? parseInt(key.slice(2), 16) : parseInt(key.slice(1), 10);
+      return Number.isFinite(n) ? String.fromCodePoint(n) : m;
+    }
+    return m;
+  });
+}
+
+// Note: this is used for comparing text, never for counting it. countWords()
+// deliberately still measures the raw token stream so the word counts stay
+// identical to the original measurement.
+const normalize = s => decodeEntities(String(s)).toLowerCase().replace(/\s+/g, ' ').trim();
 
 // --- per-page analysis -----------------------------------------------------
 function analysePage(relPath, html) {
