@@ -248,7 +248,7 @@
       "name": "How is reading time calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Based on an average of about 200 words per minute."
+        "text": "At about 200 words per minute, a typical adult screen-reading pace for ordinary prose. Technical material reads considerably slower."
       }
     },
     {
@@ -256,15 +256,23 @@
       "name": "Is my text uploaded?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — it stays entirely in your browser."
+        "text": "No. It stays entirely in your browser and is never sent anywhere."
       }
     },
     {
       "@type": "Question",
-      "name": "Is there a length limit?",
+      "name": "Does the character count include spaces?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No practical limit — paste as much as you like."
+        "text": "Yes. Be aware that some platforms count spaces and some do not, so check which measure the destination uses when a limit is tight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should a meta description be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Around 155 characters. Search engines truncate near 160 measured in pixels, so a small margin protects against wide letters."
       }
     }
   ]
@@ -314,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -334,25 +354,62 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Word &amp; Character Counter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Count words, characters, sentences and estimated reading time in real time as you type. Perfect for essays, SEO meta descriptions, tweets and more. Your text stays in your browser.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to Word &amp; Character Counter</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Count words, characters, sentences and reading time as you type, with the text staying in your browser and going nowhere else. Built for the moments when a limit is a hard requirement rather than a suggestion — a meta description, an application form, an abstract, a post.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to count words and characters</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Type or paste your text.</li>
           <li>See live word, character and sentence counts.</li>
           <li>Use the counts to hit your target length.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Limits worth having to hand</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Search engines truncate a title around 60 characters and a meta description around 160, measured in pixels rather than characters, so wide letters cost more than narrow ones. Writing to 155 characters leaves a margin for that variation.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Elsewhere the limits are exact: 280 characters on a post, 2,600 on a LinkedIn summary, 4,000 on many application fields. Academic abstracts commonly cap at 250 or 300 words. When a form silently truncates rather than warning you, having the count in front of you before pasting saves discovering the loss afterwards.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Words, characters, and which one is being counted</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">A word count splits on whitespace, so hyphenated compounds count as one and numbers count as words. A character count usually includes spaces, but not always — some platforms count them and some do not, and the difference across a long piece is substantial.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">When a limit is tight, check which measure the destination uses before editing to fit. Trimming to a word count when the form enforces characters is wasted work, and the reverse leaves you over the limit.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Reading time and what it is for</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Reading time is estimated at about 200 words per minute, a reasonable average for adults reading ordinary prose on screen. It is an approximation, not a measurement: technical material with formulae or code reads far slower, and skimmed listicles far faster.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">It is most useful as a relative signal — an article that estimates at 12 minutes is probably worth splitting, and one at 40 seconds probably lacks substance. Treat the number as a rough guide to length rather than a promise to the reader.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Editing down to a limit</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Cutting to a limit works best from the end backwards. Closing sentences are usually the most disposable — summaries of what the reader has just read — while the opening carries the most weight per word.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Beyond that, the reliable savings are structural rather than lexical: hedges, throat-clearing openers, and any sentence that restates the previous one. Trimming adjectives one at a time rarely closes a meaningful gap and tends to leave the prose flat.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">How is reading time calculated?</h3><p class="mb-0" style="color:var(--text-secondary);">Based on an average of about 200 words per minute.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is my text uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No — it stays entirely in your browser.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is there a length limit?</h3><p class="mb-0" style="color:var(--text-secondary);">No practical limit — paste as much as you like.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">How is reading time calculated?</h3><p class="mb-0" style="color:var(--text-secondary);">At about 200 words per minute, a typical adult screen-reading pace for ordinary prose. Technical material reads considerably slower.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is my text uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No. It stays entirely in your browser and is never sent anywhere.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does the character count include spaces?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Be aware that some platforms count spaces and some do not, so check which measure the destination uses when a limit is tight.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">How long should a meta description be?</h3><p class="mb-0" style="color:var(--text-secondary);">Around 155 characters. Search engines truncate near 160 measured in pixels, so a small margin protects against wide letters.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

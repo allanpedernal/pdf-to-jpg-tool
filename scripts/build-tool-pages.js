@@ -13,6 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 
+const CONTENT = require('./tool-content.js');
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://www.pdf-to-jpg-tool.com';
 
@@ -202,6 +203,45 @@ const TOOLS = [
   }
 ];
 
+// --- copy resolution ------------------------------------------------------
+// The FAQ and step text must come from ONE source for both the JSON-LD and the
+// rendered HTML. Reading them from different places is exactly how a page ends
+// up marking up content it does not display — the spam-policy problem in B2.
+function copyFor(t) {
+  const c = CONTENT[t.slug] || {};
+  return {
+    lead: c.lead || t.intro,
+    sections: c.sections || [],
+    steps: t.steps,
+    faqs: c.faqs || t.faqs,
+  };
+}
+
+// "How to ${h1}" reads wrong for the noun-phrase tools ("How to PDF to JPG
+// Converter"). No single rule fixes all 20, so the heading is stated per tool.
+const HOW_TITLE = {
+  'pdf-to-jpg': 'How to convert a PDF to JPG',
+  'pdf-to-png': 'How to convert a PDF to PNG',
+  'jpg-to-pdf': 'How to convert JPG images to a PDF',
+  'compress-pdf': 'How to compress a PDF',
+  'split-pdf': 'How to split a PDF',
+  'merge-pdf': 'How to merge PDF files',
+  'rotate-pdf': 'How to rotate PDF pages',
+  'pdf-ocr': 'How to extract text from a scanned PDF',
+  'png-to-jpg': 'How to convert PNG to JPG',
+  'resize-image': 'How to resize an image',
+  'compress-image': 'How to compress an image',
+  'heic-to-jpg': 'How to convert HEIC to JPG',
+  'jpg-to-png': 'How to convert JPG to PNG',
+  'image-to-webp': 'How to convert an image to WebP',
+  'webp-to-jpg': 'How to convert WebP to JPG',
+  'webp-to-png': 'How to convert WebP to PNG',
+  'add-page-numbers-to-pdf': 'How to add page numbers to a PDF',
+  'qr-code-generator': 'How to generate a QR code',
+  'password-generator': 'How to generate a strong password',
+  'word-counter': 'How to count words and characters',
+};
+
 // --- ad density guard (G8) -------------------------------------------------
 // AdSense policy: no ads on pages with little or no content. A generated tool
 // page inherits three ad units from the index.html shell, so a page whose
@@ -260,14 +300,15 @@ function stripAdUnits(html) {
 
 // --- build -----------------------------------------------------------------
 function toolJsonLd(t) {
+  const copy = copyFor(t);
   const howto = {
     '@context': 'https://schema.org', '@type': 'HowTo', name: t.h1,
     description: t.desc,
-    step: t.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, text: s }))
+    step: copy.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, text: s }))
   };
   const faq = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: t.faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+    mainEntity: copy.faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
   };
   const app = {
     '@context': 'https://schema.org', '@type': 'WebApplication', name: t.h1,
@@ -278,17 +319,24 @@ function toolJsonLd(t) {
 }
 
 function seoSection(t) {
-  const steps = t.steps.map(s => `          <li>${esc(s)}</li>`).join('\n');
-  const faqs = t.faqs.map(([q, a]) => `          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">${esc(q)}</h3><p class="mb-0" style="color:var(--text-secondary);">${esc(a)}</p></div>`).join('\n');
+  const copy = copyFor(t);
+  const steps = copy.steps.map(s => `          <li>${esc(s)}</li>`).join('\n');
+  const body = copy.sections.map(sec =>
+    `        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">${esc(sec.h2)}</h2>\n` +
+    sec.p.map(par => `        <p style="color:var(--text-secondary); line-height:1.8;">${esc(par)}</p>`).join('\n')
+  ).join('\n');
+  const faqs = copy.faqs.map(([q, a]) => `          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">${esc(q)}</h3><p class="mb-0" style="color:var(--text-secondary);">${esc(a)}</p></div>`).join('\n');
+  const howTitle = HOW_TITLE[t.slug] || `How to use the ${t.h1.replace(/ —.*/, '')}`;
   return `
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">${esc(t.h1)}</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">${esc(t.intro)}</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to ${esc(t.h1.replace(/ —.*/, ''))}</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">${esc(copy.lead)}</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">${esc(howTitle)}</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
 ${steps}
         </ol>
+${body}
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
 ${faqs}
       </section>`;

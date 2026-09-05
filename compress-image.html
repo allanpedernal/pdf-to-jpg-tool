@@ -245,10 +245,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How much smaller will it get?",
+      "name": "How much can I compress without it showing?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Often 50–80% smaller with little visible difference, depending on the image."
+        "text": "On photographs, quality around 0.8 to 0.85 usually halves the file with no visible difference. Below about 0.7, smooth areas like skies start to show blocking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I resize or compress?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both, in that order. Resize to the dimensions actually displayed, then compress. Resizing alone leaves quality on the table; compressing alone leaves an oversized image."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does compressing repeatedly make it worse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. JPG compression is lossy and cumulative, so each re-save discards more detail. Always compress from the original."
       }
     },
     {
@@ -256,7 +272,7 @@
       "name": "Are my images uploaded?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — compression happens entirely in your browser."
+        "text": "No. Compression runs in your browser and the file never leaves your device."
       }
     }
   ]
@@ -306,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -326,24 +354,62 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Image Compressor</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Reduce the file size of JPG and PNG images for faster-loading websites and smaller email attachments, while keeping them looking sharp. Runs locally in your browser.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to Image Compressor</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Reduce an image's file size while keeping it looking right, entirely in your browser. Most images on the web are several times larger than they need to be, and shrinking them is the single cheapest improvement you can make to how fast a page loads.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to compress an image</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Drag in the image(s) to compress.</li>
           <li>Choose how much to compress.</li>
           <li>Download the smaller image.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Where the quality setting actually bites</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">JPG quality runs from 0 to 1, and the relationship between that number and the file size is steep and uneven. Dropping from 1.0 to 0.85 typically halves the file with no visible change on a photograph. Dropping from 0.85 to 0.7 saves much less and starts to show as soft blocking in smooth gradients like skies and skin.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">That makes roughly 0.8 to 0.85 the practical sweet spot for photographs on the web. Go lower only when a hard size limit forces it, and check the result at full size rather than as a thumbnail — compression artifacts hide at small scale and reappear when someone zooms.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Resize first, then compress</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Compression and resizing solve different halves of the same problem, and the order matters. A 4000-pixel-wide photograph displayed in an 800-pixel column is carrying five times the pixels anyone will see. No amount of quality reduction fixes that; it just makes an oversized image blurry as well as heavy.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Resize to the dimensions the image is actually displayed at, then compress. Doing both usually takes a multi-megabyte camera file to something under 200 KB, which is a completely different page-load experience from compressing alone.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Knowing when to stop</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Compression is lossy and cumulative. Each save discards a little more detail, and re-compressing an already-compressed image degrades it further while saving very little — the easy wins were taken the first time.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Keep the original as your master and compress copies. If you later need a different size or a different format, going back to the original gives a clean result; re-processing the compressed copy compounds every artifact already in it.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Choosing the format before the quality</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Format choice usually saves more than quality tuning. A photograph converted to WebP is typically 25 to 35 percent smaller than the same photograph as a well-compressed JPG, at the same visual quality.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The decision tree is short. Photograph for the web: WebP, with a JPG fallback if you need one. Photograph for email or print: JPG. Screenshot, logo or diagram: PNG, or lossless WebP if everything that will open it supports the format.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">How much smaller will it get?</h3><p class="mb-0" style="color:var(--text-secondary);">Often 50–80% smaller with little visible difference, depending on the image.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my images uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No — compression happens entirely in your browser.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">How much can I compress without it showing?</h3><p class="mb-0" style="color:var(--text-secondary);">On photographs, quality around 0.8 to 0.85 usually halves the file with no visible difference. Below about 0.7, smooth areas like skies start to show blocking.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Should I resize or compress?</h3><p class="mb-0" style="color:var(--text-secondary);">Both, in that order. Resize to the dimensions actually displayed, then compress. Resizing alone leaves quality on the table; compressing alone leaves an oversized image.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does compressing repeatedly make it worse?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. JPG compression is lossy and cumulative, so each re-save discards more detail. Always compress from the original.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my images uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No. Compression runs in your browser and the file never leaves your device.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

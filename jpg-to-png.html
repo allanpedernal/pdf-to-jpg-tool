@@ -245,26 +245,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Why convert JPG to PNG?",
+      "name": "Will converting to PNG improve quality?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "PNG is lossless and keeps sharp edges crisp; some workflows and editors prefer it."
+        "text": "No. It prevents further loss from future saves, but the detail JPG already discarded cannot be recovered."
       }
     },
     {
       "@type": "Question",
-      "name": "Does it upload my images?",
+      "name": "Why is the PNG so much bigger?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — conversion happens entirely in your browser."
+        "text": "PNG compresses flat colour and sharp edges well and photographic detail poorly. A photo is typically three to five times larger as PNG."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I convert many at once?",
+      "name": "Does it add transparency?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, batch-convert and download them together as a ZIP."
+        "text": "It gives the file the ability to store transparency. The image itself stays fully opaque until you erase part of it in an editor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use PNG for photos on my website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually not. A well-compressed JPG or WebP looks the same and loads far faster."
       }
     }
   ]
@@ -314,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -334,25 +354,62 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">JPG to PNG Converter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert JPG or JPEG images into lossless PNG files, right in your browser. Useful when you need a format that supports crisp edges. Your images never leave your device.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to JPG to PNG Converter</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert JPG images to PNG in your browser, with no uploads. Worth being clear about what this does and does not achieve: it stops any further quality loss from here on, but it cannot restore the detail JPG compression already discarded.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert JPG to PNG</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Drag your JPG images onto the drop zone (or click to browse).</li>
           <li>Click &quot;Convert to PNG&quot;.</li>
           <li>Download your PNG images — one file, or all of them as a ZIP.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What converting to PNG gains you</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">PNG is lossless, so once an image is in PNG form you can open, edit and re-save it as many times as you like without degrading it further. That matters if the file is entering an editing workflow where it will be cropped, annotated or adjusted repeatedly — every one of those steps would cost quality in JPG.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">PNG also supports an alpha channel, which JPG does not. If you plan to cut out a background or composite the image over something else, you need a format that can carry transparency, and this is the conversion that gets you there.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What it cannot do</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">It cannot undo JPG compression. The detail discarded when the file was first saved as a JPG is gone, and the compression artifacts around edges are now part of the image data. Converting to PNG preserves those artifacts perfectly and losslessly — which is not the same as removing them.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">It will also make the file substantially larger, often by three to five times, because PNG compresses photographic content poorly. You are paying for the ability to edit without further loss, not for better-looking pixels.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">When to convert and when not to</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Convert when the image is about to be edited repeatedly, when you need to add transparency, or when a tool or specification demands PNG input. Screenshots that were mistakenly saved as JPG are also worth converting, since further JPG saves would keep degrading their sharp edges.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Do not convert simply to make a photograph look better on a web page. The result is a much heavier file that looks identical, which slows the page down for no benefit. For web photographs, a well-compressed JPG or a WebP is the better answer.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Screenshots deserve special mention</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Screenshots are the clearest case for PNG. They are almost entirely sharp edges — window borders, text, icons, flat interface colour — which is exactly the material JPG compression handles worst, ringing faint halos around every edge.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">A screenshot saved as JPG is also usually larger than the same screenshot as PNG, because flat interface colour compresses beautifully under PNG and poorly under JPG. It is the rare case where the lossless format wins on both quality and size.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why convert JPG to PNG?</h3><p class="mb-0" style="color:var(--text-secondary);">PNG is lossless and keeps sharp edges crisp; some workflows and editors prefer it.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does it upload my images?</h3><p class="mb-0" style="color:var(--text-secondary);">No — conversion happens entirely in your browser.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I convert many at once?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes, batch-convert and download them together as a ZIP.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will converting to PNG improve quality?</h3><p class="mb-0" style="color:var(--text-secondary);">No. It prevents further loss from future saves, but the detail JPG already discarded cannot be recovered.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why is the PNG so much bigger?</h3><p class="mb-0" style="color:var(--text-secondary);">PNG compresses flat colour and sharp edges well and photographic detail poorly. A photo is typically three to five times larger as PNG.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does it add transparency?</h3><p class="mb-0" style="color:var(--text-secondary);">It gives the file the ability to store transparency. The image itself stays fully opaque until you erase part of it in an editor.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Should I use PNG for photos on my website?</h3><p class="mb-0" style="color:var(--text-secondary);">Usually not. A well-compressed JPG or WebP looks the same and loads far faster.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

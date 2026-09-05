@@ -245,26 +245,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Does it change my content?",
+      "name": "Can I start numbering from a page other than the first?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — it only adds numbers on top; your existing content is preserved."
+        "text": "Yes. Set a starting offset so front matter is skipped and the printed numbers match the pages people will cite."
       }
     },
     {
       "@type": "Question",
-      "name": "Is my PDF uploaded?",
+      "name": "Where will the numbers appear?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — page numbers are added locally in your browser."
+        "text": "You choose the position. Bottom right is the safest default for printed and bound documents."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I start at a custom number?",
+      "name": "Will they overlap my existing footer?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — set any starting value."
+        "text": "They can. Check a middle page rather than only the first, since front matter often has a different layout."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the original file modified?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You get a new numbered PDF and the original is left as it was."
       }
     }
   ]
@@ -314,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -334,25 +354,62 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Add Page Numbers to PDF</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Stamp page numbers onto every page of your PDF, with control over position, format and starting number. It is lossless (your text and images are untouched) and runs entirely in your browser.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to Add Page Numbers to PDF</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Stamp page numbers onto an existing PDF without uploading it or opening a desktop editor. Useful for documents assembled from several sources, for court and tender submissions where numbered pages are required, and for anything that will be discussed by page over a call.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to add page numbers to a PDF</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Upload your PDF (it stays on your device).</li>
           <li>Pick the position, format, start number and size.</li>
           <li>Click &quot;Add Page Numbers&quot; and download the result.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Why assembled documents lose their numbering</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">A PDF built by merging several files carries whatever numbering each source had. Three ten-page documents merged together produce a thirty-page PDF numbered one to ten, three times over — which is worse than no numbering at all, because two people looking at &quot;page 4&quot; may be looking at different pages.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Scanned documents have the opposite problem: no numbers anywhere, because the original paper had none. Either way the fix is to stamp a single consistent sequence across the finished document once it is assembled.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Placement and the pitfalls</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Bottom centre and bottom right are the conventional positions, and bottom right is the better default for anything that will be printed and bound, since it stays visible when a reader thumbs the outside edge.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The thing to check is collision. Many documents already have a footer — a filename, a confidentiality notice, a date — and a stamped number landing on top of it is worse than none. Look at a middle page before accepting the result, not just the first, because front matter often has a different layout from the body.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Starting number and front matter</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Documents with a cover page and a contents page conventionally start the visible numbering at the first page of real content, so the cover is not page one. Setting a starting offset gets the printed numbers matching the numbers people will cite.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">For legal and tender submissions the convention is usually the opposite: every physical page is numbered from the first, with no exceptions, so that a page reference is unambiguous. Check the requirements before stamping, because restamping means re-generating the document.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Number after assembling, not before</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the document is being built from several files, merge first and number last. Numbering the parts individually produces a merged document with three separate sequences, which is the problem numbering was supposed to solve.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The same applies to insertions. Adding a page to an already-numbered document leaves every number after it wrong, and there is no way to shift them without restamping. Settle the page order, then number once.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does it change my content?</h3><p class="mb-0" style="color:var(--text-secondary);">No — it only adds numbers on top; your existing content is preserved.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is my PDF uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No — page numbers are added locally in your browser.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I start at a custom number?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes — set any starting value.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I start numbering from a page other than the first?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Set a starting offset so front matter is skipped and the printed numbers match the pages people will cite.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Where will the numbers appear?</h3><p class="mb-0" style="color:var(--text-secondary);">You choose the position. Bottom right is the safest default for printed and bound documents.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will they overlap my existing footer?</h3><p class="mb-0" style="color:var(--text-secondary);">They can. Check a middle page rather than only the first, since front matter often has a different layout.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is the original file modified?</h3><p class="mb-0" style="color:var(--text-secondary);">No. You get a new numbered PDF and the original is left as it was.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

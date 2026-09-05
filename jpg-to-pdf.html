@@ -245,18 +245,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Can I combine many images at once?",
+      "name": "Can I combine many images into one PDF?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — add as many as you like and drag to set the page order."
+        "text": "Yes — add as many as you like and set the order before generating. Every image becomes its own page."
       }
     },
     {
       "@type": "Question",
-      "name": "Will the quality drop?",
+      "name": "Will the image quality drop?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, your images are placed into the PDF at full quality."
+        "text": "No. Images are placed at full quality, which is why the resulting file can be large. Compress it afterwards if you need a smaller document."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What image formats can I use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JPG and PNG both work. If your photos are HEIC from an iPhone, convert them to JPG first with the HEIC to JPG tool."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I mix portrait and landscape photos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Each page is sized to its image, so a mixed set produces a PDF with mixed page orientations."
       }
     }
   ]
@@ -306,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -326,24 +354,62 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">JPG to PDF Converter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Combine one or many JPG images into a single, tidy PDF. Reorder pages, choose A4 or Letter, and download — all in your browser with no uploads.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to JPG to PDF Converter</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Combine photos and scans into a single PDF you can email, print or archive, with the page order under your control and nothing leaving your device. Useful for turning phone snaps of a receipt into one tidy document, or assembling scanned pages that arrived as separate image files.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert JPG images to a PDF</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Select or drag in all the images you want to combine.</li>
           <li>Drag to reorder them and pick a page size.</li>
           <li>Convert and download your single PDF.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Page order and why it matters</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Images are placed into the PDF in the order you add them, and you can rearrange before generating. This sounds trivial until you scan a ten-page document and find your scanner named the files in an order that sorts as 1, 10, 2, 3 — a classic alphabetical-versus-numeric mismatch that puts page ten second.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Check the order before you generate rather than after. Reordering here takes a moment; fixing it in the finished PDF means splitting and merging it again.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Quality, size and what gets preserved</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Your images are embedded at their existing resolution rather than downsampled, so a 12-megapixel phone photo goes in as a 12-megapixel photo. That keeps the document faithful, but it also means a twenty-photo PDF can run to tens of megabytes — beyond the attachment limit of most mail servers.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the result is too heavy to send, run it through the Compress PDF tool afterwards. That downsamples the oversized embedded images while leaving any text layer untouched, which is usually enough to bring a bulky photo PDF under a 25 MB limit.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Working with phone photos of documents</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Photographs of paper are rarely square to the page. Before converting, crop away the desk and any surrounding clutter, and straighten the page if your phone gallery offers it — a PDF made from tidy source images looks like a document, while one made from raw snaps looks like a photo album.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Even lighting helps more than resolution. A shadow across the page survives every downstream step, and it will defeat OCR later if you ever want to extract the text.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Paper size and printing</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Pages are sized to the images you supply, so a set of phone photos produces a PDF with photo-shaped pages rather than A4 ones. That is usually what you want on screen, and occasionally a surprise at the printer, where an unusual page size may be scaled or centred on the sheet.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the document will definitely be printed, crop your images to a standard ratio first — 1.41:1 for A4, 1.29:1 for US Letter. Doing that before conversion gives you control over what gets trimmed, rather than leaving it to a print driver.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I combine many images at once?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes — add as many as you like and drag to set the page order.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will the quality drop?</h3><p class="mb-0" style="color:var(--text-secondary);">No, your images are placed into the PDF at full quality.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I combine many images into one PDF?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes — add as many as you like and set the order before generating. Every image becomes its own page.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will the image quality drop?</h3><p class="mb-0" style="color:var(--text-secondary);">No. Images are placed at full quality, which is why the resulting file can be large. Compress it afterwards if you need a smaller document.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">What image formats can I use?</h3><p class="mb-0" style="color:var(--text-secondary);">JPG and PNG both work. If your photos are HEIC from an iPhone, convert them to JPG first with the HEIC to JPG tool.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I mix portrait and landscape photos?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Each page is sized to its image, so a mixed set produces a PDF with mixed page orientations.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

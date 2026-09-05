@@ -248,15 +248,31 @@
       "name": "Can I extract just one page?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — pick a single page or any range you need."
+        "text": "Yes. Choose a single page or any range and save it as a new PDF."
       }
     },
     {
       "@type": "Question",
-      "name": "Is the original changed?",
+      "name": "Is the original file changed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, you get new files; the original PDF is untouched."
+        "text": "No. You get new files; the original stays exactly as it was."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do the extracted pages keep their formatting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Pages are copied whole, so fonts, images, layout and any text layer come across unchanged."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I split a password-protected PDF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not while it is protected. Remove the password in your PDF viewer first, then split the unprotected copy."
       }
     }
   ]
@@ -306,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -326,24 +354,65 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Split PDF</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Pull out the exact pages you need from a PDF — a single page, a range, or break a big file into parts. Runs entirely in your browser with no uploads.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to Split PDF</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Pull a single page or a run of pages out of a PDF and save them as a new document, without uploading the original anywhere. Useful for sending one signed page instead of a forty-page contract, or for breaking a bulky report into sections small enough to email.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to split a PDF</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Open your PDF in the splitter.</li>
           <li>Choose the pages or ranges to extract.</li>
           <li>Download your new, smaller PDF(s).</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Extracting a page versus splitting a document</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">These are different jobs that people often conflate. Extracting means taking pages 12 to 15 out of a long document and saving just those. Splitting means cutting one document into several — chapters, sections, or fixed-size chunks — and keeping all of it.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Both start the same way: choose the page or range you want. For an extraction you take one range and stop. For a split you repeat the operation across the document, producing a file per section. The original is untouched either way, so there is no risk in experimenting.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Working out which pages you need</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">PDF page numbers and printed page numbers frequently disagree. A report with a cover, a blank verso and Roman-numbered front matter can easily have printed page 1 sitting at PDF page 7. Always go by the position in the viewer rather than the number printed on the page.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the document has bookmarks, they are the fastest way to find section boundaries. Open the outline panel in your PDF viewer, note the page each section starts on, and use those as your split points.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Privacy when the document is sensitive</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Splitting is one of the operations people most often need on exactly the documents they should least want to upload: contracts, bank statements, medical records, identity documents. Because this tool runs in your browser, the file is read from disk, processed in memory and written back out without ever crossing the network.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">That also means it works with no connection at all. Load the page once and you can split documents on a plane or on a locked-down network.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Naming the pieces so they stay sorted</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Whatever you extract, name it in a way that sorts correctly. Alphabetical sorting places 'section-10' before 'section-2', which scrambles a set of extracts the moment someone opens the folder.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Zero-padding fixes it: 'section-02' and 'section-10' sort correctly everywhere. Leading the name with a date in year-month-day order does the same job for documents that accumulate over time, and both conventions survive being emailed, zipped and unpacked on a different operating system.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Splitting large documents for sending</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">When a document is too large to email, splitting is often better than compressing. Compression degrades pages that were fine; splitting leaves every page untouched and simply sends fewer of them at a time.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Break at meaningful boundaries rather than arbitrary page counts. Three files named for their sections are far easier for a recipient to handle than three named part one, two and three, and they can act on the relevant section without reassembling anything.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I extract just one page?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes — pick a single page or any range you need.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is the original changed?</h3><p class="mb-0" style="color:var(--text-secondary);">No, you get new files; the original PDF is untouched.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I extract just one page?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Choose a single page or any range and save it as a new PDF.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is the original file changed?</h3><p class="mb-0" style="color:var(--text-secondary);">No. You get new files; the original stays exactly as it was.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Do the extracted pages keep their formatting?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Pages are copied whole, so fonts, images, layout and any text layer come across unchanged.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I split a password-protected PDF?</h3><p class="mb-0" style="color:var(--text-secondary);">Not while it is protected. Remove the password in your PDF viewer first, then split the unprotected copy.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

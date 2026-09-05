@@ -248,7 +248,7 @@
       "name": "Why convert PNG to JPG?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JPG files are much smaller for photos, which helps email and page speed."
+        "text": "Mostly for size. Photographs stored as PNG are often five to ten times larger than the equivalent JPG with no visible quality difference at normal viewing size."
       }
     },
     {
@@ -256,7 +256,23 @@
       "name": "Will I lose transparency?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "JPG has no transparency, so transparent areas become a solid background."
+        "text": "Yes. JPG has no transparency, so transparent areas become a solid background colour. Use WebP if you need transparency and small files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the quality drop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JPG is lossy, so technically yes, but at high quality settings the difference is invisible on photographs. On screenshots and line art it is visible, and PNG is the better choice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert back to PNG later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can change the format back, but the detail discarded during JPG compression does not return. Keep the original PNG if you may need it."
       }
     }
   ]
@@ -306,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -326,24 +354,62 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">PNG to JPG Converter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert PNG images to smaller, widely-compatible JPG files — great for email and faster web pages. Everything runs in your browser with no uploads.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to PNG to JPG Converter</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert PNG images to JPG to cut file size dramatically, in your browser and without uploads. The right move for photographs that were saved as PNG and are now many times larger than they need to be — and the wrong move for screenshots and logos, which is worth knowing before you convert.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert PNG to JPG</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Drag in one or more PNG files.</li>
           <li>Choose the JPG quality.</li>
           <li>Convert and download your JPGs.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Why the size difference is so large</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">PNG compresses losslessly by finding repeated patterns. That works beautifully on flat colour, sharp edges and large uniform areas, and it works badly on photographs, where almost every pixel differs slightly from its neighbour and there is very little repetition to exploit.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">JPG makes the opposite bet: it discards fine detail the eye is unlikely to miss in a photograph, and gets very small files as a result. A photograph saved as PNG at 4 MB frequently becomes a 400 KB JPG that looks identical at normal viewing size. On a website, that difference is the whole page-speed story.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Transparency is the thing you lose</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">JPG has no alpha channel at all. Any transparent area in your PNG becomes solid colour on conversion — typically white — which is fine for a photograph with no transparency and disastrous for a logo meant to sit on a coloured background.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If your image has transparency you actually rely on, convert to WebP instead: it supports an alpha channel and still produces far smaller files than PNG. Keep the PNG as the master in either case.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Deciding before you convert</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Convert to JPG when the image is a photograph, a scan of a photograph, or any continuous-tone artwork, and when it is destined for email, a document or a web page.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Keep the PNG when the image is a screenshot, a logo, an icon, a chart, a diagram, or anything with text in it. JPG compression puts visible halos around hard edges, and screenshots are almost entirely hard edges — the result looks noticeably worse while saving less than it would on a photo.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What this means for page speed</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Images are usually the largest thing a web page downloads, ahead of scripts and stylesheets. Converting photographic PNGs to JPG frequently removes several megabytes from a page, and that shows up directly in how quickly the page becomes usable on a phone connection.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Search engines measure this. Largest Contentful Paint, one of the Core Web Vitals used in ranking, is very often an image — so the format decision is a ranking factor as well as a courtesy to your visitors.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why convert PNG to JPG?</h3><p class="mb-0" style="color:var(--text-secondary);">JPG files are much smaller for photos, which helps email and page speed.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will I lose transparency?</h3><p class="mb-0" style="color:var(--text-secondary);">JPG has no transparency, so transparent areas become a solid background.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why convert PNG to JPG?</h3><p class="mb-0" style="color:var(--text-secondary);">Mostly for size. Photographs stored as PNG are often five to ten times larger than the equivalent JPG with no visible quality difference at normal viewing size.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will I lose transparency?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. JPG has no transparency, so transparent areas become a solid background colour. Use WebP if you need transparency and small files.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will the quality drop?</h3><p class="mb-0" style="color:var(--text-secondary);">JPG is lossy, so technically yes, but at high quality settings the difference is invisible on photographs. On screenshots and line art it is visible, and PNG is the better choice.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I convert back to PNG later?</h3><p class="mb-0" style="color:var(--text-secondary);">You can change the format back, but the detail discarded during JPG compression does not return. Keep the original PNG if you may need it.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

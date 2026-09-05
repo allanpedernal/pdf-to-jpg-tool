@@ -1,12 +1,12 @@
 {
   "$schema": "seeded by scripts/seo-audit.js — see adsense-loop-plan.txt L5",
-  "phase": "phase0",
+  "phase": "hardening",
   "seededAt": "2026-09-04",
-  "lastAuditAt": "2026-09-04T23:51:24.723Z",
+  "lastAuditAt": "2026-09-05T00:12:59.046Z",
   "gates": {
     "G1": {
-      "pass": false,
-      "value": "0/20 tool pages >= 600 words",
+      "pass": true,
+      "value": "20/20 tool pages >= 600 words",
       "blocking": true
     },
     "G2": {
@@ -26,7 +26,7 @@
     },
     "G5": {
       "pass": true,
-      "value": "newest post 0d old (max 7)",
+      "value": "newest post 1d old (max 7)",
       "blocking": true
     },
     "G6": {
@@ -73,11 +73,9 @@
       "note": "Real Formspree form ID for contact.html (placeholder YOUR_FORM_ID still shipped). Loop must never invent one."
     }
   ],
-  "openPRs": [
-    "loop/verifier-entity-decoding",
-    "loop/b2-render-homepage-schema (stacked)"
-  ],
+  "openPRs": [],
   "notes": [
+    "2026-09-05 B1 COMPLETE: 11,488 words of per-tool copy in scripts/tool-content.js. G1 FAIL -> PASS (20/20 >= 600 words, avg 574 unique prose words). Ad units returned automatically once pages cleared the 300-word threshold — the B4 guard self-disabled as designed. Zero near-duplicate pairs. Remaining: G4 (7 more posts) and G6 (4 consecutive weeks) — both time-gated, cannot be closed today.",
     "2026-09-05 B2: index.html now renders its own HowTo (4 steps) + FAQPage (10 Q&A) as #home-seo-content. G3 FAIL -> PASS, 27 -> 0 orphans. index.html 849 -> 1353 words. build-tool-pages.js strips the block from tool pages so the PDF-to-JPG-specific copy is not cloned onto 20 URLs.",
     "2026-09-05 verifier: schema comparison now decodes HTML entities. G3 32 -> 27 orphans; the 5 tool-page orphans were false positives (&quot; vs \"). All 27 remaining are real and all on index.html: a 3-step HowTo and a 10-question FAQPage marked up but never rendered.",
     "2026-09-05 B4: ad-density guard added to build-tool-pages.js. G8 FAIL -> PASS. Guard is conditional on AD_MIN_WORDS=300, so ads return automatically once B1 copy lands — no second edit needed.",

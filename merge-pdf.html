@@ -248,7 +248,7 @@
       "name": "Is there a file limit?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No fixed limit — very large files just depend on your device memory."
+        "text": "No fixed limit. Because merging happens on your device, the practical ceiling is your available memory rather than a server quota."
       }
     },
     {
@@ -256,7 +256,23 @@
       "name": "Are my files private?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, merging happens locally in your browser with no uploads."
+        "text": "Yes. Merging happens locally in your browser with no uploads, so none of the documents leave your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the merged PDF still be searchable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, provided the originals were. Pages are copied intact, including their text layer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I reorder pages after merging?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reorder the source files before merging. To rearrange afterwards, split the merged document and merge again in the order you want."
       }
     }
   ]
@@ -306,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -326,24 +354,65 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Merge PDF</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Combine several PDFs into one tidy document. Drag to set the order, then merge — all in your browser, so private documents never get uploaded.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to Merge PDF</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Join several PDFs into one document in the order you choose, entirely in your browser. Handy for assembling a single submission from separately signed pages, or for stitching scanned chapters back into one file.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to merge PDF files</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Add all the PDFs you want to combine.</li>
           <li>Drag them into the order you want.</li>
           <li>Merge and download the single combined PDF.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Order is the whole job</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Merging is mechanically simple and easy to get wrong in exactly one way: sequence. Set the order deliberately before you merge, especially when filenames sort alphabetically rather than logically — &quot;appendix.pdf&quot; lands before &quot;chapter1.pdf&quot; in any alphabetical list, which is almost never what you want.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the parts came from a scanner that split a document into batches, check the seam pages after merging. A duplicated or missing page at a batch boundary is the most common scanning error and the easiest to miss.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What survives the merge</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Page content comes across exactly: fonts, images, layout and any selectable text layer are preserved, because pages are copied rather than re-rendered. A merged document remains searchable if its sources were.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Document-level features are less portable. Bookmarks, form fields and annotations vary in how well they carry across depending on how each source PDF was produced. If a source relies heavily on interactive form fields, check them in the merged file before sending it on.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">File size and practical limits</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">The merged file is roughly the sum of its parts, so combining several image-heavy PDFs produces something large. If the result needs to be emailed, run it through Compress PDF afterwards rather than compressing each part first — one pass over the finished document is more effective.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">There is no fixed page or file limit here because nothing is uploaded. Very large merges depend on your device's available memory, which is generally more generous on a laptop than on a phone.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Mixing scanned and digital sources</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Merging a digitally created PDF with a scanned one produces a document where some pages have selectable text and others are pictures of text. It looks consistent and behaves inconsistently: searching finds hits in half the document and silently misses the rest.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the merged file needs to be searchable throughout, run the scanned parts through the PDF OCR tool before merging. Doing it first is much easier than working out afterwards which pages were the scanned ones.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Checking the result before you send it</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Open the merged file and check three things: the total page count matches the sum of the parts, the seams between documents land where you expect, and nothing has been duplicated at a boundary. Those three checks catch nearly every merge error.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Page count is the fastest signal. If twelve plus eight produces nineteen pages, a page was dropped, and finding it now is far easier than after the document has been signed, circulated or filed.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is there a file limit?</h3><p class="mb-0" style="color:var(--text-secondary);">No fixed limit — very large files just depend on your device memory.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my files private?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes, merging happens locally in your browser with no uploads.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is there a file limit?</h3><p class="mb-0" style="color:var(--text-secondary);">No fixed limit. Because merging happens on your device, the practical ceiling is your available memory rather than a server quota.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my files private?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Merging happens locally in your browser with no uploads, so none of the documents leave your device.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will the merged PDF still be searchable?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes, provided the originals were. Pages are copied intact, including their text layer.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I reorder pages after merging?</h3><p class="mb-0" style="color:var(--text-secondary);">Reorder the source files before merging. To rearrange afterwards, split the merged document and merge again in the order you want.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

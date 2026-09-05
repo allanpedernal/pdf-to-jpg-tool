@@ -245,18 +245,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Why convert WebP to JPG?",
+      "name": "Why will my WebP file not open?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Some apps and older software don't support WebP — JPG works everywhere."
+        "text": "Some desktop editors, email clients and upload forms still do not support the format, even though every current browser does."
       }
     },
     {
       "@type": "Question",
-      "name": "Are my images uploaded?",
+      "name": "Will quality drop?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — conversion happens entirely in your browser."
+        "text": "Slightly in principle, since both formats are lossy and this is a re-encode. At high quality settings it is not visible on photographs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the file get bigger?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually, by roughly 25 to 35 percent, because JPG compresses less efficiently than WebP."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to transparency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is lost — JPG has no alpha channel, so transparent areas become solid colour. Convert to PNG if you need to keep it."
       }
     }
   ]
@@ -306,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -326,24 +354,65 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">WebP to JPG Converter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert WebP images into JPG that opens on any device, app or website. Everything runs locally in your browser — no uploads.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to WebP to JPG Converter</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert WebP images to JPG so they open in software that has not caught up with the format, without uploading anything. WebP is excellent on the web and still awkward everywhere else, and this is the conversion that gets a file into something universally accepted.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert WebP to JPG</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Drag your WebP images onto the drop zone.</li>
           <li>Click &quot;Convert to JPG&quot;.</li>
           <li>Download one JPG or all of them as a ZIP.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Why you end up with WebP files you cannot use</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Most WebP files arrive by accident. Save an image from a modern website and you often get WebP, because that is what the site served — the format is now the default for image delivery on a large share of the web.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The file is perfectly good; the problem is downstream. Older versions of Photoshop, many desktop viewers, a number of email clients and a long tail of upload forms either reject the extension outright or show nothing at all. Converting to JPG sidesteps every one of those.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What the conversion costs</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Both formats are lossy, so this is a re-encode rather than a straight copy, and a small amount of quality is lost in principle. At high JPG quality settings it is not visible on ordinary photographic content.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The file will get larger — often 25 to 35 percent — because JPG compresses less efficiently than WebP. That is the trade: you are paying in bytes for a format that everything can open.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Transparency needs attention</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">WebP can carry an alpha channel and JPG cannot. If your WebP has transparent regions, they will be filled with solid colour on conversion, which is fine for a photograph and wrong for a logo or an icon meant to sit on a coloured background.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">When transparency matters, convert to PNG instead. The file will be larger than either alternative but the alpha channel survives intact.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Where WebP files usually come from</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Two sources account for nearly all of them. Saving an image from a modern website gives you whatever the site served, which is increasingly WebP. Exporting from a design tool with web-optimised defaults does the same.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If you keep hitting the problem, change the export default rather than converting repeatedly. Where you cannot — saving from someone else's site — converting once to JPG gives you a file that every piece of software will accept without further thought.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Keeping quality through the re-encode</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Because both formats are lossy, this conversion re-encodes rather than repackages. Use a high JPG quality — 0.9 or above — so the second compression pass has little visible effect on top of the first.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Convert from the original WebP rather than from a copy that has already been resized or re-saved. Each lossy step compounds, and the artifacts of earlier passes are preserved faithfully by every later one.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why convert WebP to JPG?</h3><p class="mb-0" style="color:var(--text-secondary);">Some apps and older software don't support WebP — JPG works everywhere.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my images uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No — conversion happens entirely in your browser.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why will my WebP file not open?</h3><p class="mb-0" style="color:var(--text-secondary);">Some desktop editors, email clients and upload forms still do not support the format, even though every current browser does.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will quality drop?</h3><p class="mb-0" style="color:var(--text-secondary);">Slightly in principle, since both formats are lossy and this is a re-encode. At high quality settings it is not visible on photographs.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will the file get bigger?</h3><p class="mb-0" style="color:var(--text-secondary);">Usually, by roughly 25 to 35 percent, because JPG compresses less efficiently than WebP.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">What happens to transparency?</h3><p class="mb-0" style="color:var(--text-secondary);">It is lost — JPG has no alpha channel, so transparent areas become solid colour. Convert to PNG if you need to keep it.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

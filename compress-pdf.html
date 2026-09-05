@@ -245,18 +245,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Will it blur my text?",
+      "name": "Will compression blur my text?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — text stays sharp; only oversized embedded images are downsampled."
+        "text": "No. Text is stored as characters and font data, not pixels, and is left untouched. Only oversized embedded images are downsampled."
       }
     },
     {
       "@type": "Question",
-      "name": "Is it safe for sensitive files?",
+      "name": "Is it safe for confidential documents?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, compression runs in your browser so the file is never uploaded."
+        "text": "Yes. Compression runs entirely in your browser — the file is never uploaded, so there is no server copy to worry about."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why did my file barely get smaller?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because it was already efficient. A text-only PDF has little to remove. Large files that resist compression are usually already-compressed scans."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it remove any content?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No pages, text or images are removed. Images are re-encoded at a resolution matched to how they are actually displayed."
       }
     }
   ]
@@ -306,10 +322,22 @@
     <div class="row g-0 min-vh-100">
       
       <!-- Left Ad Sidebar (Desktop Only) -->
-      
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Left Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
 
       <!-- Main Content Area (col-8): holds the tool sidebar + content -->
-      <main id="main-content" class="col-12 p-0">
+      <main id="main-content" class="col-12 col-lg-8 p-0">
         <div class="row g-0 h-100">
 
           <!-- Left Navigation Sidebar -->
@@ -326,24 +354,62 @@
       <!-- SEO content (unique per tool) -->
       <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Compress PDF</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Shrink large PDFs so they fit email and upload limits, without wrecking quality. The compression happens locally in your browser, so even confidential documents stay private.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to Compress PDF</h2>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Shrink a PDF that is too large to email without turning the text into mush. The compressor targets the oversized images embedded in the file — usually the real reason a document is heavy — and leaves the text layer alone, so words stay selectable, searchable and sharp.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to compress a PDF</h2>
         <ol style="color:var(--text-secondary); line-height:1.9;">
           <li>Drop your PDF into the compressor.</li>
           <li>Choose a compression level (medium is a good balance).</li>
           <li>Compress and download the smaller file.</li>
         </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Where the weight in a PDF actually is</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">A page of pure text is tiny; a few kilobytes covers a dense page, because the file stores characters and font references rather than pixels. What inflates a PDF is almost always embedded imagery: a scanned page, a full-bleed photograph, or a logo saved at print resolution and then placed at thumbnail size.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">That last case is the most common and the most wasteful. A 4000-pixel-wide image displayed in a 400-pixel-wide box carries ten times the detail anyone will ever see, and every copy of the document drags it along. Downsampling that image to something matched to its display size can cut a file by 80 percent with no visible change.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What compression will not do</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Text does not compress much further, because it is not stored as pixels in the first place. If your PDF is 40 MB of text with no images, there is little to recover, and a tool promising otherwise is either rasterising your pages — turning searchable text into a picture of text — or removing content.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Compression also cannot recover detail once removed. Keep the original if the document is a legal record, an archival scan or anything you may need at full fidelity later. Compress a copy for sending.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Getting under an email attachment limit</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Most mail providers cap attachments somewhere between 20 and 25 MB, and some corporate gateways are stricter. If one pass does not get you there, the usual culprit is a handful of very large scanned pages rather than the document as a whole.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Splitting a long document into two or three smaller PDFs is often more practical than compressing harder, and it avoids degrading pages that were fine to begin with. The Split PDF tool handles that without a second upload.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Scanned documents behave differently</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">A digitally created PDF — exported from Word, InDesign or a browser — stores text as text and compresses very little further. A scanned PDF is a stack of photographs of paper, and that is where the large savings live.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Scans also respond well to a resolution matched to their purpose. A contract that only needs to be readable on screen does not need 600 DPI page images; 200 DPI is comfortable and a fraction of the size. If you also want the text to be searchable, run the document through the PDF OCR tool before compressing, since heavy compression makes character recognition harder.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will it blur my text?</h3><p class="mb-0" style="color:var(--text-secondary);">No — text stays sharp; only oversized embedded images are downsampled.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is it safe for sensitive files?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes, compression runs in your browser so the file is never uploaded.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will compression blur my text?</h3><p class="mb-0" style="color:var(--text-secondary);">No. Text is stored as characters and font data, not pixels, and is left untouched. Only oversized embedded images are downsampled.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is it safe for confidential documents?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Compression runs entirely in your browser — the file is never uploaded, so there is no server copy to worry about.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why did my file barely get smaller?</h3><p class="mb-0" style="color:var(--text-secondary);">Because it was already efficient. A text-only PDF has little to remove. Large files that resist compression are usually already-compressed scans.</p></div>
+          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does it remove any content?</h3><p class="mb-0" style="color:var(--text-secondary);">No pages, text or images are removed. Images are re-encoded at a resolution matched to how they are actually displayed.</p></div>
       </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
-      
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+        <!-- Google AdSense Right Sidebar -->
+        <ins class="adsbygoogle"
+                 style="display:block; min-width: 160px; width: 100%;"
+             data-ad-client="ca-pub-2042221703015293"
+                 data-ad-slot="9174709096"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+      </div>
+    </aside>
     
       <!-- Bottom Ad Banner (Mobile & Desktop) -->
-      
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+    <!-- Google AdSense Bottom Banner -->
+    <ins class="adsbygoogle"
+                 style="display:block; width: 100%; min-height: 90px;"
+         data-ad-client="ca-pub-2042221703015293"
+         data-ad-slot="9174709096"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
