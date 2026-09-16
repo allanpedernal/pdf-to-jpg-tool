@@ -628,64 +628,6 @@
         </div>
 
 
-      <!-- Homepage SEO content — renders the HowTo and FAQPage schema above.
-           Single source of truth: tools.js no longer renders an FAQ (see
-           sectionFAQ), because rendering both put two FAQs on the page.
-           Removed from generated tool pages by scripts/build-tool-pages.js,
-           which injects its own per-tool copy instead. -->
-      <section id="home-seo-content" class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Free Online PDF & Image Tools</h1>
-        <h2 class="h4 fw-bold mb-3" style="color:var(--text-primary);">How to Convert PDF to JPG Online</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-            <li class="mb-2"><strong style="color:var(--text-primary);">Select PDF File</strong> — Drag and drop your PDF file or click to browse and select a PDF file from your computer.</li>
-            <li class="mb-2"><strong style="color:var(--text-primary);">Adjust Settings</strong> — Set JPEG quality (0.1-1.0) and scale (0.5-3.0) according to your needs. Higher quality and scale produce larger but better images.</li>
-            <li class="mb-2"><strong style="color:var(--text-primary);">Convert PDF</strong> — Click the 'Convert PDF to JPG' button to start the conversion process.</li>
-            <li class="mb-2"><strong style="color:var(--text-primary);">Download Images</strong> — Wait for the conversion to complete. All JPG images will be automatically downloaded as a ZIP file.</li>
-        </ol>
-        <h2 class="h4 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-home">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-0" aria-expanded="false" aria-controls="faq-home-0" style="font-size: 1rem; padding: 1rem;">How do I convert PDF to JPG?</button></h3>
-              <div id="faq-home-0" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Simply drag and drop your PDF file into the upload area, adjust the quality and scale settings if needed, then click 'Convert PDF to JPG'. The conversion happens instantly in your browser, and all JPG images will be downloaded as a ZIP file.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-1" aria-expanded="false" aria-controls="faq-home-1" style="font-size: 1rem; padding: 1rem;">Is my PDF file uploaded to a server?</button></h3>
-              <div id="faq-home-1" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No! Your PDF files never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-2" aria-expanded="false" aria-controls="faq-home-2" style="font-size: 1rem; padding: 1rem;">What quality settings should I use?</button></h3>
-              <div id="faq-home-2" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Quality ranges from 0.1 (lowest, smallest file) to 1.0 (highest, largest file). For most purposes, 0.85 provides an excellent balance between quality and file size. Use 1.0 for maximum quality when file size isn't a concern, or lower values for smaller file sizes.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-3" aria-expanded="false" aria-controls="faq-home-3" style="font-size: 1rem; padding: 1rem;">What does the scale setting do?</button></h3>
-              <div id="faq-home-3" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Scale controls the resolution of the output JPG images. 1.0 = original PDF size, 2.0 = double the resolution, 0.5 = half the resolution. Higher scale values produce larger, sharper images but also larger file sizes. Default is 1.6 for optimal quality.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-4" aria-expanded="false" aria-controls="faq-home-4" style="font-size: 1rem; padding: 1rem;">Can I convert multi-page PDFs?</button></h3>
-              <div id="faq-home-4" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes! Our PDF to JPG converter supports PDFs with any number of pages. Each page will be converted to a separate JPG image, and all images will be packaged in a single ZIP file for easy download.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-5" aria-expanded="false" aria-controls="faq-home-5" style="font-size: 1rem; padding: 1rem;">Is this service free?</button></h3>
-              <div id="faq-home-5" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can convert. Convert as many PDFs to JPG as you need, whenever you need.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-6" aria-expanded="false" aria-controls="faq-home-6" style="font-size: 1rem; padding: 1rem;">What browsers are supported?</button></h3>
-              <div id="faq-home-6" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Our PDF to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-7" aria-expanded="false" aria-controls="faq-home-7" style="font-size: 1rem; padding: 1rem;">How long does conversion take?</button></h3>
-              <div id="faq-home-7" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most PDFs convert in just a few seconds, depending on the number of pages and your device's performance.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-8" aria-expanded="false" aria-controls="faq-home-8" style="font-size: 1rem; padding: 1rem;">What file format will I get?</button></h3>
-              <div id="faq-home-8" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">You'll receive JPG (JPEG) image files. Each PDF page becomes a separate JPG file, and all files are packaged in a ZIP archive for convenient download. JPG is a widely supported image format compatible with all devices and software.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-9" aria-expanded="false" aria-controls="faq-home-9" style="font-size: 1rem; padding: 1rem;">Can I convert password-protected PDFs?</button></h3>
-              <div id="faq-home-9" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Currently, password-protected PDFs cannot be converted. You'll need to remove the password protection from your PDF file first before converting it to JPG format.</div></div>
-            </div>
-        </div>
-      </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
@@ -843,6 +785,65 @@
   </script>
 
   <!-- Footer -->
+      <!-- Homepage SEO content — renders the HowTo and FAQPage schema above.
+           Single source of truth: tools.js no longer renders an FAQ (see
+           sectionFAQ), because rendering both put two FAQs on the page.
+           Removed from generated tool pages by scripts/build-tool-pages.js,
+           which injects its own per-tool copy instead. -->
+      <section id="home-seo-content" class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Free Online PDF & Image Tools</h1>
+        <h2 class="h4 fw-bold mb-3" style="color:var(--text-primary);">How to Convert PDF to JPG Online</h2>
+        <ol style="color:var(--text-secondary); line-height:1.9;">
+            <li class="mb-2"><strong style="color:var(--text-primary);">Select PDF File</strong> — Drag and drop your PDF file or click to browse and select a PDF file from your computer.</li>
+            <li class="mb-2"><strong style="color:var(--text-primary);">Adjust Settings</strong> — Set JPEG quality (0.1-1.0) and scale (0.5-3.0) according to your needs. Higher quality and scale produce larger but better images.</li>
+            <li class="mb-2"><strong style="color:var(--text-primary);">Convert PDF</strong> — Click the 'Convert PDF to JPG' button to start the conversion process.</li>
+            <li class="mb-2"><strong style="color:var(--text-primary);">Download Images</strong> — Wait for the conversion to complete. All JPG images will be automatically downloaded as a ZIP file.</li>
+        </ol>
+        <h2 class="h4 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+        <div class="accordion accordion-flush" id="faq-home">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-0" aria-expanded="false" aria-controls="faq-home-0" style="font-size: 1rem; padding: 1rem;">How do I convert PDF to JPG?</button></h3>
+              <div id="faq-home-0" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Simply drag and drop your PDF file into the upload area, adjust the quality and scale settings if needed, then click 'Convert PDF to JPG'. The conversion happens instantly in your browser, and all JPG images will be downloaded as a ZIP file.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-1" aria-expanded="false" aria-controls="faq-home-1" style="font-size: 1rem; padding: 1rem;">Is my PDF file uploaded to a server?</button></h3>
+              <div id="faq-home-1" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No! Your PDF files never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-2" aria-expanded="false" aria-controls="faq-home-2" style="font-size: 1rem; padding: 1rem;">What quality settings should I use?</button></h3>
+              <div id="faq-home-2" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Quality ranges from 0.1 (lowest, smallest file) to 1.0 (highest, largest file). For most purposes, 0.85 provides an excellent balance between quality and file size. Use 1.0 for maximum quality when file size isn't a concern, or lower values for smaller file sizes.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-3" aria-expanded="false" aria-controls="faq-home-3" style="font-size: 1rem; padding: 1rem;">What does the scale setting do?</button></h3>
+              <div id="faq-home-3" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Scale controls the resolution of the output JPG images. 1.0 = original PDF size, 2.0 = double the resolution, 0.5 = half the resolution. Higher scale values produce larger, sharper images but also larger file sizes. Default is 1.6 for optimal quality.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-4" aria-expanded="false" aria-controls="faq-home-4" style="font-size: 1rem; padding: 1rem;">Can I convert multi-page PDFs?</button></h3>
+              <div id="faq-home-4" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes! Our PDF to JPG converter supports PDFs with any number of pages. Each page will be converted to a separate JPG image, and all images will be packaged in a single ZIP file for easy download.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-5" aria-expanded="false" aria-controls="faq-home-5" style="font-size: 1rem; padding: 1rem;">Is this service free?</button></h3>
+              <div id="faq-home-5" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can convert. Convert as many PDFs to JPG as you need, whenever you need.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-6" aria-expanded="false" aria-controls="faq-home-6" style="font-size: 1rem; padding: 1rem;">What browsers are supported?</button></h3>
+              <div id="faq-home-6" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Our PDF to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-7" aria-expanded="false" aria-controls="faq-home-7" style="font-size: 1rem; padding: 1rem;">How long does conversion take?</button></h3>
+              <div id="faq-home-7" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most PDFs convert in just a few seconds, depending on the number of pages and your device's performance.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-8" aria-expanded="false" aria-controls="faq-home-8" style="font-size: 1rem; padding: 1rem;">What file format will I get?</button></h3>
+              <div id="faq-home-8" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">You'll receive JPG (JPEG) image files. Each PDF page becomes a separate JPG file, and all files are packaged in a ZIP archive for convenient download. JPG is a widely supported image format compatible with all devices and software.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-home-9" aria-expanded="false" aria-controls="faq-home-9" style="font-size: 1rem; padding: 1rem;">Can I convert password-protected PDFs?</button></h3>
+              <div id="faq-home-9" class="accordion-collapse collapse" data-bs-parent="#faq-home"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Currently, password-protected PDFs cannot be converted. You'll need to remove the password protection from your PDF file first before converting it to JPG format.</div></div>
+            </div>
+        </div>
+      </section>
+
   <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
     <!-- Decorative gradient overlay -->
     <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>

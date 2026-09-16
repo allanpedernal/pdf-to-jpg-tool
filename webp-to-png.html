@@ -350,52 +350,6 @@
             <div id="tool-content" class="w-100 py-3"></div>
           </div>
         </div>
-
-      <!-- SEO content (unique per tool) -->
-      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">WebP to PNG Converter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert WebP images to PNG in your browser, keeping transparency intact and adding no further compression loss. The right conversion when the image has an alpha channel or is heading into an editing workflow.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert WebP to PNG</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-          <li>Drag your WebP images in.</li>
-          <li>Click &quot;Convert to PNG&quot;.</li>
-          <li>Download a single PNG or all of them as a ZIP.</li>
-        </ol>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Why PNG rather than JPG</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">The deciding factor is almost always transparency. WebP can store an alpha channel; JPG cannot; PNG can. If your WebP has transparent regions and you convert to JPG, they become solid colour and there is no way back. PNG preserves them exactly.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">The second factor is editing. PNG is lossless, so an image can be opened, adjusted and re-saved repeatedly without degrading. If the file is entering a workflow with several edit-and-save cycles, PNG is the format that survives it.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Expect a larger file</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">PNG will usually be several times the size of the WebP, sometimes much more on photographic content. WebP was designed for efficient delivery; PNG was designed for exact reproduction, and exactness is expensive.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">That makes PNG a poor choice for serving images on a page and a good choice for a working master. Convert to PNG to edit, then export back to WebP or JPG for publishing.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Lossy sources stay lossy</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">If the WebP used lossy compression — most do — converting to PNG preserves the result of that compression perfectly, artifacts included. Lossless does not mean restored; it means nothing further is discarded from this point on.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">The practical implication: convert early, before an image has been through several lossy stages. Once artifacts are in the pixels, every subsequent format change carries them along.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Fitting into an editing workflow</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">The usual sequence is convert, edit, export. PNG is the working format because it survives repeated saves without degrading; the published format is whatever the destination wants, which for the web is usually WebP again.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Do the conversion once at the start rather than moving between formats repeatedly. Every lossy step compounds, and a file that has been through several round trips carries the artifacts of all of them even though the last save was lossless.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">When PNG is the wrong answer</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">PNG is not a universal upgrade. For an opaque photograph headed to email, a document or a web page, it produces a far larger file with no visible benefit, and JPG or WebP is the better choice.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Reach for PNG when the image has transparency to preserve, when it is about to be edited repeatedly, or when a tool specifically requires PNG input. Outside those cases the extra size buys nothing.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-webp-to-png">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-0" aria-expanded="false" aria-controls="faq-webp-to-png-0" style="font-size: 1rem; padding: 1rem;">Does the transparency survive?</button></h3>
-              <div id="faq-webp-to-png-0" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. PNG supports an alpha channel, so transparent regions in the WebP are preserved exactly.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-1" aria-expanded="false" aria-controls="faq-webp-to-png-1" style="font-size: 1rem; padding: 1rem;">Will the file be bigger?</button></h3>
-              <div id="faq-webp-to-png-1" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes, usually several times bigger. PNG stores data exactly rather than compressing it aggressively.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-2" aria-expanded="false" aria-controls="faq-webp-to-png-2" style="font-size: 1rem; padding: 1rem;">Does converting improve quality?</button></h3>
-              <div id="faq-webp-to-png-2" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. It stops further loss but cannot undo compression already applied to the WebP.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-3" aria-expanded="false" aria-controls="faq-webp-to-png-3" style="font-size: 1rem; padding: 1rem;">Should I use PNG or JPG?</button></h3>
-              <div id="faq-webp-to-png-3" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">PNG if the image has transparency or is about to be edited. JPG if it is an opaque photograph headed for email or a web page.</div></div>
-            </div>
-        </div>
-      </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
@@ -553,6 +507,59 @@
   </script>
 
   <!-- Footer -->
+      <!-- Homepage SEO content — renders the HowTo and FAQPage schema above.
+           Single source of truth: tools.js no longer renders an FAQ (see
+           sectionFAQ), because rendering both put two FAQs on the page.
+           Removed from generated tool pages by scripts/build-tool-pages.js,
+           which injects its own per-tool copy instead. -->
+      
+
+
+      <!-- SEO content (unique per tool) -->
+      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">WebP to PNG Converter</h1>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Convert WebP images to PNG in your browser, keeping transparency intact and adding no further compression loss. The right conversion when the image has an alpha channel or is heading into an editing workflow.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert WebP to PNG</h2>
+        <ol style="color:var(--text-secondary); line-height:1.9;">
+          <li>Drag your WebP images in.</li>
+          <li>Click &quot;Convert to PNG&quot;.</li>
+          <li>Download a single PNG or all of them as a ZIP.</li>
+        </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Why PNG rather than JPG</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">The deciding factor is almost always transparency. WebP can store an alpha channel; JPG cannot; PNG can. If your WebP has transparent regions and you convert to JPG, they become solid colour and there is no way back. PNG preserves them exactly.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The second factor is editing. PNG is lossless, so an image can be opened, adjusted and re-saved repeatedly without degrading. If the file is entering a workflow with several edit-and-save cycles, PNG is the format that survives it.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Expect a larger file</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">PNG will usually be several times the size of the WebP, sometimes much more on photographic content. WebP was designed for efficient delivery; PNG was designed for exact reproduction, and exactness is expensive.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">That makes PNG a poor choice for serving images on a page and a good choice for a working master. Convert to PNG to edit, then export back to WebP or JPG for publishing.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Lossy sources stay lossy</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the WebP used lossy compression — most do — converting to PNG preserves the result of that compression perfectly, artifacts included. Lossless does not mean restored; it means nothing further is discarded from this point on.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The practical implication: convert early, before an image has been through several lossy stages. Once artifacts are in the pixels, every subsequent format change carries them along.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Fitting into an editing workflow</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">The usual sequence is convert, edit, export. PNG is the working format because it survives repeated saves without degrading; the published format is whatever the destination wants, which for the web is usually WebP again.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Do the conversion once at the start rather than moving between formats repeatedly. Every lossy step compounds, and a file that has been through several round trips carries the artifacts of all of them even though the last save was lossless.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">When PNG is the wrong answer</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">PNG is not a universal upgrade. For an opaque photograph headed to email, a document or a web page, it produces a far larger file with no visible benefit, and JPG or WebP is the better choice.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Reach for PNG when the image has transparency to preserve, when it is about to be edited repeatedly, or when a tool specifically requires PNG input. Outside those cases the extra size buys nothing.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+        <div class="accordion accordion-flush" id="faq-webp-to-png">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-0" aria-expanded="false" aria-controls="faq-webp-to-png-0" style="font-size: 1rem; padding: 1rem;">Does the transparency survive?</button></h3>
+              <div id="faq-webp-to-png-0" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. PNG supports an alpha channel, so transparent regions in the WebP are preserved exactly.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-1" aria-expanded="false" aria-controls="faq-webp-to-png-1" style="font-size: 1rem; padding: 1rem;">Will the file be bigger?</button></h3>
+              <div id="faq-webp-to-png-1" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes, usually several times bigger. PNG stores data exactly rather than compressing it aggressively.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-2" aria-expanded="false" aria-controls="faq-webp-to-png-2" style="font-size: 1rem; padding: 1rem;">Does converting improve quality?</button></h3>
+              <div id="faq-webp-to-png-2" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. It stops further loss but cannot undo compression already applied to the WebP.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-webp-to-png-3" aria-expanded="false" aria-controls="faq-webp-to-png-3" style="font-size: 1rem; padding: 1rem;">Should I use PNG or JPG?</button></h3>
+              <div id="faq-webp-to-png-3" class="accordion-collapse collapse" data-bs-parent="#faq-webp-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">PNG if the image has transparency or is about to be edited. JPG if it is an opaque photograph headed for email or a web page.</div></div>
+            </div>
+        </div>
+      </section>
   <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
     <!-- Decorative gradient overlay -->
     <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>

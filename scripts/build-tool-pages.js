@@ -387,8 +387,16 @@ function main() {
     // then add the unique supporting content below it.
     html = html.replace(
       /<div id="tool-content"[\s\S]*?<\/main>/,
-      `<div id="tool-content" class="w-100 py-3"></div>\n          </div>\n        </div>\n${seoSection(t)}\n      </main>`
+      `<div id="tool-content" class="w-100 py-3"></div>\n          </div>\n        </div>\n      </main>`
     );
+
+    // The SEO section goes AFTER the flex row, not inside <main>.
+    // <main> is a flex item (col-lg-8) in .row.g-0, and a tall block inside it
+    // overflowed instead of growing the row: the footer laid out at main's
+    // height and painted straight over the section. Outside the row the
+    // section is a normal full-width block, which also stops it being squeezed
+    // into the middle column with an empty ad rail beside it.
+    html = html.replace(/\n  <footer/, `\n${seoSection(t)}\n  <footer`);
     // G8: strip inherited ad units while the page is still thin.
     const words = crawlableWords(html);
     let adNote = '';

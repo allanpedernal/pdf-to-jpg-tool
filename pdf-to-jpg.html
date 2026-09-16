@@ -350,46 +350,6 @@
             <div id="tool-content" class="w-100 py-3"></div>
           </div>
         </div>
-
-      <!-- SEO content (unique per tool) -->
-      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">PDF to JPG Converter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Turn every page of a PDF into a standalone JPG image without installing anything or handing your file to a server. The conversion runs on your own machine using your browser's rendering engine, so a contract, a payslip or a medical scan never travels anywhere. Drop the file in, pick a resolution, and download the pages individually or as a single ZIP.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert a PDF to JPG</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-          <li>Drag your PDF onto the drop zone (or click to browse).</li>
-          <li>Choose the quality and scale (150 DPI for screen, 300 for print).</li>
-          <li>Click convert and download your JPG images — individually or as a ZIP.</li>
-        </ol>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Choosing a resolution that matches the job</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">The scale setting controls how many pixels each PDF page becomes, and it is the only setting that really matters. A scale of 1.0 renders the page at its nominal size, roughly 72 pixels per inch — fine for a thumbnail, too soft for anything else. Around 1.6 gives you something close to 115 DPI, which is comfortable for reading on screen and for dropping into a slide deck.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Push to 2.0 or higher when the JPG is destined for print or when the page carries small type, tables or fine line art. An A4 page at scale 4.0 lands near 300 DPI, the traditional print threshold, and produces an image around 2480 by 3508 pixels. The trade is file size and time: each doubling of scale roughly quadruples the pixel count, so a 20-page document at scale 4.0 is a meaningfully heavier download than the same document at 1.6.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">When JPG is the right format — and when it is not</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">JPG uses lossy compression tuned for photographs and continuous tone. It is the right choice when your PDF pages are scans, photographs, or design-heavy layouts, and when you need the smallest file that still looks good. At quality 0.85 most people cannot see the difference from the original at normal viewing size, while the file is a fraction of the equivalent PNG.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">It is the wrong choice for pages that are mostly sharp black text on white, screenshots of user interfaces, or diagrams with hard edges. JPG compression smears those edges into faint halos that get worse every time the file is re-saved. For that material use the PDF to PNG converter instead — PNG is lossless, so text stays crisp at any zoom level.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Multi-page documents and batch downloads</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Every page of the PDF becomes its own numbered JPG. For a single-page document you get one image; for a hundred-page report you get a hundred, packaged into one ZIP so you are not clicking through a hundred save dialogs. Page order is preserved in the filenames, so the archive stays sorted correctly when you extract it.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Because the work happens on your device rather than a shared server, there is no upload queue and no per-file size ceiling imposed by a hosting plan. The practical limit is your own available memory: very large documents at very high scale will be slower on a phone than on a laptop.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-pdf-to-jpg">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-0" aria-expanded="false" aria-controls="faq-pdf-to-jpg-0" style="font-size: 1rem; padding: 1rem;">What DPI should I use for printing?</button></h3>
-              <div id="faq-pdf-to-jpg-0" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Aim for about 300 DPI. Since the scale setting is relative to a nominal 72 DPI, a scale of roughly 4.0 gets you there for a standard page. For a large-format poster where viewers stand further back, 150 DPI is usually enough.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-1" aria-expanded="false" aria-controls="faq-pdf-to-jpg-1" style="font-size: 1rem; padding: 1rem;">Why does my text look blurry?</button></h3>
-              <div id="faq-pdf-to-jpg-1" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Almost always because the scale is too low for the amount of detail on the page, and JPG compression is softening what is left. Raise the scale to 2.0 or above. If the page is mainly text or line art, convert it to PNG instead — the format, not the setting, is the problem.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-2" aria-expanded="false" aria-controls="faq-pdf-to-jpg-2" style="font-size: 1rem; padding: 1rem;">Can I convert just one page of a long PDF?</button></h3>
-              <div id="faq-pdf-to-jpg-2" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">The converter renders every page, then you download only the images you want rather than the whole ZIP. To work with a single page as a PDF first, use the Split PDF tool to extract it, then convert that.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-3" aria-expanded="false" aria-controls="faq-pdf-to-jpg-3" style="font-size: 1rem; padding: 1rem;">Does converting change the original PDF?</button></h3>
-              <div id="faq-pdf-to-jpg-3" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. The original file on your device is only read, never modified or moved. You end up with new JPG files alongside it.</div></div>
-            </div>
-        </div>
-      </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
@@ -547,6 +507,53 @@
   </script>
 
   <!-- Footer -->
+      <!-- Homepage SEO content — renders the HowTo and FAQPage schema above.
+           Single source of truth: tools.js no longer renders an FAQ (see
+           sectionFAQ), because rendering both put two FAQs on the page.
+           Removed from generated tool pages by scripts/build-tool-pages.js,
+           which injects its own per-tool copy instead. -->
+      
+
+
+      <!-- SEO content (unique per tool) -->
+      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">PDF to JPG Converter</h1>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Turn every page of a PDF into a standalone JPG image without installing anything or handing your file to a server. The conversion runs on your own machine using your browser's rendering engine, so a contract, a payslip or a medical scan never travels anywhere. Drop the file in, pick a resolution, and download the pages individually or as a single ZIP.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert a PDF to JPG</h2>
+        <ol style="color:var(--text-secondary); line-height:1.9;">
+          <li>Drag your PDF onto the drop zone (or click to browse).</li>
+          <li>Choose the quality and scale (150 DPI for screen, 300 for print).</li>
+          <li>Click convert and download your JPG images — individually or as a ZIP.</li>
+        </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Choosing a resolution that matches the job</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">The scale setting controls how many pixels each PDF page becomes, and it is the only setting that really matters. A scale of 1.0 renders the page at its nominal size, roughly 72 pixels per inch — fine for a thumbnail, too soft for anything else. Around 1.6 gives you something close to 115 DPI, which is comfortable for reading on screen and for dropping into a slide deck.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Push to 2.0 or higher when the JPG is destined for print or when the page carries small type, tables or fine line art. An A4 page at scale 4.0 lands near 300 DPI, the traditional print threshold, and produces an image around 2480 by 3508 pixels. The trade is file size and time: each doubling of scale roughly quadruples the pixel count, so a 20-page document at scale 4.0 is a meaningfully heavier download than the same document at 1.6.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">When JPG is the right format — and when it is not</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">JPG uses lossy compression tuned for photographs and continuous tone. It is the right choice when your PDF pages are scans, photographs, or design-heavy layouts, and when you need the smallest file that still looks good. At quality 0.85 most people cannot see the difference from the original at normal viewing size, while the file is a fraction of the equivalent PNG.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">It is the wrong choice for pages that are mostly sharp black text on white, screenshots of user interfaces, or diagrams with hard edges. JPG compression smears those edges into faint halos that get worse every time the file is re-saved. For that material use the PDF to PNG converter instead — PNG is lossless, so text stays crisp at any zoom level.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Multi-page documents and batch downloads</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Every page of the PDF becomes its own numbered JPG. For a single-page document you get one image; for a hundred-page report you get a hundred, packaged into one ZIP so you are not clicking through a hundred save dialogs. Page order is preserved in the filenames, so the archive stays sorted correctly when you extract it.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Because the work happens on your device rather than a shared server, there is no upload queue and no per-file size ceiling imposed by a hosting plan. The practical limit is your own available memory: very large documents at very high scale will be slower on a phone than on a laptop.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+        <div class="accordion accordion-flush" id="faq-pdf-to-jpg">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-0" aria-expanded="false" aria-controls="faq-pdf-to-jpg-0" style="font-size: 1rem; padding: 1rem;">What DPI should I use for printing?</button></h3>
+              <div id="faq-pdf-to-jpg-0" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Aim for about 300 DPI. Since the scale setting is relative to a nominal 72 DPI, a scale of roughly 4.0 gets you there for a standard page. For a large-format poster where viewers stand further back, 150 DPI is usually enough.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-1" aria-expanded="false" aria-controls="faq-pdf-to-jpg-1" style="font-size: 1rem; padding: 1rem;">Why does my text look blurry?</button></h3>
+              <div id="faq-pdf-to-jpg-1" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Almost always because the scale is too low for the amount of detail on the page, and JPG compression is softening what is left. Raise the scale to 2.0 or above. If the page is mainly text or line art, convert it to PNG instead — the format, not the setting, is the problem.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-2" aria-expanded="false" aria-controls="faq-pdf-to-jpg-2" style="font-size: 1rem; padding: 1rem;">Can I convert just one page of a long PDF?</button></h3>
+              <div id="faq-pdf-to-jpg-2" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">The converter renders every page, then you download only the images you want rather than the whole ZIP. To work with a single page as a PDF first, use the Split PDF tool to extract it, then convert that.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-jpg-3" aria-expanded="false" aria-controls="faq-pdf-to-jpg-3" style="font-size: 1rem; padding: 1rem;">Does converting change the original PDF?</button></h3>
+              <div id="faq-pdf-to-jpg-3" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. The original file on your device is only read, never modified or moved. You end up with new JPG files alongside it.</div></div>
+            </div>
+        </div>
+      </section>
   <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
     <!-- Decorative gradient overlay -->
     <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>

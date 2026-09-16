@@ -350,49 +350,6 @@
             <div id="tool-content" class="w-100 py-3"></div>
           </div>
         </div>
-
-      <!-- SEO content (unique per tool) -->
-      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">QR Code Generator</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Generate a QR code from a link, some text, or contact details, entirely in your browser. Nothing is sent to a server, which also means the code is not a redirect through anyone else's domain — it points straight at what you put in it, permanently.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to generate a QR code</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-          <li>Type or paste your link or text.</li>
-          <li>Pick a size — the QR code previews live.</li>
-          <li>Download the PNG and print or share it.</li>
-        </ol>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Static codes and why that matters</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Many QR generators produce a code pointing at their own short URL, which then redirects to your destination. That gives them analytics and gives you the ability to change the target later, but it makes your printed code depend on their service continuing to exist and continuing to be free.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">The codes here are static: the destination is encoded directly into the pattern. Nobody can track scans, nobody can change where it goes, and it will keep working for as long as the destination does. The trade-off is that changing the target means generating and reprinting a new code.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Size, distance and print quality</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">The usual rule of thumb is that a code should be about one tenth of the distance it will be scanned from. A code read at arm's length, on a business card or a menu, works at around 2 by 2 centimetres. A poster read from three metres needs roughly 30 centimetres.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Keep the quiet zone — the blank margin around the pattern — at least four modules wide. Cropping tight to the edge of the pattern is the most common reason a printed code refuses to scan, and it is invisible as a mistake until the code is already printed.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Keeping the encoded data short</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">The more data you encode, the denser the pattern becomes, and dense patterns need to be printed larger and scanned more carefully. A short URL produces a sparse, forgiving code; a long tracking URL with several query parameters produces a dense one that struggles at small sizes.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Shorten the destination before generating rather than shrinking the printed code afterwards. Also test the finished code with more than one phone before committing to a print run — camera quality and scanning apps vary more than people expect.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What you can usefully encode</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">A URL is the common case, but a QR code carries any short text. Contact details in vCard format add someone to a phone's address book in one scan, which is what makes them useful on a business card.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Wi-Fi credentials are the other genuinely useful one: a code encoding the network name and password lets a guest join without anyone reading a long passphrase aloud. Both work offline, since the data is in the pattern rather than behind a link.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-qr-code-generator">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-0" aria-expanded="false" aria-controls="faq-qr-code-generator-0" style="font-size: 1rem; padding: 1rem;">Do these QR codes expire?</button></h3>
-              <div id="faq-qr-code-generator-0" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. The destination is encoded directly in the pattern, so there is no service in the middle that could shut down or start charging.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-1" aria-expanded="false" aria-controls="faq-qr-code-generator-1" style="font-size: 1rem; padding: 1rem;">Can I track how many people scan it?</button></h3>
-              <div id="faq-qr-code-generator-1" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Not with a static code, because scans never touch a server of ours. Tracking requires a redirect service, which is the trade-off this tool deliberately avoids.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-2" aria-expanded="false" aria-controls="faq-qr-code-generator-2" style="font-size: 1rem; padding: 1rem;">How big should I print it?</button></h3>
-              <div id="faq-qr-code-generator-2" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Roughly one tenth of the scanning distance. About 2 cm for a business card, about 30 cm for a poster read from three metres.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-3" aria-expanded="false" aria-controls="faq-qr-code-generator-3" style="font-size: 1rem; padding: 1rem;">Why will my printed code not scan?</button></h3>
-              <div id="faq-qr-code-generator-3" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Usually too little quiet zone around the pattern, too small a print for the amount of data encoded, or low contrast. Keep a clear margin and use dark on light.</div></div>
-            </div>
-        </div>
-      </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
@@ -550,6 +507,56 @@
   </script>
 
   <!-- Footer -->
+      <!-- Homepage SEO content — renders the HowTo and FAQPage schema above.
+           Single source of truth: tools.js no longer renders an FAQ (see
+           sectionFAQ), because rendering both put two FAQs on the page.
+           Removed from generated tool pages by scripts/build-tool-pages.js,
+           which injects its own per-tool copy instead. -->
+      
+
+
+      <!-- SEO content (unique per tool) -->
+      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">QR Code Generator</h1>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Generate a QR code from a link, some text, or contact details, entirely in your browser. Nothing is sent to a server, which also means the code is not a redirect through anyone else's domain — it points straight at what you put in it, permanently.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to generate a QR code</h2>
+        <ol style="color:var(--text-secondary); line-height:1.9;">
+          <li>Type or paste your link or text.</li>
+          <li>Pick a size — the QR code previews live.</li>
+          <li>Download the PNG and print or share it.</li>
+        </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Static codes and why that matters</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Many QR generators produce a code pointing at their own short URL, which then redirects to your destination. That gives them analytics and gives you the ability to change the target later, but it makes your printed code depend on their service continuing to exist and continuing to be free.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The codes here are static: the destination is encoded directly into the pattern. Nobody can track scans, nobody can change where it goes, and it will keep working for as long as the destination does. The trade-off is that changing the target means generating and reprinting a new code.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Size, distance and print quality</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">The usual rule of thumb is that a code should be about one tenth of the distance it will be scanned from. A code read at arm's length, on a business card or a menu, works at around 2 by 2 centimetres. A poster read from three metres needs roughly 30 centimetres.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Keep the quiet zone — the blank margin around the pattern — at least four modules wide. Cropping tight to the edge of the pattern is the most common reason a printed code refuses to scan, and it is invisible as a mistake until the code is already printed.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Keeping the encoded data short</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">The more data you encode, the denser the pattern becomes, and dense patterns need to be printed larger and scanned more carefully. A short URL produces a sparse, forgiving code; a long tracking URL with several query parameters produces a dense one that struggles at small sizes.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Shorten the destination before generating rather than shrinking the printed code afterwards. Also test the finished code with more than one phone before committing to a print run — camera quality and scanning apps vary more than people expect.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">What you can usefully encode</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">A URL is the common case, but a QR code carries any short text. Contact details in vCard format add someone to a phone's address book in one scan, which is what makes them useful on a business card.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Wi-Fi credentials are the other genuinely useful one: a code encoding the network name and password lets a guest join without anyone reading a long passphrase aloud. Both work offline, since the data is in the pattern rather than behind a link.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+        <div class="accordion accordion-flush" id="faq-qr-code-generator">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-0" aria-expanded="false" aria-controls="faq-qr-code-generator-0" style="font-size: 1rem; padding: 1rem;">Do these QR codes expire?</button></h3>
+              <div id="faq-qr-code-generator-0" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. The destination is encoded directly in the pattern, so there is no service in the middle that could shut down or start charging.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-1" aria-expanded="false" aria-controls="faq-qr-code-generator-1" style="font-size: 1rem; padding: 1rem;">Can I track how many people scan it?</button></h3>
+              <div id="faq-qr-code-generator-1" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Not with a static code, because scans never touch a server of ours. Tracking requires a redirect service, which is the trade-off this tool deliberately avoids.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-2" aria-expanded="false" aria-controls="faq-qr-code-generator-2" style="font-size: 1rem; padding: 1rem;">How big should I print it?</button></h3>
+              <div id="faq-qr-code-generator-2" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Roughly one tenth of the scanning distance. About 2 cm for a business card, about 30 cm for a poster read from three metres.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-qr-code-generator-3" aria-expanded="false" aria-controls="faq-qr-code-generator-3" style="font-size: 1rem; padding: 1rem;">Why will my printed code not scan?</button></h3>
+              <div id="faq-qr-code-generator-3" class="accordion-collapse collapse" data-bs-parent="#faq-qr-code-generator"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Usually too little quiet zone around the pattern, too small a print for the amount of data encoded, or low contrast. Keep a clear margin and use dark on light.</div></div>
+            </div>
+        </div>
+      </section>
   <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
     <!-- Decorative gradient overlay -->
     <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>

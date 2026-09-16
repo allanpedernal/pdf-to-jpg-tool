@@ -350,52 +350,6 @@
             <div id="tool-content" class="w-100 py-3"></div>
           </div>
         </div>
-
-      <!-- SEO content (unique per tool) -->
-      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Split PDF</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Pull a single page or a run of pages out of a PDF and save them as a new document, without uploading the original anywhere. Useful for sending one signed page instead of a forty-page contract, or for breaking a bulky report into sections small enough to email.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to split a PDF</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-          <li>Open your PDF in the splitter.</li>
-          <li>Choose the pages or ranges to extract.</li>
-          <li>Download your new, smaller PDF(s).</li>
-        </ol>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Extracting a page versus splitting a document</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">These are different jobs that people often conflate. Extracting means taking pages 12 to 15 out of a long document and saving just those. Splitting means cutting one document into several — chapters, sections, or fixed-size chunks — and keeping all of it.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Both start the same way: choose the page or range you want. For an extraction you take one range and stop. For a split you repeat the operation across the document, producing a file per section. The original is untouched either way, so there is no risk in experimenting.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Working out which pages you need</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">PDF page numbers and printed page numbers frequently disagree. A report with a cover, a blank verso and Roman-numbered front matter can easily have printed page 1 sitting at PDF page 7. Always go by the position in the viewer rather than the number printed on the page.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">If the document has bookmarks, they are the fastest way to find section boundaries. Open the outline panel in your PDF viewer, note the page each section starts on, and use those as your split points.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Privacy when the document is sensitive</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Splitting is one of the operations people most often need on exactly the documents they should least want to upload: contracts, bank statements, medical records, identity documents. Because this tool runs in your browser, the file is read from disk, processed in memory and written back out without ever crossing the network.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">That also means it works with no connection at all. Load the page once and you can split documents on a plane or on a locked-down network.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Naming the pieces so they stay sorted</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Whatever you extract, name it in a way that sorts correctly. Alphabetical sorting places 'section-10' before 'section-2', which scrambles a set of extracts the moment someone opens the folder.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Zero-padding fixes it: 'section-02' and 'section-10' sort correctly everywhere. Leading the name with a date in year-month-day order does the same job for documents that accumulate over time, and both conventions survive being emailed, zipped and unpacked on a different operating system.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Splitting large documents for sending</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">When a document is too large to email, splitting is often better than compressing. Compression degrades pages that were fine; splitting leaves every page untouched and simply sends fewer of them at a time.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Break at meaningful boundaries rather than arbitrary page counts. Three files named for their sections are far easier for a recipient to handle than three named part one, two and three, and they can act on the relevant section without reassembling anything.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-split-pdf">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-0" aria-expanded="false" aria-controls="faq-split-pdf-0" style="font-size: 1rem; padding: 1rem;">Can I extract just one page?</button></h3>
-              <div id="faq-split-pdf-0" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Choose a single page or any range and save it as a new PDF.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-1" aria-expanded="false" aria-controls="faq-split-pdf-1" style="font-size: 1rem; padding: 1rem;">Is the original file changed?</button></h3>
-              <div id="faq-split-pdf-1" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. You get new files; the original stays exactly as it was.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-2" aria-expanded="false" aria-controls="faq-split-pdf-2" style="font-size: 1rem; padding: 1rem;">Do the extracted pages keep their formatting?</button></h3>
-              <div id="faq-split-pdf-2" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Pages are copied whole, so fonts, images, layout and any text layer come across unchanged.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-3" aria-expanded="false" aria-controls="faq-split-pdf-3" style="font-size: 1rem; padding: 1rem;">Can I split a password-protected PDF?</button></h3>
-              <div id="faq-split-pdf-3" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Not while it is protected. Remove the password in your PDF viewer first, then split the unprotected copy.</div></div>
-            </div>
-        </div>
-      </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
@@ -553,6 +507,59 @@
   </script>
 
   <!-- Footer -->
+      <!-- Homepage SEO content — renders the HowTo and FAQPage schema above.
+           Single source of truth: tools.js no longer renders an FAQ (see
+           sectionFAQ), because rendering both put two FAQs on the page.
+           Removed from generated tool pages by scripts/build-tool-pages.js,
+           which injects its own per-tool copy instead. -->
+      
+
+
+      <!-- SEO content (unique per tool) -->
+      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Split PDF</h1>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Pull a single page or a run of pages out of a PDF and save them as a new document, without uploading the original anywhere. Useful for sending one signed page instead of a forty-page contract, or for breaking a bulky report into sections small enough to email.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to split a PDF</h2>
+        <ol style="color:var(--text-secondary); line-height:1.9;">
+          <li>Open your PDF in the splitter.</li>
+          <li>Choose the pages or ranges to extract.</li>
+          <li>Download your new, smaller PDF(s).</li>
+        </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Extracting a page versus splitting a document</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">These are different jobs that people often conflate. Extracting means taking pages 12 to 15 out of a long document and saving just those. Splitting means cutting one document into several — chapters, sections, or fixed-size chunks — and keeping all of it.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Both start the same way: choose the page or range you want. For an extraction you take one range and stop. For a split you repeat the operation across the document, producing a file per section. The original is untouched either way, so there is no risk in experimenting.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Working out which pages you need</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">PDF page numbers and printed page numbers frequently disagree. A report with a cover, a blank verso and Roman-numbered front matter can easily have printed page 1 sitting at PDF page 7. Always go by the position in the viewer rather than the number printed on the page.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">If the document has bookmarks, they are the fastest way to find section boundaries. Open the outline panel in your PDF viewer, note the page each section starts on, and use those as your split points.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Privacy when the document is sensitive</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Splitting is one of the operations people most often need on exactly the documents they should least want to upload: contracts, bank statements, medical records, identity documents. Because this tool runs in your browser, the file is read from disk, processed in memory and written back out without ever crossing the network.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">That also means it works with no connection at all. Load the page once and you can split documents on a plane or on a locked-down network.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Naming the pieces so they stay sorted</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Whatever you extract, name it in a way that sorts correctly. Alphabetical sorting places 'section-10' before 'section-2', which scrambles a set of extracts the moment someone opens the folder.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Zero-padding fixes it: 'section-02' and 'section-10' sort correctly everywhere. Leading the name with a date in year-month-day order does the same job for documents that accumulate over time, and both conventions survive being emailed, zipped and unpacked on a different operating system.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Splitting large documents for sending</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">When a document is too large to email, splitting is often better than compressing. Compression degrades pages that were fine; splitting leaves every page untouched and simply sends fewer of them at a time.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Break at meaningful boundaries rather than arbitrary page counts. Three files named for their sections are far easier for a recipient to handle than three named part one, two and three, and they can act on the relevant section without reassembling anything.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+        <div class="accordion accordion-flush" id="faq-split-pdf">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-0" aria-expanded="false" aria-controls="faq-split-pdf-0" style="font-size: 1rem; padding: 1rem;">Can I extract just one page?</button></h3>
+              <div id="faq-split-pdf-0" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Choose a single page or any range and save it as a new PDF.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-1" aria-expanded="false" aria-controls="faq-split-pdf-1" style="font-size: 1rem; padding: 1rem;">Is the original file changed?</button></h3>
+              <div id="faq-split-pdf-1" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. You get new files; the original stays exactly as it was.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-2" aria-expanded="false" aria-controls="faq-split-pdf-2" style="font-size: 1rem; padding: 1rem;">Do the extracted pages keep their formatting?</button></h3>
+              <div id="faq-split-pdf-2" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Pages are copied whole, so fonts, images, layout and any text layer come across unchanged.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-split-pdf-3" aria-expanded="false" aria-controls="faq-split-pdf-3" style="font-size: 1rem; padding: 1rem;">Can I split a password-protected PDF?</button></h3>
+              <div id="faq-split-pdf-3" class="accordion-collapse collapse" data-bs-parent="#faq-split-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Not while it is protected. Remove the password in your PDF viewer first, then split the unprotected copy.</div></div>
+            </div>
+        </div>
+      </section>
   <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
     <!-- Decorative gradient overlay -->
     <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>

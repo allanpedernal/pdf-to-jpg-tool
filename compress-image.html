@@ -350,49 +350,6 @@
             <div id="tool-content" class="w-100 py-3"></div>
           </div>
         </div>
-
-      <!-- SEO content (unique per tool) -->
-      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Image Compressor</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Reduce an image's file size while keeping it looking right, entirely in your browser. Most images on the web are several times larger than they need to be, and shrinking them is the single cheapest improvement you can make to how fast a page loads.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to compress an image</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-          <li>Drag in the image(s) to compress.</li>
-          <li>Choose how much to compress.</li>
-          <li>Download the smaller image.</li>
-        </ol>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Where the quality setting actually bites</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">JPG quality runs from 0 to 1, and the relationship between that number and the file size is steep and uneven. Dropping from 1.0 to 0.85 typically halves the file with no visible change on a photograph. Dropping from 0.85 to 0.7 saves much less and starts to show as soft blocking in smooth gradients like skies and skin.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">That makes roughly 0.8 to 0.85 the practical sweet spot for photographs on the web. Go lower only when a hard size limit forces it, and check the result at full size rather than as a thumbnail — compression artifacts hide at small scale and reappear when someone zooms.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Resize first, then compress</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Compression and resizing solve different halves of the same problem, and the order matters. A 4000-pixel-wide photograph displayed in an 800-pixel column is carrying five times the pixels anyone will see. No amount of quality reduction fixes that; it just makes an oversized image blurry as well as heavy.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Resize to the dimensions the image is actually displayed at, then compress. Doing both usually takes a multi-megabyte camera file to something under 200 KB, which is a completely different page-load experience from compressing alone.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Knowing when to stop</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Compression is lossy and cumulative. Each save discards a little more detail, and re-compressing an already-compressed image degrades it further while saving very little — the easy wins were taken the first time.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Keep the original as your master and compress copies. If you later need a different size or a different format, going back to the original gives a clean result; re-processing the compressed copy compounds every artifact already in it.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Choosing the format before the quality</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Format choice usually saves more than quality tuning. A photograph converted to WebP is typically 25 to 35 percent smaller than the same photograph as a well-compressed JPG, at the same visual quality.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">The decision tree is short. Photograph for the web: WebP, with a JPG fallback if you need one. Photograph for email or print: JPG. Screenshot, logo or diagram: PNG, or lossless WebP if everything that will open it supports the format.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-compress-image">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-0" aria-expanded="false" aria-controls="faq-compress-image-0" style="font-size: 1rem; padding: 1rem;">How much can I compress without it showing?</button></h3>
-              <div id="faq-compress-image-0" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">On photographs, quality around 0.8 to 0.85 usually halves the file with no visible difference. Below about 0.7, smooth areas like skies start to show blocking.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-1" aria-expanded="false" aria-controls="faq-compress-image-1" style="font-size: 1rem; padding: 1rem;">Should I resize or compress?</button></h3>
-              <div id="faq-compress-image-1" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Both, in that order. Resize to the dimensions actually displayed, then compress. Resizing alone leaves quality on the table; compressing alone leaves an oversized image.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-2" aria-expanded="false" aria-controls="faq-compress-image-2" style="font-size: 1rem; padding: 1rem;">Does compressing repeatedly make it worse?</button></h3>
-              <div id="faq-compress-image-2" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. JPG compression is lossy and cumulative, so each re-save discards more detail. Always compress from the original.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-3" aria-expanded="false" aria-controls="faq-compress-image-3" style="font-size: 1rem; padding: 1rem;">Are my images uploaded?</button></h3>
-              <div id="faq-compress-image-3" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. Compression runs in your browser and the file never leaves your device.</div></div>
-            </div>
-        </div>
-      </section>
       </main>
 
       <!-- Right Ad Sidebar (Desktop Only) -->
@@ -550,6 +507,56 @@
   </script>
 
   <!-- Footer -->
+      <!-- Homepage SEO content — renders the HowTo and FAQPage schema above.
+           Single source of truth: tools.js no longer renders an FAQ (see
+           sectionFAQ), because rendering both put two FAQs on the page.
+           Removed from generated tool pages by scripts/build-tool-pages.js,
+           which injects its own per-tool copy instead. -->
+      
+
+
+      <!-- SEO content (unique per tool) -->
+      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Image Compressor</h1>
+        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Reduce an image's file size while keeping it looking right, entirely in your browser. Most images on the web are several times larger than they need to be, and shrinking them is the single cheapest improvement you can make to how fast a page loads.</p>
+        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to compress an image</h2>
+        <ol style="color:var(--text-secondary); line-height:1.9;">
+          <li>Drag in the image(s) to compress.</li>
+          <li>Choose how much to compress.</li>
+          <li>Download the smaller image.</li>
+        </ol>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Where the quality setting actually bites</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">JPG quality runs from 0 to 1, and the relationship between that number and the file size is steep and uneven. Dropping from 1.0 to 0.85 typically halves the file with no visible change on a photograph. Dropping from 0.85 to 0.7 saves much less and starts to show as soft blocking in smooth gradients like skies and skin.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">That makes roughly 0.8 to 0.85 the practical sweet spot for photographs on the web. Go lower only when a hard size limit forces it, and check the result at full size rather than as a thumbnail — compression artifacts hide at small scale and reappear when someone zooms.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Resize first, then compress</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Compression and resizing solve different halves of the same problem, and the order matters. A 4000-pixel-wide photograph displayed in an 800-pixel column is carrying five times the pixels anyone will see. No amount of quality reduction fixes that; it just makes an oversized image blurry as well as heavy.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Resize to the dimensions the image is actually displayed at, then compress. Doing both usually takes a multi-megabyte camera file to something under 200 KB, which is a completely different page-load experience from compressing alone.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Knowing when to stop</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Compression is lossy and cumulative. Each save discards a little more detail, and re-compressing an already-compressed image degrades it further while saving very little — the easy wins were taken the first time.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">Keep the original as your master and compress copies. If you later need a different size or a different format, going back to the original gives a clean result; re-processing the compressed copy compounds every artifact already in it.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Choosing the format before the quality</h2>
+        <p style="color:var(--text-secondary); line-height:1.8;">Format choice usually saves more than quality tuning. A photograph converted to WebP is typically 25 to 35 percent smaller than the same photograph as a well-compressed JPG, at the same visual quality.</p>
+        <p style="color:var(--text-secondary); line-height:1.8;">The decision tree is short. Photograph for the web: WebP, with a JPG fallback if you need one. Photograph for email or print: JPG. Screenshot, logo or diagram: PNG, or lossless WebP if everything that will open it supports the format.</p>
+        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+        <div class="accordion accordion-flush" id="faq-compress-image">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-0" aria-expanded="false" aria-controls="faq-compress-image-0" style="font-size: 1rem; padding: 1rem;">How much can I compress without it showing?</button></h3>
+              <div id="faq-compress-image-0" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">On photographs, quality around 0.8 to 0.85 usually halves the file with no visible difference. Below about 0.7, smooth areas like skies start to show blocking.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-1" aria-expanded="false" aria-controls="faq-compress-image-1" style="font-size: 1rem; padding: 1rem;">Should I resize or compress?</button></h3>
+              <div id="faq-compress-image-1" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Both, in that order. Resize to the dimensions actually displayed, then compress. Resizing alone leaves quality on the table; compressing alone leaves an oversized image.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-2" aria-expanded="false" aria-controls="faq-compress-image-2" style="font-size: 1rem; padding: 1rem;">Does compressing repeatedly make it worse?</button></h3>
+              <div id="faq-compress-image-2" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. JPG compression is lossy and cumulative, so each re-save discards more detail. Always compress from the original.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-3" aria-expanded="false" aria-controls="faq-compress-image-3" style="font-size: 1rem; padding: 1rem;">Are my images uploaded?</button></h3>
+              <div id="faq-compress-image-3" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. Compression runs in your browser and the file never leaves your device.</div></div>
+            </div>
+        </div>
+      </section>
   <footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
     <!-- Decorative gradient overlay -->
     <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>
