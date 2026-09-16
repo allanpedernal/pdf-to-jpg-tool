@@ -374,10 +374,24 @@
         <p style="color:var(--text-secondary); line-height:1.8;">Images are usually the largest thing a web page downloads, ahead of scripts and stylesheets. Converting photographic PNGs to JPG frequently removes several megabytes from a page, and that shows up directly in how quickly the page becomes usable on a phone connection.</p>
         <p style="color:var(--text-secondary); line-height:1.8;">Search engines measure this. Largest Contentful Paint, one of the Core Web Vitals used in ranking, is very often an image — so the format decision is a ranking factor as well as a courtesy to your visitors.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why convert PNG to JPG?</h3><p class="mb-0" style="color:var(--text-secondary);">Mostly for size. Photographs stored as PNG are often five to ten times larger than the equivalent JPG with no visible quality difference at normal viewing size.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will I lose transparency?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. JPG has no transparency, so transparent areas become a solid background colour. Use WebP if you need transparency and small files.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will the quality drop?</h3><p class="mb-0" style="color:var(--text-secondary);">JPG is lossy, so technically yes, but at high quality settings the difference is invisible on photographs. On screenshots and line art it is visible, and PNG is the better choice.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I convert back to PNG later?</h3><p class="mb-0" style="color:var(--text-secondary);">You can change the format back, but the detail discarded during JPG compression does not return. Keep the original PNG if you may need it.</p></div>
+        <div class="accordion accordion-flush" id="faq-png-to-jpg">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-png-to-jpg-0" aria-expanded="false" aria-controls="faq-png-to-jpg-0" style="font-size: 1rem; padding: 1rem;">Why convert PNG to JPG?</button></h3>
+              <div id="faq-png-to-jpg-0" class="accordion-collapse collapse" data-bs-parent="#faq-png-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Mostly for size. Photographs stored as PNG are often five to ten times larger than the equivalent JPG with no visible quality difference at normal viewing size.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-png-to-jpg-1" aria-expanded="false" aria-controls="faq-png-to-jpg-1" style="font-size: 1rem; padding: 1rem;">Will I lose transparency?</button></h3>
+              <div id="faq-png-to-jpg-1" class="accordion-collapse collapse" data-bs-parent="#faq-png-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. JPG has no transparency, so transparent areas become a solid background colour. Use WebP if you need transparency and small files.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-png-to-jpg-2" aria-expanded="false" aria-controls="faq-png-to-jpg-2" style="font-size: 1rem; padding: 1rem;">Will the quality drop?</button></h3>
+              <div id="faq-png-to-jpg-2" class="accordion-collapse collapse" data-bs-parent="#faq-png-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">JPG is lossy, so technically yes, but at high quality settings the difference is invisible on photographs. On screenshots and line art it is visible, and PNG is the better choice.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-png-to-jpg-3" aria-expanded="false" aria-controls="faq-png-to-jpg-3" style="font-size: 1rem; padding: 1rem;">Can I convert back to PNG later?</button></h3>
+              <div id="faq-png-to-jpg-3" class="accordion-collapse collapse" data-bs-parent="#faq-png-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">You can change the format back, but the detail discarded during JPG compression does not return. Keep the original PNG if you may need it.</div></div>
+            </div>
+        </div>
       </section>
       </main>
 

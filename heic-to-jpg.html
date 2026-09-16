@@ -374,10 +374,24 @@
         <p style="color:var(--text-secondary); line-height:1.8;">Exporting many photos at once is where the format bites hardest, because a mixed folder of HEIC and JPG will half-open in whatever you hand it to. Converting the whole set first gives you a folder that behaves consistently everywhere.</p>
         <p style="color:var(--text-secondary); line-height:1.8;">Watch the storage cost. The JPGs will be roughly twice the size of the HEICs, so a 5 GB export becomes around 10 GB. Keep the HEIC originals on the phone or in your photo library and treat the JPGs as a working copy for sharing.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why can I not open HEIC files on Windows?</h3><p class="mb-0" style="color:var(--text-secondary);">HEIC uses HEVC compression, which is patent-encumbered. Windows needs an extra codec from the Microsoft Store; converting to JPG avoids the problem entirely.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will converting reduce quality?</h3><p class="mb-0" style="color:var(--text-secondary);">Not visibly at high quality settings. The JPG will be roughly twice the file size for the same picture, because JPG compresses less efficiently.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">What happens to Live Photos?</h3><p class="mb-0" style="color:var(--text-secondary);">You keep the still key frame. The motion is not part of a JPG and is lost in conversion.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I stop my iPhone making HEIC files?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes — Settings, Camera, Formats, Most Compatible. Your phone will shoot JPG from then on, using more storage.</p></div>
+        <div class="accordion accordion-flush" id="faq-heic-to-jpg">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-heic-to-jpg-0" aria-expanded="false" aria-controls="faq-heic-to-jpg-0" style="font-size: 1rem; padding: 1rem;">Why can I not open HEIC files on Windows?</button></h3>
+              <div id="faq-heic-to-jpg-0" class="accordion-collapse collapse" data-bs-parent="#faq-heic-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">HEIC uses HEVC compression, which is patent-encumbered. Windows needs an extra codec from the Microsoft Store; converting to JPG avoids the problem entirely.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-heic-to-jpg-1" aria-expanded="false" aria-controls="faq-heic-to-jpg-1" style="font-size: 1rem; padding: 1rem;">Will converting reduce quality?</button></h3>
+              <div id="faq-heic-to-jpg-1" class="accordion-collapse collapse" data-bs-parent="#faq-heic-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Not visibly at high quality settings. The JPG will be roughly twice the file size for the same picture, because JPG compresses less efficiently.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-heic-to-jpg-2" aria-expanded="false" aria-controls="faq-heic-to-jpg-2" style="font-size: 1rem; padding: 1rem;">What happens to Live Photos?</button></h3>
+              <div id="faq-heic-to-jpg-2" class="accordion-collapse collapse" data-bs-parent="#faq-heic-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">You keep the still key frame. The motion is not part of a JPG and is lost in conversion.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-heic-to-jpg-3" aria-expanded="false" aria-controls="faq-heic-to-jpg-3" style="font-size: 1rem; padding: 1rem;">Can I stop my iPhone making HEIC files?</button></h3>
+              <div id="faq-heic-to-jpg-3" class="accordion-collapse collapse" data-bs-parent="#faq-heic-to-jpg"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes — Settings, Camera, Formats, Most Compatible. Your phone will shoot JPG from then on, using more storage.</div></div>
+            </div>
+        </div>
       </section>
       </main>
 

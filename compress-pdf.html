@@ -374,10 +374,24 @@
         <p style="color:var(--text-secondary); line-height:1.8;">A digitally created PDF — exported from Word, InDesign or a browser — stores text as text and compresses very little further. A scanned PDF is a stack of photographs of paper, and that is where the large savings live.</p>
         <p style="color:var(--text-secondary); line-height:1.8;">Scans also respond well to a resolution matched to their purpose. A contract that only needs to be readable on screen does not need 600 DPI page images; 200 DPI is comfortable and a fraction of the size. If you also want the text to be searchable, run the document through the PDF OCR tool before compressing, since heavy compression makes character recognition harder.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will compression blur my text?</h3><p class="mb-0" style="color:var(--text-secondary);">No. Text is stored as characters and font data, not pixels, and is left untouched. Only oversized embedded images are downsampled.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is it safe for confidential documents?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Compression runs entirely in your browser — the file is never uploaded, so there is no server copy to worry about.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why did my file barely get smaller?</h3><p class="mb-0" style="color:var(--text-secondary);">Because it was already efficient. A text-only PDF has little to remove. Large files that resist compression are usually already-compressed scans.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does it remove any content?</h3><p class="mb-0" style="color:var(--text-secondary);">No pages, text or images are removed. Images are re-encoded at a resolution matched to how they are actually displayed.</p></div>
+        <div class="accordion accordion-flush" id="faq-compress-pdf">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-pdf-0" aria-expanded="false" aria-controls="faq-compress-pdf-0" style="font-size: 1rem; padding: 1rem;">Will compression blur my text?</button></h3>
+              <div id="faq-compress-pdf-0" class="accordion-collapse collapse" data-bs-parent="#faq-compress-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. Text is stored as characters and font data, not pixels, and is left untouched. Only oversized embedded images are downsampled.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-pdf-1" aria-expanded="false" aria-controls="faq-compress-pdf-1" style="font-size: 1rem; padding: 1rem;">Is it safe for confidential documents?</button></h3>
+              <div id="faq-compress-pdf-1" class="accordion-collapse collapse" data-bs-parent="#faq-compress-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Compression runs entirely in your browser — the file is never uploaded, so there is no server copy to worry about.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-pdf-2" aria-expanded="false" aria-controls="faq-compress-pdf-2" style="font-size: 1rem; padding: 1rem;">Why did my file barely get smaller?</button></h3>
+              <div id="faq-compress-pdf-2" class="accordion-collapse collapse" data-bs-parent="#faq-compress-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Because it was already efficient. A text-only PDF has little to remove. Large files that resist compression are usually already-compressed scans.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-pdf-3" aria-expanded="false" aria-controls="faq-compress-pdf-3" style="font-size: 1rem; padding: 1rem;">Does it remove any content?</button></h3>
+              <div id="faq-compress-pdf-3" class="accordion-collapse collapse" data-bs-parent="#faq-compress-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No pages, text or images are removed. Images are re-encoded at a resolution matched to how they are actually displayed.</div></div>
+            </div>
+        </div>
       </section>
       </main>
 

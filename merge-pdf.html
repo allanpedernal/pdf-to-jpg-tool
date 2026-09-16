@@ -377,10 +377,24 @@
         <p style="color:var(--text-secondary); line-height:1.8;">Open the merged file and check three things: the total page count matches the sum of the parts, the seams between documents land where you expect, and nothing has been duplicated at a boundary. Those three checks catch nearly every merge error.</p>
         <p style="color:var(--text-secondary); line-height:1.8;">Page count is the fastest signal. If twelve plus eight produces nineteen pages, a page was dropped, and finding it now is far easier than after the document has been signed, circulated or filed.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Is there a file limit?</h3><p class="mb-0" style="color:var(--text-secondary);">No fixed limit. Because merging happens on your device, the practical ceiling is your available memory rather than a server quota.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my files private?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. Merging happens locally in your browser with no uploads, so none of the documents leave your device.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will the merged PDF still be searchable?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes, provided the originals were. Pages are copied intact, including their text layer.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Can I reorder pages after merging?</h3><p class="mb-0" style="color:var(--text-secondary);">Reorder the source files before merging. To rearrange afterwards, split the merged document and merge again in the order you want.</p></div>
+        <div class="accordion accordion-flush" id="faq-merge-pdf">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-merge-pdf-0" aria-expanded="false" aria-controls="faq-merge-pdf-0" style="font-size: 1rem; padding: 1rem;">Is there a file limit?</button></h3>
+              <div id="faq-merge-pdf-0" class="accordion-collapse collapse" data-bs-parent="#faq-merge-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No fixed limit. Because merging happens on your device, the practical ceiling is your available memory rather than a server quota.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-merge-pdf-1" aria-expanded="false" aria-controls="faq-merge-pdf-1" style="font-size: 1rem; padding: 1rem;">Are my files private?</button></h3>
+              <div id="faq-merge-pdf-1" class="accordion-collapse collapse" data-bs-parent="#faq-merge-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Merging happens locally in your browser with no uploads, so none of the documents leave your device.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-merge-pdf-2" aria-expanded="false" aria-controls="faq-merge-pdf-2" style="font-size: 1rem; padding: 1rem;">Will the merged PDF still be searchable?</button></h3>
+              <div id="faq-merge-pdf-2" class="accordion-collapse collapse" data-bs-parent="#faq-merge-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes, provided the originals were. Pages are copied intact, including their text layer.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-merge-pdf-3" aria-expanded="false" aria-controls="faq-merge-pdf-3" style="font-size: 1rem; padding: 1rem;">Can I reorder pages after merging?</button></h3>
+              <div id="faq-merge-pdf-3" class="accordion-collapse collapse" data-bs-parent="#faq-merge-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Reorder the source files before merging. To rearrange afterwards, split the merged document and merge again in the order you want.</div></div>
+            </div>
+        </div>
       </section>
       </main>
 

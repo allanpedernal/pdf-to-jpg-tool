@@ -374,10 +374,24 @@
         <p style="color:var(--text-secondary); line-height:1.8;">Screenshots are the clearest case for PNG. They are almost entirely sharp edges — window borders, text, icons, flat interface colour — which is exactly the material JPG compression handles worst, ringing faint halos around every edge.</p>
         <p style="color:var(--text-secondary); line-height:1.8;">A screenshot saved as JPG is also usually larger than the same screenshot as PNG, because flat interface colour compresses beautifully under PNG and poorly under JPG. It is the rare case where the lossless format wins on both quality and size.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Will converting to PNG improve quality?</h3><p class="mb-0" style="color:var(--text-secondary);">No. It prevents further loss from future saves, but the detail JPG already discarded cannot be recovered.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Why is the PNG so much bigger?</h3><p class="mb-0" style="color:var(--text-secondary);">PNG compresses flat colour and sharp edges well and photographic detail poorly. A photo is typically three to five times larger as PNG.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does it add transparency?</h3><p class="mb-0" style="color:var(--text-secondary);">It gives the file the ability to store transparency. The image itself stays fully opaque until you erase part of it in an editor.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Should I use PNG for photos on my website?</h3><p class="mb-0" style="color:var(--text-secondary);">Usually not. A well-compressed JPG or WebP looks the same and loads far faster.</p></div>
+        <div class="accordion accordion-flush" id="faq-jpg-to-png">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-jpg-to-png-0" aria-expanded="false" aria-controls="faq-jpg-to-png-0" style="font-size: 1rem; padding: 1rem;">Will converting to PNG improve quality?</button></h3>
+              <div id="faq-jpg-to-png-0" class="accordion-collapse collapse" data-bs-parent="#faq-jpg-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. It prevents further loss from future saves, but the detail JPG already discarded cannot be recovered.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-jpg-to-png-1" aria-expanded="false" aria-controls="faq-jpg-to-png-1" style="font-size: 1rem; padding: 1rem;">Why is the PNG so much bigger?</button></h3>
+              <div id="faq-jpg-to-png-1" class="accordion-collapse collapse" data-bs-parent="#faq-jpg-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">PNG compresses flat colour and sharp edges well and photographic detail poorly. A photo is typically three to five times larger as PNG.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-jpg-to-png-2" aria-expanded="false" aria-controls="faq-jpg-to-png-2" style="font-size: 1rem; padding: 1rem;">Does it add transparency?</button></h3>
+              <div id="faq-jpg-to-png-2" class="accordion-collapse collapse" data-bs-parent="#faq-jpg-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">It gives the file the ability to store transparency. The image itself stays fully opaque until you erase part of it in an editor.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-jpg-to-png-3" aria-expanded="false" aria-controls="faq-jpg-to-png-3" style="font-size: 1rem; padding: 1rem;">Should I use PNG for photos on my website?</button></h3>
+              <div id="faq-jpg-to-png-3" class="accordion-collapse collapse" data-bs-parent="#faq-jpg-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Usually not. A well-compressed JPG or WebP looks the same and loads far faster.</div></div>
+            </div>
+        </div>
       </section>
       </main>
 

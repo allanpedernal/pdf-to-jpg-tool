@@ -325,7 +325,14 @@ function seoSection(t) {
     `        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">${esc(sec.h2)}</h2>\n` +
     sec.p.map(par => `        <p style="color:var(--text-secondary); line-height:1.8;">${esc(par)}</p>`).join('\n')
   ).join('\n');
-  const faqs = copy.faqs.map(([q, a]) => `          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">${esc(q)}</h3><p class="mb-0" style="color:var(--text-secondary);">${esc(a)}</p></div>`).join('\n');
+  // Rendered as the site's accordion so the static copy looks like the one
+  // tools.js used to inject. The accordion body is real markup, not JS state,
+  // so a crawler reads every answer even while it is visually collapsed.
+  const acc = `faq-${t.slug}`;
+  const faqs = copy.faqs.map(([q, a], i) => `            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#${acc}-${i}" aria-expanded="false" aria-controls="${acc}-${i}" style="font-size: 1rem; padding: 1rem;">${esc(q)}</button></h3>
+              <div id="${acc}-${i}" class="accordion-collapse collapse" data-bs-parent="#${acc}"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">${esc(a)}</div></div>
+            </div>`).join('\n');
   const howTitle = HOW_TITLE[t.slug] || `How to use the ${t.h1.replace(/ —.*/, '')}`;
   return `
       <!-- SEO content (unique per tool) -->
@@ -338,7 +345,9 @@ ${steps}
         </ol>
 ${body}
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
+        <div class="accordion accordion-flush" id="${acc}">
 ${faqs}
+        </div>
       </section>`;
 }
 

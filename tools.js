@@ -39,18 +39,16 @@ function sectionUseCases(cards) {
       </div>`;
 }
 function sectionFAQ(faqs) {
-  return `
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;"><i class="bi bi-question-circle me-2"></i>Frequently Asked Questions</h2>
-          <div class="accordion accordion-flush" id="faqAccordion">${faqs.map((f, i) => `
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqx${i}" aria-expanded="false" style="font-size: 1rem; padding: 1rem;">${f.q}</button></h2>
-              <div id="faqx${i}" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">${f.a}</div></div>
-            </div>`).join('')}
-          </div>
-        </div>
-      </div>`;
+  // Intentionally renders nothing.
+  //
+  // The FAQ is now part of the STATIC page (see scripts/build-tool-pages.js
+  // and #home-seo-content in index.html) so that crawlers and AdSense reviewers
+  // actually receive it — JS-rendered copy is invisible to them, which is what
+  // left every tool page serving 79 crawlable words.
+  //
+  // Rendering it here as well put two FAQ sections on every page for humans.
+  // Do not reinstate this without removing the static one first.
+  return '';
 }
 
 function getPDFToPNGContent() {
@@ -61,9 +59,9 @@ function getPDFToPNGContent() {
         <div class="mb-4">
           <span class="emoji-document" style="font-size: 5rem;">🖼️</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PDF → PNG Converter
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Convert PDF to PNG instantly in your browser</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -272,9 +270,9 @@ function getPDFToJPGContent() {
         <div class="mb-4">
           <span class="emoji-document" style="font-size: 5rem;">📄</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PDF → JPG Converter
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Convert PDF to JPG instantly in your browser</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -528,136 +526,7 @@ function getPDFToJPGContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordion">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1" style="font-size: 1rem; padding: 1rem;">
-                  How do I convert PDF to JPG?
-                </button>
-              </h2>
-              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PDF file into the upload area, adjust the quality and scale settings if needed, then click 'Convert PDF to JPG'. The conversion happens instantly in your browser, and all JPG images will be downloaded as a ZIP file.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What quality settings should I use?
-                </button>
-              </h2>
-              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Quality ranges from 0.1 (lowest, smallest file) to 1.0 (highest, largest file). For most purposes, 0.85 provides an excellent balance between quality and file size. Use 1.0 for maximum quality when file size isn't a concern, or lower values for smaller file sizes.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What does the scale setting do?
-                </button>
-              </h2>
-              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Scale controls the resolution of the output JPG images. 1.0 = original PDF size, 2.0 = double the resolution, 0.5 = half the resolution. Higher scale values produce larger, sharper images but also larger file sizes. Default is 1.6 for optimal quality.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert multi-page PDFs?
-                </button>
-              </h2>
-              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! Our PDF to JPG converter supports PDFs with any number of pages. Each page will be converted to a separate JPG image, and all images will be packaged in a single ZIP file for easy download.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can convert. Convert as many PDFs to JPG as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq8" aria-expanded="false" aria-controls="faq8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  How long does conversion take?
-                </button>
-              </h2>
-              <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most PDFs convert in just a few seconds, depending on the number of pages and your device's performance.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq9" aria-expanded="false" aria-controls="faq9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What file format will I get?
-                </button>
-              </h2>
-              <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  You'll receive JPG (JPEG) image files. Each PDF page becomes a separate JPG file, and all files are packaged in a ZIP archive for convenient download. JPG is a widely supported image format compatible with all devices and software.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq10" aria-expanded="false" aria-controls="faq10" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert password-protected PDFs?
-                </button>
-              </h2>
-              <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, password-protected PDFs cannot be converted. You'll need to remove the password protection from your PDF file first before converting it to JPG format.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -671,9 +540,9 @@ function getJPGToPDFContent() {
           <div class="mb-3">
             <span class="emoji-document-pages" style="font-size: 4rem;">📑</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             JPG to PDF Converter
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Convert images to PDF document instantly</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -938,136 +807,7 @@ function getJPGToPDFContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionJPG">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG1" aria-expanded="false" aria-controls="faqJPG1" style="font-size: 1rem; padding: 1rem;">
-                  How do I convert JPG to PDF?
-                </button>
-              </h2>
-              <div id="faqJPG1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your images into the upload area, select your preferred page size and orientation, then click 'Convert to PDF'. The conversion happens instantly in your browser, and your PDF file will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG2" aria-expanded="false" aria-controls="faqJPG2" style="font-size: 1rem; padding: 1rem;">
-                  Are my images uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqJPG2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your images never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG3" aria-expanded="false" aria-controls="faqJPG3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What image formats are supported?
-                </button>
-              </h2>
-              <div id="faqJPG3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our JPG to PDF converter supports JPG, JPEG, and PNG image formats. You can convert multiple images at once, and each image will become a separate page in your PDF document.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG4" aria-expanded="false" aria-controls="faqJPG4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What page sizes are available?
-                </button>
-              </h2>
-              <div id="faqJPG4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  You can choose from A4, Letter, Legal, or Fit to Image. The Fit to Image option will automatically adjust the PDF page size to match your image dimensions. You can also select Portrait or Landscape orientation.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG5" aria-expanded="false" aria-controls="faqJPG5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert multiple images at once?
-                </button>
-              </h2>
-              <div id="faqJPG5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! You can select multiple images at once, and they will all be combined into a single PDF document. Each image will become a separate page in the PDF, maintaining the order you selected them.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG6" aria-expanded="false" aria-controls="faqJPG6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqJPG6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of images you can convert. Convert as many images to PDF as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG7" aria-expanded="false" aria-controls="faqJPG7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqJPG7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our JPG to PDF converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG8" aria-expanded="false" aria-controls="faqJPG8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  How long does conversion take?
-                </button>
-              </h2>
-              <div id="faqJPG8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most conversions complete in just a few seconds, depending on the number and size of images.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG9" aria-expanded="false" aria-controls="faqJPG9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will image quality be preserved?
-                </button>
-              </h2>
-              <div id="faqJPG9" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! The PDF conversion preserves the original image quality. Your images will look exactly the same in the PDF as they do in the original files. The quality depends on your original image files.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqJPG10" aria-expanded="false" aria-controls="faqJPG10" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I reorder images before converting?
-                </button>
-              </h2>
-              <div id="faqJPG10" class="accordion-collapse collapse" data-bs-parent="#faqAccordionJPG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, images are converted in the order you select them. To change the order, you can remove images from the preview and re-add them in your desired order, or select them in the order you want them to appear in the PDF.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -1081,9 +821,9 @@ function getPDFCompressContent() {
           <div class="mb-3">
             <span class="emoji-compressor" style="font-size: 4rem;">🗜️</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Compressor
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Reduce PDF file size without losing quality</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -1350,112 +1090,7 @@ function getPDFCompressContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionCompress">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress1" aria-expanded="false" aria-controls="faqCompress1" style="font-size: 1rem; padding: 1rem;">
-                  How do I compress a PDF?
-                </button>
-              </h2>
-              <div id="faqCompress1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PDF file into the upload area, select your preferred compression level, then click 'Compress PDF'. The compression happens instantly in your browser, and your compressed PDF will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress2" aria-expanded="false" aria-controls="faqCompress2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqCompress2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All compression happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress3" aria-expanded="false" aria-controls="faqCompress3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What compression level should I use?
-                </button>
-              </h2>
-              <div id="faqCompress3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  High Compression (0.3) provides maximum size reduction but may slightly reduce image quality. Medium Compression (0.5) offers a good balance between file size and quality. Low Compression (0.7) maintains better quality with moderate size reduction. Choose based on your needs.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress4" aria-expanded="false" aria-controls="faqCompress4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will compression affect PDF quality?
-                </button>
-              </h2>
-              <div id="faqCompress4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Compression reduces file size by optimizing images within the PDF. Higher compression may result in slightly lower image quality, but text and overall readability remain intact. Use Medium or Low compression for better quality preservation.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress5" aria-expanded="false" aria-controls="faqCompress5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  How much can I reduce the file size?
-                </button>
-              </h2>
-              <div id="faqCompress5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  File size reduction depends on your PDF content. PDFs with many images typically see 30-70% reduction. Text-heavy PDFs may see less reduction. The tool shows you the exact savings percentage after compression.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress6" aria-expanded="false" aria-controls="faqCompress6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqCompress6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can compress. Compress as many PDFs as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress7" aria-expanded="false" aria-controls="faqCompress7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqCompress7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF compressor works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompress8" aria-expanded="false" aria-controls="faqCompress8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I compress password-protected PDFs?
-                </button>
-              </h2>
-              <div id="faqCompress8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompress">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, password-protected PDFs cannot be compressed. You'll need to remove the password protection from your PDF file first before compressing it.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -1469,9 +1104,9 @@ function getPDFSplitContent() {
           <div class="mb-3">
             <span class="emoji-scissors" style="font-size: 4rem;">✂️</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Splitter
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Split PDF into separate pages or extract specific pages</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -1730,112 +1365,7 @@ function getPDFSplitContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionSplit">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit1" aria-expanded="false" aria-controls="faqSplit1" style="font-size: 1rem; padding: 1rem;">
-                  How do I split a PDF?
-                </button>
-              </h2>
-              <div id="faqSplit1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PDF file into the upload area. Once loaded, you can either click "Split All Pages" to split every page into separate PDFs, or select specific pages and click "Extract Selected Pages". All pages will be packaged in a ZIP file for download.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit2" aria-expanded="false" aria-controls="faqSplit2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqSplit2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All splitting happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit3" aria-expanded="false" aria-controls="faqSplit3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I select multiple pages to extract?
-                </button>
-              </h2>
-              <div id="faqSplit3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! Click on individual page numbers to select them. Selected pages will be highlighted. You can also use "Select All" or "Select None" buttons for quick selection. Only selected pages will be extracted into separate PDF files.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit4" aria-expanded="false" aria-controls="faqSplit4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What format will I receive?
-                </button>
-              </h2>
-              <div id="faqSplit4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Each page becomes a separate PDF file, and all files are packaged in a ZIP archive. The ZIP file will be automatically downloaded. Extract the ZIP to access individual PDF files for each page.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit5" aria-expanded="false" aria-controls="faqSplit5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will the page quality be preserved?
-                </button>
-              </h2>
-              <div id="faqSplit5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! The split PDFs maintain the original quality of your pages. Text, images, and formatting are preserved exactly as they appear in the original document.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit6" aria-expanded="false" aria-controls="faqSplit6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqSplit6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can split. Split as many PDFs as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit7" aria-expanded="false" aria-controls="faqSplit7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqSplit7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF splitter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqSplit8" aria-expanded="false" aria-controls="faqSplit8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I split password-protected PDFs?
-                </button>
-              </h2>
-              <div id="faqSplit8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionSplit">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, password-protected PDFs cannot be split. You'll need to remove the password protection from your PDF file first before splitting it.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -1849,9 +1379,9 @@ function getPDFMergeContent() {
           <div class="mb-3">
             <span class="emoji-link" style="font-size: 4rem;">🔗</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Merger
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Merge multiple PDFs into one document</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -2102,112 +1632,7 @@ function getPDFMergeContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionMerge">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge1" aria-expanded="false" aria-controls="faqMerge1" style="font-size: 1rem; padding: 1rem;">
-                  How do I merge PDFs?
-                </button>
-              </h2>
-              <div id="faqMerge1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop multiple PDF files into the upload area, or click to browse and select multiple PDF files. Review the list of files, then click "Merge PDFs". All PDFs will be combined into a single document in the order they appear in the list.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge2" aria-expanded="false" aria-controls="faqMerge2" style="font-size: 1rem; padding: 1rem;">
-                  Are my PDF files uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqMerge2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All merging happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge3" aria-expanded="false" aria-controls="faqMerge3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  How many PDFs can I merge at once?
-                </button>
-              </h2>
-              <div id="faqMerge3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  You can merge as many PDF files as you need. There's no limit on the number of files or pages. However, very large merges may take longer to process depending on your device's performance.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge4" aria-expanded="false" aria-controls="faqMerge4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I change the order of PDFs before merging?
-                </button>
-              </h2>
-              <div id="faqMerge4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! You can remove PDFs from the list and re-add them in your desired order. The PDFs will be merged in the order they appear in the list from top to bottom.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge5" aria-expanded="false" aria-controls="faqMerge5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will the quality be preserved?
-                </button>
-              </h2>
-              <div id="faqMerge5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! The merged PDF maintains the original quality of all pages. Text, images, and formatting are preserved exactly as they appear in the original documents.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge6" aria-expanded="false" aria-controls="faqMerge6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqMerge6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can merge. Merge as many PDFs as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge7" aria-expanded="false" aria-controls="faqMerge7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqMerge7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF merger works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqMerge8" aria-expanded="false" aria-controls="faqMerge8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I merge password-protected PDFs?
-                </button>
-              </h2>
-              <div id="faqMerge8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionMerge">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, password-protected PDFs cannot be merged. You'll need to remove the password protection from your PDF files first before merging them.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -2221,9 +1646,9 @@ function getPDFRotateContent() {
           <div class="mb-3">
             <span class="emoji-rotate" style="font-size: 4rem;">🔄</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Rotate
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Rotate PDF pages to any angle</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -2483,112 +1908,7 @@ function getPDFRotateContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionRotate">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate1" aria-expanded="false" aria-controls="faqRotate1" style="font-size: 1rem; padding: 1rem;">
-                  How do I rotate a PDF?
-                </button>
-              </h2>
-              <div id="faqRotate1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PDF file into the upload area. Once loaded, select which pages to rotate (all pages are selected by default), choose your rotation angle (90° clockwise, 180°, or 90° counter-clockwise), then click "Rotate PDF". Your rotated PDF will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate2" aria-expanded="false" aria-controls="faqRotate2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqRotate2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All rotation happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate3" aria-expanded="false" aria-controls="faqRotate3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I rotate only specific pages?
-                </button>
-              </h2>
-              <div id="faqRotate3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! Click on page numbers to select or deselect them. Selected pages will be highlighted. Only the selected pages will be rotated, while unselected pages remain in their original orientation.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate4" aria-expanded="false" aria-controls="faqRotate4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What rotation angles are available?
-                </button>
-              </h2>
-              <div id="faqRotate4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  You can rotate pages by 90° clockwise, 180° (upside down), or 90° counter-clockwise. These angles cover all common orientation corrections needed for PDF documents.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate5" aria-expanded="false" aria-controls="faqRotate5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will the page quality be preserved?
-                </button>
-              </h2>
-              <div id="faqRotate5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! The rotated PDF maintains the original quality of your pages. Text, images, and formatting are preserved exactly as they appear in the original document.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate6" aria-expanded="false" aria-controls="faqRotate6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqRotate6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can rotate. Rotate as many PDFs as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate7" aria-expanded="false" aria-controls="faqRotate7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqRotate7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF rotator works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqRotate8" aria-expanded="false" aria-controls="faqRotate8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I rotate password-protected PDFs?
-                </button>
-              </h2>
-              <div id="faqRotate8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionRotate">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, password-protected PDFs cannot be rotated. You'll need to remove the password protection from your PDF file first before rotating it.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -2601,9 +1921,9 @@ function getPNGToJPGContent() {
         <div class="mb-4">
           <span class="emoji-palette" style="font-size: 5rem;">🎨</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PNG → JPG Converter
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Convert PNG to JPG instantly in your browser</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -2854,112 +2174,7 @@ function getPNGToJPGContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionPNG">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG1" aria-expanded="false" aria-controls="faqPNG1" style="font-size: 1rem; padding: 1rem;">
-                  How do I convert PNG to JPG?
-                </button>
-              </h2>
-              <div id="faqPNG1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PNG images into the upload area, adjust the JPEG quality and background color settings if needed, then click 'Convert to JPG'. The conversion happens instantly in your browser, and all JPG images will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG2" aria-expanded="false" aria-controls="faqPNG2" style="font-size: 1rem; padding: 1rem;">
-                  Are my images uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqPNG2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your images never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG3" aria-expanded="false" aria-controls="faqPNG3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What about transparent PNGs?
-                </button>
-              </h2>
-              <div id="faqPNG3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  JPG format doesn't support transparency. When converting transparent PNGs, you can choose a background color to fill the transparent areas. The default is white, but you can select any color using the color picker.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG4" aria-expanded="false" aria-controls="faqPNG4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What quality setting should I use?
-                </button>
-              </h2>
-              <div id="faqPNG4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Quality ranges from 0.1 (lowest, smallest file) to 1.0 (highest, largest file). For most purposes, 0.9 provides an excellent balance between quality and file size. Use 1.0 for maximum quality when file size isn't a concern, or lower values for smaller file sizes.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG5" aria-expanded="false" aria-controls="faqPNG5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert multiple PNGs at once?
-                </button>
-              </h2>
-              <div id="faqPNG5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! You can select multiple PNG files at once, and they will all be converted to JPG format. Each PNG becomes a separate JPG file, and all files will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG6" aria-expanded="false" aria-controls="faqPNG6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqPNG6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PNGs you can convert. Convert as many PNGs to JPG as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG7" aria-expanded="false" aria-controls="faqPNG7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqPNG7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PNG to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPNG8" aria-expanded="false" aria-controls="faqPNG8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will image quality be preserved?
-                </button>
-              </h2>
-              <div id="faqPNG8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPNG">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Image quality depends on the quality setting you choose. Higher quality settings (0.9-1.0) preserve more detail but create larger files. Lower quality settings (0.1-0.5) create smaller files but may reduce image quality. The default 0.9 provides excellent quality for most uses.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -2972,9 +2187,9 @@ function getImageResizeContent() {
         <div class="mb-4">
           <span class="emoji-ruler" style="font-size: 5rem;">📏</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           Image Resizer
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Resize images to any size instantly in your browser</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -3234,112 +2449,7 @@ function getImageResizeContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionResize">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize1" aria-expanded="false" aria-controls="faqResize1" style="font-size: 1rem; padding: 1rem;">
-                  How do I resize images?
-                </button>
-              </h2>
-              <div id="faqResize1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your images into the upload area, enter your desired width and/or height in pixels, choose whether to maintain aspect ratio, then click "Resize Images". The resized images will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize2" aria-expanded="false" aria-controls="faqResize2" style="font-size: 1rem; padding: 1rem;">
-                  Are my images uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqResize2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your images never leave your computer. All resizing happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize3" aria-expanded="false" aria-controls="faqResize3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What does "Maintain Aspect Ratio" mean?
-                </button>
-              </h2>
-              <div id="faqResize3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  When enabled, the image proportions are maintained. If you set width to 800px, the height will automatically adjust to keep the original aspect ratio. This prevents images from appearing stretched or distorted.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize4" aria-expanded="false" aria-controls="faqResize4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I resize multiple images at once?
-                </button>
-              </h2>
-              <div id="faqResize4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! You can select multiple images at once, and they will all be resized to the same dimensions. Each resized image will be downloaded as a separate file.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize5" aria-expanded="false" aria-controls="faqResize5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will image quality be preserved?
-                </button>
-              </h2>
-              <div id="faqResize5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Resizing maintains good image quality. However, enlarging images beyond their original size may result in some quality loss. For best results, resize to smaller dimensions or maintain the original size.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize6" aria-expanded="false" aria-controls="faqResize6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqResize6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of images you can resize. Resize as many images as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize7" aria-expanded="false" aria-controls="faqResize7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What image formats are supported?
-                </button>
-              </h2>
-              <div id="faqResize7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our image resizer supports all common image formats including JPG, JPEG, PNG, GIF, BMP, and WebP. You can resize any image format supported by your browser.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqResize8" aria-expanded="false" aria-controls="faqResize8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqResize8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionResize">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our image resizer works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -3352,9 +2462,9 @@ function getImageCompressContent() {
         <div class="mb-4">
           <span class="emoji-save" style="font-size: 5rem;">💾</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           Image Compressor
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Compress images to reduce file size instantly in your browser</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -3602,112 +2712,7 @@ function getImageCompressContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionCompressImg">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg1" aria-expanded="false" aria-controls="faqCompressImg1" style="font-size: 1rem; padding: 1rem;">
-                  How do I compress images?
-                </button>
-              </h2>
-              <div id="faqCompressImg1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your images into the upload area, adjust the quality slider to your preferred compression level, then click "Compress Images". The compressed images will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg2" aria-expanded="false" aria-controls="faqCompressImg2" style="font-size: 1rem; padding: 1rem;">
-                  Are my images uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqCompressImg2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your images never leave your computer. All compression happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg3" aria-expanded="false" aria-controls="faqCompressImg3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What quality setting should I use?
-                </button>
-              </h2>
-              <div id="faqCompressImg3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Quality ranges from 0.1 (maximum compression, smallest file) to 1.0 (minimum compression, largest file). For most purposes, 0.8 provides an excellent balance between file size and quality. Use higher values for better quality or lower values for smaller files.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg4" aria-expanded="false" aria-controls="faqCompressImg4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will compression affect image quality?
-                </button>
-              </h2>
-              <div id="faqCompressImg4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Compression reduces file size by optimizing image data. Higher compression (lower quality values) may result in slightly lower visual quality, but the difference is often minimal. Use quality 0.8 or higher for best results.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg5" aria-expanded="false" aria-controls="faqCompressImg5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I compress multiple images at once?
-                </button>
-              </h2>
-              <div id="faqCompressImg5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! You can select multiple images at once, and they will all be compressed using the same quality setting. Each compressed image will be downloaded as a separate file.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg6" aria-expanded="false" aria-controls="faqCompressImg6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqCompressImg6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of images you can compress. Compress as many images as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg7" aria-expanded="false" aria-controls="faqCompressImg7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What image formats are supported?
-                </button>
-              </h2>
-              <div id="faqCompressImg7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our image compressor supports all common image formats including JPG, JPEG, PNG, GIF, BMP, and WebP. You can compress any image format supported by your browser.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCompressImg8" aria-expanded="false" aria-controls="faqCompressImg8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqCompressImg8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionCompressImg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our image compressor works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -3730,9 +2735,9 @@ function getPDFOCRContent() {
           <div class="mb-3">
             <span class="emoji-unlock" style="font-size: 4rem;">🔓</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Unlock
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Remove password protection from PDF files</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -3984,88 +2989,7 @@ function getPDFOCRContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionUnlock">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock1" aria-expanded="false" aria-controls="faqUnlock1" style="font-size: 1rem; padding: 1rem;">
-                  How do I unlock a PDF?
-                </button>
-              </h2>
-              <div id="faqUnlock1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your password-protected PDF file into the upload area, enter the password when prompted, then click "Unlock PDF". The unlocked PDF will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock2" aria-expanded="false" aria-controls="faqUnlock2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqUnlock2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All unlocking happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock3" aria-expanded="false" aria-controls="faqUnlock3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I unlock a PDF without the password?
-                </button>
-              </h2>
-              <div id="faqUnlock3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No. This tool requires the password to unlock the PDF. It removes password protection from PDFs you already have access to, enabling editing, printing, and copying.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock4" aria-expanded="false" aria-controls="faqUnlock4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will unlocking affect the PDF content?
-                </button>
-              </h2>
-              <div id="faqUnlock4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No. Unlocking only removes password protection and restrictions. All content, formatting, images, and text remain exactly the same. The PDF is identical except it's no longer password-protected.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock5" aria-expanded="false" aria-controls="faqUnlock5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqUnlock5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can unlock. Unlock as many PDFs as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqUnlock6" aria-expanded="false" aria-controls="faqUnlock6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqUnlock6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionUnlock">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF unlocker works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -4079,9 +3003,9 @@ function getPDFProtectContent() {
           <div class="mb-3">
             <span class="emoji-lock" style="font-size: 4rem;">🔒</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             PDF Protect
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Add password protection to PDF files</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -4336,112 +3260,7 @@ function getPDFProtectContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionProtect">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect1" aria-expanded="false" aria-controls="faqProtect1" style="font-size: 1rem; padding: 1rem;">
-                  How do I protect a PDF with a password?
-                </button>
-              </h2>
-              <div id="faqProtect1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PDF file into the upload area, enter a password and confirm it, then click "Protect PDF". The protected PDF will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect2" aria-expanded="false" aria-controls="faqProtect2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqProtect2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All protection happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect3" aria-expanded="false" aria-controls="faqProtect3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What type of password protection is applied?
-                </button>
-              </h2>
-              <div id="faqProtect3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  The tool uses RC4 128-bit encryption to protect your PDF with a password. The encrypted PDF will require the password to open, view, edit, print, or copy. The encryption happens entirely in your browser - your PDF never leaves your computer.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect4" aria-expanded="false" aria-controls="faqProtect4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I protect multiple PDFs at once?
-                </button>
-              </h2>
-              <div id="faqProtect4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, you can protect one PDF at a time. Process each PDF file individually to ensure proper password protection for each document.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect5" aria-expanded="false" aria-controls="faqProtect5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will the PDF content be preserved?
-                </button>
-              </h2>
-              <div id="faqProtect5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! All content, formatting, images, and text are preserved exactly as they appear in the original document. The protected PDF maintains the same quality and appearance.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect6" aria-expanded="false" aria-controls="faqProtect6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqProtect6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can protect. Protect as many PDFs as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect7" aria-expanded="false" aria-controls="faqProtect7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqProtect7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF protector works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqProtect8" aria-expanded="false" aria-controls="faqProtect8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I remove password protection later?
-                </button>
-              </h2>
-              <div id="faqProtect8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionProtect">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! You can use our PDF Unlock tool to remove password protection from PDFs you have access to. Simply provide the password to unlock the PDF.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -4454,9 +3273,9 @@ function getPDFOCRContent() {
         <div class="mb-4">
           <span class="emoji-eye" style="font-size: 5rem;">👁️</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PDF OCR
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Extract text from PDF images using OCR</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -4730,124 +3549,7 @@ function getPDFOCRContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionOCR">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR1" aria-expanded="false" aria-controls="faqOCR1" style="font-size: 1rem; padding: 1rem;">
-                  How do I extract text from a PDF?
-                </button>
-              </h2>
-              <div id="faqOCR1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PDF file into the upload area, select the language of the text, then click "Extract Text". The OCR engine will process each page and extract all text, which will be displayed in the text area below.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR2" aria-expanded="false" aria-controls="faqOCR2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqOCR2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All OCR processing happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR3" aria-expanded="false" aria-controls="faqOCR3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What types of PDFs can OCR extract text from?
-                </button>
-              </h2>
-              <div id="faqOCR3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  OCR works best with scanned PDFs and image-based PDFs. PDFs that already have selectable text layers may not need OCR, but you can still use this tool to extract all text in one place. The accuracy depends on image quality and text clarity.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR4" aria-expanded="false" aria-controls="faqOCR4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  How accurate is the OCR?
-                </button>
-              </h2>
-              <div id="faqOCR4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  OCR accuracy depends on several factors: image quality, text clarity, font size, and language. High-quality scans with clear, printed text typically achieve 95%+ accuracy. Handwritten text or low-quality images may have lower accuracy. Selecting the correct language improves results.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR5" aria-expanded="false" aria-controls="faqOCR5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I extract text from multi-page PDFs?
-                </button>
-              </h2>
-              <div id="faqOCR5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! Our PDF OCR tool supports PDFs with any number of pages. Each page is processed sequentially, and all extracted text is combined and displayed in the text area, with page separators to help you identify which text came from which page.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR6" aria-expanded="false" aria-controls="faqOCR6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqOCR6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can process. Extract text from unlimited PDFs completely free.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR7" aria-expanded="false" aria-controls="faqOCR7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqOCR7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF OCR tool works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR8" aria-expanded="false" aria-controls="faqOCR8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  How long does OCR processing take?
-                </button>
-              </h2>
-              <div id="faqOCR8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Processing time depends on the number of pages and your device's performance. Most single-page PDFs process in a few seconds. Multi-page PDFs may take longer, but you'll see progress updates as each page is processed. Since everything happens in your browser, there's no upload delay.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOCR9" aria-expanded="false" aria-controls="faqOCR9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I extract text from password-protected PDFs?
-                </button>
-              </h2>
-              <div id="faqOCR9" class="accordion-collapse collapse" data-bs-parent="#faqAccordionOCR">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, password-protected PDFs cannot be processed. You'll need to remove the password protection from your PDF file first before using OCR to extract text.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -4861,9 +3563,9 @@ function getPDFOCRContent() {
         <div class="mb-4">
           <span class="emoji-memo" style="font-size: 5rem;">📝</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           PDF → Word Converter
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Convert PDF to Word instantly in your browser</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -5100,136 +3802,7 @@ function getPDFOCRContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionPDFWord">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord1" aria-expanded="false" aria-controls="faqPDFWord1" style="font-size: 1rem; padding: 1rem;">
-                  How do I convert PDF to Word?
-                </button>
-              </h2>
-              <div id="faqPDFWord1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your PDF file into the upload area, then click 'Convert PDF to Word'. The conversion happens instantly in your browser, and your Word document will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord2" aria-expanded="false" aria-controls="faqPDFWord2" style="font-size: 1rem; padding: 1rem;">
-                  Is my PDF file uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqPDFWord2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your PDF files never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord3" aria-expanded="false" aria-controls="faqPDFWord3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What file format will I get?
-                </button>
-              </h2>
-              <div id="faqPDFWord3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  You'll receive a Word document (.doc file) that can be opened in Microsoft Word, Google Docs, LibreOffice, and other word processors. The document contains the extracted text from your PDF with basic formatting preserved.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord4" aria-expanded="false" aria-controls="faqPDFWord4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will formatting be preserved?
-                </button>
-              </h2>
-              <div id="faqPDFWord4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Basic text formatting and structure are preserved, but complex layouts, images, and advanced formatting may require manual adjustment. The tool extracts text content and converts it to a Word document format.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord5" aria-expanded="false" aria-controls="faqPDFWord5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert multi-page PDFs?
-                </button>
-              </h2>
-              <div id="faqPDFWord5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! Our PDF to Word converter supports PDFs with any number of pages. All pages will be converted into a single Word document with page breaks between pages.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord6" aria-expanded="false" aria-controls="faqPDFWord6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqPDFWord6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of PDFs you can convert. Convert as many PDFs to Word as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord7" aria-expanded="false" aria-controls="faqPDFWord7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqPDFWord7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our PDF to Word converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord8" aria-expanded="false" aria-controls="faqPDFWord8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  How long does conversion take?
-                </button>
-              </h2>
-              <div id="faqPDFWord8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Conversion is nearly instantaneous! Since everything happens in your browser, there's no upload time or server processing delay. Most PDFs convert in just a few seconds, depending on the number of pages and your device's performance.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord9" aria-expanded="false" aria-controls="faqPDFWord9" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert scanned PDFs?
-                </button>
-              </h2>
-              <div id="faqPDFWord9" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Scanned PDFs (image-based PDFs) require OCR (Optical Character Recognition) to extract text. For scanned PDFs, please use our PDF OCR tool first to extract text, then convert that text to Word format.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqPDFWord10" aria-expanded="false" aria-controls="faqPDFWord10" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert password-protected PDFs?
-                </button>
-              </h2>
-              <div id="faqPDFWord10" class="accordion-collapse collapse" data-bs-parent="#faqAccordionPDFWord">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Currently, password-protected PDFs cannot be converted. You'll need to remove the password protection from your PDF file first before converting it to Word format.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }*/
@@ -5244,9 +3817,9 @@ function getPDFOCRContent() {
           <div class="mb-3">
             <span class="emoji-document" style="font-size: 4rem;">📄</span>
           </div>
-          <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
+          <div class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">
             Word to PDF
-          </h1>
+          </div>
           <p class="text-light fs-5 mb-2 fw-medium">Convert Word documents to PDF format</p>
           <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
         </div>
@@ -5304,9 +3877,9 @@ function getHEICToJPGContent() {
         <div class="mb-4">
           <span class="emoji-camera" style="font-size: 5rem;">📷</span>
         </div>
-        <h1 class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
+        <div class="text-gradient fw-bold mb-3" style="font-size: 3rem; line-height: 1.2;">
           HEIC to JPG Converter
-        </h1>
+        </div>
         <p class="text-light fs-5 mb-2 fw-medium">Convert HEIC images to JPG format instantly in your browser</p>
         <p class="text-secondary small mb-0">Free • Fast • No Upload Required • 100% Secure</p>
       </div>
@@ -5554,112 +4127,7 @@ function getHEICToJPGContent() {
         </div>
       </div>
 
-      <!-- FAQ Section -->
-      <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body p-4 p-lg-5">
-          <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;">
-            <i class="bi bi-question-circle me-2"></i>Frequently Asked Questions
-          </h2>
-          <div class="accordion accordion-flush" id="faqAccordionHeicJpg">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg1" aria-expanded="false" aria-controls="faqHeicJpg1" style="font-size: 1rem; padding: 1rem;">
-                  How do I convert HEIC to JPG?
-                </button>
-              </h2>
-              <div id="faqHeicJpg1" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Simply drag and drop your HEIC images into the upload area, adjust the quality slider if needed, then click "Convert to JPG". The converted JPG images will be automatically downloaded.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg2" aria-expanded="false" aria-controls="faqHeicJpg2" style="font-size: 1rem; padding: 1rem;">
-                  Are my images uploaded to a server?
-                </button>
-              </h2>
-              <div id="faqHeicJpg2" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  No! Your images never leave your computer. All conversion happens locally in your browser using JavaScript, ensuring complete privacy and security. No uploads, no server storage, no data transmission.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg3" aria-expanded="false" aria-controls="faqHeicJpg3" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What quality setting should I use?
-                </button>
-              </h2>
-              <div id="faqHeicJpg3" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Quality ranges from 0.1 (maximum compression, smallest file) to 1.0 (minimum compression, largest file). For most purposes, 0.9 provides an excellent balance between file size and quality. Use higher values for better quality or lower values for smaller files.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg4" aria-expanded="false" aria-controls="faqHeicJpg4" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Will image quality be preserved?
-                </button>
-              </h2>
-              <div id="faqHeicJpg4" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! With quality set to 0.9 or higher, the converted JPG images will maintain excellent visual quality. The conversion process preserves colors, details, and overall image appearance.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg5" aria-expanded="false" aria-controls="faqHeicJpg5" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Can I convert multiple HEIC images at once?
-                </button>
-              </h2>
-              <div id="faqHeicJpg5" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes! You can select multiple HEIC images at once, and they will all be converted to JPG format. Each converted image will be downloaded as a separate file.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg6" aria-expanded="false" aria-controls="faqHeicJpg6" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Is this service free?
-                </button>
-              </h2>
-              <div id="faqHeicJpg6" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Yes, completely free! There are no hidden costs, no subscriptions, no watermarks, and no limits on the number of images you can convert. Convert as many HEIC images as you need, whenever you need.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg7" aria-expanded="false" aria-controls="faqHeicJpg7" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  What browsers are supported?
-                </button>
-              </h2>
-              <div id="faqHeicJpg7" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  Our HEIC to JPG converter works on all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. It also works on mobile browsers. No plugins or extensions are required.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqHeicJpg8" aria-expanded="false" aria-controls="faqHeicJpg8" style="background-color: transparent; border: none; font-size: 1rem; padding: 1rem;">
-                  Why convert HEIC to JPG?
-                </button>
-              </h2>
-              <div id="faqHeicJpg8" class="accordion-collapse collapse" data-bs-parent="#faqAccordionHeicJpg">
-                <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">
-                  HEIC (High Efficiency Image Container) is a format used by Apple devices, but it's not widely supported on other platforms. Converting to JPG ensures your images can be viewed and shared on any device, platform, or software application.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   `;
 }
@@ -5689,7 +4157,7 @@ function getImageConvertContent(o) {
     <div class="mx-auto" style="max-width: 760px;">
       <div class="text-center mb-4">
         <div style="font-size: 3rem;">${o.emoji}</div>
-        <h1 class="text-gradient fw-bold mb-2" style="font-size: 2.2rem;">${o.title}</h1>
+        <div class="text-gradient fw-bold mb-2" style="font-size: 2.2rem;">${o.title}</div>
         <p class="text-light fs-5 mb-0">${o.subtitle}</p>
         <p class="text-secondary small mt-1 mb-0">Free • No Upload Required • 100% Secure</p>
       </div>
@@ -5886,7 +4354,7 @@ function getUtilityContent(o) {
     <div class="mx-auto" style="max-width: 760px;">
       <div class="text-center mb-4">
         <div style="font-size: 3rem;">${o.emoji}</div>
-        <h1 class="text-gradient fw-bold mb-2" style="font-size: 2.2rem;">${o.title}</h1>
+        <div class="text-gradient fw-bold mb-2" style="font-size: 2.2rem;">${o.title}</div>
         <p class="text-light fs-5 mb-0">${o.subtitle}</p>
         <p class="text-secondary small mt-1 mb-0">Free • Private • In your browser</p>
       </div>

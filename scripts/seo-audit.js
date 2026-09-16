@@ -31,6 +31,7 @@ const NOINDEX_PAGES = ['login.html', 'dashboard.html', 'test-pwa.html'];
 
 const args = process.argv.slice(2);
 const WANT_LIVE = args.includes('--live');
+const WANT_RENDERED = args.includes('--rendered');
 const JSON_ONLY = args.includes('--json');
 
 // --- text extraction -------------------------------------------------------
@@ -350,6 +351,44 @@ async function liveCheck() {
   return { pages: results, files: extras };
 }
 
+// --- rendered-DOM check ---------------------------------------------------
+// The gates above measure the HTML a crawler receives, which is the right
+// measure for AdSense. It is blind to what a HUMAN sees after JavaScript runs.
+// That blind spot shipped two FAQ sections and two <h1>s on every page: the
+// static copy added for crawlers plus the copy tools.js injected at runtime.
+//
+// Uses whatever Chrome is already installed; no dependency is added and no
+// gate depends on it. If Chrome is absent the check reports as skipped.
+function chromeBinary() {
+  const candidates = [
+    process.env.CHROME_PATH,
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium',
+  ].filter(Boolean);
+  return candidates.find(c => { try { return fs.existsSync(c); } catch (e) { return false; } });
+}
+
+function renderedCheck(paths) {
+  const bin = chromeBinary();
+  if (!bin) return { skipped: 'no Chrome binary found (set CHROME_PATH)' };
+  const { execFileSync } = require('child_process');
+  const out = [];
+  for (const rel of paths) {
+    const url = `${SITE}/${rel === 'index.html' ? '' : rel}?cb=${Date.now()}`;
+    let dom = '';
+    try {
+      dom = execFileSync(bin, ['--headless', '--disable-gpu', '--virtual-time-budget=9000', '--dump-dom', url],
+        { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] });
+    } catch (e) { out.push({ page: rel, error: e.message.slice(0, 80) }); continue; }
+    const h1s = (dom.match(/<h1[\s>]/gi) || []).length;
+    const faqHeads = (dom.match(/Frequently [Aa]sked [Qq]uestions/g) || []).length;
+    out.push({ page: rel, renderedH1: h1s, faqHeadings: faqHeads,
+      duplicateH1: h1s > 1, duplicateFaq: faqHeads > 1 });
+  }
+  return { pages: out };
+}
+
 // --- report ----------------------------------------------------------------
 (async () => {
   const audit = {
@@ -375,9 +414,13 @@ async function liveCheck() {
     sitemap: { urls: sitemapUrls.length, missingOnDisk: sitemapMissingOnDisk, noindexedButListed: sitemapNoindexed, lastmodAllIdentical },
     duplicatePairs,
     live: null,
+    rendered: null,
   };
 
   if (WANT_LIVE) audit.live = await liveCheck();
+  if (WANT_RENDERED) {
+    audit.rendered = renderedCheck(['index.html', 'pdf-to-jpg.html', 'merge-pdf.html', 'word-counter.html']);
+  }
 
   fs.mkdirSync(LOOP_DIR, { recursive: true });
   const current = path.join(LOOP_DIR, 'audit.json');
@@ -439,6 +482,19 @@ function printSummary(audit) {
   } else {
     console.log('\n  (run with --live to fetch the deployed URLs — local pass + live fail is the');
     console.log('   failure mode that produced the original rejection)');
+  }
+
+  if (audit.rendered) {
+    console.log('\nRENDERED DOM (what a human sees, after JavaScript)');
+    if (audit.rendered.skipped) {
+      console.log('  skipped — ' + audit.rendered.skipped);
+    } else {
+      for (const r of audit.rendered.pages) {
+        if (r.error) { console.log('  ' + pad(r.page, 28) + 'ERROR ' + r.error); continue; }
+        const bad = r.duplicateH1 || r.duplicateFaq;
+        console.log('  ' + pad(r.page, 28) + 'h1=' + r.renderedH1 + '  faq-headings=' + r.faqHeadings + (bad ? '   <-- DUPLICATE' : ''));
+      }
+    }
   }
 
   const blocking = Object.entries(audit.gates).filter(([, g]) => g.blocking && !g.pass);

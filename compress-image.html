@@ -374,10 +374,24 @@
         <p style="color:var(--text-secondary); line-height:1.8;">Format choice usually saves more than quality tuning. A photograph converted to WebP is typically 25 to 35 percent smaller than the same photograph as a well-compressed JPG, at the same visual quality.</p>
         <p style="color:var(--text-secondary); line-height:1.8;">The decision tree is short. Photograph for the web: WebP, with a JPG fallback if you need one. Photograph for email or print: JPG. Screenshot, logo or diagram: PNG, or lossless WebP if everything that will open it supports the format.</p>
         <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">How much can I compress without it showing?</h3><p class="mb-0" style="color:var(--text-secondary);">On photographs, quality around 0.8 to 0.85 usually halves the file with no visible difference. Below about 0.7, smooth areas like skies start to show blocking.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Should I resize or compress?</h3><p class="mb-0" style="color:var(--text-secondary);">Both, in that order. Resize to the dimensions actually displayed, then compress. Resizing alone leaves quality on the table; compressing alone leaves an oversized image.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Does compressing repeatedly make it worse?</h3><p class="mb-0" style="color:var(--text-secondary);">Yes. JPG compression is lossy and cumulative, so each re-save discards more detail. Always compress from the original.</p></div>
-          <div class="mb-3"><h3 class="h6 fw-bold mb-1" style="color:var(--text-primary);">Are my images uploaded?</h3><p class="mb-0" style="color:var(--text-secondary);">No. Compression runs in your browser and the file never leaves your device.</p></div>
+        <div class="accordion accordion-flush" id="faq-compress-image">
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-0" aria-expanded="false" aria-controls="faq-compress-image-0" style="font-size: 1rem; padding: 1rem;">How much can I compress without it showing?</button></h3>
+              <div id="faq-compress-image-0" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">On photographs, quality around 0.8 to 0.85 usually halves the file with no visible difference. Below about 0.7, smooth areas like skies start to show blocking.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-1" aria-expanded="false" aria-controls="faq-compress-image-1" style="font-size: 1rem; padding: 1rem;">Should I resize or compress?</button></h3>
+              <div id="faq-compress-image-1" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Both, in that order. Resize to the dimensions actually displayed, then compress. Resizing alone leaves quality on the table; compressing alone leaves an oversized image.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-2" aria-expanded="false" aria-controls="faq-compress-image-2" style="font-size: 1rem; padding: 1rem;">Does compressing repeatedly make it worse?</button></h3>
+              <div id="faq-compress-image-2" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. JPG compression is lossy and cumulative, so each re-save discards more detail. Always compress from the original.</div></div>
+            </div>
+            <div class="accordion-item border-secondary mb-3 rounded faq-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-compress-image-3" aria-expanded="false" aria-controls="faq-compress-image-3" style="font-size: 1rem; padding: 1rem;">Are my images uploaded?</button></h3>
+              <div id="faq-compress-image-3" class="accordion-collapse collapse" data-bs-parent="#faq-compress-image"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. Compression runs in your browser and the file never leaves your device.</div></div>
+            </div>
+        </div>
       </section>
       </main>
 
