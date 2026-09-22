@@ -286,6 +286,20 @@ function removeElement(html, startRe, tag) {
   return html;
 }
 
+// End index of the balanced element starting at `start`.
+function elementEnd(html, start, tag) {
+  const open = new RegExp(`<${tag}\\b`, 'gi');
+  const close = new RegExp(`</${tag}\\s*>`, 'gi');
+  let depth = 0, i = start;
+  for (;;) {
+    open.lastIndex = i; close.lastIndex = i;
+    const o = open.exec(html), c = close.exec(html);
+    if (!c) throw new Error(`unbalanced <${tag}>`);
+    if (o && o.index < c.index) { depth++; i = o.index + o[0].length; }
+    else { depth--; i = c.index + c[0].length; if (depth === 0) return i; }
+  }
+}
+
 function stripAdUnits(html) {
   html = removeElement(html, /<aside id="left-ad"/i, 'aside');
   html = removeElement(html, /<aside id="right-ad"/i, 'aside');
@@ -318,37 +332,118 @@ function toolJsonLd(t) {
   return [howto, faq, app].map(o => `  <script type="application/ld+json">\n${JSON.stringify(o, null, 2)}\n  </script>`).join('\n');
 }
 
+// --- section design ---------------------------------------------------------
+// The static sections use the same card language tools.js uses for its own
+// (sectionWhy, sectionUseCases): white card, centred gradient title, primary
+// circles for numbered steps. Reusing those classes keeps both themes working —
+// .text-light and .text-secondary resolve through the theme variables in
+// style.css — and keeps this copy visually part of the page rather than prose
+// pasted onto the background.
+const TITLE = 'font-size: 2.5rem; font-weight: 700;';
+
+function card(inner, bodyClass = '') {
+  return `
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5${bodyClass ? ' ' + bodyClass : ''}">${inner}
+          </div>
+        </div>`;
+}
+
+function introCard(h1, lead) {
+  return card(`
+            <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">${esc(h1)}</h1>
+            <p class="text-light mx-auto mb-0" style="max-width: 760px; font-size: 1.1rem; line-height: 1.8;">${esc(lead)}</p>`,
+    'text-center');
+}
+
+// steps: [{ title?, text }]
+function stepsCard(title, steps) {
+  // The tool column is only ~660px wide at common laptop widths, so four steps
+  // in one row wrap every title onto two lines. Four go 2x2; three fit a row.
+  const col = steps.length >= 4 ? 'col-sm-6' : 'col-md-4';
+  const items = steps.map((s, i) => `
+              <div class="${col}">
+                <div class="text-center">
+                  <div class="mb-3"><div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">${i + 1}</div></div>${s.title ? `
+                  <h3 class="text-light fw-bold mb-2" style="font-size: 1.25rem;">${esc(s.title)}</h3>` : ''}
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">${esc(s.text)}</p>
+                </div>
+              </div>`).join('');
+  return card(`
+            <h2 class="text-gradient fw-bold mb-5 text-center" style="${TITLE}"><i class="bi bi-list-ol me-2"></i>${esc(title)}</h2>
+            <div class="row g-4 justify-content-center">${items}
+            </div>`);
+}
+
+// Long-form prose is left-aligned and capped near 75 characters a line;
+// centred paragraphs of this length are hard to read.
+function proseCard(h2, paragraphs) {
+  const ps = paragraphs.map((par, i) => `
+            <p class="text-light ${i === paragraphs.length - 1 ? 'mb-0' : 'mb-3'}" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">${esc(par)}</p>`).join('');
+  return card(`
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">${esc(h2)}</h2>${ps}`);
+}
+
+// The accordion body is real markup, not JS state, so a crawler reads every
+// answer while it is visually collapsed.
+function faqCard(accId, faqs) {
+  const items = faqs.map(([q, a], i) => `
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#${accId}-${i}" aria-expanded="false" aria-controls="${accId}-${i}" style="font-size: 1rem; padding: 1rem;">${esc(q)}</button></h3>
+                <div id="${accId}-${i}" class="accordion-collapse collapse" data-bs-parent="#${accId}"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">${esc(a)}</div></div>
+              </div>`).join('');
+  return card(`
+            <h2 class="text-gradient fw-bold mb-5 text-center" style="${TITLE}"><i class="bi bi-question-circle me-2"></i>Frequently Asked Questions</h2>
+            <div class="accordion accordion-flush" id="${accId}">${items}
+            </div>`);
+}
+
 function seoSection(t) {
   const copy = copyFor(t);
-  const steps = copy.steps.map(s => `          <li>${esc(s)}</li>`).join('\n');
-  const body = copy.sections.map(sec =>
-    `        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">${esc(sec.h2)}</h2>\n` +
-    sec.p.map(par => `        <p style="color:var(--text-secondary); line-height:1.8;">${esc(par)}</p>`).join('\n')
-  ).join('\n');
-  // Rendered as the site's accordion so the static copy looks like the one
-  // tools.js used to inject. The accordion body is real markup, not JS state,
-  // so a crawler reads every answer even while it is visually collapsed.
-  const acc = `faq-${t.slug}`;
-  const faqs = copy.faqs.map(([q, a], i) => `            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#${acc}-${i}" aria-expanded="false" aria-controls="${acc}-${i}" style="font-size: 1rem; padding: 1rem;">${esc(q)}</button></h3>
-              <div id="${acc}-${i}" class="accordion-collapse collapse" data-bs-parent="#${acc}"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">${esc(a)}</div></div>
-            </div>`).join('\n');
   const howTitle = HOW_TITLE[t.slug] || `How to use the ${t.h1.replace(/ —.*/, '')}`;
   return `
       <!-- SEO content (unique per tool) -->
-      <section class="w-100 pt-2 pb-4">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">${esc(t.h1)}</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">${esc(copy.lead)}</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">${esc(howTitle)}</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-${steps}
-        </ol>
-${body}
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="${acc}">
-${faqs}
-        </div>
+      <section class="w-100">${introCard(t.h1, copy.lead)}${stepsCard(howTitle, copy.steps.map(text => ({ text })))}${copy.sections.map(sec => proseCard(sec.h2, sec.p)).join('')}${faqCard(`faq-${t.slug}`, copy.faqs)}
       </section>`;
+}
+
+// --- homepage section ---------------------------------------------------------
+// index.html renders its own HowTo + FAQPage schema as visible cards. It is
+// regenerated from that schema on every build, so the markup and the visible
+// copy cannot drift apart, and it shares the card design above with the tool
+// pages. It sits inside the tool column as the next sibling of #tool-content,
+// for the same reason the tool-page section does (see the injection below).
+const HOME_H1 = 'Free Online PDF & Image Tools';
+const HOME_LEAD = 'Professional PDF and image conversion tools that work entirely in your browser.';
+
+function homeSection(indexHtml) {
+  let howto, faq;
+  for (const m of indexHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    const j = JSON.parse(m[1]);
+    if (j['@type'] === 'HowTo') howto = j;
+    if (j['@type'] === 'FAQPage') faq = j;
+  }
+  if (!howto || !faq) throw new Error('index.html is missing its HowTo or FAQPage schema');
+  return `
+      <!-- Homepage SEO content: generated by scripts/build-tool-pages.js from the
+           HowTo and FAQPage schema in this file. Edit the schema, not this block. -->
+      <section id="home-seo-content" class="w-100">${introCard(HOME_H1, HOME_LEAD)}${stepsCard(howto.name, howto.step.map(s => ({ title: s.name, text: s.text })))}${faqCard('faq-home', faq.mainEntity.map(q => [q.name, q.acceptedAnswer.text]))}
+      </section>`;
+}
+
+function writeHomeSection() {
+  const file = path.join(ROOT, 'index.html');
+  let html = fs.readFileSync(file, 'utf8');
+  // Remove exactly what homeSection() emits — the leading newline, the comment
+  // and the section — so rebuilding restores the byte-identical file. The
+  // section contains no nested <section>, so the lazy match stops at its own
+  // closing tag.
+  html = html.replace(/\n[ \t]*<!-- Homepage SEO content[\s\S]*?<\/section>/, '');
+  const open = html.search(/<div id="tool-content"/);
+  if (open < 0) throw new Error('index.html has no #tool-content');
+  const close = elementEnd(html, open, 'div');
+  html = html.slice(0, close) + homeSection(html) + html.slice(close);
+  fs.writeFileSync(file, html);
 }
 
 function replaceMeta(html, t) {
@@ -368,6 +463,7 @@ function replaceMeta(html, t) {
 }
 
 function main() {
+  writeHomeSection();
   const shell = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
   for (const t of TOOLS) {
     let html = replaceMeta(shell, t);

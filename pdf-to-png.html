@@ -350,45 +350,88 @@
             <div id="tool-content" class="w-100 py-3"></div>
 
       <!-- SEO content (unique per tool) -->
-      <section class="w-100 pt-2 pb-4">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">PDF to PNG Converter</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Render PDF pages as PNG images with no compression artifacts and no upload. PNG stores pixels losslessly, so text edges, thin rules and flat colour stay exactly as the PDF describes them — which makes it the format to reach for whenever the page is a document rather than a photograph.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to convert a PDF to PNG</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-          <li>Drop your PDF into the converter.</li>
-          <li>Pick the resolution you need.</li>
-          <li>Convert and download sharp PNG images of every page.</li>
-        </ol>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Why lossless matters for documents</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">JPG achieves its small files by discarding detail the eye is unlikely to miss in a photograph. That assumption breaks down on the hard black-to-white transitions that make up text and diagrams, where the discarded detail shows up as faint grey shadowing around every character. Zoom in on a JPG of a text page and you will see it; the same page as PNG stays clean at any magnification.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">The cost is size. A page of dense text might be 200 KB as a JPG and 600 KB as a PNG. That is the right trade when the image will be read, re-cropped, annotated or re-saved, because PNG survives repeated editing without degrading while JPG loses a little more each time it is written.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Transparency and compositing</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">PNG supports an alpha channel, so it can carry genuine transparency rather than baking a white rectangle behind the content. That matters when you are placing a rendered page onto a coloured slide, layering it in a design tool, or building a mockup where the page needs to sit over an existing background.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">JPG has no concept of transparency at all — any transparent region is filled with solid colour on export. If your workflow involves compositing at any stage, render to PNG and convert later if you need to.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Choosing between PNG and JPG</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">A quick rule: if you would describe the page as a document, use PNG; if you would describe it as a picture, use JPG. Screenshots, invoices, forms, code listings, charts, engineering drawings and anything with a legend all favour PNG. Photo books, scanned photographs and image-led brochures favour JPG.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">If you need both — say, a crisp version for the record and a light version for email — render to PNG first and use the PNG to JPG converter for the second copy. Going the other way loses detail you cannot recover.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Batch work and page ranges</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Every page becomes its own PNG, numbered in document order, and long documents arrive as a single ZIP rather than a stream of individual downloads. For a hundred-page manual that is the difference between one click and a hundred.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">If you only need a section, extract it first with the Split PDF tool and convert the result. Rendering a 400-page document to get four pages wastes time and memory, particularly on a phone, where available memory is the real constraint on how large a document you can process comfortably.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-pdf-to-png">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-0" aria-expanded="false" aria-controls="faq-pdf-to-png-0" style="font-size: 1rem; padding: 1rem;">Is PNG better quality than JPG?</button></h3>
-              <div id="faq-pdf-to-png-0" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">It is lossless, which is not the same as higher resolution. At the same scale both hold identical detail, but PNG stores it exactly while JPG approximates it. On photographs the difference is usually invisible; on text and line art it is obvious.</div></div>
+      <section class="w-100">
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5 text-center">
+            <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">PDF to PNG Converter</h1>
+            <p class="text-light mx-auto mb-0" style="max-width: 760px; font-size: 1.1rem; line-height: 1.8;">Render PDF pages as PNG images with no compression artifacts and no upload. PNG stores pixels losslessly, so text edges, thin rules and flat colour stay exactly as the PDF describes them — which makes it the format to reach for whenever the page is a document rather than a photograph.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;"><i class="bi bi-list-ol me-2"></i>How to convert a PDF to PNG</h2>
+            <div class="row g-4 justify-content-center">
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">1</div></div>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Drop your PDF into the converter.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">2</div></div>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Pick the resolution you need.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">3</div></div>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Convert and download sharp PNG images of every page.</p>
+                </div>
+              </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-1" aria-expanded="false" aria-controls="faq-pdf-to-png-1" style="font-size: 1rem; padding: 1rem;">Why is my PNG file so large?</button></h3>
-              <div id="faq-pdf-to-png-1" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">PNG compresses by finding repeated patterns, which works well on flat colour and poorly on photographic noise. A scanned photo page can be several times larger as PNG than as JPG. If the page is photographic, JPG is the better format.</div></div>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Why lossless matters for documents</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">JPG achieves its small files by discarding detail the eye is unlikely to miss in a photograph. That assumption breaks down on the hard black-to-white transitions that make up text and diagrams, where the discarded detail shows up as faint grey shadowing around every character. Zoom in on a JPG of a text page and you will see it; the same page as PNG stays clean at any magnification.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">The cost is size. A page of dense text might be 200 KB as a JPG and 600 KB as a PNG. That is the right trade when the image will be read, re-cropped, annotated or re-saved, because PNG survives repeated editing without degrading while JPG loses a little more each time it is written.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Transparency and compositing</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">PNG supports an alpha channel, so it can carry genuine transparency rather than baking a white rectangle behind the content. That matters when you are placing a rendered page onto a coloured slide, layering it in a design tool, or building a mockup where the page needs to sit over an existing background.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">JPG has no concept of transparency at all — any transparent region is filled with solid colour on export. If your workflow involves compositing at any stage, render to PNG and convert later if you need to.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Choosing between PNG and JPG</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">A quick rule: if you would describe the page as a document, use PNG; if you would describe it as a picture, use JPG. Screenshots, invoices, forms, code listings, charts, engineering drawings and anything with a legend all favour PNG. Photo books, scanned photographs and image-led brochures favour JPG.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">If you need both — say, a crisp version for the record and a light version for email — render to PNG first and use the PNG to JPG converter for the second copy. Going the other way loses detail you cannot recover.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Batch work and page ranges</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Every page becomes its own PNG, numbered in document order, and long documents arrive as a single ZIP rather than a stream of individual downloads. For a hundred-page manual that is the difference between one click and a hundred.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">If you only need a section, extract it first with the Split PDF tool and convert the result. Rendering a 400-page document to get four pages wastes time and memory, particularly on a phone, where available memory is the real constraint on how large a document you can process comfortably.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;"><i class="bi bi-question-circle me-2"></i>Frequently Asked Questions</h2>
+            <div class="accordion accordion-flush" id="faq-pdf-to-png">
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-0" aria-expanded="false" aria-controls="faq-pdf-to-png-0" style="font-size: 1rem; padding: 1rem;">Is PNG better quality than JPG?</button></h3>
+                <div id="faq-pdf-to-png-0" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">It is lossless, which is not the same as higher resolution. At the same scale both hold identical detail, but PNG stores it exactly while JPG approximates it. On photographs the difference is usually invisible; on text and line art it is obvious.</div></div>
+              </div>
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-1" aria-expanded="false" aria-controls="faq-pdf-to-png-1" style="font-size: 1rem; padding: 1rem;">Why is my PNG file so large?</button></h3>
+                <div id="faq-pdf-to-png-1" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">PNG compresses by finding repeated patterns, which works well on flat colour and poorly on photographic noise. A scanned photo page can be several times larger as PNG than as JPG. If the page is photographic, JPG is the better format.</div></div>
+              </div>
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-2" aria-expanded="false" aria-controls="faq-pdf-to-png-2" style="font-size: 1rem; padding: 1rem;">Will the transparent areas stay transparent?</button></h3>
+                <div id="faq-pdf-to-png-2" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes, where the PDF actually defines transparency. Many PDFs paint an opaque white background as part of the page, in which case there is no transparency to preserve.</div></div>
+              </div>
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-3" aria-expanded="false" aria-controls="faq-pdf-to-png-3" style="font-size: 1rem; padding: 1rem;">Can I use these PNGs in Word or Google Docs?</button></h3>
+                <div id="faq-pdf-to-png-3" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. PNG is supported everywhere JPG is, including Word, Google Docs, Slides, Keynote and every modern browser.</div></div>
+              </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-2" aria-expanded="false" aria-controls="faq-pdf-to-png-2" style="font-size: 1rem; padding: 1rem;">Will the transparent areas stay transparent?</button></h3>
-              <div id="faq-pdf-to-png-2" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes, where the PDF actually defines transparency. Many PDFs paint an opaque white background as part of the page, in which case there is no transparency to preserve.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-pdf-to-png-3" aria-expanded="false" aria-controls="faq-pdf-to-png-3" style="font-size: 1rem; padding: 1rem;">Can I use these PNGs in Word or Google Docs?</button></h3>
-              <div id="faq-pdf-to-png-3" class="accordion-collapse collapse" data-bs-parent="#faq-pdf-to-png"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. PNG is supported everywhere JPG is, including Word, Google Docs, Slides, Keynote and every modern browser.</div></div>
-            </div>
+          </div>
         </div>
       </section>
           </div>

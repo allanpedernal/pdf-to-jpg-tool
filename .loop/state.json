@@ -75,6 +75,7 @@
   ],
   "openPRs": [],
   "notes": [
+    "2026-09-22 DESIGN: SEO sections now use the site card system (white cards, gradient titles, numbered circles, FAQ accordion). Removed 17 duplicate JS How It Works cards from tools.js. Homepage section is regenerated from its schema by build-tool-pages.js (idempotent). Section lives inside the tool column after #tool-content — main contains a row g-0 h-100, so anything after it overflows.",
     "2026-09-16 DUPLICATE CONTENT FIX: B2/B1 added static H1+FAQ for crawlers, but tools.js already injected its own at runtime — so humans saw two FAQ sections and two h1s on every page. Removed 14 FAQ card blocks from tools.js, neutralised sectionFAQ(), demoted 18 JS h1 to div. Static copy is now the single source and renders as the accordion. Added seo-audit.js --rendered to catch post-JS duplication; the static-only audit was blind to it.",
     "2026-09-05 B1 COMPLETE: 11,488 words of per-tool copy in scripts/tool-content.js. G1 FAIL -> PASS (20/20 >= 600 words, avg 574 unique prose words). Ad units returned automatically once pages cleared the 300-word threshold — the B4 guard self-disabled as designed. Zero near-duplicate pairs. Remaining: G4 (7 more posts) and G6 (4 consecutive weeks) — both time-gated, cannot be closed today.",
     "2026-09-05 B2: index.html now renders its own HowTo (4 steps) + FAQPage (10 Q&A) as #home-seo-content. G3 FAIL -> PASS, 27 -> 0 orphans. index.html 849 -> 1353 words. build-tool-pages.js strips the block from tool pages so the PDF-to-JPG-specific copy is not cloned onto 20 URLs.",

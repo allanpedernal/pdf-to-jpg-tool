@@ -350,48 +350,95 @@
             <div id="tool-content" class="w-100 py-3"></div>
 
       <!-- SEO content (unique per tool) -->
-      <section class="w-100 pt-2 pb-4">
-        <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">Rotate PDF</h1>
-        <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">Fix pages that were scanned sideways or upside down and save the corrected document, without uploading anything. Rotate a single page or the whole file in ninety-degree steps and get a PDF that opens the right way up everywhere.</p>
-        <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">How to rotate PDF pages</h2>
-        <ol style="color:var(--text-secondary); line-height:1.9;">
-          <li>Open your PDF in the rotate tool.</li>
-          <li>Rotate the pages that need fixing.</li>
-          <li>Download the corrected PDF.</li>
-        </ol>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Why scanned pages come out sideways</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Sheet-fed scanners record the direction paper travelled through the feeder, not the direction the text runs. Feed a landscape spreadsheet into a portrait-oriented scanner and every page arrives rotated ninety degrees, even though the scan itself is perfectly good.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Mixed documents are the awkward case: a report that is mostly portrait with three landscape tables in the middle needs those three pages rotated and the rest left alone. Rotating page by page is the fix, and it is why a whole-document rotation is not always what you want.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Rotating the file rather than the view</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Most PDF viewers offer a rotate button, but it usually only turns the page on your screen for the current session. Close the file and it is sideways again, and anyone you send it to sees the original orientation.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Saving a rotated copy writes the correct orientation into the document itself, so it opens the right way up for every recipient, in every viewer, and prints correctly without anyone reaching for a setting.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Quality and what rotation costs</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">Nothing. Rotation in ninety-degree steps is a lossless transformation — the page content is not re-rendered or re-compressed, only its orientation flag and coordinate system change. Text stays selectable, images stay exactly as sharp as they were.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">That makes it safe to rotate a page several times while you work out which way is up. There is no accumulating degradation the way there is with repeatedly re-saving a JPG.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Checking a long scan efficiently</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">On a long document, do not page through every sheet. Scanners rotate consistently, so the pages that came in sideways are usually a contiguous block — one batch, one tray, one orientation.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Skim the thumbnails panel in your PDF viewer instead. Wrong-way pages are obvious at thumbnail size, and you will spot the boundaries of the affected block in seconds rather than scrolling through two hundred pages one at a time.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Rotation and printing</h2>
-        <p style="color:var(--text-secondary); line-height:1.8;">A correctly rotated PDF prints the right way up without anyone touching a driver setting, which matters when the document is going to somebody else's printer. Relying on a viewer's on-screen rotation means the recipient gets it sideways.</p>
-        <p style="color:var(--text-secondary); line-height:1.8;">Landscape pages inside a portrait document are handled well by modern printers, which read each page's own orientation. The problems come from pages that claim portrait while containing sideways content — precisely what saving a proper rotation fixes.</p>
-        <h2 class="h5 fw-bold mt-4 mb-3" style="color:var(--text-primary);">Frequently asked questions</h2>
-        <div class="accordion accordion-flush" id="faq-rotate-pdf">
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-0" aria-expanded="false" aria-controls="faq-rotate-pdf-0" style="font-size: 1rem; padding: 1rem;">Can I rotate just one page?</button></h3>
-              <div id="faq-rotate-pdf-0" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Rotate a single page or all pages at once, which is what mixed portrait and landscape documents need.</div></div>
+      <section class="w-100">
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5 text-center">
+            <h1 class="text-gradient fw-bold mb-3" style="font-size: 2.5rem; line-height: 1.2;">Rotate PDF</h1>
+            <p class="text-light mx-auto mb-0" style="max-width: 760px; font-size: 1.1rem; line-height: 1.8;">Fix pages that were scanned sideways or upside down and save the corrected document, without uploading anything. Rotate a single page or the whole file in ninety-degree steps and get a PDF that opens the right way up everywhere.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;"><i class="bi bi-list-ol me-2"></i>How to rotate PDF pages</h2>
+            <div class="row g-4 justify-content-center">
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">1</div></div>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Open your PDF in the rotate tool.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">2</div></div>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Rotate the pages that need fixing.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <div class="mb-3"><div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white fw-bold" style="width: 60px; height: 60px; font-size: 1.5rem;">3</div></div>
+                  <p class="text-light mb-0" style="font-size: 0.95rem; line-height: 1.6;">Download the corrected PDF.</p>
+                </div>
+              </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-1" aria-expanded="false" aria-controls="faq-rotate-pdf-1" style="font-size: 1rem; padding: 1rem;">Does rotating reduce quality?</button></h3>
-              <div id="faq-rotate-pdf-1" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. Ninety-degree rotation is lossless — nothing is re-rendered or re-compressed.</div></div>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Why scanned pages come out sideways</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Sheet-fed scanners record the direction paper travelled through the feeder, not the direction the text runs. Feed a landscape spreadsheet into a portrait-oriented scanner and every page arrives rotated ninety degrees, even though the scan itself is perfectly good.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Mixed documents are the awkward case: a report that is mostly portrait with three landscape tables in the middle needs those three pages rotated and the rest left alone. Rotating page by page is the fix, and it is why a whole-document rotation is not always what you want.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Rotating the file rather than the view</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Most PDF viewers offer a rotate button, but it usually only turns the page on your screen for the current session. Close the file and it is sideways again, and anyone you send it to sees the original orientation.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Saving a rotated copy writes the correct orientation into the document itself, so it opens the right way up for every recipient, in every viewer, and prints correctly without anyone reaching for a setting.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Quality and what rotation costs</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Nothing. Rotation in ninety-degree steps is a lossless transformation — the page content is not re-rendered or re-compressed, only its orientation flag and coordinate system change. Text stays selectable, images stay exactly as sharp as they were.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">That makes it safe to rotate a page several times while you work out which way is up. There is no accumulating degradation the way there is with repeatedly re-saving a JPG.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Checking a long scan efficiently</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">On a long document, do not page through every sheet. Scanners rotate consistently, so the pages that came in sideways are usually a contiguous block — one batch, one tray, one orientation.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Skim the thumbnails panel in your PDF viewer instead. Wrong-way pages are obvious at thumbnail size, and you will spot the boundaries of the affected block in seconds rather than scrolling through two hundred pages one at a time.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-4" style="font-size: 1.75rem; font-weight: 700;">Rotation and printing</h2>
+            <p class="text-light mb-3" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">A correctly rotated PDF prints the right way up without anyone touching a driver setting, which matters when the document is going to somebody else's printer. Relying on a viewer's on-screen rotation means the recipient gets it sideways.</p>
+            <p class="text-light mb-0" style="max-width: 75ch; font-size: 1rem; line-height: 1.8;">Landscape pages inside a portrait document are handled well by modern printers, which read each page's own orientation. The problems come from pages that claim portrait while containing sideways content — precisely what saving a proper rotation fixes.</p>
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm mb-5">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="text-gradient fw-bold mb-5 text-center" style="font-size: 2.5rem; font-weight: 700;"><i class="bi bi-question-circle me-2"></i>Frequently Asked Questions</h2>
+            <div class="accordion accordion-flush" id="faq-rotate-pdf">
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-0" aria-expanded="false" aria-controls="faq-rotate-pdf-0" style="font-size: 1rem; padding: 1rem;">Can I rotate just one page?</button></h3>
+                <div id="faq-rotate-pdf-0" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Yes. Rotate a single page or all pages at once, which is what mixed portrait and landscape documents need.</div></div>
+              </div>
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-1" aria-expanded="false" aria-controls="faq-rotate-pdf-1" style="font-size: 1rem; padding: 1rem;">Does rotating reduce quality?</button></h3>
+                <div id="faq-rotate-pdf-1" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">No. Ninety-degree rotation is lossless — nothing is re-rendered or re-compressed.</div></div>
+              </div>
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-2" aria-expanded="false" aria-controls="faq-rotate-pdf-2" style="font-size: 1rem; padding: 1rem;">Why does my viewer show it correctly but others do not?</button></h3>
+                <div id="faq-rotate-pdf-2" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Your viewer is probably rotating the on-screen view only, without saving it. Saving a rotated copy writes the orientation into the file itself.</div></div>
+              </div>
+              <div class="accordion-item border-secondary mb-3 rounded faq-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-3" aria-expanded="false" aria-controls="faq-rotate-pdf-3" style="font-size: 1rem; padding: 1rem;">Can I rotate by an arbitrary angle to straighten a crooked scan?</button></h3>
+                <div id="faq-rotate-pdf-3" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Not here — rotation is in ninety-degree steps. Correcting a slight skew means re-rendering the page, which costs quality; straightening in your scanner software gives a better result.</div></div>
+              </div>
             </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-2" aria-expanded="false" aria-controls="faq-rotate-pdf-2" style="font-size: 1rem; padding: 1rem;">Why does my viewer show it correctly but others do not?</button></h3>
-              <div id="faq-rotate-pdf-2" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Your viewer is probably rotating the on-screen view only, without saving it. Saving a rotated copy writes the orientation into the file itself.</div></div>
-            </div>
-            <div class="accordion-item border-secondary mb-3 rounded faq-item">
-              <h3 class="accordion-header"><button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq-rotate-pdf-3" aria-expanded="false" aria-controls="faq-rotate-pdf-3" style="font-size: 1rem; padding: 1rem;">Can I rotate by an arbitrary angle to straighten a crooked scan?</button></h3>
-              <div id="faq-rotate-pdf-3" class="accordion-collapse collapse" data-bs-parent="#faq-rotate-pdf"><div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6; padding: 1rem;">Not here — rotation is in ninety-degree steps. Correcting a slight skew means re-rendering the page, which costs quality; straightening in your scanner software gives a better result.</div></div>
-            </div>
+          </div>
         </div>
       </section>
           </div>
