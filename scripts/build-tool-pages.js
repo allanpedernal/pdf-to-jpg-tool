@@ -336,7 +336,7 @@ function seoSection(t) {
   const howTitle = HOW_TITLE[t.slug] || `How to use the ${t.h1.replace(/ —.*/, '')}`;
   return `
       <!-- SEO content (unique per tool) -->
-      <section class="w-100 px-3 px-lg-4 py-4" style="max-width:900px; margin:0 auto;">
+      <section class="w-100 pt-2 pb-4">
         <h1 class="fw-bold mb-3" style="font-size:2rem; color:var(--text-primary);">${esc(t.h1)}</h1>
         <p class="mb-4" style="font-size:1.05rem; color:var(--text-secondary); line-height:1.8;">${esc(copy.lead)}</p>
         <h2 class="h5 fw-bold mb-3" style="color:var(--text-primary);">${esc(howTitle)}</h2>
@@ -385,18 +385,19 @@ function main() {
     // Empty #tool-content (the tool fills it via JS) so we don't ship the homepage's
     // landing copy/H1 on every tool page (avoids duplicate content + double H1),
     // then add the unique supporting content below it.
+    // The SEO section goes INSIDE the tool column, as the next sibling of
+    // #tool-content (never inside it — app.js replaces its innerHTML).
+    //
+    // Not after the column, and not after <main>'s inner row: that row is
+    // `row g-0 h-100`, i.e. height:100% of <main>, so any sibling placed after
+    // it overflows <main> and the footer paints over it. Not outside <main>
+    // either: that clears the overlap but pulls the prose out of the column,
+    // misaligned with the tool above and stranded below the sidebar.
     html = html.replace(
       /<div id="tool-content"[\s\S]*?<\/main>/,
-      `<div id="tool-content" class="w-100 py-3"></div>\n          </div>\n        </div>\n      </main>`
+      `<div id="tool-content" class="w-100 py-3"></div>\n${seoSection(t)}\n          </div>\n        </div>\n      </main>`
     );
 
-    // The SEO section goes AFTER the flex row, not inside <main>.
-    // <main> is a flex item (col-lg-8) in .row.g-0, and a tall block inside it
-    // overflowed instead of growing the row: the footer laid out at main's
-    // height and painted straight over the section. Outside the row the
-    // section is a normal full-width block, which also stops it being squeezed
-    // into the middle column with an empty ad rail beside it.
-    html = html.replace(/\n  <footer/, `\n${seoSection(t)}\n  <footer`);
     // G8: strip inherited ad units while the page is still thin.
     const words = crawlableWords(html);
     let adNote = '';
