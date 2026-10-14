@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>How to Convert a Multi-Page PDF Into Separate Images | PDF Tools</title>
+  <meta name="description" content="Discover a fast, secure way to convert multi-page PDFs into separate JPG or PNG images directly in your browser with zero file uploads.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="PDF Tools Team">
+  <link rel="canonical" href="https://www.pdf-to-jpg-tool.com/blog/how-to-convert-a-multi-page-pdf-into-separate-images.html">
+  <meta name="theme-color" content="#0f172a">
+  
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <script src="/shared/pwa.js"></script>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="PDF Tools Blog" href="/blog/rss.xml">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.pdf-to-jpg-tool.com/blog/how-to-convert-a-multi-page-pdf-into-separate-images.html">
+  <meta property="og:title" content="How to Convert a Multi-Page PDF Into Separate Images | PDF Tools">
+  <meta property="og:description" content="Discover a fast, secure way to convert multi-page PDFs into separate JPG or PNG images directly in your browser with zero file uploads.">
+  <meta property="og:image" content="https://www.pdf-to-jpg-tool.com/blog/images/how-to-convert-a-multi-page-pdf-into-separate-images.jpg">
+  <meta property="og:site_name" content="PDF Tools">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Convert a Multi-Page PDF Into Separate Images | PDF Tools">
+  <meta name="twitter:description" content="Discover a fast, secure way to convert multi-page PDFs into separate JPG or PNG images directly in your browser with zero file uploads.">
+  <meta name="twitter:image" content="https://www.pdf-to-jpg-tool.com/blog/images/how-to-convert-a-multi-page-pdf-into-separate-images.jpg">
+  <meta name="twitter:creator" content="@allanpedernal">
+
+  <!-- Bootstrap + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/shared/styles.css">
+  <link rel="stylesheet" href="/style.css">
+
+  <style>
+    .blog-page .blog-card { overflow:hidden; transition:transform .2s ease, box-shadow .2s ease; }
+    .blog-page .blog-card:hover { transform:translateY(-4px); box-shadow:0 14px 30px rgba(15,23,42,.18) !important; }
+    .blog-page .card-img-top { aspect-ratio:1200/630; object-fit:cover; }
+    .blog-page .card .card-body { text-align:left !important; }
+    .blog-page .blog-card h2, .blog-page .card h4 { color:var(--text-primary) !important; }
+    .blog-page .blog-excerpt { color:var(--text-secondary) !important; }
+    .blog-page .blog-meta { color:var(--text-secondary) !important; }
+    /* article typography — all themed so it reads in light or dark */
+    .blog-content { color:var(--text-primary); }
+    .blog-content h2 { font-size:1.6rem; font-weight:800; color:var(--text-primary); margin:2.2rem 0 .75rem; }
+    .blog-content h3 { font-size:1.2rem; font-weight:700; color:var(--text-primary); margin:1.6rem 0 .5rem; }
+    .blog-content p, .blog-content li { color:var(--text-primary); }
+    .blog-content p { margin:0 0 1.05rem; }
+    .blog-content ul, .blog-content ol { margin:0 0 1.05rem; padding-left:1.3rem; }
+    .blog-content li { margin-bottom:.45rem; }
+    .blog-content a { color:var(--bs-primary, #3b82f6); text-decoration:underline; text-underline-offset:2px; }
+    .blog-content blockquote { border-left:4px solid var(--bs-primary, #3b82f6); background:rgba(59,130,246,0.08); padding:1rem 1.25rem; margin:1.6rem 0; border-radius:.5rem; color:var(--text-secondary); }
+    .blog-content blockquote p { margin:0; color:var(--text-secondary); }
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Convert a Multi-Page PDF Into Separate Images",
+  "description": "Discover a fast, secure way to convert multi-page PDFs into separate JPG or PNG images directly in your browser with zero file uploads.",
+  "image": "https://www.pdf-to-jpg-tool.com/blog/images/how-to-convert-a-multi-page-pdf-into-separate-images.jpg",
+  "datePublished": "2026-10-14",
+  "dateModified": "2026-10-14",
+  "author": {
+    "@type": "Organization",
+    "name": "PDF Tools Team",
+    "url": "https://www.pdf-to-jpg-tool.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "PDF Tools",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.pdf-to-jpg-tool.com/apple-touch-icon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.pdf-to-jpg-tool.com/blog/how-to-convert-a-multi-page-pdf-into-separate-images.html"
+  }
+}
+  </script>
+
+  <!-- Google tag (gtag.js) - delayed on mobile -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function(){
+      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+      function loadAnalytics(){
+        var s=document.createElement('script'); s.async=true;
+        s.src='https://www.googletagmanager.com/gtag/js?id=G-G1CV3K3BXS';
+        document.head.appendChild(s);
+        s.onload=function(){ gtag('js', new Date()); gtag('config','G-G1CV3K3BXS',{page_location:window.location.href}); window.gtag=gtag; };
+      }
+      if(isMobile){ var done=false; var go=function(){ if(!done){done=true; loadAnalytics(); ['touchstart','click','scroll'].forEach(function(e){window.removeEventListener(e,go);});}};
+        ['touchstart','click','scroll'].forEach(function(e){window.addEventListener(e,go,{once:true,passive:true});});
+        setTimeout(function(){ if(!done) loadAnalytics(); },3000);
+      } else { loadAnalytics(); }
+    })();
+  </script>
+
+  <!-- Google AdSense - delayed on mobile -->
+  <meta name="google-adsense-account" content="ca-pub-2042221703015293">
+  <script>
+    (function(){
+      var isMobileAd = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+      function loadAdSense(){
+        var s=document.createElement('script'); s.async=true;
+        s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2042221703015293';
+        s.crossOrigin='anonymous'; document.head.appendChild(s);
+      }
+      if(isMobileAd){ if(document.readyState==='complete'){ setTimeout(loadAdSense,2000);} else { window.addEventListener('load',function(){ setTimeout(loadAdSense,2000); }); } }
+      else { loadAdSense(); }
+    })();
+  </script>
+</head>
+<body class="blog-page" style="background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 50%,#f8fafc 100%); color:#0f172a;">
+
+  <!-- Top Navigation -->
+  <nav class="navbar navbar-expand-lg sticky-top topnav">
+    <div class="container-fluid px-3 px-lg-4">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
+        <i class="bi bi-file-earmark-pdf-fill me-2" style="color:#3b82f6;"></i><span class="text-gradient">PDF Tools</span>
+      </a>
+      <button class="navbar-toggler border-0 p-1" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list" style="font-size:1.7rem; line-height:1; color:var(--text-primary);"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house-door me-1"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about.html"><i class="bi bi-info-circle me-1"></i>About Us</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/blog/"><i class="bi bi-journal-text me-1"></i>Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact.html"><i class="bi bi-envelope me-1"></i>Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="/login.html"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container - Bootstrap Grid Layout (matches the rest of the site) -->
+  <div class="container-fluid px-0">
+    <div class="row g-0 min-vh-100">
+
+      <aside id="left-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+            <ins class="adsbygoogle"
+       style="display:block; min-width: 160px; width: 100%;"
+       data-ad-client="ca-pub-2042221703015293"
+       data-ad-slot="9174709096"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main id="main-content" class="col-12 col-lg-8 px-3 px-sm-4 px-lg-4 pt-4">
+        <div class="w-100 py-3 mx-auto" style="max-width:960px;">
+          <!-- Header card (same treatment as the legal pages) -->
+          <header class="privacy-header text-center mb-4" style="border-radius:16px; overflow:hidden; padding:3.5rem 1.5rem 3rem;">
+            <div class="container">
+              <div class="header-icon"><i class="bi bi-journal-text"></i></div>
+              <div class="mb-3"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF Tools</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF to JPG</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">Privacy</span></div>
+              <h1 class="mb-3" style="font-size:2.6rem; font-weight:800; line-height:1.2;">How to Convert a Multi-Page PDF Into Separate Images</h1>
+              <p class="fs-5 mb-2" style="color:var(--text-secondary);">Learn how to turn any multi-page PDF into separate image files directly in your browser without uploading your private documents.</p>
+              <p class="fs-6 mb-0" style="color:var(--text-secondary);">
+                <i class="bi bi-person-circle me-1"></i>PDF Tools Team
+                <span class="mx-2">·</span>
+                <i class="bi bi-calendar3 me-1"></i><time datetime="2026-10-14">October 14, 2026</time>
+                <span class="mx-2">·</span>
+                <i class="bi bi-clock me-1"></i>7 min read
+              </p>
+            </div>
+          </header>
+
+          <!-- Content card -->
+          <article class="privacy-card">
+            <div class="p-3 p-lg-5">
+              <img src="/blog/images/how-to-convert-a-multi-page-pdf-into-separate-images.jpg" alt="How to Convert a Multi-Page PDF Into Separate Images" class="img-fluid rounded-3 shadow-sm mb-4" loading="eager" style="width:100%; aspect-ratio:1200/630; object-fit:cover;">
+
+              <div class="blog-content" style="font-size:1.08rem; line-height:1.85;">
+<h2>Why you might need separate images from a PDF</h2><p>Portable Document Formats, universally known as PDFs, are the absolute gold standard for sharing documents that need to look identical on every screen or printer. They lock down fonts, formatting, and layouts so nothing shifts around. However, this exact strength becomes a frustrating weakness when you simply want to grab a single page, share a visual snippet on social media, or embed document pages into a slide presentation. Most standard image viewers cannot open a PDF natively, leaving you stranded unless you know how to extract the pages properly.</p><p>Imagine you have a multi-page PDF containing invoices, certificates, graphic designs, or scanned lecture notes. If you try to upload these pages into an online design tool, a messaging app, or an e-commerce platform, you will often find that the system strictly demands standard image formats like JPG or PNG. Attempting to take manual screenshots of every single page is tedious, results in jagged edges, and degrades the image quality. You need a clean, automated way to extract every page as its own standalone picture file.</p><p>Fortunately, converting your documents into images does not have to be a headache. Whether you are preparing portfolio pieces, extracting receipt images for accounting software, or making educational materials easier to view on mobile devices, breaking a document apart gives you total flexibility. The key is finding a method that is fast, preserves your original document quality, and respects your personal data privacy by keeping your files strictly on your own device.</p><h2>The hidden privacy risks of standard online converters</h2><p>If you search the web for ways to turn a PDF into images, you will be bombarded with dozens of free online file conversion websites. On the surface, they look convenient. You drag and drop your file, wait a few seconds, and download a neat ZIP folder containing all your converted pictures. But have you ever stopped to wonder where your file actually goes during those few seconds? In almost all cases, your document is being uploaded across the internet to a remote server owned by a third-party company.</p><p>This hidden upload process introduces massive privacy and security risks, especially if your PDF contains sensitive personal data. Think about tax forms, bank statements, medical records, signed legal contracts, or proprietary business documents. Do you really want to send these files to an unknown cloud server where they might be stored, logged, or inadvertently exposed? Even if a company promises to delete your files after an hour, you are forced to blindly trust their server infrastructure and security practices.</p><p>A much safer approach is utilizing client-side web technology. Modern browsers are incredibly powerful and capable of executing complex processing tasks right on your own machine. When a utility tool processes your documents locally inside your browser tab, your files never leave your computer storage. There are no server uploads, no waiting in cloud queues, and zero risk of data interception. You get instant results while keeping your private documents completely private.</p><h2>Step-by-step: turning a PDF into images locally</h2><p>Converting your multi-page documents safely and efficiently requires a reliable, privacy-first interface. You can easily accomplish this task using a dedicated utility like the <a href="/">PDF to JPG converter</a>. Because the entire conversion happens locally through your browser, you do not need to install heavy desktop software or hand over your data to a remote cloud service. Here is how you can transform your multi-page documents into clean, separate picture files in just a few straightforward steps.</p><ol><li><strong>Open the conversion tool:</strong> Navigate to the browser-based converter page. You will see a clear, welcoming drop zone waiting for your document.</li><li><strong>Select your file:</strong> Drag your multi-page PDF directly from your desktop into the browser window, or click the upload button to browse your local folders. Remember, your file stays securely on your device.</li><li><strong>Choose your image format:</strong> Decide whether you need JPG for smaller file sizes and wide compatibility, or PNG if you require crystal-clear text sharpness and transparency.</li><li><strong>Initiate the split:</strong> Click the convert button. Within moments, the script reads every single page of your document and renders them into individual image files.</li><li><strong>Download your images:</strong> Grab your converted files individually or download them all at once in a convenient archive folder, ready for immediate use.</li></ol><p>This streamlined workflow takes the frustration out of document management. By processing everything locally, you avoid subscription paywalls, intrusive advertisements, and the nagging anxiety of sending sensitive files out into the cloud. You maintain total control over your files from the first click to the final download.</p><h2>Choosing between JPG and PNG formats</h2><p>When you are ready to export your document pages into image files, you will typically be asked to choose between two primary formats: JPG and PNG. Selecting the right format depends heavily on what kind of content is inside your PDF and how you plan to use the resulting images later. Understanding the technical differences ensures your final pictures look sharp and professional.</p><p>JPG is the veteran workhorse of the internet. It uses lossy compression, which means it cleverly discards tiny, imperceptible color details to keep the file size remarkably small. If your PDF contains full-color photographs, complex scanned magazine pages, or rich picture layouts, JPG is usually your best bet. The smaller file sizes make them lightning-fast to load on websites, email to clients, or text to colleagues. However, keep in mind that JPG does not support transparent backgrounds and can sometimes introduce subtle visual artifacts around sharp text edges.</p><p>On the other hand, PNG is a lossless format. It preserves every single pixel of your original document with absolute mathematical precision. If your PDF consists primarily of text documents, charts, wireframes, vector drawings, or crisp graphic designs, PNG will ensure that the typography remains razor-sharp and legible without any fuzzy compression halos. The trade-off is that PNG files are generally larger in size. For most everyday tasks, both formats work wonderfully, but matching the format to your content guarantees the best visual outcome.</p><h2>Tips for getting the best image quality</h2><p>When you convert a document page into a picture, you are shifting from vector graphics, which scale infinitely, to raster graphics made of fixed pixels. Because of this shift, low-resolution exports can sometimes look blurry or pixelated when zoomed in. To ensure your final images look pristine and professional, a few simple best practices can make a world of difference.</p><p>First, always check the rendering settings of your conversion tool if available. Higher rendering resolutions, often measured in DPI (dots per inch), will produce larger image dimensions with significantly clearer text. If you plan on printing the extracted pages or using them in high-end design projects, opting for a higher resolution setting is vital. For standard web sharing, screen viewing, or quick messaging, standard resolutions will keep things fast and lightweight.</p><p>Second, ensure your source PDF is as clean as possible. If you are converting a badly blurred scan taken with a shaky smartphone camera, no conversion tool can magically invent missing clarity. Whenever you can, start from a cleanly exported digital PDF rather than a low-quality physical scan. By combining a clean source file with a secure, high-performance browser converter, you will consistently achieve stunning visual results every single time.</p><h2>Frequently asked questions</h2><h3>Do I need to install any software to convert my PDF pages?</h3><p>Not at all. Modern web-based utilities run entirely inside your browser using advanced client-side scripts. This means you do not need to download, install, or configure any bulky desktop applications. Everything happens instantly right inside your browser window.</p><h3>Are my files safe and private during the conversion process?</h3><p>Yes, absolutely. Because the processing occurs locally on your machine using your browser's processing power, your documents are never uploaded to any remote servers. Your private data remains strictly on your own device at all times.</p><h3>Can I convert only specific pages instead of the whole document?</h3><p>Many browser-based utility suites allow you to preview your document pages before exporting. You can easily choose to download all pages or select only the specific individual pages you need, saving you time and storage space.</p>
+              </div>
+
+              
+    <div class="card tools-cta border-0 shadow-sm my-5">
+      <div class="card-body p-4">
+        <h3 class="h5 fw-bold mb-3" style="color:var(--text-primary);"><i class="bi bi-lightning-charge-fill text-primary me-2"></i>Try the tools mentioned in this guide</h3>
+        <a href="/" class="btn btn-primary btn-sm me-2 mb-2"><i class="bi bi-tools me-1"></i>PDF to JPG Converter</a>
+      </div>
+    </div>
+            </div>
+          </article>
+
+          <section class="my-5">
+            <h2 class="h4 fw-bold mb-4" style="color:var(--text-primary,#0f172a);">Related guides</h2>
+            <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <a href="/blog/merge-and-split-pdf-files-safely.html" class="text-decoration-none">
+            <article class="card h-100 border-0 shadow-sm blog-card">
+              <img src="/blog/images/merge-and-split-pdf-files-safely.svg" alt="PDF pages being merged together and split apart" class="card-img-top" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF Merge</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF Split</span></div>
+                <h2 class="h5 fw-bold">How to Merge &amp; Split PDF Files Safely</h2>
+                <p class="small flex-grow-1 blog-excerpt">Combine several PDFs into one, or pull out just the pages you need — without sending sensitive documents to a stranger&#39;s server.</p>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>June 5, 2026 · 5 min read</div>
+              </div>
+            </article>
+          </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <a href="/blog/pdf-to-png-vs-pdf-to-jpg.html" class="text-decoration-none">
+            <article class="card h-100 border-0 shadow-sm blog-card">
+              <img src="/blog/images/pdf-to-png-vs-pdf-to-jpg.svg" alt="Side by side comparison of PNG and JPG image formats" class="card-img-top" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF to PNG</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF to JPG</span></div>
+                <h2 class="h5 fw-bold">PDF to PNG vs PDF to JPG: Which Should You Use?</h2>
+                <p class="small flex-grow-1 blog-excerpt">JPG is smaller, PNG is sharper. Here&#39;s a simple decision guide for choosing the right format for documents, screenshots, and photos.</p>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 25, 2026 · 5 min read</div>
+              </div>
+            </article>
+          </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+          <a href="/blog/convert-pdf-to-jpg-without-losing-quality.html" class="text-decoration-none">
+            <article class="card h-100 border-0 shadow-sm blog-card">
+              <img src="/blog/images/convert-pdf-to-jpg-without-losing-quality.svg" alt="PDF document being converted into a high-quality JPG image" class="card-img-top" loading="lazy">
+              <div class="card-body d-flex flex-column">
+                <div class="mb-2"><span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">PDF to JPG</span> <span class="badge rounded-pill" style="background:#e0e7ff; color:#3730a3;">Image Quality</span></div>
+                <h2 class="h5 fw-bold">How to Convert PDF to JPG Without Losing Quality</h2>
+                <p class="small flex-grow-1 blog-excerpt">The settings that actually matter when turning PDF pages into sharp JPG images — resolution, DPI, and compression explained in plain English.</p>
+                <div class="small blog-meta mt-2"><i class="bi bi-calendar3 me-1"></i>May 20, 2026 · 5 min read</div>
+              </div>
+            </article>
+          </a>
+        </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+
+      <aside id="right-ad" class="d-none d-lg-block col-lg-2 position-sticky" style="top: 0; height: 100vh; overflow-y: auto; padding: 1rem;">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 250px;">
+            <ins class="adsbygoogle"
+       style="display:block; min-width: 160px; width: 100%;"
+       data-ad-client="ca-pub-2042221703015293"
+       data-ad-slot="9174709096"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Bottom Ad Banner -->
+      <div class="col-12 mt-auto ad-bottom">
+        <div class="card border-0 shadow-sm m-2 m-lg-3">
+          <div class="card-body text-center py-3 py-lg-4">
+            <ins class="adsbygoogle"
+       style="display:block; width: 100%; min-height: 90px;"
+       data-ad-client="ca-pub-2042221703015293"
+       data-ad-slot="9174709096"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer class="mt-2 footer-theme" style="position: relative; overflow: hidden;">
+  <!-- Decorative gradient overlay -->
+  <div class="footer-gradient-line" style="position: absolute; top: 0; left: 0; right: 0; height: 1px;"></div>
+  
+  <div class="container-fluid px-4 px-lg-5 py-5 position-relative">
+    <div class="row g-4 g-lg-5">
+      <!-- Brand Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="mb-4">
+          <h3 class="fw-bold mb-3" style="font-size: 1.5rem;">
+            <i class="bi bi-file-earmark-pdf-fill me-2" style="color:#3b82f6;"></i><span class="text-gradient">PDF Tools</span>
+          </h3>
+          <p class="footer-text-light mb-3" style="line-height: 1.8; font-size: 0.95rem;">
+            Free online PDF and image conversion tools. All tools work entirely in your browser - no uploads required.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="https://www.facebook.com/PDFtoJPGandVATools" target="_blank" rel="noopener noreferrer" class="footer-icon-link" style="width: 42px; height: 42px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; color: #60a5fa; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+              <i class="bi bi-facebook" style="font-size: 1.2rem; transition: transform 0.3s ease;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+          <i class="bi bi-tools text-primary me-2"></i>Tools
+        </h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3">
+            <a href="/pdf-to-jpg.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF to JPG</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/jpg-to-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>JPG to PDF</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/compress-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF Compressor</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/merge-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF Merger</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/split-pdf.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>PDF Splitter</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+          <i class="bi bi-shield-check text-primary me-2"></i>Legal
+        </h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3">
+            <a href="/privacy-policy.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>Privacy Policy</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/terms-of-service.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>Terms of Service</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/blog/" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>Blog &amp; Guides</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/about.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>About Us</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="/contact.html" class="footer-link footer-text-light" style="text-decoration: none; display: flex; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 0.35rem 0;">
+              <i class="bi bi-arrow-right-circle me-2 footer-link-icon" style="font-size: 0.85rem; opacity: 0; transition: all 0.3s ease; transform: translateX(-5px);"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Features Column -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="footer-text-light fw-bold mb-4 d-flex align-items-center" style="font-size: 1.1rem;">
+          <i class="bi bi-star-fill text-primary me-2"></i>Features
+        </h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-check-circle-fill text-success me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">100% Free</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-cloud-upload text-info me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">No Upload Required</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-shield-lock-fill text-warning me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">100% Secure</span>
+          </li>
+          <li class="mb-3 d-flex align-items-center footer-feature-item" style="transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default;">
+            <i class="bi bi-wifi-off text-danger me-2" style="font-size: 1rem; transition: transform 0.3s ease;"></i>
+            <span class="footer-text-light" style="font-size: 0.95rem;">Works Offline</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="row mt-5 pt-4 footer-border-top">
+      <div class="col-12">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+          <p class="footer-text-light mb-0 small" style="font-size: 0.9rem;">
+            &copy; <span id="current-year-footer">2024</span> PDF Tools. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Update copyright year dynamically
+    (function() {
+      const yearElement = document.getElementById('current-year-footer');
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+      
+      // Enhanced footer link interactions
+      document.querySelectorAll('.footer-link').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          this.style.color = 'var(--bs-primary)';
+          this.style.transform = 'translateX(5px)';
+          const icon = this.querySelector('.footer-link-icon');
+          if (icon) {
+            icon.style.opacity = '1';
+            icon.style.transform = 'translateX(0)';
+          }
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.color = '';
+          this.style.transform = 'translateX(0)';
+          const icon = this.querySelector('.footer-link-icon');
+          if (icon) {
+            icon.style.opacity = '0';
+            icon.style.transform = 'translateX(-5px)';
+          }
+        });
+      });
+      
+      // Enhanced footer icon link interactions
+      document.querySelectorAll('.footer-icon-link').forEach(iconLink => {
+        iconLink.addEventListener('mouseenter', function() {
+          this.style.background = 'rgba(59, 130, 246, 0.2)';
+          this.style.transform = 'translateY(-4px)';
+          this.style.boxShadow = '0 6px 20px rgba(59, 130, 246, 0.4)';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1.15) rotate(8deg)';
+          }
+        });
+        
+        iconLink.addEventListener('mouseleave', function() {
+          this.style.background = 'rgba(59, 130, 246, 0.1)';
+          this.style.transform = 'translateY(0)';
+          this.style.boxShadow = 'none';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1) rotate(0deg)';
+          }
+        });
+      });
+      
+      // Enhanced footer feature item interactions
+      document.querySelectorAll('.footer-feature-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateX(8px)';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1.2)';
+          }
+        });
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateX(0)';
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.style.transform = 'scale(1)';
+          }
+        });
+      });
+
+      // Footer bottom link interactions
+      document.querySelectorAll('.footer-bottom-link').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          this.style.color = 'var(--bs-primary)';
+          this.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+        });
+        link.addEventListener('mouseleave', function() {
+          this.style.color = '';
+          this.style.backgroundColor = 'transparent';
+        });
+      });
+    })();
+  </script>
+</footer>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<script>
+  // Show/hide scroll to top button
+  window.addEventListener('scroll', function() {
+    const scrollTop = document.querySelector('.scroll-top');
+    if (scrollTop) {
+      if (window.pageYOffset > 300) {
+        scrollTop.classList.add('visible');
+      } else {
+        scrollTop.classList.remove('visible');
+      }
+    }
+  });
+</script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    // Theme sync with the rest of the site (light default, stored in localStorage by index.html)
+    (function(){
+      function applyTheme(t){ document.documentElement.setAttribute('data-theme', t); }
+      applyTheme(localStorage.getItem('theme') || 'light');
+      window.addEventListener('storage', function(e){ if(e.key==='theme') applyTheme(e.newValue||'light'); });
+      setInterval(function(){
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var saved = localStorage.getItem('theme') || 'light';
+        if (cur !== saved) applyTheme(saved);
+      }, 500);
+    })();
+  </script>
+
+  <script>
+    (function(){
+      function initAds(){
+        if(typeof adsbygoogle==='undefined'){ return setTimeout(initAds,150); }
+        document.querySelectorAll('.adsbygoogle:not([data-ads-initialized])').forEach(function(slot){
+          try{ (adsbygoogle = window.adsbygoogle || []).push({}); slot.setAttribute('data-ads-initialized','true'); }
+          catch(e){ console.warn('AdSense init error', e); }
+        });
+      }
+      if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',initAds);} else { initAds(); }
+    })();
+  </script>
+</body>
+</html>
